@@ -27,11 +27,11 @@ app.use(express.static('public'))
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use((res, req, next) => {
-  setTimeout(() => {
-    next()
-  }, 1000)
-})
+// app.use((res, req, next) => {
+//   setTimeout(() => {
+//     next()
+//   }, 1000)
+// })
 
 app.post('/api/login', (req, res) => {
   let { username, password } = req.body
