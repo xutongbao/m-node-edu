@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
-const { bookMallData, bookMallDetailData, companyData } = require('./data')
+const { bookMallData, bookMallDetailData, companyData, shopData } = require('./data')
 const { voiceData } = require('./testData')
+const { uploadImgMulter, uploadImg } = require('./upload.js')
 
 const app = express()
 
@@ -24,6 +25,7 @@ let myBooks = []
 
 //app.use(history())
 app.use(express.static('public'))
+app.use(express.static(__dirname + '/upload'))
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -181,6 +183,26 @@ app.get('/api/company', (req, res) => {
     message: '列表'
   })
 })
+
+app.get('/api/shop', (req, res) => {
+  let { page, size, id = '' } = req.query
+  let newsSearchResult = shopData.filter(item => item.id == id || id == '')
+  let start = (page - 1) * size
+  let end = start + size * 1
+  res.send({
+    code: 200,
+    data: {
+      list: newsSearchResult.slice(start, end),
+      total: newsSearchResult.length,
+      current: page - 0,
+      pageSize: size - 0
+    },
+    message: '列表'
+  })
+})
+
+//删除
+app.post('/api/upload', uploadImgMulter.single('img'), uploadImg)
 
 //启动命令：set PORT=3000 && node app
 app.listen(process.env.PORT, () => {

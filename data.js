@@ -754,9 +754,28 @@ const companyData = Mock.mock({
 		'updateTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
 		'operators': '@cname',
 		'releaseStatus': () => Mock.Random.integer(0,1),
+		'shopCount': () => Mock.Random.integer(0,5),
 		'title': '@ctitle',
 		'paragraph': '@cparagraph',
 		'datetime': '@datetime'
+	}]
+}).list
+
+const shopData = Mock.mock({
+	'list|100': [{
+		'id|+1': 1,
+		'shopName': '@cname 瑞尚创美（北京朝阳校区）',
+		'beloneCompany': '@cname 瑞尚创美',
+		'logo': '@image(60x60, @color)',
+		'category': '化妆造型',
+		'address': () => Mock.Random.city(true),
+		'checkStatus': () => Mock.Random.integer(0,1),
+		'supplementCheckStatus': () => Mock.Random.integer(0,1),
+		'supplementBindStatus': () => Mock.Random.integer(0,1),
+		'shopMoney': () => Mock.Random.integer(100,1000),
+		'addTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
+		'updateTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
+		'releaseStatus': () => Mock.Random.integer(0,1),
 	}]
 }).list
 
@@ -765,4 +784,5 @@ module.exports = {
 	bookMallData,
 	bookMallDetailData,
 	companyData,
+	shopData,
 }
