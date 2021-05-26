@@ -1,3 +1,5 @@
+const Mock = require('mockjs')
+
 //导航
 const bookNavData = [
 	{
@@ -724,8 +726,43 @@ const bookMallDetailData = [
 	}
 ]
 
+// const mockDataList = Mock.mock({
+// 	'list|100': [{
+// 		'id|+1': 1,
+// 		'name': '@name',
+// 		'title': '@title',
+// 		'image': '@image(300x300)',
+// 		'paragraph': '@paragraph',
+// 		'sentence': '@sentence',
+// 		'region': '@region',
+// 		'datetime': '@datetime',
+// 		'a': '@dataImage'
+// 	}]
+// }).list
+
+const companyData = Mock.mock({
+	'list|32': [{
+		'id|+1': 1,
+		'companyName': '@cname 京佳教育商户品牌：京佳教育2关联品牌：京佳教育2商户ID: 118198167621386',
+		'schoolName': '@cname 北京京佳教育有限公司',
+		//'image': Mock.Random.image(null, '#ff0000', '#ffff00', 'hello'),
+		'phone': '电话：4008281999 【机构】短信：13716171502 【机构】',
+		'logo': '@image(60x60, @color)',
+		'checkStatus': () => Mock.Random.integer(0,1),
+		'checkTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
+		'addTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
+		'updateTime': Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
+		'operators': '@cname',
+		'releaseStatus': () => Mock.Random.integer(0,1),
+		'title': '@ctitle',
+		'paragraph': '@cparagraph',
+		'datetime': '@datetime'
+	}]
+}).list
+
 module.exports = {
 	bookNavData,
 	bookMallData,
-	bookMallDetailData
+	bookMallDetailData,
+	companyData,
 }

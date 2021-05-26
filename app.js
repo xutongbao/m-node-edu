@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
-const { bookMallData, bookMallDetailData } = require('./data')
+const { bookMallData, bookMallDetailData, companyData } = require('./data')
 const { voiceData } = require('./testData')
 
 const app = express()
@@ -41,7 +41,8 @@ app.post('/api/login', (req, res) => {
       res.send({
         code: 200,
         data: {
-          username
+          username,
+          token: user.id
         },
         message: '登录成功'
       })
@@ -162,6 +163,23 @@ app.get('/api/detail/:id', (req, res) => {
 //测试
 app.post('/api/test', (req, res) => {
   res.send(voiceData)
+})
+
+app.get('/api/company', (req, res) => {
+  let { page, size, search = '' } = req.query
+  //let newsSearchResult = news.filter(item => item.name.includes(search))
+  let start = (page - 1) * size
+  let end = start + size * 1
+  res.send({
+    code: 200,
+    data: {
+      list: companyData.slice(start, end),
+      total: companyData.length,
+      current: page - 0,
+      pageSize: size - 0
+    },
+    message: '列表'
+  })
 })
 
 //启动命令：set PORT=3000 && node app
