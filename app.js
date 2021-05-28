@@ -25,7 +25,7 @@ let myBooks = []
 
 //app.use(history())
 app.use(express.static('public'))
-app.use(express.static(__dirname + '/upload'))
+app.use(express.static('upload'))
 app.use(cors())
 app.use(bodyParser.json())
 
