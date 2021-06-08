@@ -12,6 +12,13 @@ const {
   tableEdit,
 } = require('../air/table/table')
 
+const {
+  fieldsSearch,
+  fieldsAdd,
+  fieldsDelete,
+  fieldsEdit,
+} = require('../air/fields/fields')
+
 const air = (app) => {
   //应用接口
   app.post('/api/router/search', routerSearch)
@@ -24,6 +31,12 @@ const air = (app) => {
   app.post('/api/table/add', tableAdd)
   app.post('/api/table/delete', tableDelete)
   app.post('/api/table/edit', tableEdit)
+
+  //应用字段对应的表格接口
+  app.post('/api/fields/search', fieldsSearch)
+  app.post('/api/fields/add', fieldsAdd)
+  app.post('/api/fields/delete', fieldsDelete)
+  app.post('/api/fields/edit', fieldsEdit)
 }
 
 module.exports = {

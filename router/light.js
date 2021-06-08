@@ -1,5 +1,5 @@
 const { uploadImgMulter, uploadImg } = require('../light/upload/upload')
-const { login, loginEdu, getUserInfo } = require('../light/user/user')
+const { login, loginEdu, logout, getUserInfo } = require('../light/user/user')
 const {
   shopSearch,
   shopAdd,
@@ -37,7 +37,9 @@ const light = (app) => {
   //登录
   app.post('/api/login', login)
   //登录
-  app.post('/edu/login', loginEdu)
+  app.post('/edu/auth/login', loginEdu)
+  //退出
+  app.post('/edu/auth/logout', logout)
   //获取用户信息
   app.get('/api/getUserInfo', getUserInfo)
   //上传

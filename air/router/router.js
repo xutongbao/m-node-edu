@@ -2,9 +2,17 @@ let { dataArr } = require('../data')
 
 //搜索
 const dataSearch = (req, res) => {
+  const data = dataArr.map(item => {
+    return {
+      id: item.id,
+      key: item.key,
+      path: item.path,
+      title: item.title,
+    }
+  })
   res.send({
     code: 200,
-    data: dataArr,
+    data,
     message: '搜索成功',
   })
 }
@@ -15,6 +23,40 @@ const dataAdd = (req, res) => {
   dataItem.id = Date.now()
   dataItem.path += `?id=${dataItem.id}`
   dataItem.key = dataItem.id
+  dataItem.table = {
+    fields: [
+      {
+        id: 0,
+        title: 'ID',
+        dataIndex: 'id',
+        isColumn: true,
+        isSearch: false,
+        isModalField: false,
+        isSystem: true,
+      },
+      {
+        id: 1,
+        title: '创建时间',
+        dataIndex: 'createTime',
+        renderFunName: 'renderDatetime',
+        isColumn: true,
+        isSearch: false,
+        isModalField: false,
+        isSystem: true,
+      },
+      {
+        id: 2,
+        title: '更新时间',
+        dataIndex: 'updateTime',
+        renderFunName: 'renderDatetime',
+        isColumn: true,
+        isSearch: false,
+        isModalField: false,
+        isSystem: true,
+      }
+    ],
+    dataArr: [],
+  }
   dataArr.push({ ...dataItem })
   res.send({
     code: 200,

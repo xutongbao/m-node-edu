@@ -42,7 +42,6 @@ const login = (req, res) => {
 //登录
 const loginEdu = (req, res) => {
   let { userName, passWord } = req.body
-  console.log(req.body)
   let user = userList.find(item => item.username === userName)
   if (user) {
     if (user.password === passWord) {
@@ -68,6 +67,14 @@ const loginEdu = (req, res) => {
   }
 }
 
+//退出
+const logout = (req, res) => {
+  res.send({
+    code: 200,
+    message: '退出成功'
+  })
+}
+
 //根据token获取用户信息
 const getUserInfo = (req, res) => {
   let token = req.headers['token']
@@ -79,7 +86,7 @@ const getUserInfo = (req, res) => {
   })
 }
 
-module.exports = { login, loginEdu, getUserInfo }
+module.exports = { login, loginEdu, logout, getUserInfo }
 
 
 

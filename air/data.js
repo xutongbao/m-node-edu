@@ -1,3 +1,5 @@
+const { customerInitValue, clueInitValue } = require('../utils/air')
+
 let dataArr = [
   {
     id: 0,
@@ -7,15 +9,17 @@ let dataArr = [
     table: {
       fields: [
         {
+          id: 0,
           title: 'ID',
           dataIndex: 'id',
           isColumn: true,
           isSearch: false,
-          isAdd: false,
-          isEdit: false,
-          isCheck: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 0,
         },
         {
+          id: 3,
           title: '客户名称',   //表单里对应label
           dataIndex: 'name',  //表单里对应name
           rules: [
@@ -25,15 +29,37 @@ let dataArr = [
             },
           ],
           formComponentName: 'Input',
-          render: 'funName',
+          renderFunName: 'renderSpan',
           isColumn: true,
           isSearch: true,
-          isAdd: true,
-          isEdit: true,
-          isCheck: true,
+          isModalField: true,
+          isSystem: false,
+          orderIndex: 1,
+        },
+        {
+          id: 1,
+          title: '创建时间',
+          dataIndex: 'createTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 101,
+        },
+        {
+          id: 2,
+          title: '更新时间',
+          dataIndex: 'updateTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 102,
         },
       ],
-      dataArr: [],
+      dataArr: customerInitValue(),
     },
   },
   {
@@ -44,15 +70,17 @@ let dataArr = [
     table: {
       fields: [
         {
+          id: 0,
           title: 'ID',
           dataIndex: 'id',
           isColumn: true,
           isSearch: false,
-          isAdd: false,
-          isEdit: false,
-          isCheck: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 0,
         },
         {
+          id: 3,
           title: '线索名称',   //表单里对应label
           dataIndex: 'name',  //表单里对应name
           rules: [
@@ -62,15 +90,37 @@ let dataArr = [
             },
           ],
           formComponentName: 'Input',
-          render: 'funName',
+          renderFunName: 'renderSpan',
           isColumn: true,
           isSearch: true,
-          isAdd: true,
-          isEdit: true,
-          isCheck: true,
+          isModalField: true,
+          isSystem: false,
+          orderIndex: 1,
+        },
+        {
+          id: 1,
+          title: '创建时间',
+          dataIndex: 'createTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 101,
+        },
+        {
+          id: 2,
+          title: '更新时间',
+          dataIndex: 'updateTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 102,
         },
       ],
-      dataArr: [],
+      dataArr: clueInitValue(),
     },
   },
 ]
