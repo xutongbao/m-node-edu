@@ -33,6 +33,7 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
+        orderIndex: 0,
       },
       {
         id: 1,
@@ -43,6 +44,7 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
+        orderIndex: 101,
       },
       {
         id: 2,
@@ -53,6 +55,7 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
+        orderIndex: 102,
       }
     ],
     dataArr: [],
