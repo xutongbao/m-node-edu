@@ -93,7 +93,8 @@ const dataEdit = (req, res) => {
   let { id, dataItem } = req.body
   let index = dataArr.findIndex((item) => item.id === id)
   if (index >= 0) {
-    dataArr[index] = { id, ...dataItem }
+    dataArr[index].title = dataItem.title
+    //dataArr[index] = { id, ...dataItem }
     res.send({
       code: 200,
       data: dataItem,
