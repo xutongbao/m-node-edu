@@ -1,4 +1,5 @@
 const {
+  routerSearchAll,
   routerSearch,
   routerAdd,
   routerDelete,
@@ -21,6 +22,7 @@ const {
 
 const air = (app) => {
   //应用接口
+  app.post('/api/router/searchAll', routerSearchAll)
   app.post('/api/router/search', routerSearch)
   app.post('/api/router/add', routerAdd)
   app.post('/api/router/delete', routerDelete)

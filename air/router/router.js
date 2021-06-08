@@ -1,5 +1,13 @@
 let { dataArr } = require('../data')
 
+const dataSearchAll = (req, res) => {
+  res.send({
+    code: 200,
+    data: dataArr,
+    message: '搜索成功',
+  })
+}
+
 //搜索
 const dataSearch = (req, res) => {
   const data = dataArr.map(item => {
@@ -101,6 +109,7 @@ const dataEdit = (req, res) => {
 }
 
 module.exports = {
+  routerSearchAll: dataSearchAll,
   routerSearch: dataSearch,
   routerAdd: dataAdd,
   routerDelete: dataDelete,
