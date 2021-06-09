@@ -14,6 +14,7 @@ const {
 } = require('../air/table/table')
 
 const {
+  fieldsSearchAll,
   fieldsSearch,
   fieldsAdd,
   fieldsDelete,
@@ -35,6 +36,7 @@ const air = (app) => {
   app.post('/api/table/edit', tableEdit)
 
   //应用字段对应的表格接口
+  app.post('/api/fields/searchAll', fieldsSearchAll)
   app.post('/api/fields/search', fieldsSearch)
   app.post('/api/fields/add', fieldsAdd)
   app.post('/api/fields/delete', fieldsDelete)

@@ -1,5 +1,15 @@
 let { dataArr } = require('../data')
 
+//调试用，返回全部数据
+const dataSearchAll = (req, res) => {
+  res.send({
+    code: 200,
+    data: dataArr,
+    message: '搜索成功',
+  })
+}
+
+
 //搜索
 const dataSearch = (req, res) => {
   const { tableId } = req.body
@@ -73,6 +83,7 @@ const dataEdit = (req, res) => {
 }
 
 module.exports = {
+  fieldsSearchAll: dataSearchAll,
   fieldsSearch: dataSearch,
   fieldsAdd: dataAdd,
   fieldsDelete: dataDelete,
