@@ -74,6 +74,7 @@ const mockCompany = () => {
     shopCount: () => Mock.Random.integer(0, 5),
     addTime: Date.now(),
     updateTime: undefined,
+    companyId: Date.now()
   })
 }
 
