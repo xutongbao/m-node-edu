@@ -36,7 +36,16 @@ const shopInitValue = () => {
     owner_name: '徐同保',
     work_time: '07:00-22:00',
     position: '116.314007,39.948574',
-    category: ['职业教育', 'IT/互联网', '电商运营'],
+    category: [
+      {
+        id: 0,
+        value: ['职业教育', 'IT/互联网', '电商运营'],
+      },
+      {
+        id: 1,
+        value: ['职业教育', 'IT/互联网', '产品经理'],
+      },
+    ],
     detail_address: '1',
   }
 
