@@ -28,7 +28,7 @@ const dataSearch = (req, res) => {
   const start = (page - 1) * pageSize
   const end = start + pageSize * 1
   res.send({
-    code: 200,
+    state: 1,
     data: {
       list: list.slice(start, end),
       total: list.length,
@@ -45,7 +45,7 @@ const dataAdd = (req, res) => {
   dataItem.id = Date.now()
   dataArr.unshift({...dataItem, ...mockShop()})
   res.send({
-    code: 200,
+    state: 1,
     data: dataItem,
     message: '添加成功',
   })
@@ -57,7 +57,7 @@ const dataDelete = (req, res) => {
   console.log(ids)
   dataArr = dataArr.filter((item) => !ids.includes(item.id))
   res.send({
-    code: 200,
+    state: 1,
     data: ids,
     message: '删除成功',
   })
@@ -70,17 +70,39 @@ const dataEdit = (req, res) => {
   if (index >= 0) {
     dataArr[index] = { id, ...dataItem, updateTime: Date.now() }
     res.send({
-      code: 200,
+      state: 1,
       data: dataItem,
       message: '编辑成功',
     })
   } else {
     res.send({
-      code: 400,
+      state: 0,
       data: dataItem,
       message: '编辑失败，id不存在',
     })    
   }
+}
+
+// 开启线索短信
+const openClueSms = (req, res) => {
+  const { id, type } = req.query
+
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    dataArr[index] = { ...dataArr[index], isOpenClueSms: type === 'open' , updateTime: Date.now() }
+    res.send({
+      state: 1,
+      data: {},
+      message: '操作成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })    
+  }
+
 }
 
 module.exports = {
@@ -88,4 +110,5 @@ module.exports = {
   shopAdd: dataAdd,
   shopDelete: dataDelete,
   shopEdit: dataEdit,
+  openClueSms,
 }

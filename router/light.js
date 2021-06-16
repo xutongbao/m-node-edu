@@ -5,6 +5,7 @@ const {
   shopAdd,
   shopDelete,
   shopEdit,
+  openClueSms,
 } = require('../light/shop/shop')
 const {
   companySearch,
@@ -49,6 +50,7 @@ const light = (app) => {
   app.post('/api/shop/add', shopAdd)
   app.post('/api/shop/delete', shopDelete)
   app.post('/api/shop/edit', shopEdit)
+  app.post('/api/shop/openClueSms', openClueSms)
   //模板页面的接口
   app.post('/api/template/search', templateSearch)
   app.post('/api/template/add', templateAdd)

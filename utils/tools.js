@@ -10,6 +10,7 @@ const mockShop = () => {
     addTime: Date.now(),
     updateTime: undefined,
     releaseStatus: () => Mock.Random.integer(0, 1),
+    isOpenClueSms: false,
   })
 }
 
@@ -47,6 +48,7 @@ const shopInitValue = () => {
       },
     ],
     detail_address: '1',
+    isOpenClueSms: false,
   }
 
   let arr = []
