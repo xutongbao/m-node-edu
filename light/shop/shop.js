@@ -84,7 +84,7 @@ const dataEdit = (req, res) => {
 }
 
 // 开启线索短信
-const openClueSms = (req, res) => {
+const shopOpenClueSms = (req, res) => {
   const { id, type } = req.query
 
   let index = dataArr.findIndex((item) => item.id == id)
@@ -102,7 +102,26 @@ const openClueSms = (req, res) => {
       message: 'id不存在',
     })    
   }
+}
 
+// 复制店铺
+const shopCopy = (req, res) => {
+  const { id } = req.query
+
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    res.send({
+      state: 1,
+      data: {},
+      message: '操作成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })    
+  }
 }
 
 module.exports = {
@@ -110,5 +129,6 @@ module.exports = {
   shopAdd: dataAdd,
   shopDelete: dataDelete,
   shopEdit: dataEdit,
-  openClueSms,
+  shopOpenClueSms,
+  shopCopy,
 }
