@@ -8,6 +8,10 @@ let userList = [
     id: 1,
     username: 'admin',
     password: '123'
+  }, {
+    id: 2,
+    username: 'xu',
+    password: '123'
   }
 ]
 
