@@ -53,6 +53,9 @@ const light = (app) => {
   app.post('/api/shop/edit', shopEdit)
   app.post('/api/shop/openClueSms', shopOpenClueSms)
   app.post('/api/shop/copy', shopCopy)
+  app.post('/api/shop/grounding', shopCopy) //上架
+  app.post('/api/shop/submitShop', shopCopy) //提交百度审核
+  app.post('/api/shop/submitGoods', shopCopy) //提交补充物料
   //模板页面的接口
   app.post('/api/template/search', templateSearch)
   app.post('/api/template/add', templateAdd)

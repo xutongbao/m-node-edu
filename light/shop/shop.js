@@ -124,6 +124,11 @@ const shopCopy = (req, res) => {
   }
 }
 
+// 新增IM组件
+
+// 提交IM组件
+
+
 module.exports = {
   shopSearch: dataSearch,
   shopAdd: dataAdd,
