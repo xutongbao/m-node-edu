@@ -7,6 +7,7 @@ const {
   shopEdit,
   shopOpenClueSms,
   shopCopy,
+  shopIMAdd,
 } = require('../light/shop/shop')
 const {
   companySearch,
@@ -56,6 +57,8 @@ const light = (app) => {
   app.post('/api/shop/grounding', shopCopy) //上架
   app.post('/api/shop/submitShop', shopCopy) //提交百度审核
   app.post('/api/shop/submitGoods', shopCopy) //提交补充物料
+  app.post('/api/shop/IMAdd', shopIMAdd) // 添加、编辑共用一个接口
+  app.post('/api/shop/submitIM', shopCopy) //提交IM
   //模板页面的接口
   app.post('/api/template/search', templateSearch)
   app.post('/api/template/add', templateAdd)

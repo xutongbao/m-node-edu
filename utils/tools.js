@@ -53,7 +53,8 @@ const shopInitValue = () => {
     isOpenClueSms: false,
     commentCount: () => Mock.Random.integer(0, 5),
     guideCount: () => Mock.Random.integer(0, 5),
-
+    IM: {
+    }
   }
 
   let arr = []

@@ -125,9 +125,25 @@ const shopCopy = (req, res) => {
 }
 
 // 新增IM组件
+const shopIMAdd = (req, res) => {
+  const { id, dataItem } = req.body
 
-// 提交IM组件
-
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    dataArr[index] = { ...dataArr[index], IM: dataItem , updateTime: Date.now() }
+    res.send({
+      state: 1,
+      data: {},
+      message: 'IM添加成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })    
+  }
+}
 
 module.exports = {
   shopSearch: dataSearch,
@@ -136,4 +152,5 @@ module.exports = {
   shopEdit: dataEdit,
   shopOpenClueSms,
   shopCopy,
+  shopIMAdd,
 }
