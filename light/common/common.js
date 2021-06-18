@@ -2,7 +2,7 @@ const { categoryData, relatedBrandData } = require('./data')
 
 const category = (req, res) => {
   res.send({
-    code: 200,
+    state: 1,
     data: categoryData,
     message: '所属分类',
   })

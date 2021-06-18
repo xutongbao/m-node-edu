@@ -1,18 +1,18 @@
 const categoryData = [
   {
-    value: '职业教育',
+    value: '1',
     label: '职业教育',
     children: [
       {
-        value: 'IT/互联网',
+        value: '11',
         label: 'IT/互联网',
         children: [
           {
-            value: '电商运营',
+            value: '111',
             label: '电商运营',
           },
           {
-            value: '产品经理',
+            value: '112',
             label: '产品经理',
           },          
         ],

@@ -6,7 +6,16 @@ const app = express()
 const { light } = require('./router/light')
 const { air } = require('./router/air')
 const compression = require('compression')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
+//通过代理解决跨域
+app.use(
+  '/edu',
+  createProxyMiddleware({
+    target: 'http://test_zhiliao.gongzuoshouji.cn',
+    changeOrigin: true,
+  })
+)
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
 //app.use(express.static('public'))
