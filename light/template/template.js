@@ -1,6 +1,33 @@
-const { templateInitValue } = require('../../utils/tools')
+const Mock = require('mockjs')
 
-let dataArr = templateInitValue()
+//模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
+const mockOtherValue = () => {
+  return Mock.mock({
+    releaseStatus: () => Mock.Random.integer(0, 1),
+    commentCount: () => Mock.Random.integer(0, 5), 
+  })
+}
+
+//这些初始值在mock的批量数据中是重复的
+const addInitValues = {
+  addTime: Date.now(),
+  sale_name: '张三',
+}
+
+const initValue = () => {
+  let arr = []
+  for (let i = 0; i < 100; i++) {
+    //这些值在mock的批量数据中是随机的
+    const temp = Mock.mock({
+      name: '@cname',
+    })
+    arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
+  }
+
+  return arr
+}
+
+let dataArr = initValue()
 
 //搜索
 const dataSearch = (req, res) => {
@@ -43,7 +70,7 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
-  dataArr.unshift({ ...dataItem })
+  dataArr.unshift({...addInitValues, ...dataItem, ...mockOtherValue() })
   res.send({
     state: 1,
     data: dataItem,
