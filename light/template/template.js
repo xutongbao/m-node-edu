@@ -4,7 +4,7 @@ let dataArr = templateInitValue()
 
 //搜索
 const dataSearch = (req, res) => {
-  const { page = 1, pageSize = 10, searchParams = {} } = req.body
+  const { pageNum = 1, pageSize = 10, searchParams = {} } = req.body
   let list = [...dataArr]
 
   list = list.filter((item) => {
@@ -25,14 +25,14 @@ const dataSearch = (req, res) => {
     return flag
   })
 
-  const start = (page - 1) * pageSize
+  const start = (pageNum - 1) * pageSize
   const end = start + pageSize * 1
   res.send({
-    code: 200,
+    state: 1,
     data: {
       list: list.slice(start, end),
-      total: list.length,
-      current: page - 0,
+      totalCount: list.length,
+      pageNum: pageNum - 0,
       pageSize: pageSize - 0,
     },
     message: '搜索成功',
@@ -45,7 +45,7 @@ const dataAdd = (req, res) => {
   dataItem.id = Date.now()
   dataArr.unshift({ ...dataItem })
   res.send({
-    code: 200,
+    state: 1,
     data: dataItem,
     message: '添加成功',
   })
@@ -57,7 +57,7 @@ const dataDelete = (req, res) => {
   console.log(ids)
   dataArr = dataArr.filter((item) => !ids.includes(item.id))
   res.send({
-    code: 200,
+    state: 1,
     data: ids,
     message: '删除成功',
   })
@@ -70,13 +70,13 @@ const dataEdit = (req, res) => {
   if (index >= 0) {
     dataArr[index] = { id, ...dataItem, updateTime: Date.now() }
     res.send({
-      code: 200,
+      state: 1,
       data: dataItem,
       message: '编辑成功',
     })
   } else {
     res.send({
-      code: 400,
+      state: 0,
       data: dataItem,
       message: '编辑失败，id不存在',
     })
