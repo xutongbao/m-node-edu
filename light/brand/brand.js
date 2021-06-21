@@ -4,7 +4,9 @@ const Mock = require('mockjs')
 const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5), 
+    bdAuditStatus: () => Mock.Random.integer(0, 5), 
+    creatorUid: () => Mock.Random.integer(68, 69),
+    status: () => Mock.Random.integer(1, 5),
     isUp: () => Mock.Random.integer(0, 1),
   })
 }
@@ -112,8 +114,8 @@ const dataEdit = (req, res) => {
   }
 }
 
-// 状态操作
-const dataUp = (req, res) => {
+// 上架
+const brandUp = (req, res) => {
   const { id, isUp } = req.body
 
   let index = dataArr.findIndex((item) => item.id == id)
@@ -134,9 +136,9 @@ const dataUp = (req, res) => {
 }
 
 module.exports = {
-  templateSearch: dataSearch,
-  templateAdd: dataAdd,
-  templateDelete: dataDelete,
-  templateEdit: dataEdit,
-  templateUp: dataUp,
+  brandSearch: dataSearch,
+  brandAdd: dataAdd,
+  brandDelete: dataDelete,
+  brandEdit: dataEdit,
+  brandUp,
 }

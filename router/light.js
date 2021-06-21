@@ -21,6 +21,7 @@ const {
   templateAdd,
   templateDelete,
   templateEdit,
+  templateUp,
 } = require('../light/template/template')
 const {
   easyTemplateSearch,
@@ -35,6 +36,13 @@ const {
   categoryDelete,
   categoryEdit,
 } = require('../light/baseMgt/category/category')
+const {
+  brandSearch,
+  brandAdd,
+  brandDelete,
+  brandEdit,
+  brandUp,
+} = require('../light/brand/brand')
 
 const light = (app) => {
   //登录
@@ -64,6 +72,7 @@ const light = (app) => {
   app.post('/api/template/add', templateAdd)
   app.post('/api/template/delete', templateDelete)
   app.post('/api/template/edit', templateEdit)
+  app.post('/api/template/up', templateUp)
   //简单模板页面的接口
   app.post('/api/easyTemplate/search', easyTemplateSearch)
   app.post('/api/easyTemplate/add', easyTemplateAdd)
@@ -84,6 +93,13 @@ const light = (app) => {
   app.post('/api/category/add', categoryAdd)
   app.post('/api/category/delete', categoryDelete)
   app.post('/api/category/edit', categoryEdit)
+
+  //品牌列表页面的接口
+  app.post('/api/brand/search', brandSearch)
+  app.post('/api/brand/add', brandAdd)
+  app.post('/api/brand/delete', brandDelete)
+  app.post('/api/brand/edit', brandEdit)
+  app.post('/api/brand/up', brandUp)
 }
 
 module.exports = {
