@@ -10,7 +10,7 @@ const mockOtherValue = () => {
 
 //这些初始值在mock的批量数据中是重复的
 const addInitValues = {
-  addTime: Date.now(),
+  addtime: Date.now(),
   sale_name: '张三',
 }
 
@@ -70,10 +70,11 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
-  dataArr.unshift({...addInitValues, ...dataItem, ...mockOtherValue() })
+  let temp = {...addInitValues, ...dataItem, ...mockOtherValue(), addtime: Date.now() }
+  dataArr.unshift(temp)
   res.send({
     state: 1,
-    data: dataItem,
+    data: temp,
     message: '添加成功',
   })
 }
@@ -95,10 +96,10 @@ const dataEdit = (req, res) => {
   let { id, dataItem } = req.body
   let index = dataArr.findIndex((item) => item.id === id)
   if (index >= 0) {
-    dataArr[index] = { id, ...dataItem, updateTime: Date.now() }
+    dataArr[index] = { id, ...dataItem, edittime: Date.now() }
     res.send({
       state: 1,
-      data: dataItem,
+      data: dataArr[index],
       message: '编辑成功',
     })
   } else {
