@@ -42,6 +42,7 @@ const {
   brandDelete,
   brandEdit,
   brandUp,
+  brandHonorAdd,
 } = require('../light/brand/brand')
 
 const light = (app) => {
@@ -100,6 +101,7 @@ const light = (app) => {
   app.post('/api/brand/delete', brandDelete)
   app.post('/api/brand/edit', brandEdit)
   app.post('/api/brand/up', brandUp)
+  app.post('/api/brand/honor/add', brandHonorAdd)
 }
 
 module.exports = {

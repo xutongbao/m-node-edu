@@ -4,7 +4,7 @@ const Mock = require('mockjs')
 const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
-    bdAuditStatus: () => Mock.Random.integer(0, 5), 
+    bdAuditStatus: () => Mock.Random.integer(0, 5),
     creatorUid: () => Mock.Random.integer(68, 69),
     status: () => Mock.Random.integer(1, 5),
     isUp: () => Mock.Random.integer(0, 1),
@@ -15,6 +15,7 @@ const mockOtherValue = () => {
 const addInitValues = {
   addtime: Date.now(),
   sale_name: '张三',
+  honor: [],
 }
 
 const initValue = () => {
@@ -73,7 +74,12 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
-  let temp = {...addInitValues, ...dataItem, ...mockOtherValue(), addtime: Date.now() }
+  let temp = {
+    ...addInitValues,
+    ...dataItem,
+    ...mockOtherValue(),
+    addtime: Date.now(),
+  }
   dataArr.unshift(temp)
   res.send({
     state: 1,
@@ -120,7 +126,7 @@ const brandUp = (req, res) => {
 
   let index = dataArr.findIndex((item) => item.id == id)
   if (index >= 0) {
-    dataArr[index] = { ...dataArr[index], isUp: isUp , updateTime: Date.now() }
+    dataArr[index] = { ...dataArr[index], isUp: isUp, edittime: Date.now() }
     res.send({
       state: 1,
       data: {},
@@ -131,7 +137,39 @@ const brandUp = (req, res) => {
       state: 0,
       data: {},
       message: 'id不存在',
-    })    
+    })
+  }
+}
+
+// 添加荣誉证书
+const brandHonorAdd = (req, res) => {
+  const { id, dataItem } = req.body
+
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    dataItem.id = Date.now()
+    dataItem.addtime = Date.now()
+    dataItem.order = 0
+    const tempHonor =
+      Array.isArray(dataArr[index].honor) && dataArr[index].honor.length === 0
+        ? [dataItem]
+        : [ dataItem, ...dataArr[index].honor]
+    dataArr[index] = {
+      ...dataArr[index],
+      honor: tempHonor,
+      updateTime: Date.now(),
+    }
+    res.send({
+      state: 1,
+      data: {},
+      message: '操作成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })
   }
 }
 
@@ -141,4 +179,5 @@ module.exports = {
   brandDelete: dataDelete,
   brandEdit: dataEdit,
   brandUp,
+  brandHonorAdd,
 }
