@@ -12,14 +12,14 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 app.use(
   '/edu',
   createProxyMiddleware({
-    target: 'http://test_zhiliao.gongzuoshouji.cn',
+    target: 'http://test-zhiliao.gongzuoshouji.cn',
     changeOrigin: true,
   })
 )
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
-//app.use(express.static('public'))
-app.use(express.static('../edu/build'))
+app.use(express.static('public'))
+//app.use(express.static('../edu/build'))
 app.use(express.static('upload'))
 app.use(cors())
 
