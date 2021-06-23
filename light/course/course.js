@@ -4,7 +4,7 @@ const Mock = require('mockjs')
 const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5), 
+    bdAuditStatus: () => Mock.Random.integer(0, 5), 
     isUp: () => Mock.Random.integer(0, 1),
   })
 }
@@ -13,6 +13,10 @@ const mockOtherValue = () => {
 const addInitValues = {
   addtime: Date.now(),
   sale_name: '张三',
+  belong: '测试',
+  courseImage: 'http://test_img01-edu.gongzuoshouji.cn/company/20210310/2ef42a40a87b5f4b79366b7ff933aa9d.jpg',
+  category: '三级分类名称',
+  author: '管理员'
 }
 
 const initValue = () => {
