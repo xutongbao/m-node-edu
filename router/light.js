@@ -44,6 +44,13 @@ const {
   brandUp,
   brandHonorAdd,
 } = require('../light/brand/brand')
+const {
+  orgSearch,
+  orgAdd,
+  orgDelete,
+  orgEdit,
+  orgUp,
+} = require('../light/org/org')
 
 const light = (app) => {
   //登录
@@ -102,6 +109,13 @@ const light = (app) => {
   app.post('/api/brand/edit', brandEdit)
   app.post('/api/brand/up', brandUp)
   app.post('/api/brand/honor/add', brandHonorAdd)
+
+  //机构账号
+  app.post('/api/org/search', orgSearch)
+  app.post('/api/org/add', orgAdd)
+  app.post('/api/org/delete', orgDelete)
+  app.post('/api/org/edit', orgEdit)
+  app.post('/api/org/up', orgUp)
 }
 
 module.exports = {
