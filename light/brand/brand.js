@@ -149,7 +149,7 @@ const brandHonorAdd = (req, res) => {
   if (index >= 0) {
     dataItem.id = Date.now()
     dataItem.addtime = Date.now()
-    dataItem.order = 0
+    dataItem.sort = 0
     const tempHonor =
       Array.isArray(dataArr[index].honor) && dataArr[index].honor.length === 0
         ? [dataItem]
