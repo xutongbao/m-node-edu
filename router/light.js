@@ -51,6 +51,13 @@ const {
   orgEdit,
   orgUp,
 } = require('../light/org/org')
+const {
+  courseSearch,
+  courseAdd,
+  courseDelete,
+  courseEdit,
+  courseUp,
+} = require('../light/course/course')
 
 const light = (app) => {
   //登录
@@ -116,6 +123,13 @@ const light = (app) => {
   app.post('/api/org/delete', orgDelete)
   app.post('/api/org/edit', orgEdit)
   app.post('/api/org/up', orgUp)
+
+  //课程
+  app.post('/api/course/search', courseSearch)
+  app.post('/api/course/add', courseAdd)
+  app.post('/api/course/delete', courseDelete)
+  app.post('/api/course/edit', courseEdit)
+  app.post('/api/course/up', courseUp)
 }
 
 module.exports = {

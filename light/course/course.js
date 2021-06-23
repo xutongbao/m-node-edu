@@ -3,41 +3,16 @@ const Mock = require('mockjs')
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
 const mockOtherValue = () => {
   return Mock.mock({
-    bindStatus: () => Mock.Random.integer(0, 1),
-    bindCount: () => Mock.Random.integer(1, 5), 
-    bdAuditStatus: () => Mock.Random.integer(0, 5), 
+    releaseStatus: () => Mock.Random.integer(0, 1),
+    commentCount: () => Mock.Random.integer(0, 5), 
     isUp: () => Mock.Random.integer(0, 1),
-    accountType: () => Mock.Random.integer(0, 1),
   })
 }
 
 //这些初始值在mock的批量数据中是重复的
 const addInitValues = {
   addtime: Date.now(),
-  belong: '中公',
-  relatedShop: ['0'],
-  bindShop: [
-    {
-      id: 0,
-      companyId: 576,
-      shopName: '中公',
-      shopId: 104677943735392,
-      bdAuditStatus: 0,
-      status: 0,
-      addtime: Date.now(),
-      edittime: Date.now(),
-    },
-    {
-      id: 1,
-      companyId: 575,
-      shopName: '千峰',
-      shopId: 104677943735393,
-      bdAuditStatus: 1,
-      status: 1,
-      addtime: Date.now(),
-      edittime: Date.now(),
-    },
-  ],
+  sale_name: '张三',
 }
 
 const initValue = () => {
@@ -159,9 +134,9 @@ const dataUp = (req, res) => {
 }
 
 module.exports = {
-  orgSearch: dataSearch,
-  orgAdd: dataAdd,
-  orgDelete: dataDelete,
-  orgEdit: dataEdit,
-  orgUp: dataUp,
+  courseSearch: dataSearch,
+  courseAdd: dataAdd,
+  courseDelete: dataDelete,
+  courseEdit: dataEdit,
+  courseUp: dataUp,
 }
