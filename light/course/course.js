@@ -19,6 +19,7 @@ const addInitValues = {
   categoryForList: '三级分类名称',
   author: '管理员',
   openClass: [],
+  seo: [],
 }
 
 const initValue = () => {
@@ -139,7 +140,7 @@ const dataUp = (req, res) => {
   }
 }
 
-// 添加荣誉证书
+// 添加开班信息
 const courseOpenClassAdd = (req, res) => {
   const { id, dataItem } = req.body
 
@@ -171,11 +172,44 @@ const courseOpenClassAdd = (req, res) => {
   }
 }
 
+// 添加开班信息
+const courseSeoAdd = (req, res) => {
+  const { id, dataItem } = req.body
+
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    dataItem.id = Date.now()
+    dataItem.addtime = Date.now()
+    dataItem.sort = 0
+    const tempHonor =
+      Array.isArray(dataArr[index].seo) && dataArr[index].seo.length === 0
+        ? [dataItem]
+        : [ dataItem, ...dataArr[index].seo]
+    dataArr[index] = {
+      ...dataArr[index],
+      seo: tempHonor,
+      updateTime: Date.now(),
+    }
+    res.send({
+      state: 1,
+      data: {},
+      message: '操作成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })
+  }
+}
+
 module.exports = {
   courseSearch: dataSearch,
   courseAdd: dataAdd,
   courseDelete: dataDelete,
   courseEdit: dataEdit,
   courseUp: dataUp,
-  courseOpenClassAdd
+  courseOpenClassAdd,
+  courseSeoAdd,
 }

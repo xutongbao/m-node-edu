@@ -58,6 +58,7 @@ const {
   courseEdit,
   courseUp,
   courseOpenClassAdd,
+  courseSeoAdd,
 } = require('../light/course/course')
 
 const light = (app) => {
@@ -132,6 +133,8 @@ const light = (app) => {
   app.post('/api/course/edit', courseEdit)
   app.post('/api/course/up', courseUp)
   app.post('/api/course/openClass/add', courseOpenClassAdd)
+  app.post('/api/course/seo/add', courseSeoAdd)
+
 }
 
 module.exports = {
