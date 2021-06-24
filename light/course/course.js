@@ -5,6 +5,7 @@ const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
     bdAuditStatus: () => Mock.Random.integer(0, 5), 
+    shopListCount: () => Mock.Random.integer(0, 5),  
     isUp: () => Mock.Random.integer(0, 1),
   })
 }
@@ -16,7 +17,8 @@ const addInitValues = {
   belong: '测试',
   courseImage: 'http://test_img01-edu.gongzuoshouji.cn/company/20210310/2ef42a40a87b5f4b79366b7ff933aa9d.jpg',
   categoryForList: '三级分类名称',
-  author: '管理员'
+  author: '管理员',
+  openClass: [],
 }
 
 const initValue = () => {
@@ -137,10 +139,43 @@ const dataUp = (req, res) => {
   }
 }
 
+// 添加荣誉证书
+const courseOpenClassAdd = (req, res) => {
+  const { id, dataItem } = req.body
+
+  let index = dataArr.findIndex((item) => item.id == id)
+  if (index >= 0) {
+    dataItem.id = Date.now()
+    dataItem.addtime = Date.now()
+    dataItem.sort = 0
+    const tempHonor =
+      Array.isArray(dataArr[index].openClass) && dataArr[index].openClass.length === 0
+        ? [dataItem]
+        : [ dataItem, ...dataArr[index].openClass]
+    dataArr[index] = {
+      ...dataArr[index],
+      openClass: tempHonor,
+      updateTime: Date.now(),
+    }
+    res.send({
+      state: 1,
+      data: {},
+      message: '操作成功',
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {},
+      message: 'id不存在',
+    })
+  }
+}
+
 module.exports = {
   courseSearch: dataSearch,
   courseAdd: dataAdd,
   courseDelete: dataDelete,
   courseEdit: dataEdit,
   courseUp: dataUp,
+  courseOpenClassAdd
 }
