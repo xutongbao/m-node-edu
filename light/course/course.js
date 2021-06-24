@@ -15,7 +15,7 @@ const addInitValues = {
   sale_name: '张三',
   belong: '测试',
   courseImage: 'http://test_img01-edu.gongzuoshouji.cn/company/20210310/2ef42a40a87b5f4b79366b7ff933aa9d.jpg',
-  category: '三级分类名称',
+  categoryForList: '三级分类名称',
   author: '管理员'
 }
 
