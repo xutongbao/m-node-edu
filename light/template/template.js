@@ -32,8 +32,12 @@ let dataArr = initValue()
 
 //搜索
 const dataSearch = (req, res) => {
-  const { pageNum = 1, pageSize = 10, searchParams = {} } = req.body
+  const { pageNum = 1, pageSize = 10 } = req.body
   let list = [...dataArr]
+
+  const searchParams = req.body || {}
+  delete searchParams.pageNum
+  delete searchParams.pageSize
 
   list = list.filter((item) => {
     let flag = true
