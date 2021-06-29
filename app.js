@@ -5,6 +5,7 @@ const history = require('connect-history-api-fallback')
 const app = express()
 const { light } = require('./router/light')
 const { air } = require('./router/air')
+const { sale } = require('./router/sale')
 const compression = require('compression')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
@@ -46,6 +47,9 @@ function shouldCompress (req, res) {
 
 //知了好学的接口
 light(app)
+
+//销售系统
+sale(app)
 
 //无代码平台的接口
 air(app)
