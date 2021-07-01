@@ -11,7 +11,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 
 //通过代理解决跨域
 app.use(
-  '/edu',
+  '/zlhx',
   createProxyMiddleware({
     target: 'http://test-zhiliao.gongzuoshouji.cn',
     changeOrigin: true,
@@ -19,8 +19,8 @@ app.use(
 )
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
-app.use(express.static('public'))
-//app.use(express.static('../edu/build'))
+//app.use(express.static('public'))
+app.use(express.static('../edu/build'))
 app.use(express.static('upload'))
 app.use(cors())
 
