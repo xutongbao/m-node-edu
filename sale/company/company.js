@@ -3,7 +3,7 @@ const Mock = require('mockjs')
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
 const mockOtherValue = () => {
   return Mock.mock({
-    releaseStatus: () => Mock.Random.integer(0, 1),
+    releaseStatus: () => Mock.Random.integer(0, 4),
     commentCount: () => Mock.Random.integer(0, 5), 
     isUp: () => Mock.Random.integer(0, 1),
   })
