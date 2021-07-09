@@ -4,7 +4,7 @@ let dataArr = []
 //搜索
 const dataSearch = (req, res) => {
   res.send({
-    code: 200,
+    state: 1,
     data: dataArr,
     message: '搜索成功',
   })
@@ -16,7 +16,7 @@ const dataAdd = (req, res) => {
   dataItem.id = Date.now()
   dataArr.push({ ...dataItem })
   res.send({
-    code: 200,
+    state: 1,
     data: dataItem,
     message: '添加成功',
   })
@@ -28,7 +28,7 @@ const dataDelete = (req, res) => {
   console.log(ids)
   dataArr = dataArr.filter((item) => !ids.includes(item.id))
   res.send({
-    code: 200,
+    state: 1,
     data: ids,
     message: '删除成功',
   })
@@ -41,13 +41,13 @@ const dataEdit = (req, res) => {
   if (index >= 0) {
     dataArr[index] = { id, ...dataItem, updateTime: Date.now() }
     res.send({
-      code: 200,
+      state: 1,
       data: dataItem,
       message: '编辑成功',
     })
   } else {
     res.send({
-      code: 400,
+      state: 0,
       data: dataItem,
       message: '编辑失败，id不存在',
     })

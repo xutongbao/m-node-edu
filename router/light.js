@@ -60,6 +60,13 @@ const {
   courseOpenClassAdd,
   courseSeoAdd,
 } = require('../light/course/course')
+const {
+  authSearch,
+  authAdd,
+  authDelete,
+  authEdit,
+  authUp,
+} = require('../light/auth/auth')
 
 const light = (app) => {
   //登录
@@ -134,6 +141,13 @@ const light = (app) => {
   app.post('/api/course/up', courseUp)
   app.post('/api/course/openClass/add', courseOpenClassAdd)
   app.post('/api/course/seo/add', courseSeoAdd)
+
+  //权限接口
+  app.post('/api/auth/search', authSearch)
+  app.post('/api/auth/add', authAdd)
+  app.post('/api/auth/delete', authDelete)
+  app.post('/api/auth/edit', authEdit)
+  app.post('/api/auth/up', authUp)  
 
 }
 
