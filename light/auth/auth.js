@@ -1,3 +1,4 @@
+const { router } = require('./data')
 const Mock = require('mockjs')
 
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
@@ -36,7 +37,7 @@ const dataSearch = (req, res) => {
 
   res.send({
     state: 1,
-    data: dataArr,
+    data: router,
     message: '搜索成功',
   })
 }
