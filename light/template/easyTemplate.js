@@ -14,6 +14,7 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
+  dataItem.addtime = Date.now()
   dataArr.push({ ...dataItem })
   res.send({
     state: 1,
@@ -39,7 +40,7 @@ const dataEdit = (req, res) => {
   let { id, dataItem } = req.body
   let index = dataArr.findIndex((item) => item.id === id)
   if (index >= 0) {
-    dataArr[index] = { id, ...dataItem, updateTime: Date.now() }
+    dataArr[index] = { id, ...dataItem, edittime: Date.now(), addtime: dataArr[index].addtime, sort: dataArr[index].sort }
     res.send({
       state: 1,
       data: dataItem,
