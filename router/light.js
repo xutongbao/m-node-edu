@@ -109,7 +109,7 @@ const light = (app) => {
   app.post('/api/company/edit', companyEdit)
   app.post('/api/company/fastAdd', companyFastAdd)
   //所属分类
-  app.get('/api/category', category)
+  app.post('/api/category', category)
   app.get('/api/relatedBrand', relatedBrand)
 
   //基础管理-分类管理-分类列表
