@@ -1,4 +1,4 @@
-const { router } = require('./data')
+let { router, authData } = require('./data')
 const Mock = require('mockjs')
 
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
@@ -37,7 +37,7 @@ const dataSearch = (req, res) => {
 
   res.send({
     state: 1,
-    data: router,
+    data: authData,
     message: '搜索成功',
   })
 }
@@ -69,22 +69,13 @@ const dataDelete = (req, res) => {
 
 //编辑
 const dataEdit = (req, res) => {
-  let { id, dataItem } = req.body
-  let index = dataArr.findIndex((item) => item.id === id)
-  if (index >= 0) {
-    dataArr[index] = { id, ...dataItem, edittime: Date.now() }
-    res.send({
-      state: 1,
-      data: dataArr[index],
-      message: '编辑成功',
-    })
-  } else {
-    res.send({
-      state: 0,
-      data: dataItem,
-      message: '编辑失败，id不存在',
-    })
-  }
+  let { dataItem } = req.body
+  authData = dataItem
+  res.send({
+    state: 1,
+    data: authData,
+    message: '编辑成功',
+  })
 }
 
 // 状态操作

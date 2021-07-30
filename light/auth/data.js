@@ -513,6 +513,36 @@ const router = [
   },
 ]
 
+let authData = [
+  {
+    path: '/light/index/baseMgt',
+  },
+  {
+    path: '/light/index/offline/companyMgt/testNode',
+  },
+  {
+    path: '/light/index/baseMgt/categoryMgt/templateList',
+    auth: [
+      {
+        title: '查看',
+        name: 'check',
+        isVisible: true
+      },
+      {
+        title: '添加',
+        name: 'add',
+        isVisible: true,
+      },
+      {
+        title: '按钮',
+        name: 'btn',
+        isVisible: false
+      }
+    ]
+  }
+]
+
 module.exports = {
   router,
+  authData,
 }

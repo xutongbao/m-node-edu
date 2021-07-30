@@ -40,11 +40,11 @@ function shouldCompress (req, res) {
   return compression.filter(req, res)
 }
 
-app.use((res, req, next) => {
-  setTimeout(() => {
-    next()
-  }, 4000)
-})
+// app.use((res, req, next) => {
+//   setTimeout(() => {
+//     next()
+//   }, 4000)
+// })
 
 //知了好学的接口
 light(app)
