@@ -62,10 +62,8 @@ const {
 } = require('../light/course/course')
 const {
   authSearch,
-  authAdd,
-  authDelete,
   authEdit,
-  authUp,
+  authRoleSearch,
 } = require('../light/auth/auth')
 
 const light = (app) => {
@@ -144,10 +142,8 @@ const light = (app) => {
 
   //权限接口
   app.post('/api/auth/search', authSearch)
-  app.post('/api/auth/add', authAdd)
-  app.post('/api/auth/delete', authDelete)
   app.post('/api/auth/edit', authEdit)
-  app.post('/api/auth/up', authUp)  
+  app.post('/api/auth/role', authRoleSearch)  
 
 }
 
