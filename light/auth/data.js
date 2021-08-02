@@ -1,8 +1,8 @@
 
 let authData = [
   {
+    id: 0,
     title: '管理员',
-    role: 'admin',
     auth: {
       path: '/light/index/baseMgt/categoryMgt/templateList',
       auth: [
@@ -25,8 +25,8 @@ let authData = [
     },
   },
   {
+    id: 1,
     title: '项目经理',
-    role: 'manager',
     auth: {
       path: '/light/index/baseMgt/categoryMgt/templateList',
       auth: [
