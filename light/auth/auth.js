@@ -2,11 +2,13 @@ let { authData } = require('./data')
 
 //搜索
 const dataSearch = (req, res) => {
-  //const { pageNum = 1, pageSize = 10 } = req.body
+  const { id = 19 } = req.body
+
+  const tempData = authData.find(item => item.id === id)
 
   res.send({
     state: 1,
-    data: authData,
+    data: (tempData && tempData.auth) ? tempData.auth : authData[0].auth,
     message: '搜索成功',
   })
 }

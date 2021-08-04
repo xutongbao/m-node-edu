@@ -1,9 +1,9 @@
 
 let authData = [
   {
-    id: 0,
+    id: 19,
     title: '管理员',
-    auth: {
+    auth: [{
       path: '/light/index/baseMgt/categoryMgt/templateList',
       auth: [
         {
@@ -22,12 +22,12 @@ let authData = [
           isVisible: false,
         },
       ],
-    },
+    }],
   },
   {
-    id: 1,
-    title: '项目经理',
-    auth: {
+    id: 22,
+    title: '客服',
+    auth: [{
       path: '/light/index/baseMgt/categoryMgt/templateList',
       auth: [
         {
@@ -46,7 +46,7 @@ let authData = [
           isVisible: false,
         },
       ],
-    },
+    }],
   },
 ]
 
