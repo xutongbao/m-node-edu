@@ -60,11 +60,14 @@ const {
   courseOpenClassAdd,
   courseSeoAdd,
 } = require('../light/course/course')
+const { authSearch, authEdit, authRoleSearch } = require('../light/auth/auth')
 const {
-  authSearch,
-  authEdit,
-  authRoleSearch,
-} = require('../light/auth/auth')
+  logSearch,
+  logAdd,
+  logDelete,
+  logEdit,
+  logUp,
+} = require('../light/log/log')
 
 const light = (app) => {
   //登录
@@ -143,8 +146,14 @@ const light = (app) => {
   //权限接口
   app.post('/api/auth/search', authSearch)
   app.post('/api/auth/edit', authEdit)
-  app.post('/api/auth/role', authRoleSearch)  
+  app.post('/api/auth/role', authRoleSearch)
 
+  //错误日志接口
+  app.post('/api/log/search', logSearch)
+  app.post('/api/log/add', logAdd)
+  app.post('/api/log/delete', logDelete)
+  app.post('/api/log/edit', logEdit)
+  app.post('/api/log/up', logUp)
 }
 
 module.exports = {

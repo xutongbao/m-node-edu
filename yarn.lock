@@ -370,6 +370,13 @@ isarray@~1.0.0:
   resolved "https://registry.nlark.com/isarray/download/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
 
+lowdb@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.nlark.com/lowdb/download/lowdb-2.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Flowdb%2Fdownload%2Flowdb-2.1.0.tgz#c8063e228b5ab3e082ece90e0512537ecb6e1e2a"
+  integrity sha1-yAY+Iotas+CC7OkOBRJTfstuHio=
+  dependencies:
+    steno "^1.0.0"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.npm.taobao.org/media-typer/download/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -604,6 +611,11 @@ setprototypeof@1.1.1:
   version "1.5.0"
   resolved "https://registry.npm.taobao.org/statuses/download/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
+
+steno@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/steno/download/steno-1.0.0.tgz?cache=0&sync_timestamp=1622951391856&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsteno%2Fdownload%2Fsteno-1.0.0.tgz#475e32c6066ec9760229eaaf1550601764fbecba"
+  integrity sha1-R14yxgZuyXYCKeqvFVBgF2T77Lo=
 
 streamsearch@0.1.2:
   version "0.1.2"
