@@ -76,16 +76,16 @@ const dataSearch = async (req, res) => {
 //添加
 const dataAdd = async (req, res) => {
   const { dataItem } = req.body
-  const { path, username } = dataItem
+  const { path, username, errorTitle, detail } = dataItem
   const id = Date.now()
   const addtime = Date.now()
   const edittime = ''
   //const path = 'a'
   //const username = 'admin'
-  const browser = 'chrome'
-  const detail = '详情'
+  const browser = req.headers[`user-agent`]
+  //const detail = '详情'
   const err = await runSql(
-    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`
+    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}')`
   )
   res.send({
     state: 1,
@@ -112,8 +112,9 @@ const dataDelete = async (req, res) => {
 const dataEdit = async (req, res) => {
   let { id, dataItem } = req.body
   const { path, username } = dataItem
+  const edittime = Date.now()
   err = await runSql(
-    `UPDATE myLogs SET path='${path}', username='${username}' WHERE id=${id}`
+    `UPDATE myLogs SET path='${path}', username='${username}', edittime='${edittime}' WHERE id=${id}`
   )
   res.send({
     state: 1,
@@ -153,16 +154,17 @@ const dataAction = async (req, res) => {
   const path = 'a'
   const username = 'admin'
   const browser = 'chrome'
+  const errorTitle = '1'
   const detail = '详情'
   const editId = '1628502771985'
 
   if (type === 'create') {
     err = await runSql(
-      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, detail TEXT)`
+      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, errorTitle TEXT, detail TEXT)`
     )
   } else if (type === 'insert') {
     err = await runSql(
-      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`
+      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}')`
     )
   } else if (type === 'select') {
     result = await queryPromise(`SELECT * FROM myLogs`)
