@@ -32,9 +32,10 @@ const initValue = () => {
 let dataArr = initValue()
 
 //搜索
-const dataSearch = (req, res) => {
+const dataSearch = async (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
-  let list = [...dataArr]
+  const result = await queryPromise(`SELECT * FROM myLogs`)
+  let list = [...result]
 
   const searchParams = req.body || {}
   delete searchParams.pageNum
@@ -73,28 +74,33 @@ const dataSearch = (req, res) => {
 }
 
 //添加
-const dataAdd = (req, res) => {
+const dataAdd = async (req, res) => {
   const { dataItem } = req.body
-  dataItem.id = Date.now()
-  let temp = {
-    ...addInitValues,
-    ...mockOtherValue(),
-    ...dataItem,
-    addtime: Date.now(),
-  }
-  dataArr.unshift(temp)
+  const { path } = dataItem
+  const id = Date.now()
+  const addtime = Date.now()
+  const edittime = ''
+  //const path = 'a'
+  const username = 'admin'
+  const browser = 'chrome'
+  const detail = '详情'
+  const err = await runSql(
+    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`
+  )
   res.send({
     state: 1,
-    data: temp,
+    data: dataItem,
     message: '添加成功',
   })
 }
 
 //删除
-const dataDelete = (req, res) => {
+const dataDelete = async (req, res) => {
   let { ids } = req.body
   console.log(ids)
-  dataArr = dataArr.filter((item) => !ids.includes(item.id))
+  err = await runSql(
+    `DELETE FROM myLogs WHERE id=${ids[0]}`
+  )
   res.send({
     state: 1,
     data: ids,
@@ -103,23 +109,17 @@ const dataDelete = (req, res) => {
 }
 
 //编辑
-const dataEdit = (req, res) => {
+const dataEdit = async (req, res) => {
   let { id, dataItem } = req.body
-  let index = dataArr.findIndex((item) => item.id === id)
-  if (index >= 0) {
-    dataArr[index] = { id, ...dataItem, edittime: Date.now() }
-    res.send({
-      state: 1,
-      data: dataArr[index],
-      message: '编辑成功',
-    })
-  } else {
-    res.send({
-      state: 0,
-      data: dataItem,
-      message: '编辑失败，id不存在',
-    })
-  }
+  const { path } = dataItem
+  err = await runSql(
+    `UPDATE myLogs SET path='${path}' WHERE id=${id}`
+  )
+  res.send({
+    state: 1,
+    data: dataItem,
+    message: '编辑成功',
+  })
 }
 
 // 状态操作
