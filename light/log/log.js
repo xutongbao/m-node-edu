@@ -147,20 +147,30 @@ const dataAction = async (req, res) => {
   const { type } = req.body
   let result = []
   let err
+  const id = Date.now()
+  const addtime = Date.now()
+  const edittime = '1'
+  const path = 'a'
+  const username = 'admin'
+  const browser = 'chrome'
+  const detail = '详情'
+
   if (type === 'create') {
-    err = await runSql('CREATE TABLE lorem (info TEXT)')
+    err = await runSql(`CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, detail TEXT)`)
+    //err = await runSql(`CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT   )`)
   } else if (type === 'insert') {
-    err = await runSql(`INSERT INTO lorem VALUES (${Date.now()})`)
+    err = await runSql(`INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`)
+    //err = await runSql(`INSERT INTO myLogs VALUES (  ${id}, ${addtime}, ${edittime}, '${path}' )`)
   } else if (type === 'select') {
-    result = await queryPromise(`SELECT rowid AS id, info FROM lorem`)
+    result = await queryPromise(`SELECT * FROM myLogs`)
   }else if (type === 'drop') {
-    runSql('DROP TABLE lorem')
+    runSql('DROP TABLE myLogs')
   } 
   //console.log(result)
   if (err) {
     res.send({
       state: 0,
-      message: err,
+      message: JSON.stringify(err),
     })
   } else {
     res.send({
