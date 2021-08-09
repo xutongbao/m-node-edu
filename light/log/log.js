@@ -34,7 +34,7 @@ let dataArr = initValue()
 //搜索
 const dataSearch = async (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
-  const result = await queryPromise(`SELECT * FROM myLogs`)
+  const result = await queryPromise(`SELECT * FROM myLogs ORDER BY addtime DESC`)
   let list = [...result]
 
   const searchParams = req.body || {}
@@ -76,12 +76,12 @@ const dataSearch = async (req, res) => {
 //添加
 const dataAdd = async (req, res) => {
   const { dataItem } = req.body
-  const { path } = dataItem
+  const { path, username } = dataItem
   const id = Date.now()
   const addtime = Date.now()
   const edittime = ''
   //const path = 'a'
-  const username = 'admin'
+  //const username = 'admin'
   const browser = 'chrome'
   const detail = '详情'
   const err = await runSql(
@@ -111,9 +111,9 @@ const dataDelete = async (req, res) => {
 //编辑
 const dataEdit = async (req, res) => {
   let { id, dataItem } = req.body
-  const { path } = dataItem
+  const { path, username } = dataItem
   err = await runSql(
-    `UPDATE myLogs SET path='${path}' WHERE id=${id}`
+    `UPDATE myLogs SET path='${path}', username='${username}' WHERE id=${id}`
   )
   res.send({
     state: 1,
