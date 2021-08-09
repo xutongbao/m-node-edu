@@ -1,5 +1,5 @@
 const Mock = require('mockjs')
-const { dbAdd, dropTable, runSql, queryPromise } = require('../../db/index')
+const { runSql, queryPromise } = require('../../db/index')
 
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
 const mockOtherValue = () => {
@@ -145,23 +145,30 @@ const dataUp = (req, res) => {
 
 const dataAction = async (req, res) => {
   const { type } = req.body
-  let result
+  let result = []
+  let err
   if (type === 'create') {
-    runSql('CREATE TABLE lorem (info TEXT)')
+    err = await runSql('CREATE TABLE lorem (info TEXT)')
   } else if (type === 'insert') {
-    runSql(`INSERT INTO lorem VALUES (${Date.now()})`)
+    err = await runSql(`INSERT INTO lorem VALUES (${Date.now()})`)
   } else if (type === 'select') {
     result = await queryPromise(`SELECT rowid AS id, info FROM lorem`)
-
   }else if (type === 'drop') {
     runSql('DROP TABLE lorem')
   } 
-  console.log(result)
-  res.send({
-    state: 1,
-    data: result,
-    message: '成功',
-  })
+  //console.log(result)
+  if (err) {
+    res.send({
+      state: 0,
+      message: err,
+    })
+  } else {
+    res.send({
+      state: 1,
+      data: result,
+      message: '成功',
+    })
+  }
 }
 
 module.exports = {
