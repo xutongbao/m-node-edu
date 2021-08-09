@@ -154,18 +154,29 @@ const dataAction = async (req, res) => {
   const username = 'admin'
   const browser = 'chrome'
   const detail = '详情'
+  const editId = '1628502771985'
 
   if (type === 'create') {
-    err = await runSql(`CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, detail TEXT)`)
-    //err = await runSql(`CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT   )`)
+    err = await runSql(
+      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, detail TEXT)`
+    )
   } else if (type === 'insert') {
-    err = await runSql(`INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`)
-    //err = await runSql(`INSERT INTO myLogs VALUES (  ${id}, ${addtime}, ${edittime}, '${path}' )`)
+    err = await runSql(
+      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${detail}')`
+    )
   } else if (type === 'select') {
     result = await queryPromise(`SELECT * FROM myLogs`)
-  }else if (type === 'drop') {
+  } else if (type === 'update') {
+    err = await runSql(
+      `UPDATE myLogs SET edittime='666' WHERE id=${editId}`
+    )
+  } else if (type === 'delete') {
+    err = await runSql(
+      `DELETE FROM myLogs WHERE id=${editId}`
+    )
+  } else if (type === 'drop') {
     runSql('DROP TABLE myLogs')
-  } 
+  }
   //console.log(result)
   if (err) {
     res.send({
