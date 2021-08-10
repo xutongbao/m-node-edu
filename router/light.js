@@ -64,6 +64,7 @@ const { authSearch, authEdit, authRoleSearch } = require('../light/auth/auth')
 const {
   logSearch,
   logAdd,
+  logEmail,
   logDelete,
   logEdit,
   logStatus,
@@ -152,6 +153,7 @@ const light = (app) => {
   //错误日志接口
   app.post('/api/log/search', logSearch)
   app.post('/api/log/add', logAdd)
+  app.post('/api/log/email', logEmail)
   app.post('/api/log/delete', logDelete)
   app.post('/api/log/edit', logEdit)
   app.post('/api/log/status', logStatus)

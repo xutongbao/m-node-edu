@@ -159,7 +159,7 @@ const sendEmail = async (dataObj) => {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '<13642061747@sina.cn>', // sender address
-    to: '13642061747@sina.cn', //'1183391880@qq.com', // list of receivers
+    to: '1183391880@qq.com', //'1183391880@qq.com', // list of receivers
     subject: "知了好学错误报告", // Subject line
     html: `
     <div>

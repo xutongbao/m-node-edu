@@ -103,6 +103,20 @@ const dataAdd = async (req, res) => {
   })
 }
 
+const dataEmail = async (req, res) => {
+  const emailData = req.body
+  console.log('邮件')
+  await sendEmail({...emailData}).catch(err => {
+    console.log(err)
+    myErr = err
+  });
+  res.send({
+    state: 1,
+    data: emailData,
+    message: '成功',
+  })
+}
+
 //删除
 const dataDelete = async (req, res) => {
   let { ids } = req.body
@@ -201,6 +215,7 @@ const dataAction = async (req, res) => {
 module.exports = {
   logSearch: dataSearch,
   logAdd: dataAdd,
+  logEmail: dataEmail,
   logDelete: dataDelete,
   logEdit: dataEdit,
   logStatus: dataStatus,
