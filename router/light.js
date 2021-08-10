@@ -66,7 +66,7 @@ const {
   logAdd,
   logDelete,
   logEdit,
-  logUp,
+  logStatus,
   logAction,
 } = require('../light/log/log')
 
@@ -154,7 +154,7 @@ const light = (app) => {
   app.post('/api/log/add', logAdd)
   app.post('/api/log/delete', logDelete)
   app.post('/api/log/edit', logEdit)
-  app.post('/api/log/up', logUp)
+  app.post('/api/log/status', logStatus)
   app.post('/api/log/action', logAction)
 }
 

@@ -84,8 +84,9 @@ const dataAdd = async (req, res) => {
   //const username = 'admin'
   const browser = req.headers[`user-agent`]
   //const detail = '详情'
+  const status = '0'
   const err = await runSql(
-    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}')`
+    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
   )
   res.send({
     state: 1,
@@ -124,24 +125,18 @@ const dataEdit = async (req, res) => {
 }
 
 // 状态操作
-const dataUp = (req, res) => {
-  const { id, isUp } = req.body
+const dataStatus = async (req, res) => {
+  const { id, status } = req.body
 
-  let index = dataArr.findIndex((item) => item.id == id)
-  if (index >= 0) {
-    dataArr[index] = { ...dataArr[index], isUp: isUp, edittime: Date.now() }
-    res.send({
-      state: 1,
-      data: {},
-      message: '操作成功',
-    })
-  } else {
-    res.send({
-      state: 0,
-      data: {},
-      message: 'id不存在',
-    })
-  }
+  const edittime = Date.now()
+  err = await runSql(
+    `UPDATE myLogs SET edittime='${edittime}', status='${status}' WHERE id=${id}`
+  )
+  res.send({
+    state: 1,
+    data: status,
+    message: '编辑成功',
+  })
 }
 
 const dataAction = async (req, res) => {
@@ -157,14 +152,15 @@ const dataAction = async (req, res) => {
   const errorTitle = '1'
   const detail = '详情'
   const editId = '1628502771985'
+  const status = '0' //0: 未解决 1：已解决
 
   if (type === 'create') {
     err = await runSql(
-      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, errorTitle TEXT, detail TEXT)`
+      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, errorTitle TEXT, detail TEXT, status TEXT)`
     )
   } else if (type === 'insert') {
     err = await runSql(
-      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}')`
+      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
     )
   } else if (type === 'select') {
     result = await queryPromise(`SELECT * FROM myLogs`)
@@ -199,6 +195,6 @@ module.exports = {
   logAdd: dataAdd,
   logDelete: dataDelete,
   logEdit: dataEdit,
-  logUp: dataUp,
+  logStatus: dataStatus,
   logAction: dataAction,
 }
