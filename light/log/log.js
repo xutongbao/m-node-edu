@@ -89,12 +89,17 @@ const dataAdd = async (req, res) => {
   const err = await runSql(
     `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
   )
-  await sendEmail({...dataItem, browser}).catch(console.error);
+  let myErr = ''
+  await sendEmail({...dataItem, browser}).catch(err => {
+    console.log(err)
+    myErr = err
+  });
   console.log('发送邮件成功')
   res.send({
     state: 1,
     data: dataItem,
     message: '添加成功',
+    err: myErr
   })
 }
 
