@@ -165,7 +165,7 @@ const sendEmail = async (dataObj) => {
     <div>
       <div>
         <span>路径：</span>
-        <a href="http://zlhx.gongzuoshouji.cn/#/${path}">${path}</a>
+        <a href="http://zlhx.gongzuoshouji.cn/#${path}">${path}</a>
       </div> 
       <div>
         <span>用户名：</span>
