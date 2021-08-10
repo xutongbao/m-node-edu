@@ -1,37 +1,6 @@
-const Mock = require('mockjs')
 const axios = require('axios')
 const { runSql, queryPromise } = require('../../db/index')
 const { sendEmail } = require('../../utils/tools')
-
-//模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
-const mockOtherValue = () => {
-  return Mock.mock({
-    releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5),
-    isUp: () => Mock.Random.integer(0, 1),
-  })
-}
-
-//这些初始值在mock的批量数据中是重复的
-const addInitValues = {
-  addtime: Date.now(),
-  sale_name: '张三',
-}
-
-const initValue = () => {
-  let arr = []
-  for (let i = 0; i < 100; i++) {
-    //这些值在mock的批量数据中是随机的
-    const temp = Mock.mock({
-      name: '@cname',
-    })
-    arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
-  }
-
-  return arr
-}
-
-let dataArr = initValue()
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -77,6 +46,7 @@ const dataSearch = async (req, res) => {
   })
 }
 
+//调用阿里云服务器上的发送邮件的接口
 const emailPost = (emailData) => {
   axios
     .post('http://39.97.238.175:81/api/log/email', {
@@ -98,34 +68,25 @@ const dataAdd = async (req, res) => {
   const id = Date.now()
   const addtime = Date.now()
   const edittime = ''
-  //const path = 'a'
-  //const username = 'admin'
   const browser = req.headers[`user-agent`]
-  //const detail = '详情'
   const status = '0'
   const err = await runSql(
     `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
   )
-  // let myErr = ''
-  // await sendEmail({...dataItem, browser}).catch(err => {
-  //   console.log(err)
-  //   myErr = err
-  // });
-  // console.log('发送邮件成功')
   res.send({
     state: 1,
     data: dataItem,
     message: '添加成功',
   })
+  //添加错误时调用发送邮件的接口
   emailPost({...dataItem, browser})
 }
 
+//发送邮件的接口
 const dataEmail = async (req, res) => {
   const emailData = req.body
-  console.log('邮件')
   await sendEmail({ ...emailData }).catch((err) => {
     console.log(err)
-    myErr = err
   })
   res.send({
     state: 1,
@@ -138,7 +99,7 @@ const dataEmail = async (req, res) => {
 const dataDelete = async (req, res) => {
   let { ids } = req.body
   console.log(ids)
-  err = await runSql(`DELETE FROM myLogs WHERE id=${ids[0]}`)
+  err = await runSql(`DELETE FROM myLogs WHERE id in (${ids.join(',')})`)
   res.send({
     state: 1,
     data: ids,
@@ -176,6 +137,7 @@ const dataStatus = async (req, res) => {
   })
 }
 
+//创建表，销毁表，增删查改，练习
 const dataAction = async (req, res) => {
   const { type } = req.body
   let result = []
