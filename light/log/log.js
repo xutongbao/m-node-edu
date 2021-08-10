@@ -1,4 +1,5 @@
 const Mock = require('mockjs')
+const axios = require('axios')
 const { runSql, queryPromise } = require('../../db/index')
 const { sendEmail } = require('../../utils/tools')
 
@@ -35,7 +36,9 @@ let dataArr = initValue()
 //搜索
 const dataSearch = async (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
-  const result = await queryPromise(`SELECT * FROM myLogs ORDER BY addtime DESC`)
+  const result = await queryPromise(
+    `SELECT * FROM myLogs ORDER BY addtime DESC`
+  )
   let list = [...result]
 
   const searchParams = req.body || {}
@@ -74,6 +77,20 @@ const dataSearch = async (req, res) => {
   })
 }
 
+const emailPost = (emailData) => {
+  axios
+    .post('http://39.97.238.175:81/api/log/email', {
+      ...emailData
+    })
+    .then((res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      console.log(res)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
 //添加
 const dataAdd = async (req, res) => {
   const { dataItem } = req.body
@@ -89,27 +106,27 @@ const dataAdd = async (req, res) => {
   const err = await runSql(
     `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
   )
-  let myErr = ''
-  await sendEmail({...dataItem, browser}).catch(err => {
-    console.log(err)
-    myErr = err
-  });
-  console.log('发送邮件成功')
+  // let myErr = ''
+  // await sendEmail({...dataItem, browser}).catch(err => {
+  //   console.log(err)
+  //   myErr = err
+  // });
+  // console.log('发送邮件成功')
   res.send({
     state: 1,
     data: dataItem,
     message: '添加成功',
-    err: myErr
   })
+  emailPost({...dataItem, browser})
 }
 
 const dataEmail = async (req, res) => {
   const emailData = req.body
   console.log('邮件')
-  await sendEmail({...emailData}).catch(err => {
+  await sendEmail({ ...emailData }).catch((err) => {
     console.log(err)
     myErr = err
-  });
+  })
   res.send({
     state: 1,
     data: emailData,
@@ -121,9 +138,7 @@ const dataEmail = async (req, res) => {
 const dataDelete = async (req, res) => {
   let { ids } = req.body
   console.log(ids)
-  err = await runSql(
-    `DELETE FROM myLogs WHERE id=${ids[0]}`
-  )
+  err = await runSql(`DELETE FROM myLogs WHERE id=${ids[0]}`)
   res.send({
     state: 1,
     data: ids,
@@ -187,13 +202,9 @@ const dataAction = async (req, res) => {
   } else if (type === 'select') {
     result = await queryPromise(`SELECT * FROM myLogs`)
   } else if (type === 'update') {
-    err = await runSql(
-      `UPDATE myLogs SET edittime='666' WHERE id=${editId}`
-    )
+    err = await runSql(`UPDATE myLogs SET edittime='666' WHERE id=${editId}`)
   } else if (type === 'delete') {
-    err = await runSql(
-      `DELETE FROM myLogs WHERE id=${editId}`
-    )
+    err = await runSql(`DELETE FROM myLogs WHERE id=${editId}`)
   } else if (type === 'drop') {
     runSql('DROP TABLE myLogs')
   }
