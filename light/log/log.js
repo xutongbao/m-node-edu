@@ -1,5 +1,6 @@
 const Mock = require('mockjs')
 const { runSql, queryPromise } = require('../../db/index')
+const { sendEmail } = require('../../utils/tools')
 
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
 const mockOtherValue = () => {
@@ -88,6 +89,8 @@ const dataAdd = async (req, res) => {
   const err = await runSql(
     `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
   )
+  await sendEmail({...dataItem, browser}).catch(console.error);
+  console.log('发送邮件成功')
   res.send({
     state: 1,
     data: dataItem,

@@ -1,4 +1,5 @@
 const Mock = require('mockjs')
+const nodemailer = require("nodemailer")
 
 const mockShop = () => {
   return Mock.mock({
@@ -129,10 +130,80 @@ const companyInitValue = () => {
   return arr
 }
 
+let transporter
+const emailInit = async () => {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  transporter = nodemailer.createTransport({
+    host: 'smtp.sina.cn',
+    // service: 'qq',
+    // port: 465,
+    //secure: false, // true for 465, false for other ports
+    secureConnection: true, // 使用了 SSL
+    auth: {
+      user: '13642061747@sina.cn', // generated ethereal user
+      pass: 'xutongbao123456' // generated ethereal password
+    }
+  });
+}
+
+emailInit()
+
+//发送邮件
+// async..await is not allowed in global scope, must use a wrapper
+const sendEmail = async (dataObj) => {
+  const { path, username, errorTitle, detail, browser } = dataObj
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '<13642061747@sina.cn>', // sender address
+    to: '1183391880@qq.com', // list of receivers
+    subject: "知了好学错误报告", // Subject line
+    html: `
+    <div>
+      <div>
+        <span>路径：</span>
+        <a href="http://zlhx.gongzuoshouji.cn/#/${path}">${path}</a>
+      </div> 
+      <div>
+        <span>用户名：</span>
+        <span>${username}</span>
+      </div>
+      <div>
+        <span>错误标题：</span>
+        <span>${errorTitle}</span>
+      </div>
+      <div>
+        <span>错误详情：</span>
+        <div>${detail}</div>
+      </div>
+      <div>
+        <span>发生时间：</span>
+        <span>${Date()}</span>
+      </div>
+      <div>
+        <span>浏览器型号：</span>
+        <span>${browser}</span>
+      </div>
+    </div>`// html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
   templateInitValue,
   mockCompany,
   companyInitValue,
+  //发送邮件
+  sendEmail,
 }
