@@ -177,7 +177,7 @@ const sendEmail = async (dataObj) => {
       </div>
       <div>
         <span>错误详情：</span>
-        <div>${detail}</div>
+        <div style="white-space: pre-wrap">${detail}</div>
       </div>
       <div>
         <span>发生时间：</span>
