@@ -49,7 +49,7 @@ const dataAdd = (req, res) => {
   const index = dataArr.findIndex((item) => item.id === tableId)
   dataItem.id = Date.now()
   dataItem.createTime = Date.now()
-  dataArr[index].table.dataArr.push({ ...dataItem })
+  dataArr[index].table.dataArr.unshift({ ...dataItem })
   res.send({
     code: 200,
     data: dataItem,
