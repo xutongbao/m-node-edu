@@ -19,6 +19,7 @@ const {
   fieldsAdd,
   fieldsDelete,
   fieldsEdit,
+  fieldsEditAll,
 } = require('../air/fields/fields')
 
 const air = (app) => {
@@ -41,6 +42,7 @@ const air = (app) => {
   app.post('/api/fields/add', fieldsAdd)
   app.post('/api/fields/delete', fieldsDelete)
   app.post('/api/fields/edit', fieldsEdit)
+  app.post('/api/fields/editAll', fieldsEditAll)
 }
 
 module.exports = {

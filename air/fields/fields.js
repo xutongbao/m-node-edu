@@ -9,18 +9,19 @@ const dataSearchAll = (req, res) => {
   })
 }
 
-
 //搜索
 const dataSearch = (req, res) => {
   const { tableId } = req.body
   const application = dataArr.find((item) => item.id === tableId)
-  const fields = application.table.fields.sort((a, b) => a.orderIndex - b.orderIndex)
+  const fields = application.table.fields.sort(
+    (a, b) => a.orderIndex - b.orderIndex
+  )
 
   res.send({
     code: 200,
     data: {
       title: application.title,
-      fields
+      fields,
     },
     message: '搜索成功',
   })
@@ -82,10 +83,27 @@ const dataEdit = (req, res) => {
   }
 }
 
+//编辑全部
+const dataEditAll = (req, res) => {
+  const { tableId, dataItem } = req.body
+  const tableIndex = dataArr.findIndex((item) => item.id === tableId)
+  dataArr[tableIndex].table.fields = [
+    ...dataArr[tableIndex].table.fields.filter((item) => item.isSystem),
+    ...dataItem,
+  ]
+
+  res.send({
+    code: 200,
+    data: dataArr,
+    message: '保存成功',
+  })
+}
+
 module.exports = {
   fieldsSearchAll: dataSearchAll,
   fieldsSearch: dataSearch,
   fieldsAdd: dataAdd,
   fieldsDelete: dataDelete,
   fieldsEdit: dataEdit,
+  fieldsEditAll: dataEditAll,
 }
