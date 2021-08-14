@@ -6,8 +6,8 @@ let userList = [
   },
   {
     id: 1,
-    username: 'admin',
-    password: '123'
+    username: 'xutongbao',
+    password: '123456'
   }, {
     id: 2,
     username: 'xu',
@@ -22,7 +22,7 @@ const login = (req, res) => {
   if (user) {
     if (user.password === password) {
       res.send({
-        code: 200,
+        state: 1,
         data: {
           username,
           token: user.id
@@ -31,13 +31,13 @@ const login = (req, res) => {
       })
     } else {
       res.send({
-        code: 400,
+        state: 0,
         message: '密码错误'
       })
     }
   } else {
     res.send({
-      code: 400,
+      state: 0,
       message: '用户名不存在'
     })
   }
@@ -50,7 +50,7 @@ const loginEdu = (req, res) => {
   if (user) {
     if (user.password === passWord) {
       res.send({
-        code: 200,
+        state: 1,
         data: {
           userName,
           token: user.id
@@ -59,13 +59,13 @@ const loginEdu = (req, res) => {
       })
     } else {
       res.send({
-        code: 400,
+        state: 0,
         message: '密码错误'
       })
     }
   } else {
     res.send({
-      code: 400,
+      state: 0,
       message: '用户名不存在'
     })
   }
@@ -74,7 +74,7 @@ const loginEdu = (req, res) => {
 //退出
 const logout = (req, res) => {
   res.send({
-    code: 200,
+    state: 1,
     message: '退出成功'
   })
 }
@@ -84,7 +84,7 @@ const getUserInfo = (req, res) => {
   let token = req.headers['token']
   const user = userList.find(item => item.id == token)
   res.send({
-    code: 200,
+    state: 1,
     data: user,
     message: '获取用户信息成功'
   })
