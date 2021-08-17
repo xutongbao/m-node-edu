@@ -1,5 +1,11 @@
 const { uploadImgMulter, uploadImg } = require('../light/upload/upload')
-const { login, loginEdu, logout, getUserInfo } = require('../light/user/user')
+const {
+  login,
+  loginEdu,
+  logout,
+  getUserInfo,
+  getUserList,
+} = require('../light/user/user')
 const {
   shopSearch,
   shopAdd,
@@ -71,6 +77,19 @@ const {
   logAction,
 } = require('../light/log/log')
 
+const {
+  insightSearch,
+  insightAdd,
+  insightDelete,
+  insightEdit,
+  insightUp,
+} = require('../light/insight/insight')
+
+const {
+  setItem,
+  getItem,
+} = require('../light/columns/columns')
+
 const light = (app) => {
   //登录
   app.post('/api/login', login)
@@ -80,6 +99,8 @@ const light = (app) => {
   app.post('/api/logout', logout)
   //获取用户信息
   app.get('/api/getUserInfo', getUserInfo)
+  //获取用户列表
+  app.post('/api/getUserList', getUserList)
   //上传
   app.post('/api/upload', uploadImgMulter.single('img'), uploadImg)
   //店铺
@@ -158,6 +179,17 @@ const light = (app) => {
   app.post('/api/log/edit', logEdit)
   app.post('/api/log/status', logStatus)
   app.post('/api/log/action', logAction)
+
+  //微信跟进页面的接口
+  app.post('/api/insight/search', insightSearch)
+  app.post('/api/insight/add', insightAdd)
+  app.post('/api/insight/delete', insightDelete)
+  app.post('/api/insight/edit', insightEdit)
+  app.post('/api/insight/up', insightUp)  
+
+  //表格列显示隐藏，调整顺序的接口
+  app.post('/api/columns/setItem', setItem)
+  app.post('/api/columns/getItem', getItem)
 }
 
 module.exports = {

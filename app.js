@@ -20,8 +20,10 @@ app.use(
 
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
-app.use(express.static('D:/zlhx-ui'))
-//app.use(express.static('../edu-dev2/build'))
+//app.use(express.static('D:/zlhx-ui'))
+//app.use(express.static('D:/tan-ui'))
+app.use(express.static('../zlhx-ui'))
+app.use(express.static('../tan-ui'))
 app.use(express.static('upload'))
 app.use(cors())
 

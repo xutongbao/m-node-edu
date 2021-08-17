@@ -90,7 +90,22 @@ const getUserInfo = (req, res) => {
   })
 }
 
-module.exports = { login, loginEdu, logout, getUserInfo }
+//获取用户列表
+const getUserList = (req, res) => {
+  const data = userList.map(item => {
+    return {
+      id: item.id,
+      name: item.username
+    }
+  })
+  res.send({
+    state: 1,
+    data,
+    message: '成功'
+  })
+}
+
+module.exports = { login, loginEdu, logout, getUserInfo, getUserList }
 
 
 
