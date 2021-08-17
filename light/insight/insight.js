@@ -5,7 +5,7 @@ const moment = require('moment')
 const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5), 
+    commentCount: () => Mock.Random.integer(0, 5),
     isUp: () => Mock.Random.integer(0, 1),
   })
 }
@@ -25,9 +25,13 @@ const initValue = () => {
     const temp = Mock.mock({
       name: '@cname',
       date: moment().subtract(i, 'day').format('YYYY-MM-DD'),
-      addFriendsCount: () => Mock.Random.integer(0, 10), 
-      applyCount: () => Mock.Random.integer(0, 10), 
-      sensitiveWordsCount: () => Mock.Random.integer(0, 10), 
+      friendsTotalCount: () => Mock.Random.integer(0, 10), //好友总数
+      addFriendsCount: () => Mock.Random.integer(0, 10), //新增好友
+      applyCount: () => Mock.Random.integer(0, 10), //发起申请
+      followFirendsCount: () => Mock.Random.integer(0, 10), //跟进好友-新
+      followFirendsRate: () => Mock.Random.integer(0, 10), //跟进率-新
+      effectiveCommunicationRate: () => Mock.Random.integer(0, 10), //有效沟通率-新
+      sensitiveWordsCount: () => Mock.Random.integer(0, 10),
       tempCount: () => Mock.Random.integer(0, 10),
     })
     date.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
@@ -37,9 +41,9 @@ const initValue = () => {
     //这些值在mock的批量数据中是随机的
     const temp = Mock.mock({
       name: '@cname',
-      addFriendsCount: () => Mock.Random.integer(0, 10), 
-      applyCount: () => Mock.Random.integer(0, 10), 
-      sensitiveWordsCount: () => Mock.Random.integer(0, 10), 
+      addFriendsCount: () => Mock.Random.integer(0, 10),
+      applyCount: () => Mock.Random.integer(0, 10),
+      sensitiveWordsCount: () => Mock.Random.integer(0, 10),
       tempCount: () => Mock.Random.integer(0, 10),
     })
     user.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
@@ -66,7 +70,12 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
-  let temp = {...addInitValues, ...mockOtherValue(), ...dataItem, addtime: Date.now() }
+  let temp = {
+    ...addInitValues,
+    ...mockOtherValue(),
+    ...dataItem,
+    addtime: Date.now(),
+  }
   dataArr.unshift(temp)
   res.send({
     state: 1,
@@ -113,7 +122,7 @@ const dataUp = (req, res) => {
 
   let index = dataArr.findIndex((item) => item.id == id)
   if (index >= 0) {
-    dataArr[index] = { ...dataArr[index], isUp: isUp , edittime: Date.now() }
+    dataArr[index] = { ...dataArr[index], isUp: isUp, edittime: Date.now() }
     res.send({
       state: 1,
       data: {},
@@ -124,8 +133,37 @@ const dataUp = (req, res) => {
       state: 0,
       data: {},
       message: 'id不存在',
-    })    
+    })
   }
+}
+
+const dataDetail = (req, res) => {
+  const { id } = req.body
+  res.send({
+    state: 1,
+    data: {
+      addCustomerList: [
+        {
+          id: 1,
+        },
+        {
+          id: 2,
+        },
+      ],
+      sensitiveWordsList: [
+        {
+          id: 1
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        }
+      ]
+    },
+    message: '搜索成功',
+  })
 }
 
 module.exports = {
@@ -134,4 +172,5 @@ module.exports = {
   insightDelete: dataDelete,
   insightEdit: dataEdit,
   insightUp: dataUp,
+  insightDetail: dataDetail,
 }

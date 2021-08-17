@@ -83,6 +83,7 @@ const {
   insightDelete,
   insightEdit,
   insightUp,
+  insightDetail,
 } = require('../light/insight/insight')
 
 const {
@@ -185,7 +186,8 @@ const light = (app) => {
   app.post('/api/insight/add', insightAdd)
   app.post('/api/insight/delete', insightDelete)
   app.post('/api/insight/edit', insightEdit)
-  app.post('/api/insight/up', insightUp)  
+  app.post('/api/insight/up', insightUp) 
+  app.post('/api/insight/detail', insightDetail)  
 
   //表格列显示隐藏，调整顺序的接口
   app.post('/api/columns/setItem', setItem)
