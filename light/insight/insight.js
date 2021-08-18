@@ -57,6 +57,32 @@ const initValue = () => {
 
 let dataArr = initValue()
 
+//初始化好友列表、群列表数据
+const initFriendsList = () => {
+  const friendsList = []
+  const getList = ({type}) => {
+    let arr = []
+    for (let i = 0; i < 100; i++) {
+      const temp = Mock.mock({
+        name: '@cname',
+        type,
+        date: moment().subtract(i, 'day').format('YYYY-MM-DD'),
+      })
+      arr.push({ ...temp, id: i + 1 })
+    }
+    return arr
+  }
+  for (let i = 0; i < 4; i++) {
+    friendsList.push({
+      type: i + 1 + '',
+      friends: getList({type: i + 1 + ''})
+    })
+  }
+  return friendsList
+}
+
+const friendsList = initFriendsList()
+
 //搜索
 const dataSearch = (req, res) => {
   res.send({
@@ -166,6 +192,21 @@ const dataDetail = (req, res) => {
   })
 }
 
+const dataFriends = (req, res) => {
+  //1：外部好友 2：内部好友 3：外部群 4：内部群
+  const { type } = req.body
+  let result = friendsList.find(item => item.type === type)
+  let data = []
+  if (result && result.friends) {
+    data = result.friends
+  }
+  res.send({
+    state: 1,
+    data,
+    message: '成功'
+  })
+}
+
 module.exports = {
   insightSearch: dataSearch,
   insightAdd: dataAdd,
@@ -173,4 +214,5 @@ module.exports = {
   insightEdit: dataEdit,
   insightUp: dataUp,
   insightDetail: dataDetail,
+  insightFriends: dataFriends
 }
