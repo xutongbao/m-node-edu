@@ -57,6 +57,16 @@ const initValue = () => {
 
 let dataArr = initValue()
 
+const getImage = () => {
+  const urlArr = [
+    'http://images.gongzuoshouji.cn/teacher/2021-08-09/84751fbcf153487f868a21a77048d19c.jpg',
+    'http://images.gongzuoshouji.cn/teacher/20210804/196b0fa5d1726432492ad5edae6a565b.jpg',
+    'http://images.gongzuoshouji.cn/teacher/20210730/a8e65bfaf7575a051a45b8dedd528af4.jpg',
+  ]
+  const index = Mock.Random.integer(0, urlArr.length - 1)
+  return urlArr[index]
+}
+
 //初始化好友列表、群列表数据
 const initFriendsList = () => {
   const friendsList = []
@@ -65,8 +75,10 @@ const initFriendsList = () => {
     for (let i = 0; i < 100; i++) {
       const temp = Mock.mock({
         name: '@cname',
+        msg: '@ctitle',
         type,
-        date: moment().subtract(i, 'day').format('YYYY-MM-DD'),
+        img: getImage() ,
+        date: moment().subtract(i, 'day').format()
       })
       arr.push({ ...temp, id: i + 1 })
     }
