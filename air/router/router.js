@@ -1,4 +1,5 @@
 let { dataArr } = require('../data')
+const { v4: uuidv4 } = require('uuid')
 
 //调试用，返回全部数据
 const dataSearchAll = (req, res) => {
@@ -29,7 +30,7 @@ const dataSearch = (req, res) => {
 //添加
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
-  dataItem.id = Date.now()
+  dataItem.id = uuidv4()
   dataItem.path += `?id=${dataItem.id}`
   dataItem.key = dataItem.id
   dataItem.table = {

@@ -104,7 +104,7 @@ const light = (app) => {
   //获取用户列表
   app.post('/api/getUserList', getUserList)
   //上传
-  app.post('/api/upload', uploadImgMulter.single('img'), uploadImg)
+  app.post('/api/upload', uploadImgMulter.single('file'), uploadImg)
   //店铺
   app.post('/api/shop/search', shopSearch)
   app.post('/api/shop/add', shopAdd)

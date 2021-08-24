@@ -13,7 +13,7 @@ const uploadImgMulter = multer({ storage })
  
 const uploadImg = (req, res) => {
   res.send({
-    code: 200,
+    state: 1,
     data: req.file,
     message: '上传成功'
   })
