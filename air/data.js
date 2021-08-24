@@ -18,10 +18,12 @@ let dataArr = [
           isSystem: true,
           orderIndex: 0,
         },
+
         {
           id: 3,
           title: '客户名称',   //表单里对应label
           dataIndex: 'name',  //表单里对应name
+          type: 'formItem',
           rules: [
             {
               required: true,
@@ -30,6 +32,8 @@ let dataArr = [
           ],
           formComponentName: 'Input',
           renderFunName: 'renderSpan',
+          isHasRules: true,
+          isHasPlaceHolder: true,
           isColumn: true,
           isSearch: true,
           isModalField: true,
@@ -83,6 +87,7 @@ let dataArr = [
           id: 3,
           title: '线索名称',   //表单里对应label
           dataIndex: 'name',  //表单里对应name
+          type: 'formItem',
           rules: [
             {
               required: true,
