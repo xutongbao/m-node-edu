@@ -2,7 +2,7 @@ const { customerInitValue, clueInitValue } = require('../utils/air')
 
 let dataArr = [
   {
-    id: 0,
+    id: '0',
     key: '0',
     path: '/light/index/content?id=0',
     title: '客户',
@@ -63,7 +63,7 @@ let dataArr = [
     },
   },
   {
-    id: 1,
+    id: '1',
     key: '1',
     path: '/light/index/content?id=1',
     title: '线索',
