@@ -21,8 +21,8 @@ let dataArr = [
 
         {
           id: 3,
-          title: '客户名称',   //表单里对应label
-          dataIndex: 'name',  //表单里对应name
+          title: '客户名称', //表单里对应label
+          dataIndex: 'name', //表单里对应name
           type: 'formItem',
           rules: [
             {
@@ -85,8 +85,8 @@ let dataArr = [
         },
         {
           id: 3,
-          title: '线索名称',   //表单里对应label
-          dataIndex: 'name',  //表单里对应name
+          title: '线索名称', //表单里对应label
+          dataIndex: 'name', //表单里对应name
           type: 'formItem',
           rules: [
             {
@@ -103,6 +103,138 @@ let dataArr = [
           isModalField: true,
           isSystem: false,
           orderIndex: 1,
+        },
+        {
+          id: 1,
+          title: '创建时间',
+          dataIndex: 'createTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 101,
+        },
+        {
+          id: 2,
+          title: '更新时间',
+          dataIndex: 'updateTime',
+          renderFunName: 'renderDatetime',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 102,
+        },
+      ],
+      dataArr: clueInitValue(),
+    },
+  },
+  {
+    id: '2',
+    key: '2',
+    path: '/light/index/content?id=2',
+    title: '问卷调查',
+    table: {
+      fields: [
+        {
+          id: 0,
+          title: 'ID',
+          dataIndex: 'id',
+          isColumn: true,
+          isSearch: false,
+          isModalField: false,
+          isSystem: true,
+          orderIndex: 0,
+        },
+        {
+          id: '4229c0a5-1a9d-4a95-9d40-debcb43aa0d8',
+          icon: 'image',
+          title: '图片',
+          formComponentName: 'Image',
+          dataIndex: 'image-4229c0a5-1a9d-4a95-9d40-debcb43aa0d8',
+          renderFunName: 'renderImage',
+          type: 'image',
+          isHasRules: false,
+          isHasPlaceHolder: false,
+          src: 'https://efficacious-tiny-infinity.glitch.me/1629784718630-m-love2.jpg',
+          isColumn: false,
+          isModalField: true,
+          orderIndex: 1,
+          rules: [null],
+          props: {},
+        },
+        {
+          id: '208da2d9-9725-48c6-a15d-14fcd035ad4f',
+          icon: 'input',
+          title: '姓名',
+          formComponentName: 'Input',
+          dataIndex: 'input-208da2d9-9725-48c6-a15d-14fcd035ad4f',
+          renderFunName: 'renderSpan',
+          type: 'formItem',
+          isHasRules: true,
+          isHasPlaceHolder: true,
+          isColumn: true,
+          isModalField: true,
+          orderIndex: 2,
+          placeholder: '尊姓大名',
+          rules: [
+            {
+              required: true,
+              message: '姓名不能为空',
+            },
+          ],
+          props: {
+            placeholder: '尊姓大名',
+          },
+        },
+        {
+          id: 'ea661dd4-a777-4c01-93b9-657223c0dae0',
+          icon: 'number-input',
+          title: '年龄1',
+          formComponentName: 'InputNumber',
+          dataIndex: 'inputNumber-ea661dd4-a777-4c01-93b9-657223c0dae0',
+          renderFunName: 'renderSpan',
+          type: 'formItem',
+          isHasRules: true,
+          isHasPlaceHolder: true,
+          isColumn: true,
+          isModalField: true,
+          orderIndex: 3,
+          placeholder: '芳龄几何',
+          rules: [
+            {
+              required: true,
+              message: '年龄不能为空',
+            },
+          ],
+          props: {
+            placeholder: '芳龄几何',
+          },
+        },
+        {
+          id: '5312acb2-6cf6-423b-b682-e6caadfa0f46',
+          icon: 'textarea',
+          title: '自我介绍',
+          formComponentName: 'TextArea',
+          dataIndex: 'textArea-5312acb2-6cf6-423b-b682-e6caadfa0f46',
+          renderFunName: 'renderSpan',
+          type: 'formItem',
+          isHasRules: true,
+          isHasPlaceHolder: true,
+          isColumn: true,
+          isModalField: true,
+          orderIndex: 4,
+          placeholder: '有对象吗',
+          rules: [
+            {
+              required: false,
+              message: '多行文本不能为空',
+            },
+          ],
+          props: {
+            placeholder: '有对象吗',
+          },
         },
         {
           id: 1,
