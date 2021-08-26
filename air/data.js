@@ -191,7 +191,7 @@ let dataArr = [
         {
           id: 'ea661dd4-a777-4c01-93b9-657223c0dae0',
           icon: 'number-input',
-          title: '年龄1',
+          title: '年龄',
           formComponentName: 'InputNumber',
           dataIndex: 'inputNumber-ea661dd4-a777-4c01-93b9-657223c0dae0',
           renderFunName: 'renderSpan',
@@ -259,7 +259,7 @@ let dataArr = [
           orderIndex: 102,
         },
       ],
-      dataArr: clueInitValue(),
+      dataArr: [],
     },
   },
 ]
