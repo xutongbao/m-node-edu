@@ -96,6 +96,8 @@ let dataArr = [
           ],
           formComponentName: 'Input',
           renderFunName: 'renderSpan',
+          isHasRules: true,
+          isHasPlaceHolder: true,
           isColumn: true,
           isSearch: true,
           isModalField: true,
