@@ -22,6 +22,7 @@ const dataSearch = (req, res) => {
     data: {
       title: application.title,
       fields,
+      skin: application.table.skin
     },
     message: '搜索成功',
   })
