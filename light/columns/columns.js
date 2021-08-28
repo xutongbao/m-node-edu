@@ -25,7 +25,6 @@ const setItem = (req, res) => {
 const getItem = (req, res) => {
   const { key } = req.body
   const index = dataArr.findIndex(item => item.key === key)
-  console.log(index)
   if (index >= 0) {
     res.send({
       state: 1,
