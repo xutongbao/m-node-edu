@@ -22,7 +22,7 @@ const dataSearch = (req, res) => {
     data: {
       title: application.title,
       fields,
-      skin: application.table.skin
+      skin: application.table.skin,
     },
     message: '搜索成功',
   })
@@ -86,12 +86,13 @@ const dataEdit = (req, res) => {
 
 //编辑全部
 const dataEditAll = (req, res) => {
-  const { tableId, dataItem } = req.body
+  const { tableId, dataItem, skin } = req.body
   const tableIndex = dataArr.findIndex((item) => item.id === tableId)
   dataArr[tableIndex].table.fields = [
     ...dataArr[tableIndex].table.fields.filter((item) => item.isSystem),
     ...dataItem,
   ]
+  dataArr[tableIndex].table.skin = skin ? skin : {}
 
   res.send({
     code: 200,
