@@ -1,0 +1,3553 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"><channel><title>博客园-徐同保</title><link>https://www.cnblogs.com/xutongbao/</link><description>web前端行业的小学生</description><language>zh-cn</language><lastBuildDate>Mon, 13 Sep 2021 10:50:44 GMT</lastBuildDate><pubDate>Mon, 13 Sep 2021 10:50:44 GMT</pubDate><ttl>60</ttl><item><title>pagic Deno + React 驱动的静态网站生成器 入门</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264299.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 10 Sep 2021 03:03:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264299.html</guid><description><![CDATA[
+                    <p>安装：</p> 
+<pre><code class="language-bash"># 安装 pagic
+deno install --unstable --allow-read --allow-write --allow-net --allow-run --name=pagic https://deno.land/x/pagic/mod.ts</code></pre> 
+<p><img alt="" height="664" src="https://img-blog.csdnimg.cn/20210910105934798.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="677"></p> 
+<p><img alt="" height="113" src="https://img-blog.csdnimg.cn/20210910110003759.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_13,color_FFFFFF,t_70,g_se,x_16" width="344"></p> 
+<p>pagic.config.ts:</p> 
+<pre><code class="language-javascript">export default {}</code></pre> 
+<p>README.md:</p> 
+<pre><code class="language-bash"># Hello world
+</code></pre> 
+<p>启动：</p> 
+<pre><code class="language-bash"># 运行 pagic
+pagic build --watch --serve</code></pre> 
+<p>效果：</p> 
+<p><img alt="" height="447" src="https://img-blog.csdnimg.cn/20210910110203443.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>antd Form.Item label添加解释信息</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264300.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 10 Sep 2021 02:29:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264300.html</guid><description><![CDATA[
+                    <p><img alt="" height="164" src="https://img-blog.csdnimg.cn/20210910102855685.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_17,color_FFFFFF,t_70,g_se,x_16" width="435"></p> 
+<p></p> 
+<pre><code class="language-javascript">      &lt;Col span={span} className={expandClassname}&gt;
+        &lt;Form.Item
+          label={
+            &lt;span&gt;
+              &lt;span&gt;是否添加&lt;/span&gt;
+              &lt;Tooltip
+                title='添加'
+                overlayClassName="m-tooltip"
+              &gt;
+                &lt;span className="m-help-wrap"&gt;
+                  &lt;Icon name="help"&gt;&lt;/Icon&gt;
+                &lt;/span&gt;
+              &lt;/Tooltip&gt;
+            &lt;/span&gt;
+          }
+        &gt;
+          &lt;Form.Item name="isAdd" noStyle&gt;
+            &lt;Select
+              placeholder="请选择"
+              allowClear
+              getPopupContainer={() =&gt;
+                document.getElementById('m-content-wrap')
+              }
+            &gt;
+              &lt;Option value={1}&gt;是&lt;/Option&gt;
+              &lt;Option value={0}&gt;否&lt;/Option&gt;
+            &lt;/Select&gt;
+          &lt;/Form.Item&gt;
+        &lt;/Form.Item&gt;
+      &lt;/Col&gt;</code></pre> 
+<p></p>
+                ]]></description></item><item><title>deno可以通过url引入标准库，运行时自动下载，下载到哪里呢</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264301.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 09 Sep 2021 10:37:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264301.html</guid><description><![CDATA[
+                    <p>可以通过下面的指令查询：</p> 
+<pre><code class="language-javascript">deno info</code></pre> 
+<p><img alt="" height="552" src="https://img-blog.csdnimg.cn/20210909183534705.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="906"></p> 
+<p></p>
+                ]]></description></item><item><title>如何查看github开源项目star趋势</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264302.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 09 Sep 2021 09:34:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264302.html</guid><description><![CDATA[
+                    <p>网站：</p> 
+<p><a href="https://star-history.t9t.io/#denoland/deno">https://star-history.t9t.io</a></p> 
+<p><a href="https://star-history.t9t.io/#denoland/deno">https://star-history.t9t.io/#denoland/deno</a></p> 
+<p>deno:</p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/2021090917305385.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;react:</p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210909173214968.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>vue:</p> 
+<p><img alt="" height="859" src="https://img-blog.csdnimg.cn/20210909173335179.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>使用deno开发post请求，get请求，监测文件变化自动重启（类似于nodemon）</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264303.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 09 Sep 2021 07:59:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264303.html</guid><description><![CDATA[
+                    <p><img alt="" height="116" src="https://img-blog.csdnimg.cn/2021090915551595.png" width="189"></p> 
+<p>launch.js:</p> 
+<pre><code class="language-javascript">const run = () =&gt; {
+  return Deno.run({
+    cmd: ['deno', 'run', '--allow-net', '--allow-read', 'index.js'],
+    cwd: 'app',
+  })
+}
+let myPorcess = run()
+const watcher = Deno.watchFs('./app')
+for await (const event of watcher) {
+  console.log(event)
+  console.log('kill proceess')
+  myPorcess.close()
+  console.log('restart')
+  myPorcess = run()
+}
+</code></pre> 
+<p>app/index.js:</p> 
+<pre><code class="language-javascript">import { Application, Router, helpers } from 'https://deno.land/x/oak/mod.ts'
+const app = new Application()
+const router = new Router()
+
+router.get('/list', async (ctx) =&gt; {
+  const { id } = helpers.getQuery(ctx, { mergeParams: true })
+  ctx.response.body = {
+    state: 1,
+    data: { id },
+    message: '成功',
+  }
+})
+
+router.post('/login', async (ctx) =&gt; {
+  const result = ctx.request.body()
+  console.log(66678910)
+  if (result.type === 'json') {
+    const { username } = await result.value
+    ctx.response.body = {
+      state: 1,
+      data: { username },
+      message: '成功',
+    }
+  }
+})
+
+app.use(router.routes())
+app.use(router.allowedMethods())
+app.listen({ port: 8000 })
+console.log(8000)
+</code></pre> 
+<p>&nbsp;启动命令：</p> 
+<pre><code class="language-javascript">deno run --allow-net --allow-read --allow-run launch.js</code></pre> 
+<p>自动重启：</p> 
+<p><img alt="" height="639" src="https://img-blog.csdnimg.cn/20210909155845794.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p></p> 
+<p>post请求：</p> 
+<p><img alt="" height="855" src="https://img-blog.csdnimg.cn/20210909155645724.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;get请求：</p> 
+<p><img alt="" height="838" src="https://img-blog.csdnimg.cn/20210909155710748.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>参考链接：</p> 
+<p><a href="https://zhuanlan.zhihu.com/p/143947500">https://zhuanlan.zhihu.com/p/143947500</a></p> 
+<p><a href="https://deno-tutorial.js.org/articles/index.html">https://deno-tutorial.js.org/articles/index.html</a></p>
+                ]]></description></item><item><title>windows安装deno</title><link>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264304.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 09 Sep 2021 05:52:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/09/09/15264304.html</guid><description><![CDATA[
+                    <p>以管理员身份运行windows PowerShell</p> 
+<p>命令行里输入:</p> 
+<pre><code class="language-javascript">Set-ExecutionPolicy RemoteSigned</code></pre> 
+<p><img alt="" height="239" src="https://img-blog.csdnimg.cn/20210909134704807.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1076"></p> 
+<p>如果没有安装&nbsp;choco，先安装&nbsp;choco</p> 
+<p><a href="https://link.jianshu.com/?t=https://chocolatey.org/">chocolatey</a>是windows下的一个命令行的包管理工具，类似ubuntu的apt，或centos下的yum</p> 
+<p>安装命令：</p> 
+<pre><code class="language-javascript">iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex</code></pre> 
+<p>&nbsp;安装deno：</p> 
+<pre><code class="language-javascript">choco install deno</code></pre> 
+<p><img alt="" height="939" src="https://img-blog.csdnimg.cn/20210909135013562.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1103"></p> 
+<p>查询deno版本：</p> 
+<p><img alt="" height="90" src="https://img-blog.csdnimg.cn/20210909135121814.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="585"></p> 
+<p>运行js：</p> 
+<p><img alt="" height="546" src="https://img-blog.csdnimg.cn/20210909135841211.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1049"></p> 
+<p></p>
+                ]]></description></item><item><title>react 轮播图 react-slick</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/31/15264305.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Tue, 31 Aug 2021 06:26:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/31/15264305.html</guid><description><![CDATA[
+                    <p style="text-align:center;"><img alt="" src="https://img-blog.csdnimg.cn/20210831142442598.gif"></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">import Slider from 'react-slick'
+import "~slick-carousel/slick/slick.css"; 
+import "~slick-carousel/slick/slick-theme.css";   
+
+
+
+
+  //轮播图改变
+  const handleAfterChange = () =&gt; {
+    const activeDom = [...document.getElementsByClassName('js-slider-main')[0].childNodes].find(item =&gt; item.className.includes('slick-active'))
+    activeDom.scrollIntoView({behavior: "smooth", block: "nearest", inline: "center"})
+  }
+
+
+
+           &lt;Slider
+                className="m-slider"
+                dots={true}
+                infinite={false}
+                dotsClass="m-slider-dot-ul js-slider-main"
+                afterChange={handleAfterChange}
+                customPaging={(i) =&gt; {
+                  return (
+                    &lt;img
+                      src={imageUrlFormat(dataSource.attachment[i].filepath)}
+                      alt="图片"
+                    /&gt;
+                  )
+                }}
+              &gt;
+                {dataSource.attachment.map((item) =&gt; (
+                  &lt;div key={item.id}&gt;
+                    &lt;img
+                      alt="图片"
+                      key={item.id}
+                      src={imageUrlFormat(item.filepath)}
+                      className="m-shop-preview-slider-main-img"
+                    &gt;&lt;/img&gt;
+                  &lt;/div&gt;
+                ))}
+              &lt;/Slider&gt;</code></pre> 
+<p>参考链接：<a href="https://react-slick.neostack.com/docs/example/custom-paging/">https://react-slick.neostack.com/docs/example/custom-paging/</a></p> 
+<p></p>
+                ]]></description></item><item><title>display:flex 元素垂直居中，有间距，右对齐</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/30/15264306.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 30 Aug 2021 04:44:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/30/15264306.html</guid><description><![CDATA[
+                    <p>&nbsp;</p> 
+<p>&nbsp;<img alt="" height="507" src="https://img-blog.csdnimg.cn/20210830124255199.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="591"></p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<pre><code class="language-css">.m-design-header-action{display: flex;padding: 0 18px 0 0; align-items: center; width: 180px;gap: 8px;text-align: right;justify-content: flex-end;}
+</code></pre> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p></p>
+                ]]></description></item><item><title>antd tabe表头出现遮挡</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/28/15264307.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 28 Aug 2021 02:59:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/28/15264307.html</guid><description><![CDATA[
+                    <p>antd table 表头文本禁止换行（white-space:&nbsp;nowrap;）</p> 
+<p>设置表格高度，出现纵向滚动条（&nbsp;scroll={<!-- -->{&nbsp; y: 200 }}）</p> 
+<p>这时是表头和表格主体部分被渲染成两个table，表头文本出现遮挡</p> 
+<p></p> 
+<p>&nbsp;<img alt="" height="318" src="https://img-blog.csdnimg.cn/20210828105401104.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="886"></p> 
+<p></p> 
+<p><img alt="" height="479" src="https://img-blog.csdnimg.cn/20210828104958922.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;解决办法：</p> 
+<p>表头不应该通过样式禁止换行，应该通过样式加大表格主体单元的的最小宽度，把表头撑开</p> 
+<p><img alt="" height="796" src="https://img-blog.csdnimg.cn/20210828105841855.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p></p>
+                ]]></description></item><item><title>url转二维码（js,qrcode）可以带logo</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/26/15264309.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 26 Aug 2021 10:33:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/26/15264309.html</guid><description><![CDATA[
+                    <p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210826183228509.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p></p> 
+<p></p> 
+<pre><code class="language-javascript">import QRCode from 'qrcode'  
+import { Image } from 'antd'
+
+
+
+
+const [qrCodeImageUrl, setQrCodeImageUrl] = useState()
+
+
+
+
+useEffect(() =&gt; {
+    QRCode.toDataURL(document.location.href)
+      .then((url) =&gt; {
+        console.log(url)
+        setQrCodeImageUrl(url)
+      })
+      .catch((err) =&gt; {
+        console.error(err)
+      })
+  }, [])
+
+
+
+
+
+                &lt;Image
+                  className="m-qrcode-img"
+                  src={qrCodeImageUrl}
+                  alt={'图片'}
+                  preview={<!-- -->{
+                    mask: '',
+                  }}
+                &gt;&lt;/Image&gt;</code></pre> 
+<p>参考链接：<a href="https://www.npmjs.com/package/qrcode">https://www.npmjs.com/package/qrcode</a></p> 
+<p></p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210826192337187.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>带logo：</p> 
+<pre><code class="language-javascript">import QrCodeWithLogo from 'qr-code-with-logo'
+import { Image } from 'antd'
+
+
+const [qrCodeImageUrl, setQrCodeImageUrl] = useState()
+
+
+  useEffect(() =&gt; {
+    const image = new Image()
+    QrCodeWithLogo.toImage({
+      image,
+      content: document.location.href,
+      logo: {
+        src: logo,
+      },
+    })
+    image.id = 'm-img'
+    image.style = "display:none;"
+    document.body.appendChild(image)
+    const imageDom = document.getElementById('m-img')
+    setTimeout(() =&gt; {
+      setQrCodeImageUrl(imageDom.src)
+    })
+  }, [])
+
+
+
+
+
+                &lt;Image
+                  className="m-qrcode-img"
+                  src={qrCodeImageUrl}
+                  alt={'图片'}
+                  preview={<!-- -->{
+                    mask: '',
+                  }}
+                &gt;&lt;/Image&gt;</code></pre> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>react项目打包优化</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/25/15264310.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 25 Aug 2021 03:46:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/25/15264310.html</guid><description><![CDATA[
+                    <p>优化前：</p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210825113401704.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_79,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>优化中：</p> 
+<p><img alt="" height="0" src="https://img-blog.csdnimg.cn/20210825113521714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_1,color_FFFFFF,t_70,g_se,x_16" width="0"><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210825113532501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_79,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210825113707153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_79,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>优化完成：</p> 
+<p><img alt="" height="0" src="https://img-blog.csdnimg.cn/202108251138318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_1,color_FFFFFF,t_70,g_se,x_16" width="0"><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210825113839735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_79,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>&nbsp;<img alt="" height="0" src="https://img-blog.csdnimg.cn/20210825114030970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_1,color_FFFFFF,t_70,g_se,x_16" width="0"><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210825114034683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBA5b6Q5ZCM5L-d,size_79,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>要点：</p> 
+<p>1.路由懒加载</p> 
+<p>2.在路由懒加载前把自己开发的公共组件全部引入</p> 
+<p>3.剔除掉比较大的公共组件（例如富文本组件），在业务页面中单独引入</p> 
+<p></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">import React, { Suspense, lazy } from 'react'
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import Loading from '../components/light/Loading'
+//自己开发的公共组件会再此处全部引入
+import { ErrorBoundary } from '../components/light'
+const Login = lazy(() =&gt; import('../views/light/login/Login'))
+const SaleLogin = lazy(() =&gt; import('../views/sale/login/Login'))
+const EduLogin = lazy(() =&gt; import('../views/edu/login/Login'))
+const Index = lazy(() =&gt; import('../views/light/index/Index'))
+const NotFound = lazy(() =&gt; import('../views/light/notFound/NotFound'))
+
+export default function Router() {
+  window.reactRouter = useHistory()
+  return (
+    &lt;&gt;
+      &lt;ErrorBoundary&gt;
+        &lt;Suspense fallback={&lt;Loading isLazyLoading={true}&gt;&lt;/Loading&gt;}&gt;
+          &lt;Switch&gt;
+            &lt;Redirect from="/" to="/light/login" exact&gt;&lt;/Redirect&gt;
+            &lt;Route path="/light/login" component={Login}&gt;&lt;/Route&gt;
+            &lt;Route path="/sale/login" component={SaleLogin}&gt;&lt;/Route&gt;
+            &lt;Route path="/edu/login" component={EduLogin}&gt;&lt;/Route&gt;
+            &lt;Route path="/light/index" component={Index}&gt;&lt;/Route&gt;
+            &lt;Route path="/sale/index" component={Index}&gt;&lt;/Route&gt;
+            &lt;Route path="/edu/index" component={Index}&gt;&lt;/Route&gt;
+            &lt;Route path="/404" component={NotFound}&gt;&lt;/Route&gt;
+            &lt;Redirect from="*" to="/404" exact&gt;&lt;/Redirect&gt;
+          &lt;/Switch&gt;
+        &lt;/Suspense&gt;
+      &lt;/ErrorBoundary&gt;
+      &lt;Loading&gt;&lt;/Loading&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>react-dnd 拖拽</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/23/15264311.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 23 Aug 2021 05:57:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/23/15264311.html</guid><description><![CDATA[
+                    <p></p> 
+<p></p> 
+<p style="text-align:center;"><img alt="" src="https://img-blog.csdnimg.cn/20210823135611101.gif">&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p><img alt="" height="255" src="https://img-blog.csdnimg.cn/20210823135047242.png" width="266"></p> 
+<p>&nbsp;Index.js:</p> 
+<pre><code class="language-javascript">import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { Form, Button, Collapse, Col, Row } from 'antd'
+import Header from './Header'
+import useList from './useList'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { Icon } from '../../../../components/light'
+import { getComponentArr, getAttrFields } from './config'
+import List from './List'
+import BtnField from './BtnField'
+
+const { Panel } = Collapse
+
+function Index(props) {
+  const {
+    applicationTitle,
+    dataSource,
+    form,
+    formForAttr,
+    initValues,
+    initValuesForAttr,
+    tableId,
+    cardActiveId,
+    moveCard,
+    handleFinish,
+    handleFinishFailed,
+    handleAdd,
+    handleSave,
+    handleCardActiveId,
+    handleValuesChange,
+    handleDelete,
+  } = useList(props)
+
+  return (
+    &lt;div className="m-admin-content"&gt;
+      &lt;Header
+        applicationTitle={applicationTitle}
+        tableId={tableId}
+        onSave={handleSave}
+      &gt;&lt;/Header&gt;
+      &lt;div className="m-design-wrap"&gt;
+        &lt;div className="m-design-sidebar"&gt;
+          &lt;Collapse defaultActiveKey={['1', '2', '3']}&gt;
+            &lt;Panel header="通用字段" key="1"&gt;
+              &lt;Row gutter={[2, 2]}&gt;
+                &lt;DndProvider backend={HTML5Backend}&gt;
+                  {getComponentArr().map((fieldInfo, index) =&gt; (
+                    &lt;BtnField key={index} fieldInfo={fieldInfo} onAdd={handleAdd} /&gt;
+                  ))}
+                &lt;/DndProvider&gt;
+              &lt;/Row&gt;
+            &lt;/Panel&gt;
+            &lt;Panel header="联系信息字段" key="2"&gt;
+              &lt;Row gutter={[2, 2]}&gt;
+                &lt;Col span={8}&gt;
+                  &lt;div className="m-component-item"&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                    &lt;div&gt;敬请期待&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/Col&gt;
+              &lt;/Row&gt;
+            &lt;/Panel&gt;
+            &lt;Panel header="商品字段" key="3"&gt;
+              &lt;Row gutter={[2, 2]}&gt;
+                &lt;Col span={8}&gt;
+                  &lt;div className="m-component-item"&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                    &lt;div&gt;敬请期待&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/Col&gt;
+              &lt;/Row&gt;
+            &lt;/Panel&gt;
+          &lt;/Collapse&gt;
+        &lt;/div&gt;
+        &lt;div className="m-design-content"&gt;
+          &lt;Form
+            form={form}
+            labelCol={<!-- -->{ span: 4 }}
+            wrapperCol={<!-- -->{ span: 17 }}
+            initialValues={<!-- -->{ ...initValues }}
+            onFinish={handleFinish}
+            onFinishFailed={handleFinishFailed}
+          &gt;
+            &lt;DndProvider backend={HTML5Backend}&gt;
+              &lt;List
+                dataSource={dataSource}
+                cardActiveId={cardActiveId}
+                moveCard={moveCard}
+                handleCardActiveId={handleCardActiveId}
+                handleDelete={handleDelete}
+              /&gt;
+            &lt;/DndProvider&gt;
+            &lt;Form.Item
+              wrapperCol={<!-- -->{ offset: 4, span: 17 }}
+              className="m-design-footer"
+            &gt;
+              &lt;Button type="primary" htmlType="submit" className="m-space"&gt;
+                &lt;Icon name="submit" className="m-tool-btn-icon"&gt;&lt;/Icon&gt;
+                提交
+              &lt;/Button&gt;
+              &lt;Button
+                className="m-space"
+                onClick={() =&gt; {
+                  form.resetFields()
+                }}
+              &gt;
+                &lt;Icon name="reset" className="m-tool-btn-icon"&gt;&lt;/Icon&gt;
+                重置
+              &lt;/Button&gt;
+            &lt;/Form.Item&gt;
+          &lt;/Form&gt;
+        &lt;/div&gt;
+        &lt;div className="m-design-attr"&gt;
+          &lt;Form
+            form={formForAttr}
+            labelCol={<!-- -->{ span: 8 }}
+            wrapperCol={<!-- -->{ span: 15 }}
+            initialValues={<!-- -->{ ...initValuesForAttr }}
+            scrollToFirstError={true}
+            onValuesChange={handleValuesChange}
+            id="m-set-application-modal-form"
+            className="m-set-application-modal-form"
+          &gt;
+            {getAttrFields()}
+          &lt;/Form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+
+const mapStateToProps = (state) =&gt; {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch) =&gt; {
+  return {
+    onSetState(key, value) {
+      dispatch({ type: 'SET_LIGHT_STATE', key, value })
+    },
+    onDispatch(action) {
+      dispatch(action)
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Index))
+</code></pre> 
+<p>BtnField.js:</p> 
+<pre><code class="language-javascript">import { useDrag } from 'react-dnd'
+import { ItemTypes } from './ItemTypes'
+import { Icon } from '../../../../components/light'
+import { Col } from 'antd'
+
+export default function BtnField({ fieldInfo, onAdd }) {
+  const [{ isDragging }, drag] = useDrag(() =&gt; ({
+    type: ItemTypes.BTN_FIELD,
+    item: { ...fieldInfo },
+    end: (item, monitor) =&gt; {
+      const dropResult = monitor.getDropResult()
+      if (item &amp;&amp; dropResult) {
+        console.log(`${item.title} 加入 ${dropResult.name}`)
+        onAdd({fieldInfo})
+      }
+    },
+    collect: (monitor) =&gt; ({
+      isDragging: monitor.isDragging(),
+      handlerId: monitor.getHandlerId(),
+    }),
+  }))
+  const opacity = isDragging ? 0.4 : 1
+  return (
+    &lt;Col span={8}&gt;
+      &lt;div
+        className="m-component-item"
+        ref={drag}
+        style={<!-- -->{ opacity }}
+        data-testid={`box-${fieldInfo.title}`}
+        onClick={() =&gt; onAdd({fieldInfo})}
+      &gt;
+        &lt;div&gt;
+          &lt;Icon name={fieldInfo.icon}&gt;&lt;/Icon&gt;
+        &lt;/div&gt;
+        &lt;div&gt;{fieldInfo.title}&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/Col&gt;
+  )
+}
+</code></pre> 
+<p>config.js:</p> 
+<pre><code class="language-javascript">import { Form, Input, Button } from 'antd'
+import { FieldRequired } from '../../../../components/light'
+
+//表格列字段
+const getColumns = (props) =&gt; {
+  return [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: '字段名称',
+      dataIndex: 'title',
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'dataIndex',
+    },
+    {
+      title: '表单组件名',
+      dataIndex: 'formComponentName',
+      render: (text) =&gt; {
+        return text ? text : '无'
+      },
+    },
+    {
+      title: '渲染函数名',
+      dataIndex: 'renderFunName',
+      render: (text) =&gt; {
+        return text ? text : '无'
+      },
+    },
+    {
+      title: '字段必填',
+      dataIndex: 'rules',
+      render: (text) =&gt; {
+        const result = Array.isArray(text) &amp;&amp; text.length &gt; 0 &amp;&amp; text[0]
+        return result ? (result.required ? '是' : '否') : '否'
+      },
+    },
+    {
+      title: '表格展示',
+      dataIndex: 'isColumn',
+      render: (text) =&gt; {
+        return text ? '是' : '否'
+      },
+    },
+    // {
+    //   title: '搜索',
+    //   dataIndex: 'isSearch',
+    //   render: (text) =&gt; {
+    //     return text ? '是' : '否'
+    //   },
+    // },
+    {
+      title: '添加/编辑',
+      dataIndex: 'isModalField',
+      render: (text) =&gt; {
+        return text ? '是' : '否'
+      },
+    },
+    {
+      title: '顺序号',
+      dataIndex: 'orderIndex',
+      render: (text) =&gt; {
+        return typeof text === 'number' ? text : '无'
+      },
+    },
+    {
+      title: '操作',
+      width: 220,
+      render: (record) =&gt; {
+        if (record.isSystem) {
+          return '系统字段'
+        } else {
+          return (
+            &lt;div className="m-action"&gt;
+              &lt;Button
+                className="m-action-btn"
+                size="small"
+                danger
+                onClick={() =&gt; props.onDelete(record)}
+              &gt;
+                删除
+              &lt;/Button&gt;
+              &lt;Button
+                className="m-action-btn"
+                size="small"
+                onClick={() =&gt; props.onCheck(record)}
+              &gt;
+                查看
+              &lt;/Button&gt;
+              &lt;Button
+                className="m-action-btn"
+                size="small"
+                onClick={() =&gt; props.onEdit(record)}
+              &gt;
+                编辑
+              &lt;/Button&gt;
+            &lt;/div&gt;
+          )
+        }
+      },
+    },
+  ]
+}
+
+//组件元素
+const getComponentArr = () =&gt; {
+  return [
+    {
+      icon: 'input',
+      title: '单行文本',
+      formComponentName: "Input",
+      dataIndex: 'input',
+      renderFunName: "renderSpan"
+    },
+    {
+      icon: 'textarea',
+      title: '多行文本',
+      formComponentName: "TextArea",
+      dataIndex: 'textArea',
+      renderFunName: "renderSpan"
+    },
+    {
+      icon: 'number-input',
+      title: '数字',
+      formComponentName: "InputNumber",
+      dataIndex: 'inputNumber ',
+      renderFunName: "renderSpan"
+    },
+  ]
+}
+
+//添加编辑查看对话框表单字段
+const getAttrFields = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Form.Item
+        label="字段名称"
+        name="title"
+        rules={[
+          {
+            required: true,
+            message: '请输入字段名称！',
+          },
+        ]}
+      &gt;
+        &lt;Input /&gt;
+      &lt;/Form.Item&gt;
+      &lt;Form.Item
+        label="英文名称"
+        name="dataIndex"
+        rules={[
+          {
+            required: true,
+            message: '请输入字段名称！',
+          },
+        ]}
+      &gt;
+        &lt;Input /&gt;
+      &lt;/Form.Item&gt;
+      &lt;Form.Item label="字段必填" name="rules"&gt;
+        &lt;FieldRequired&gt;&lt;/FieldRequired&gt;
+      &lt;/Form.Item&gt;
+    &lt;/&gt;
+  )
+}
+
+export { getColumns, getComponentArr, getAttrFields }
+</code></pre> 
+<p>Header.js:</p> 
+<pre><code class="language-javascript">import React from 'react'
+import { Button } from 'antd'
+import { withRouter, Link } from 'react-router-dom'
+import { Icon } from '../../../../components/light'
+
+function Header(props) {
+  const { applicationTitle, tableId, onSave } = props
+  return (
+    &lt;div className="m-design-header"&gt;
+      &lt;div className="m-design-header-title"&gt;
+        &lt;Icon
+          name="goback"
+          title="返回"
+          className="m-set-application-header-icon"
+          onClick={() =&gt; props.history.go(-1)}
+        &gt;&lt;/Icon&gt;
+        &lt;span title={applicationTitle}&gt;{applicationTitle}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className="m-design-header-middle"&gt;&lt;/div&gt;
+      &lt;div className="m-design-header-action"&gt;
+        &lt;Button type="primary" onClick={onSave}&gt;
+          保存
+        &lt;/Button&gt;
+        &lt;Link to={`/light/formview?id=${tableId}`} target="_blank" style={<!-- -->{display: 'inherit'}}&gt;
+          &lt;Button&gt;预览&lt;/Button&gt;
+        &lt;/Link&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default withRouter(Header)
+</code></pre> 
+<p>ItemTypes.js:</p> 
+<pre><code class="language-javascript">export const ItemTypes = {
+  LIST_ITEM: 'listItem',
+  BTN_FIELD: 'btnField' //'btnField',
+}
+</code></pre> 
+<p>List.js:</p> 
+<pre><code class="language-javascript">import { useDrop } from 'react-dnd'
+import { ItemTypes } from './ItemTypes'
+import ListItem from './ListItem'
+
+export default function List({
+  dataSource,
+  cardActiveId,
+  moveCard,
+  handleCardActiveId,
+  handleDelete,
+}) {
+  const [{ canDrop, isOver }, drop] = useDrop(() =&gt; ({
+    accept: ItemTypes.BTN_FIELD,
+    drop: () =&gt; ({ name: '容器' }),
+    collect: (monitor) =&gt; ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }))
+  const isActive = canDrop &amp;&amp; isOver
+  return (
+    &lt;div
+      ref={drop}
+      className={`m-center-list-wrap ${isActive ? 'active' : ''}`}
+    &gt;
+      {dataSource.map((card, index) =&gt; (
+        &lt;ListItem
+          key={card.id}
+          index={index}
+          cardActiveId={cardActiveId}
+          card={card}
+          moveCard={moveCard}
+          onCardActiveId={handleCardActiveId}
+          onDelete={handleDelete}
+        /&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}
+</code></pre> 
+<p>ListItem.js:</p> 
+<pre><code class="language-javascript">import { useRef } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
+import { ItemTypes } from './ItemTypes'
+import { Form, Input, Button } from 'antd'
+import { getFormComponentArr } from '../../../../utils/tools'
+
+export default function ListItem({
+  index,
+  cardActiveId,
+  card,
+  moveCard,
+  onCardActiveId,
+  onDelete,
+}) {
+  const ref = useRef(null)
+  const [{ handlerId }, drop] = useDrop({
+    accept: ItemTypes.LIST_ITEM,
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+      }
+    },
+    hover(item, monitor) {
+      if (!ref.current) {
+        return
+      }
+      const dragIndex = item.index
+      const hoverIndex = index
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect()
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset()
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex &lt; hoverIndex &amp;&amp; hoverClientY &lt; hoverMiddleY) {
+        return
+      }
+      // Dragging upwards
+      if (dragIndex &gt; hoverIndex &amp;&amp; hoverClientY &gt; hoverMiddleY) {
+        return
+      }
+      // Time to actually perform the action
+      moveCard(dragIndex, hoverIndex)
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex
+
+      console.log(hoverIndex)
+    },
+  })
+  const [{ isDragging }, drag] = useDrag({
+    type: ItemTypes.LIST_ITEM,
+    item: () =&gt; {
+      return { id: card.id, index }
+    },
+    collect: (monitor) =&gt; ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+  const opacity = isDragging ? 0 : 1
+  drag(drop(ref))
+
+  //console.log(card)
+  const renderDom = () =&gt; {
+    if (card.isModalField) {
+      const result = getFormComponentArr().find(
+        (componentItem) =&gt;
+          componentItem.formComponentName === card.formComponentName
+      )
+      return (
+        &lt;div
+          ref={ref}
+          style={<!-- -->{ opacity }}
+          data-handler-id={handlerId}
+          className={`m-design-card ${
+            cardActiveId === card.id ? 'active' : ''
+          }`}
+          onClick={() =&gt; onCardActiveId({ id: card.id })}
+        &gt;
+          &lt;div className="m-design-card-info"&gt;
+            &lt;Form.Item
+              key={card.id}
+              label={card.title}
+              name={card.dataIndex}
+              rules={card.rules}
+            &gt;
+              {result ? result.component : &lt;Input&gt;&lt;/Input&gt;}
+            &lt;/Form.Item&gt;
+          &lt;/div&gt;
+          &lt;div className="m-design-card-action"&gt;
+            &lt;Button
+              className="m-action-btn"
+              size="small"
+              danger
+              onClick={() =&gt; onDelete(card)}
+            &gt;
+              删除
+            &lt;/Button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )
+    } else {
+      return null
+    }
+  }
+
+  return &lt;&gt;{renderDom()}&lt;/&gt;
+}
+</code></pre> 
+<p>useList.js:</p> 
+<pre><code class="language-javascript">import { useState, useEffect, useCallback } from 'react'
+import Api from '../../../../api'
+import { Modal, Form, message } from 'antd'
+import update from 'immutability-helper'
+import { getRouterSearchObj } from '../../../../utils/tools'
+import { v4 as uuidv4 } from 'uuid'
+
+const { confirm } = Modal
+
+let currentDataSource = []
+export default function useList(props) {
+  const [form] = Form.useForm()
+  const [formForAttr] = Form.useForm()
+  const [dataSource, setDataSource] = useState([])
+  const [applicationTitle, setApplicationTitle] = useState()
+  const [cardActiveId, setCardActiveId] = useState()
+  const [initValuesForAttr, setInitValuesForAttr] = useState({})
+
+  //获取路由参数
+  const routerSearchObj = getRouterSearchObj(props)
+  const tableId = routerSearchObj.id - 0
+
+  const addInitValues = {}
+
+  //搜索
+  const handleSearch = () =&gt; {
+    Api.light.fieldsSearch({ tableId }).then((res) =&gt; {
+      if (res.code === 200) {
+        let tempDataSource = res.data.fields.filter((item) =&gt; !item.isSystem)
+        setDataSource(tempDataSource)
+        setApplicationTitle(res.data.title)
+        if (Array.isArray(tempDataSource) &amp;&amp; tempDataSource.length &gt; 0) {
+          handleCardActiveId({
+            id: tempDataSource[0].id,
+            myDataSource: tempDataSource,
+          })
+        }
+      }
+    })
+  }
+
+  //拖动改变顺序
+  const moveCard = useCallback(
+    (dragIndex, hoverIndex) =&gt; {
+      const dragCard = dataSource[dragIndex]
+      setDataSource(
+        update(dataSource, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragCard],
+          ],
+        })
+      )
+    },
+    [dataSource]
+  )
+
+  //添加新字段
+  const handleAdd = ({ fieldInfo }) =&gt; {
+    const orderIndexArr = currentDataSource.map((item) =&gt; item.orderIndex)
+    const orderIndex = Math.max.apply(Math, orderIndexArr) + 1
+    const id = uuidv4()
+    let tempValues = {
+      id,
+      dataIndex: `${fieldInfo.dataIndex}-${id}`,
+      isColumn: true,
+      isModalField: true,
+      orderIndex,
+    }
+    console.log({ ...fieldInfo, ...tempValues })
+    console.log(currentDataSource)
+    setDataSource([...currentDataSource, { ...fieldInfo, ...tempValues }])
+  }
+
+  //保存
+  const handleSave = () =&gt; {
+    console.log(dataSource)
+    const newDataSource = dataSource.map((item, index) =&gt; {
+      return { ...item, orderIndex: index + 1 }
+    })
+    console.log(newDataSource)
+    Api.light
+      .fieldsEditAll({ tableId, dataItem: newDataSource })
+      .then((res) =&gt; {
+        if (res.code === 200) {
+          message.success(res.message)
+        }
+      })
+  }
+
+  //删除
+  const handleDelete = (record) =&gt; {
+    console.log('删除, id:', record.id)
+    confirm({
+      title: '确认要删除吗？',
+      onOk() {
+        const newDataSource = dataSource.filter(item =&gt; item.id !== record.id)
+        setDataSource(newDataSource)
+      },
+    })
+  }
+
+  //添加或编辑
+  const handleFinish = (values) =&gt; {
+    console.log('Success:', values)
+  }
+
+  //校验失败
+  const handleFinishFailed = (errorInfo) =&gt; {
+    console.log('Failed:', errorInfo)
+  }
+
+  //设置当前card
+  const handleCardActiveId = ({ id, myDataSource = dataSource }) =&gt; {
+    setCardActiveId(id)
+    let currentItem = myDataSource.find((item) =&gt; item.id === id)
+    const rules =
+      Array.isArray(currentItem.rules) &amp;&amp; currentItem.rules.length &gt; 0
+        ? currentItem.rules[0]
+        : {}
+    setInitValuesForAttr({ ...currentItem, rules })
+  }
+
+  //修改表单字段属性
+  const handleValuesChange = (changedValues, allValues) =&gt; {
+    const cardActiveIndex = dataSource.findIndex(
+      (item) =&gt; item.id === cardActiveId
+    )
+
+    let tempValues = {
+      rules: [allValues.rules],
+    }
+
+    dataSource[cardActiveIndex] = {
+      ...dataSource[cardActiveIndex],
+      ...allValues,
+      ...tempValues,
+    }
+    setDataSource([...dataSource])
+  }
+
+  useEffect(() =&gt; {
+    formForAttr.resetFields()
+    // eslint-disable-next-line
+  }, [initValuesForAttr])
+
+  //挂载完
+  useEffect(() =&gt; {
+    handleSearch()
+    // eslint-disable-next-line
+  }, [])
+
+  //dataSource更新，同步更新currentDataSource,handleAdd函数中dataSource的值为空数组，这是一个bug
+  useEffect(() =&gt; {
+    currentDataSource = dataSource
+  }, [dataSource])
+
+  return {
+    form,
+    formForAttr,
+    initValuesForAttr,
+    dataSource,
+    applicationTitle,
+    addInitValues,
+    tableId,
+    cardActiveId,
+    handleSearch,
+    moveCard,
+    handleDelete,
+    handleFinish,
+    handleFinishFailed,
+    handleAdd,
+    handleSave,
+    handleCardActiveId,
+    handleValuesChange,
+  }
+}
+</code></pre> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>react-smooth-dnd 拖拽实例</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/23/15264312.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 23 Aug 2021 05:48:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/23/15264312.html</guid><description><![CDATA[
+                    <p></p> 
+<p></p> 
+<p style="text-align:center;"><img alt="" src="https://img-blog.csdnimg.cn/20210823134720533.gif"></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">import React, { useState } from 'react'
+import { Container, Draggable } from 'react-smooth-dnd'
+import { v4 as uuidv4 } from 'uuid'
+
+export default function CardPlus() {
+  const [toolList, setToolList] = useState([
+    {
+      id: 't0',
+      name: '1',
+    },
+    {
+      id: 't1',
+      name: '2',
+    },
+    {
+      id: 't2',
+      name: '3',
+    },
+  ])
+
+  const [contentList, setContentList] = useState([
+    {
+      id: 'c0',
+      name: 'a',
+    },
+    {
+      id: 'c1',
+      name: 'b',
+    },
+    {
+      id: 'c2',
+      name: 'c',
+    },
+  ])
+
+  const applyDrag = (arr, dragResult) =&gt; {
+    const { removedIndex, addedIndex, payload } = dragResult
+    if (removedIndex === null &amp;&amp; addedIndex === null) return arr
+
+    const result = [...arr]
+    let itemToAdd = payload
+
+    if (removedIndex !== null) {
+      itemToAdd = result.splice(removedIndex, 1)[0]
+    }
+
+    if (addedIndex !== null) {
+      result.splice(addedIndex, 0, itemToAdd)
+    }
+
+    return result
+  }
+
+  const handleGetChildPayload = ({type, index}) =&gt; {
+    if (type === 'tool') {
+      const id = uuidv4()
+      return {...toolList[index], id}
+    } else if (type === 'content') {
+      return contentList[index]
+    }
+  }
+
+  const handleCardDrop = ({ type, dragResult }) =&gt; {
+    console.log(dragResult)
+    if (type === 'tool') {
+      const result = applyDrag(toolList, dragResult)
+      setToolList(result)
+    } else if (type === 'content') {
+      const result = applyDrag(contentList, dragResult)
+      setContentList(result)
+    }
+  }
+
+  return (
+    &lt;div className="m-test-wrap"&gt;
+      &lt;div className="m-test-tool"&gt;
+        &lt;Container
+          orientation="vertical"
+          onDrop={(dragResult) =&gt; handleCardDrop({ type: 'tool', dragResult })}
+          getChildPayload={(index) =&gt; handleGetChildPayload({type: 'tool', index})}
+          behaviour="copy"
+          groupName="col"
+        &gt;
+          {toolList.map((item) =&gt; (
+            &lt;Draggable key={item.id} className="m-test-list-item"&gt;
+              &lt;div&gt;{item.name}&lt;/div&gt;
+            &lt;/Draggable&gt;
+          ))}
+        &lt;/Container&gt;
+      &lt;/div&gt;
+      &lt;div className="m-test-list"&gt;
+        &lt;Container
+          orientation="vertical"
+          onDrop={(dragResult) =&gt;
+            handleCardDrop({ type: 'content', dragResult })
+          }
+          getChildPayload={(index) =&gt; handleGetChildPayload({type: 'content', index})}
+          groupName="col"
+        &gt;
+          {contentList.map((item) =&gt; (
+            &lt;Draggable key={item.id} className="m-test-list-item"&gt;
+              &lt;div&gt;{item.name}&lt;/div&gt;
+            &lt;/Draggable&gt;
+          ))}
+        &lt;/Container&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre> 
+<p></p> 
+<p></p> 
+<p>参考链接：</p> 
+<p><a href="https://kutlugsahin.github.io/smooth-dnd-demo/">https://kutlugsahin.github.io/smooth-dnd-demo/</a></p> 
+<p></p>
+                ]]></description></item><item><title>react中div的全屏与退出全屏</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/18/15264313.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 18 Aug 2021 10:50:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/18/15264313.html</guid><description><![CDATA[
+                    <p></p> 
+<h1>基础版：</h1> 
+<pre><code class="language-javascript">import React, { useState, useRef } from 'react'
+import { Tabs, List, Input, Image } from 'antd'
+import Api from '../../../../../api'
+import moment from 'moment'
+import { deepClone } from '../../../../../utils/tools'
+import { Icon } from '../../../../../components/light'
+
+const { Search } = Input
+
+const { TabPane } = Tabs
+let historyFriends = []
+export default function useChatList() {
+
+  const [isFullScreen, setIsFullScreen] = useState(false)
+  const chatContent = useRef(null)
+
+  //全屏
+  const handleFullScreen = () =&gt; {
+    if (isFullScreen) {
+      document.exitFullscreen()
+    } else {
+      chatContent.current.requestFullscreen()
+    }
+    
+    setIsFullScreen(!isFullScreen)
+  }
+
+
+  const getChatDom = () =&gt; {
+    return (
+      &lt;div className="m-chat-list-wrap"&gt;
+        &lt;div className="m-chat-list-info" ref={chatContent}&gt;
+          &lt;div className="m-chat-list-header"&gt;
+            &lt;span className="m-chat-list-header-title"&gt;聊天内容&lt;/span&gt;
+            &lt;span className="m-chat-list-header-content"&gt;&lt;/span&gt;
+            &lt;span className="m-chat-list-header-tool" onClick={handleFullScreen}&gt;
+              &lt;Icon
+                name={isFullScreen ? 'fullscreen-exit' : 'fullscreen'}
+              &gt;&lt;/Icon&gt;
+              {isFullScreen ? '退出全屏' : '全屏查看'}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+
+  return {
+    handleReset,
+    getChatDom,
+  }
+}
+</code></pre> 
+<p></p> 
+<pre><code class="language-javascript">    if (isFullScreen) {
+      document.exitFullscreen()
+    } else {
+      chatContent.current.requestFullscreen()
+    }</code></pre> 
+<p></p> 
+<h1>加强版：</h1> 
+<p>full.js:</p> 
+<pre><code class="language-javascript">//全屏
+// 打开浏览器全屏模式
+/**
+ * screenChange &lt;Function&gt; 为窗口变化的 的回调函数  参数为当前是否为全屏状态
+ */
+const initFullScreen = (screenChange) =&gt; {
+  // 取值17是为了处理页面内容出现滚动条的情况
+  let isFull =
+    window.screen.height - window.document.documentElement.clientHeight &lt;= 17
+
+  // 阻止F11键默认事件，用HTML5全屏API代替
+  window.addEventListener('keydown', function (e) {
+    e = e || window.event
+    if (e.keyCode === 122 &amp;&amp; !isFull) {
+      e.preventDefault()
+      enterFullScreen()
+    }
+  })
+  //监听窗口变化
+  window.onresize = function () {
+    isFull =
+      window.screen.height - window.document.documentElement.clientHeight &lt;= 17
+    screenChange(isFull)
+  }
+}
+
+//进入全屏
+const enterFullScreen = (el = document.documentElement) =&gt; {
+  let rfs =
+    el.requestFullScreen ||
+    el.webkitRequestFullScreen ||
+    el.mozRequestFullScreen ||
+    el.msRequestFullscreen
+  if (rfs) {
+    // typeof rfs != "undefined" &amp;&amp; rfs
+    rfs.call(el)
+  } else if (typeof window.ActiveXObject !== 'undefined') {
+    // for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏
+    let wscript = new ActiveXObject('WScript.Shell') //eslint-disable-line
+    if (wscript != null) {
+      wscript.SendKeys('{F11}')
+    }
+  }
+}
+
+// 退出全屏
+const exitFullScreen = () =&gt; {
+  let el = document
+  let cfs =
+    el.cancelFullScreen ||
+    el.mozCancelFullScreen ||
+    el.msExitFullscreen ||
+    el.webkitExitFullscreen ||
+    el.exitFullscreen
+  if (cfs) {
+    // typeof cfs != "undefined" &amp;&amp; cfs
+    cfs.call(el)
+  } else if (typeof window.ActiveXObject !== 'undefined') {
+    // for IE，这里和fullScreen相同，模拟按下F11键退出全屏
+    let wscript = new ActiveXObject('WScript.Shell') //eslint-disable-line
+    if (wscript != null) {
+      wscript.SendKeys('{F11}')
+    }
+  }
+}
+
+export {
+  initFullScreen,
+  enterFullScreen,
+  exitFullScreen,
+}
+</code></pre> 
+<pre><code class="language-javascript">import React, { useState, useRef, useEffect } from 'react'
+import { Tabs, List, Input, Image } from 'antd'
+import Api from '../../../../../api'
+import moment from 'moment'
+import { deepClone } from '../../../../../utils/tools'
+import { Icon } from '../../../../../components/light'
+import {
+  initFullScreen,
+  enterFullScreen,
+  exitFullScreen,
+} from '../../../../../utils/full'
+
+const { Search } = Input
+
+const { TabPane } = Tabs
+let historyFriends = []
+export default function useChatList() {
+  const [activeKey, setActiveKey] = useState('1')
+  const [friends, setFriends] = useState([])
+  const [searchValue, setSearchValue] = useState()
+  const [friendActiveId, setFriendActiveId] = useState()
+  const [isFullScreen, setIsFullScreen] = useState(false)
+  const chatContent = useRef(null)
+
+  //获取好友或群列表
+  const handleSearchFriendsList = ({ type }) =&gt; {
+    Api.light.testInsightFriends({ type }).then((res) =&gt; {
+      if (res.state === 1) {
+        const friends = Array.isArray(res.data) ? res.data : []
+        setFriends(friends)
+        historyFriends = deepClone(res.data)
+        if (friends.length &gt; 0) {
+          setFriendActiveId(friends[0].id)
+        }
+      }
+    })
+  }
+
+  //切换tab
+  const handleTabsChange = (key) =&gt; {
+    setActiveKey(key)
+    handleSearchFriendsList({ type: key })
+  }
+
+  //重置
+  const handleReset = () =&gt; {
+    setActiveKey('1')
+    handleSearchFriendsList({ type: '1' })
+  }
+
+  //搜索
+  const onSearch = (value) =&gt; {
+    console.log(value)
+    value = value.trim()
+    if (value) {
+      const newFriends = historyFriends.filter((item) =&gt; {
+        if (item.name.includes(value)) {
+          return true
+        } else {
+          return false
+        }
+      })
+      setFriends(newFriends)
+    } else {
+      setFriends(historyFriends)
+    }
+  }
+
+  //全屏
+  const handleFullScreen = () =&gt; {
+    if (isFullScreen) {
+      exitFullScreen()
+    } else {
+      enterFullScreen(chatContent.current)
+    }
+
+    setIsFullScreen(!isFullScreen)
+  }
+
+  const screenChange = (isFull) =&gt; {
+    console.log('是否全屏', isFull)
+    setIsFullScreen(isFull)
+  }
+
+  useEffect(() =&gt; {
+    //初始化
+    initFullScreen(screenChange)
+  }, [])
+
+  const renderFriends = ({ type }) =&gt; {
+    const friendsDom = (
+      &lt;List
+        dataSource={friends}
+        renderItem={(item) =&gt; (
+          &lt;div
+            className={`m-friends-item ${
+              item.id === friendActiveId ? 'active' : ''
+            }`}
+            onClick={() =&gt; setFriendActiveId(item.id)}
+          &gt;
+            &lt;Image
+              className="m-friends-item-img"
+              src={item.img}
+              alt={'图片'}
+              preview={<!-- -->{
+                mask: '',
+              }}
+            &gt;&lt;/Image&gt;
+            &lt;div className="m-friends-item-info"&gt;
+              &lt;div className="m-friends-item-title"&gt;
+                &lt;div className="m-friends-item-title-nickname"&gt;{item.name}&lt;/div&gt;
+                &lt;div className="m-friends-item-title-time"&gt;
+                  {moment(item.date).format('YYYY-MM-DD')}
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className="m-friends-item-msg"&gt;{item.msg}&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        )}
+      /&gt;
+    )
+
+    return (
+      &lt;div className="m-friends-wrap"&gt;
+        &lt;div className="m-friends-search"&gt;
+          &lt;Search
+            value={searchValue}
+            onChange={(e) =&gt; setSearchValue(e.target.value)}
+            placeholder="搜索好友昵称/备注"
+            onSearch={onSearch}
+            style={<!-- -->{ width: '100%' }}
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className="m-friends-info"&gt;{friendsDom}&lt;/div&gt;
+        &lt;div className="m-friends-footer"&gt;
+          共有数据： &lt;span className="m-total-text"&gt;{friends.length}&lt;/span&gt; 条
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+
+  const getChatDom = () =&gt; {
+    return (
+      &lt;div className="m-chat-list-wrap"&gt;
+        &lt;div className="m-chat-list-sidebar"&gt;
+          &lt;Tabs
+            activeKey={activeKey}
+            onChange={handleTabsChange}
+            centered
+            className="m-friends-tabs"
+          &gt;
+            &lt;TabPane tab="外部好友" key="1"&gt;
+              {renderFriends({ type: '1' })}
+            &lt;/TabPane&gt;
+            &lt;TabPane tab="内部好友" key="2"&gt;
+              {renderFriends({ type: '2' })}
+            &lt;/TabPane&gt;
+            &lt;TabPane tab="外部群" key="3"&gt;
+              {renderFriends({ type: '3' })}
+            &lt;/TabPane&gt;
+            &lt;TabPane tab="内部群" key="4"&gt;
+              {renderFriends({ type: '4' })}
+            &lt;/TabPane&gt;
+          &lt;/Tabs&gt;
+        &lt;/div&gt;
+        &lt;div className="m-chat-list-info" ref={chatContent}&gt;
+          &lt;div className="m-chat-list-header"&gt;
+            &lt;span className="m-chat-list-header-title"&gt;聊天内容&lt;/span&gt;
+            &lt;span className="m-chat-list-header-content"&gt;&lt;/span&gt;
+            &lt;span
+              className="m-chat-list-header-tool"
+              onClick={handleFullScreen}
+            &gt;
+              &lt;Icon
+                name={isFullScreen ? 'fullscreen-exit' : 'fullscreen'}
+              &gt;&lt;/Icon&gt;
+              {isFullScreen ? '退出全屏' : '全屏查看'}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+
+  return {
+    handleReset,
+    getChatDom,
+  }
+}
+</code></pre> 
+<p></p> 
+<p></p> 
+<p>参考链接：</p> 
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/requestFullScreen">https://developer.mozilla.org/zh-CN/docs/Web/API/Element/requestFullScreen</a></p> 
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/exitFullscreen">https://developer.mozilla.org/zh-CN/docs/Web/API/Document/exitFullscreen</a></p>
+                ]]></description></item><item><title>使用mock.js伪造图片数据，图片链接是枚举值</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/18/15264314.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 18 Aug 2021 08:59:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/18/15264314.html</guid><description><![CDATA[
+                    <p></p> 
+<p><img alt="" height="420" src="https://img-blog.csdnimg.cn/20210818165905118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="387"></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">const Mock = require('mockjs')
+const moment = require('moment')
+
+const getImage = () =&gt; {
+  const urlArr = [
+    'http://images.gongzuoshouji.cn/teacher/2021-08-09/84751fbcf153487f868a21a77048d19c.jpg',
+    'http://images.gongzuoshouji.cn/teacher/20210804/196b0fa5d1726432492ad5edae6a565b.jpg',
+    'http://images.gongzuoshouji.cn/teacher/20210730/a8e65bfaf7575a051a45b8dedd528af4.jpg',
+  ]
+  const index = Mock.Random.integer(0, urlArr.length - 1)
+  return urlArr[index]
+}
+
+//初始化好友列表、群列表数据
+const initFriendsList = () =&gt; {
+  const friendsList = []
+  const getList = ({type}) =&gt; {
+    let arr = []
+    for (let i = 0; i &lt; 100; i++) {
+      const temp = Mock.mock({
+        name: '@cname',
+        msg: '@ctitle',
+        type,
+        img: getImage() ,
+        date: moment().subtract(i, 'day').format()
+      })
+      arr.push({ ...temp, id: i + 1 })
+    }
+    return arr
+  }
+  for (let i = 0; i &lt; 4; i++) {
+    friendsList.push({
+      type: i + 1 + '',
+      friends: getList({type: i + 1 + ''})
+    })
+  }
+  return friendsList
+}
+
+const friendsList = initFriendsList()</code></pre> 
+<p><img alt="" height="363" src="https://img-blog.csdnimg.cn/20210818165834359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1056"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>moment生成前一天的时间</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/16/15264315.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 16 Aug 2021 09:40:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/16/15264315.html</guid><description><![CDATA[
+                    <p>&nbsp;moment生成前一天的时间：</p> 
+<pre><code class="language-javascript">const moment = require('moment')
+
+moment().subtract(1, 'day').format('YYYY-MM-DD')</code></pre> 
+<p>批量：</p> 
+<pre><code class="language-javascript">  for (let i = 0; i &lt; 100; i++) {
+    //这些值在mock的批量数据中是随机的
+    const temp = Mock.mock({
+      name: '@cname',
+      date: moment().subtract(i, 'day').format('YYYY-MM-DD'),
+    })
+    date.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
+  }</code></pre> 
+<p><img alt="" height="429" src="https://img-blog.csdnimg.cn/20210816173958572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="989"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>Ant Design RangePicker预设常用的日期范围</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/14/15264316.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 14 Aug 2021 07:41:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/14/15264316.html</guid><description><![CDATA[
+                    <p><img alt="" height="460" src="https://img-blog.csdnimg.cn/20210814153958621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="932"></p> 
+<p></p> 
+<p></p> 
+<pre><code class="language-html">        &lt;Form.Item name="dateRange" label="时间范围"&gt;
+          &lt;RangePicker
+            ranges={<!-- -->{
+              今天: [moment(), moment()],
+              昨天: [moment().startOf('day').subtract(1, 'day'), moment().endOf('day').subtract(1, 'day')],
+              近七天: [moment().startOf('day').subtract(1, 'weeks'), moment()],
+              近一月: [moment().startOf('day').subtract(1, 'month'), moment()],
+              近三月: [moment().startOf('day').subtract(3, 'month'), moment()],
+              近六月: [moment().startOf('day').subtract(6, 'month'), moment()],
+              近一年: [moment().startOf('day').subtract(1, 'year'), moment()],
+            }}
+          /&gt;
+        &lt;/Form.Item&gt;</code></pre> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">    // 字段格式处理
+    if (
+      Array.isArray(searchParams.dateRange) &amp;&amp;
+      searchParams.dateRange.length &gt; 1
+    ) {
+      searchParams.sDate = searchParams.dateRange[0].format(
+        'YYYY-MM-DD 00:00:00'
+      )
+      searchParams.eDate = searchParams.dateRange[1].format(
+        'YYYY-MM-DD 23:59:59'
+      )
+      delete searchParams.dateRange
+    }</code></pre> 
+<p></p>
+                ]]></description></item><item><title>css文字太多时添加省略号</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/11/15264317.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 11 Aug 2021 07:04:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/11/15264317.html</guid><description><![CDATA[
+                    <p>&nbsp;<img alt="" height="229" src="https://img-blog.csdnimg.cn/20210811150328567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="794"></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-css">.m-title{width: 250px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}</code></pre> 
+<p></p>
+                ]]></description></item><item><title>node如何发生邮件，nodemailer</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/10/15264318.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Tue, 10 Aug 2021 07:35:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/10/15264318.html</guid><description><![CDATA[
+                    <p>&nbsp;<img alt="" height="861" src="https://img-blog.csdnimg.cn/20210810152919473.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p></p> 
+<pre><code class="language-javascript">const nodemailer = require("nodemailer")
+
+
+let transporter
+const emailInit = async () =&gt; {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  transporter = nodemailer.createTransport({
+    host: 'smtp.sina.cn',
+    // service: 'qq',
+    // port: 465,
+    //secure: false, // true for 465, false for other ports
+    secureConnection: true, // 使用了 SSL
+    auth: {
+      user: '136xxxxx@sina.cn', // generated ethereal user
+      pass: '密码' // generated ethereal password
+    }
+  });
+}
+
+emailInit()
+
+//发送邮件
+// async..await is not allowed in global scope, must use a wrapper
+const sendEmail = async (dataObj) =&gt; {
+  const { path, username, errorTitle, detail, browser } = dataObj
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '&lt;13642061747@sina.cn&gt;', // sender address
+    to: '1183391880@qq.com', //'1183391880@qq.com', // list of receivers
+    subject: "知了好学错误报告", // Subject line
+    html: `
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;span&gt;路径：&lt;/span&gt;
+        &lt;a href="http://zlhx.gongzuoshouji.cn/#${path}"&gt;${path}&lt;/a&gt;
+      &lt;/div&gt; 
+      &lt;div&gt;
+        &lt;span&gt;用户名：&lt;/span&gt;
+        &lt;span&gt;${username}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span&gt;错误标题：&lt;/span&gt;
+        &lt;span&gt;${errorTitle}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span&gt;错误详情：&lt;/span&gt;
+        &lt;div style="white-space: pre-wrap"&gt;${detail}&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span&gt;发生时间：&lt;/span&gt;
+        &lt;span&gt;${Date()}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span&gt;浏览器型号：&lt;/span&gt;
+        &lt;span&gt;${browser}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;`// html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: &lt;b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com&gt;
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
+
+module.exports = {
+  //发送邮件
+  sendEmail,
+}</code></pre> 
+<p>开发接口，并把接口部署到阿里云上：</p> 
+<pre><code class="language-javascript">//发送邮件的接口
+const dataEmail = async (req, res) =&gt; {
+  const emailData = req.body
+  await sendEmail({ ...emailData }).catch((err) =&gt; {
+    console.log(err)
+  })
+  res.send({
+    state: 1,
+    data: emailData,
+    message: '成功',
+  })
+}</code></pre> 
+<p></p> 
+<p>在其他node项目中调用阿里云的接口即可发邮件：</p> 
+<p>例如项目托管在（<a href="https://glitch.com/">https://glitch.com/</a>），这是一个国外的服务器，无法使用国内的邮箱直接发邮件，但是可以调用阿里云上的接口发邮件！</p> 
+<pre><code class="language-javascript">const axios = require('axios')
+
+
+//调用阿里云服务器上的发送邮件的接口
+const emailPost = (emailData) =&gt; {
+  axios
+    .post('http://xxx:81/api/log/email', {
+      ...emailData
+    })
+    .then((res) =&gt; {
+      console.log(`statusCode: ${res.statusCode}`)
+      console.log(res)
+    })
+    .catch((error) =&gt; {
+      console.error(error)
+    })
+}</code></pre> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>sqlite3，在node中使用，轻量级数据库</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/10/15264319.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Tue, 10 Aug 2021 07:20:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/10/15264319.html</guid><description><![CDATA[
+                    <p><img alt="" height="413" src="https://img-blog.csdnimg.cn/20210810152024853.png" width="294"></p> 
+<p>&nbsp;</p> 
+<p>db/index.js:</p> 
+<pre><code class="language-javascript">var sqlite3 = require('sqlite3').verbose()
+var db = new sqlite3.Database('my.db')
+
+//执行sql语句
+const runSql = async (sql) =&gt; {
+  return new Promise(async (resolve, reject) =&gt; {
+    db.run(sql, (err) =&gt; {
+      resolve(err)
+    })
+  })
+}
+
+//查询
+const queryPromise = async (sql) =&gt; {
+  return new Promise(async (resolve, reject) =&gt; {
+    db.all(sql, function (err, rows) {
+      console.log(rows)
+      if (err) {
+        reject(err)
+      } else {
+        resolve(rows)
+      }
+    })
+  })
+}
+
+module.exports = {
+  runSql,
+  queryPromise,
+}
+</code></pre> 
+<p>增删查改：</p> 
+<pre><code class="language-javascript">const axios = require('axios')
+const { runSql, queryPromise } = require('../../db/index')
+const { sendEmail } = require('../../utils/tools')
+
+//搜索
+const dataSearch = async (req, res) =&gt; {
+  const { pageNum = 1, pageSize = 10 } = req.body
+  const result = await queryPromise(
+    `SELECT * FROM myLogs ORDER BY addtime DESC`
+  )
+  let list = [...result]
+
+  const searchParams = req.body || {}
+  delete searchParams.pageNum
+  delete searchParams.pageSize
+
+  list = list.filter((item) =&gt; {
+    let flag = true
+    for (let key in searchParams) {
+      if (
+        typeof item[key] === 'string' &amp;&amp;
+        !item[key].includes(searchParams[key])
+      ) {
+        flag = false
+      } else if (
+        typeof item[key] === 'number' &amp;&amp;
+        !(item[key] === searchParams[key])
+      ) {
+        flag = false
+      }
+    }
+    return flag
+  })
+
+  const start = (pageNum - 1) * pageSize
+  const end = start + pageSize * 1
+  res.send({
+    state: 1,
+    data: {
+      list: list.slice(start, end),
+      totalCount: list.length,
+      pageNum: pageNum - 0,
+      pageSize: pageSize - 0,
+    },
+    message: '搜索成功',
+  })
+}
+
+//调用阿里云服务器上的发送邮件的接口
+const emailPost = (emailData) =&gt; {
+  axios
+    .post('http://39.97.238.175:81/api/log/email', {
+      ...emailData
+    })
+    .then((res) =&gt; {
+      console.log(`statusCode: ${res.statusCode}`)
+      console.log(res)
+    })
+    .catch((error) =&gt; {
+      console.error(error)
+    })
+}
+
+//添加
+const dataAdd = async (req, res) =&gt; {
+  const { dataItem } = req.body
+  const { path, username, errorTitle, detail } = dataItem
+  const id = Date.now()
+  const addtime = Date.now()
+  const edittime = ''
+  const browser = req.headers[`user-agent`]
+  const status = '0'
+  const err = await runSql(
+    `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
+  )
+  res.send({
+    state: 1,
+    data: dataItem,
+    message: '添加成功',
+  })
+  //添加错误时调用发送邮件的接口
+  emailPost({...dataItem, browser})
+}
+
+//发送邮件的接口
+const dataEmail = async (req, res) =&gt; {
+  const emailData = req.body
+  await sendEmail({ ...emailData }).catch((err) =&gt; {
+    console.log(err)
+  })
+  res.send({
+    state: 1,
+    data: emailData,
+    message: '成功',
+  })
+}
+
+//删除
+const dataDelete = async (req, res) =&gt; {
+  let { ids } = req.body
+  console.log(ids)
+  err = await runSql(`DELETE FROM myLogs WHERE id in (${ids.join(',')})`)
+  res.send({
+    state: 1,
+    data: ids,
+    message: '删除成功',
+  })
+}
+
+//编辑
+const dataEdit = async (req, res) =&gt; {
+  let { id, dataItem } = req.body
+  const { path, username } = dataItem
+  const edittime = Date.now()
+  err = await runSql(
+    `UPDATE myLogs SET path='${path}', username='${username}', edittime='${edittime}' WHERE id=${id}`
+  )
+  res.send({
+    state: 1,
+    data: dataItem,
+    message: '编辑成功',
+  })
+}
+
+// 状态操作
+const dataStatus = async (req, res) =&gt; {
+  const { id, status } = req.body
+
+  const edittime = Date.now()
+  err = await runSql(
+    `UPDATE myLogs SET edittime='${edittime}', status='${status}' WHERE id=${id}`
+  )
+  res.send({
+    state: 1,
+    data: status,
+    message: '编辑成功',
+  })
+}
+
+//创建表，销毁表，增删查改，练习
+const dataAction = async (req, res) =&gt; {
+  const { type } = req.body
+  let result = []
+  let err
+  const id = Date.now()
+  const addtime = Date.now()
+  const edittime = '1'
+  const path = 'a'
+  const username = 'admin'
+  const browser = 'chrome'
+  const errorTitle = '1'
+  const detail = '详情'
+  const editId = '1628502771985'
+  const status = '0' //0: 未解决 1：已解决
+
+  if (type === 'create') {
+    err = await runSql(
+      `CREATE TABLE myLogs (id TEXT, addtime TEXT, edittime TEXT, path TEXT, username TEXT, browser TEXT, errorTitle TEXT, detail TEXT, status TEXT)`
+    )
+  } else if (type === 'insert') {
+    err = await runSql(
+      `INSERT INTO myLogs VALUES ('${id}', '${addtime}', '${edittime}', '${path}', '${username}', '${browser}', '${errorTitle}', '${detail}', '${status}')`
+    )
+  } else if (type === 'select') {
+    result = await queryPromise(`SELECT * FROM myLogs`)
+  } else if (type === 'update') {
+    err = await runSql(`UPDATE myLogs SET edittime='666' WHERE id=${editId}`)
+  } else if (type === 'delete') {
+    err = await runSql(`DELETE FROM myLogs WHERE id=${editId}`)
+  } else if (type === 'drop') {
+    runSql('DROP TABLE myLogs')
+  }
+  //console.log(result)
+  if (err) {
+    res.send({
+      state: 0,
+      message: JSON.stringify(err),
+    })
+  } else {
+    res.send({
+      state: 1,
+      data: result,
+      message: '成功',
+    })
+  }
+}
+
+module.exports = {
+  logSearch: dataSearch,
+  logAdd: dataAdd,
+  logEmail: dataEmail,
+  logDelete: dataDelete,
+  logEdit: dataEdit,
+  logStatus: dataStatus,
+  logAction: dataAction,
+}
+</code></pre> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>使用fiddler修改网页的js文件</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264320.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 04 Aug 2021 10:51:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264320.html</guid><description><![CDATA[
+                    <p>把网页的请求的js文件保存到本地并修改，使用fiddler拦截原来的请求，替换为本地的js文件</p> 
+<p></p> 
+<p></p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210804184811765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>在控制台修改js变量的值，模拟异常，方便调试</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264321.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 04 Aug 2021 10:04:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264321.html</guid><description><![CDATA[
+                    <p><img alt="" height="526" src="https://img-blog.csdnimg.cn/2021080418030027.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>react路由懒加，项目经常上线导致没有刷新的用户出现js文件加载失败： ChunkLoadError: Loading chunk 42 failed.</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264322.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 04 Aug 2021 03:06:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/04/15264322.html</guid><description><![CDATA[
+                    <p>解决方案：</p> 
+<p>使用错误边界：</p> 
+<pre><code class="language-javascript">import React, { Component } from 'react'
+
+//错误边界
+//https://zh-hans.reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
+export default class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, errorInfo: null };
+  }
+  
+  componentDidCatch(error, errorInfo) {
+    // Catch errors in any components below and re-render with error message
+    this.setState({
+      error: error,
+      errorInfo: errorInfo
+    })
+    // You can also log error messages to an error reporting service here
+  }
+  
+  render() {
+    if (this.state.errorInfo) {
+      // Error path
+      return (
+        &lt;div className="m-error-wrap"&gt;
+          &lt;div className="m-error-img-wrap"&gt;
+            &lt;div className="m-error-img"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className="m-error-text"&gt;网页出错了，请尝试刷新一下~&lt;/div&gt;
+          &lt;details style={<!-- -->{ whiteSpace: 'pre-wrap' }}&gt;
+            {this.state.error &amp;&amp; this.state.error.toString()}
+            &lt;br /&gt;
+            {this.state.errorInfo.componentStack}
+          &lt;/details&gt;
+        &lt;/div&gt;
+      );
+    }
+    // Normally, just render children
+    return this.props.children;
+  }  
+}
+</code></pre> 
+<p><img alt="" height="859" src="https://img-blog.csdnimg.cn/20210804110517412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>前端向后端发送数据时，有时需要转数据格式，但是有时会得到意外的false数据</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/30/15264323.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 30 Jul 2021 01:47:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/30/15264323.html</guid><description><![CDATA[
+                    <p>无数据时得到错误的格式：false</p> 
+<pre><code class="language-javascript">      let values = {
+        serviceTags: undefined,
+      }
+      let serviceTags =
+        Array.isArray(values.serviceTags) &amp;&amp; values.serviceTags.join(',')
+      console.log(serviceTags) //false</code></pre> 
+<p>有数据时得到正确的格式：1,2</p> 
+<pre><code class="language-javascript">      let values = {
+        serviceTags: [1, 2],
+      }
+      let serviceTags =
+        Array.isArray(values.serviceTags) &amp;&amp; values.serviceTags.join(',')
+      console.log(serviceTags) //1,2</code></pre> 
+<p>使用三目运算符解决这个bug：</p> 
+<pre><code class="language-javascript">      let values = {
+        serviceTags: undefined,
+      }
+      let serviceTags =
+        Array.isArray(values.serviceTags) ? values.serviceTags.join(',') : ''
+      console.log(serviceTags)</code></pre> 
+<p></p>
+                ]]></description></item><item><title>js字符串处理，把img标签包裹在p标签里</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/29/15264324.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 29 Jul 2021 06:01:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/29/15264324.html</guid><description><![CDATA[
+                    <p>把img标签包裹在p标签里</p> 
+<pre><code class="language-javascript">      let data = `&lt;img src="http://test-images.qi.work/course/2021-07-01/bbbe7816252340aa8049bcab3b0370ac.jpg" alt="image" style="height: auto;width: auto"/&gt;`
+      data = data.replace(/&lt;img.*&gt;/g, (word) =&gt; {
+        if (word.includes('data-done="true"')) {
+          return word
+        } else {
+          word = word.split('')
+          word.splice(5, 0, 'data-done="true" ')
+          word = word.join('')
+          return `&lt;p&gt;${word}&lt;/p&gt;`
+        }
+      })
+      data = data.replace(/&lt;img.*&gt;/g, (word) =&gt; {
+        if (word.includes('data-done="true"')) {
+          return word
+        } else {
+          word = word.split('')
+          word.splice(5, 0, 'data-done="true" ')
+          word = word.join('')
+          return `&lt;p&gt;${word}&lt;/p&gt;`
+        }
+      })
+      console.log(data)</code></pre> 
+<p><img alt="" height="187" src="https://img-blog.csdnimg.cn/20210729135939148.png" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>git代码回退</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/28/15264325.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 28 Jul 2021 02:01:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/28/15264325.html</guid><description><![CDATA[
+                    <p>&nbsp;</p> 
+<p><img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210728095449129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="866" src="https://img-blog.csdnimg.cn/20210728095557320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210728095637637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210728095657216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="1030" src="https://img-blog.csdnimg.cn/20210728095729753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="1030" src="https://img-blog.csdnimg.cn/2021072809575177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="1030" src="https://img-blog.csdnimg.cn/2021072809581718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>antd 对话框、上传图片、轮播图结合在一起</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/26/15264326.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 26 Jul 2021 03:08:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/26/15264326.html</guid><description><![CDATA[
+                    <p>antd 对话框、上传图片、轮播图结合在一起</p> 
+<pre><code class="language-javascript">import React, { useState, useEffect, useRef } from 'react'
+import { Button, Upload, message, Modal, Carousel } from 'antd'
+import Icon from './Icon'
+import urls from '../../api/urls'
+import {
+  imageUrlFormat,
+  addUploadToken,
+  addUploadExtraData,
+} from '../../utils/tools'
+
+let orderType = 'up'
+export default function UploadImgPlusLightWithOrder({
+  value = [],
+  msg,
+  onChange,
+  ctype = 'company',
+}) {
+  const [fileList, setFileList] = useState([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const carouselEl = useRef(null)
+
+  const getUrl = (file) =&gt; {
+    let url = ''
+    if (file.url) {
+      url = file.url
+    } else if (file.response &amp;&amp; file.response.data) {
+      url = file.response.data.fileImg
+    }
+    return url
+  }
+
+  const handlePreview = (file) =&gt; {
+    const currentIndex = fileList.findIndex(item =&gt; {
+      return getUrl(item) === getUrl(file)
+    })
+    carouselEl.current.goTo(currentIndex, false)
+    setIsModalVisible(true)
+  }
+
+  const uploadProps = {
+    name: 'file',
+    action: urls.light.uploadFile,
+    data: {
+      ctype,
+      ...addUploadExtraData(),
+    },
+    headers: {
+      ...addUploadToken(),
+    },
+    //maxCount: 1,
+    listType: 'picture',
+    //listType: "picture-card",
+    fileList: [...fileList],
+    accept: '.jpg',
+    className: 'm-upload-order',
+    showUploadList: {
+      showDownloadIcon: true,
+      downloadIcon: (
+        &lt;div&gt;
+          &lt;Icon
+            name="top-arrow"
+            title="置顶"
+            className="m-upload-img-icon"
+            onClick={() =&gt; {
+              orderType = 'top'
+            }}
+          &gt;&lt;/Icon&gt;
+          &lt;Icon
+            name="order-arrow"
+            title="上移"
+            className="m-upload-img-icon"
+            onClick={() =&gt; {
+              orderType = 'up'
+            }}
+          &gt;&lt;/Icon&gt;
+          &lt;Icon
+            name="order-arrow"
+            title="下移"
+            className="m-upload-img-icon rotate"
+            onClick={() =&gt; {
+              orderType = 'down'
+            }}
+          &gt;&lt;/Icon&gt;
+          &lt;Icon
+            name="top-arrow"
+            title="置底"
+            className="m-upload-img-icon rotate"
+            onClick={() =&gt; {
+              orderType = 'bottom'
+            }}
+          &gt;&lt;/Icon&gt;
+        &lt;/div&gt;
+      ),
+      showRemoveIcon: true,
+    },
+    onChange(info) {
+      let fileList = [...info.fileList]
+      setFileList(fileList)
+      if (info.file.status !== 'uploading') {
+        const result = info.fileList.map((item) =&gt; {
+          if (item.historyUrl) {
+            return item.historyUrl
+          } else {
+            return item.response.data.filePath
+          }
+        })
+        console.log(result)
+        if (result.length === 0) {
+          //handleFileList([])
+          onChange(undefined)
+        } else {
+          //handleFileList(result)
+          onChange(result)
+        }
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} 上传成功`)
+        if (info.file.response.state === 1) {
+          const result = info.fileList.map((item) =&gt; {
+            if (item.historyUrl) {
+              return item.historyUrl
+            } else {
+              return item.response.data.filePath
+            }
+          })
+          console.log(result)
+          //handleFileList(result)
+          onChange(result)
+        }
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} 上传失败`)
+      }
+    },
+    onDownload(file) {
+      let url = ''
+      if (file.url) {
+        url = file.url
+      } else if (file.response &amp;&amp; file.response.data) {
+        url = file.response.data.fileImg
+      }
+      console.log(value)
+      console.log(url)
+      if (Array.isArray(value) &amp;&amp; value.length &gt; 0) {
+        let index = value.findIndex((item) =&gt; {
+          return url.includes(item)
+        })
+        if (orderType === 'top') {
+          if (index &gt; 0) {
+            const temp = value[index]
+            value.splice(index, 1)
+            value.unshift(temp)
+            handleFileList(value)
+            onChange(value)
+          }
+        } else if (orderType === 'up') {
+          // 利用ES6的解构赋值能更加便捷的进行元素交换
+          if (index &gt; 0) {
+            ;[value[index - 1], value[index]] = [value[index], value[index - 1]]
+            handleFileList(value)
+            onChange(value)
+          }
+        } else if (orderType === 'down') {
+          if (index &lt; value.length - 1) {
+            ;[value[index + 1], value[index]] = [value[index], value[index + 1]]
+            handleFileList(value)
+            onChange(value)
+          }
+        } else if (orderType === 'bottom') {
+          if (index &lt; value.length - 1) {
+            const temp = value[index]
+            value.splice(index, 1)
+            value.push(temp)
+            handleFileList(value)
+            onChange(value)
+          }
+        }
+      }
+    },
+    onPreview: handlePreview,
+  }
+
+  const handleFileList = (value) =&gt; {
+    if (Array.isArray(value)) {
+      const tempFileList = value.map((item, index) =&gt; {
+        return {
+          uid: index,
+          name: imageUrlFormat(item),
+          status: 'done',
+          url: imageUrlFormat(item),
+          historyUrl: item,
+        }
+      })
+      setFileList(tempFileList)
+    }
+  }
+
+  useEffect(() =&gt; {
+    handleFileList(value)
+    // eslint-disable-next-line
+  }, [])
+
+  return (
+    &lt;span&gt;
+      &lt;Upload {...uploadProps}&gt;
+        &lt;Button&gt;上传图片&lt;/Button&gt;
+        &lt;span className="m-upload-text"&gt;{msg}&lt;/span&gt;
+      &lt;/Upload&gt;
+      &lt;Modal
+        title="预览"
+        visible={isModalVisible}
+        onCancel={() =&gt; setIsModalVisible(false)}
+        className="m-modal-full-screen m-carousel-modal"
+        footer={null}
+        forceRender
+      &gt;
+        &lt;Carousel className="m-carousel" dots={ {className: "m-dots"} } ref={carouselEl} &gt;
+          {fileList.map((file) =&gt;  {
+            let url = ''
+            if (file.url) {
+              url = file.url
+            } else if (file.response &amp;&amp; file.response.data) {
+              url = file.response.data.fileImg
+            }
+            return (
+              &lt;div className="m-carousel-img-wrap" key={url}&gt;
+                &lt;img
+                  src={url}
+                  className="m-carousel-img"
+                  alt="img"
+                /&gt;
+              &lt;/div&gt;
+            )
+          })}
+        &lt;/Carousel&gt;
+        &lt;div className="m-modal-img-footer"&gt;
+          &lt;Button className="m-space" onClick={() =&gt; setIsModalVisible(false)}&gt;
+            取消
+          &lt;/Button&gt;
+        &lt;/div&gt;
+      &lt;/Modal&gt;
+    &lt;/span&gt;
+  )
+}
+</code></pre> 
+<pre><code class="language-css">.m-carousel-modal .ant-carousel{height: 100%;}
+.m-carousel-modal .slick-list{height: 100%;}
+.m-carousel-modal .slick-track{height: 100%;}
+.m-carousel-modal .slick-slide{height: 100%;}
+.m-carousel-modal .slick-slide&gt;div{height: 100%;}
+.m-carousel{height: 100%;}
+.m-carousel-img-wrap{display: flex; height: 100%;}
+.m-carousel-img{margin: auto;height: 100%;}</code></pre> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>JavaScript 交换数组元素位置</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264327.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 24 Jul 2021 10:27:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264327.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">;[value[index - 1], value[index]] = [value[index], value[index - 1]]</code></pre> 
+<p></p>
+                ]]></description></item><item><title>react报错：Can‘t perform a React state update on an unmounted component</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264328.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 24 Jul 2021 03:54:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264328.html</guid><description><![CDATA[
+                    <p><img alt="" height="459" src="https://img-blog.csdnimg.cn/20210724114413809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="456" src="https://img-blog.csdnimg.cn/20210724114716186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;解决方案：</p> 
+<pre><code class="language-javascript">//生成cancelToken，用于取消请求
+const getCancelSource = () =&gt; {
+  return axios.CancelToken.source()
+}  
+
+
+
+  //挂载时异步获取所属分类数据
+  useEffect(() =&gt; {
+    const source = getCancelSource()
+    Api.light.category(source.token).then((res) =&gt; {
+      if (res.state === 1) {
+        const category = formatCategory({ categoryOptions: res.data })
+        setCategoryOptions(category)
+        console.log('category')
+      }
+    }).catch(err =&gt; {
+      console.log(err)
+    })
+    return () =&gt; {
+      console.log('卸载')
+      source.cancel()
+    }
+  }, [])</code></pre> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p><img alt="" height="570" src="https://img-blog.csdnimg.cn/20210724115130157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p></p> 
+<p><img alt="" height="590" src="https://img-blog.csdnimg.cn/20210724115217490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p></p> 
+<p>参考链接：<a href="http://www.axios-js.com/zh-cn/docs/#%E5%8F%96%E6%B6%88">http://www.axios-js.com/zh-cn/docs/#%E5%8F%96%E6%B6%88</a></p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
+axios.get('/user/12345', {
+  cancelToken: source.token
+}).catch(function(thrown) {
+  if (axios.isCancel(thrown)) {
+    console.log('Request canceled', thrown.message);
+  } else {
+     // 处理错误
+  }
+});
+
+axios.post('/user/12345', {
+  name: 'new name'
+}, {
+  cancelToken: source.token
+})
+
+// 取消请求（message 参数是可选的）
+source.cancel('Operation canceled by the user.');</code></pre> 
+<p>&nbsp;axios config的一个字段：</p> 
+<pre><code class="language-javascript">  // `cancelToken` 指定用于取消请求的 cancel token
+  // （查看后面的 Cancellation 这节了解更多）
+  cancelToken: new CancelToken(function (cancel) {
+  })</code></pre> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>react 路由 404页面配置</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264329.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 24 Jul 2021 01:56:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/24/15264329.html</guid><description><![CDATA[
+                    <pre><code class="language-html">        &lt;Switch&gt;
+          &lt;Redirect from="/" to="/light/login" exact&gt;&lt;/Redirect&gt;
+          &lt;Route path="/light/login" component={Login}&gt;&lt;/Route&gt;
+          &lt;Route path="/light/index" component={Index}&gt;&lt;/Route&gt;
+          &lt;Route path="/404" component={NotFound}&gt;&lt;/Route&gt;
+          &lt;Redirect from="*" to="/404" exact&gt;&lt;/Redirect&gt;
+        &lt;/Switch&gt;</code></pre> 
+<p>二级路由需要同样的配置：</p> 
+<pre><code class="language-javascript">    listDom.push(&lt;Redirect key="404" from="*" to="/404" exact&gt;&lt;/Redirect&gt;)    
+
+    &lt;div className="m-list"&gt;
+      &lt;Header&gt;&lt;/Header&gt;
+      &lt;div className="m-list-info"&gt;
+        &lt;Nav&gt;&lt;/Nav&gt;
+        &lt;Suspense fallback={&lt;Loading isLazyLoading={true}&gt;&lt;/Loading&gt;}&gt;
+          &lt;Switch&gt;
+            {listDom}
+          &lt;/Switch&gt;
+        &lt;/Suspense&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;</code></pre> 
+<p></p>
+                ]]></description></item><item><title>antd Tabs标签页 被隐藏时也渲染 DOM 结构</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/17/15264330.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 17 Jul 2021 10:07:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/17/15264330.html</guid><description><![CDATA[
+                    <p>forceRender</p> 
+<pre><code class="language-html">            &lt;Tabs activeKey={activeKey} onChange={(key) =&gt; setActiveKey(key)} className="m-tabs" centered type="card"&gt;
+              &lt;TabPane tab="基本信息" key="1" forceRender&gt;
+                {getBaseInfoFields({
+                  belongCompanyOption,
+                  category,
+                  type,
+                })}
+              &lt;/TabPane&gt;
+              &lt;TabPane tab="法人信息" key="2" forceRender&gt;
+                {getLegalPersonInfoFields()}
+              &lt;/TabPane&gt;
+              &lt;TabPane tab="银行信息" key="3" forceRender&gt;
+                {getBankInfoFields()}
+              &lt;/TabPane&gt;
+              &lt;TabPane tab="营业信息" key="4" forceRender&gt;
+                {getBusinessInfoFields()}
+              &lt;/TabPane&gt;
+            &lt;/Tabs&gt;</code></pre> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>antd表单不显示label和冒号</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/16/15264331.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 16 Jul 2021 03:06:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/16/15264331.html</guid><description><![CDATA[
+                    <pre><code class="language-html">      &lt;Form.Item label=" " colon={false}&gt;
+        &lt;Button type="primary"&gt;点击校验兑换码&lt;/Button&gt;
+      &lt;/Form.Item&gt;</code></pre> 
+<p><img alt="" height="321" src="https://img-blog.csdnimg.cn/20210716110607233.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1071"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>阻止Chrome开发者工具的控制台登录图像404错误</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/15/15264332.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 15 Jul 2021 10:53:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/15/15264332.html</guid><description><![CDATA[
+                    <p><img alt="" height="400" src="https://img-blog.csdnimg.cn/2021071518512374.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;<img alt="" height="428" src="https://img-blog.csdnimg.cn/20210715185212508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>create-react-app 区分环境 环境变量</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/12/15264334.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 12 Jul 2021 07:07:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/12/15264334.html</guid><description><![CDATA[
+                    <p><img alt="" height="599" src="https://img-blog.csdnimg.cn/20210712150001859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="393"></p> 
+<p>config.js</p> 
+<pre><code class="language-javascript">const baseURL = {
+  // 使用反向代理解决跨域时，dev应为空字符串
+  dev: '',
+  test: 'http://abc.cn',
+  // 使用yarn build打包，所有接口使用这个url，需要服务器解决跨域
+  prod: 'http://abc.cn'
+}[process.env.REACT_APP_MODE]
+
+const imageBaseUrl = {
+  dev: 'http://abc.cn/',
+  test: 'http://abc.work/',
+  prod: 'http://abc.cn/',
+}[process.env.REACT_APP_MODE]
+
+const nodeBaseURL = {
+  dev: '',
+  test: 'https://efficacious-tiny-infinity.glitch.me',
+  prod: 'https://efficacious-tiny-infinity.glitch.me',
+}[process.env.REACT_APP_MODE]
+
+export { baseURL, imageBaseUrl, nodeBaseURL }
+</code></pre> 
+<p>.env:</p> 
+<pre><code class="language-javascript">// .env
+NODE_ENV=development
+REACT_APP_MODE=dev</code></pre> 
+<p>&nbsp;.env.prod:</p> 
+<pre><code class="language-javascript">// .env.prod
+NODE_ENV=production
+REACT_APP_MODE=prod
+BUILD_PATH= /zlhx-ui
+</code></pre> 
+<p>&nbsp;.env.test:</p> 
+<pre><code class="language-javascript">// .env.test
+NODE_ENV=production
+REACT_APP_MODE=test</code></pre> 
+<p>package.json:</p> 
+<pre><code class="language-javascript">  "scripts": {
+    "start": "node scripts/start.js",
+    "build_test": "cross-env MODE_ENV=test GENERATE_SOURCEMAP=false GENERATE_BUNDLE_ANALYZER_REPORT=true node scripts/build.js",
+    "build": "cross-env MODE_ENV=prod GENERATE_SOURCEMAP=false node scripts/build.js",
+    "test": "node scripts/test.js"
+  },</code></pre> 
+<p>&nbsp;修改config/env.js文件:</p> 
+<pre><code class="language-javascript">// const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.MODE_ENV || process.env.NODE_ENV;</code></pre> 
+<p><img alt="" height="606" src="https://img-blog.csdnimg.cn/20210827103258609.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+<p>&nbsp;</p> 
+<p></p> 
+<p></p> 
+<p>可以通过修改环境变量配置，控制打包输出目录：</p> 
+<p><img alt="" height="803" src="https://img-blog.csdnimg.cn/20210712150548885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p><img alt="" height="902" src="https://img-blog.csdnimg.cn/20210712150633276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>在actionCreator中使用getState，数据格式是immutable</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264335.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 09 Jul 2021 08:40:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264335.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">
+const setAuth = () =&gt; (dispatch, getState) =&gt; {
+  const router = getState().getIn(['light', 'router']).toJS()
+  Api.light.testAuthSearch().then((res) =&gt; {
+    if (res.state === 1) {
+      const newRouter = formatAuthData({ router: router, authData: res.data })
+      console.log(newRouter)
+      dispatch({ type: 'SET_LIGHT_STATE', key: ['router'], value: newRouter })
+    }
+  })
+}</code></pre> 
+<p></p>
+                ]]></description></item><item><title>给树状数据添加层级id</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264336.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 09 Jul 2021 07:27:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264336.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">const formatAuthData = ({ authData }) =&gt; {
+  const find = (arr, parentId = '') =&gt; {
+    for (let i = 0; i &lt; arr.length; i++) {
+      if (Array.isArray(arr[i].children) &amp;&amp; arr[i].children.length &gt; 0) {
+        arr[i].id = `${parentId}${i + 1}`
+        find(arr[i].children, `${parentId}${i + 1}`)
+      } else {
+        arr[i].id = `${parentId}${i + 1}`
+      }
+    }
+  }
+  const authDataCopy = deepClone(authData)
+  find(authDataCopy)
+  return authDataCopy
+}</code></pre> 
+<p><img alt="" height="765" src="https://img-blog.csdnimg.cn/20210709152532563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="418"></p> 
+<p>data.js:</p> 
+<pre><code class="language-javascript">const router = [
+  {
+    title: '首页',
+    icon: 'home',
+    className: 'm-sidebar-home',
+    isVisible: true,
+  },
+  {
+    title: 'xx',
+    icon: 'base',
+    isVisible: true,
+    key: '/sale/index/offline',
+    children: [
+      {
+        title: 'xx',
+        icon: '',
+        isVisible: true,
+      },   
+      {
+        title: 'xxx',
+        icon: '',
+        isVisible: true,
+      },                                            
+    ]
+  }, 
+]
+</code></pre> 
+<p></p>
+                ]]></description></item><item><title>vscode中的正则搜索与替换演示，删除对象中不要的属性及属性值</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264337.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 09 Jul 2021 06:56:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264337.html</guid><description><![CDATA[
+                    <p></p> 
+<h2 id="示例">示例</h2> 
+<p>component:.*\n.*\n.*,$<br><br> 删除对象中不要的属性及属性值</p> 
+<p><img alt="" height="745" src="https://img-blog.csdnimg.cn/20210709145258347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p><img alt="" height="422" src="https://img-blog.csdnimg.cn/20210709145953743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="681"></p> 
+<p><img alt="" height="257" src="https://img-blog.csdnimg.cn/20210714154623533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p><img alt="" height="95" src="https://img-blog.csdnimg.cn/20210714154910769.png" width="459"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>http-proxy-middleware做代理时，自定义复杂的匹配规则</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264338.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 09 Jul 2021 01:28:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/09/15264338.html</guid><description><![CDATA[
+                    <p>&nbsp;</p> 
+<pre><code class="language-javascript">/**
+ * @return {Boolean}
+ */
+const filter = function (pathname, req) {
+  return pathname.match('^/api') &amp;&amp; req.method === 'GET';
+};
+
+const apiProxy = createProxyMiddleware(filter, {
+  target: 'http://www.example.org',
+});</code></pre> 
+<p></p>
+                ]]></description></item><item><title>antd省市区级联</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264339.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 08:01:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264339.html</guid><description><![CDATA[
+                    <p></p> 
+<p><img alt="" height="0" src="https://img-blog.csdnimg.cn/20210708154618532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="0"><img alt="" height="293" src="https://img-blog.csdnimg.cn/20210708154635586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="777"></p> 
+<p></p> 
+<p></p> 
+<pre><code class="language-javascript">import React, { useState } from 'react'
+import { Cascader } from 'antd'
+import options from '../../utils/cities'
+
+export default function AreaCascader({ value = [], onChange, getPopupContainer }) {
+  const [cascader, setCascader] = useState([])
+  
+  const handleChange = (value, list) =&gt; {
+    onChange(value)
+    console.log(value)
+    setCascader(value)
+    console.log(list)
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;Cascader
+        value={value || cascader}
+        options={options}
+        fieldNames={<!-- -->{value: 'code'}}
+        onChange={handleChange}
+        placeholder="选择所属城市"
+        style={<!-- -->{ width: 300 }}
+        getPopupContainer={getPopupContainer}
+      /&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre> 
+<p></p> 
+<pre><code class="language-javascript">//根据省市区编码查询省市区
+const findAreaText = (location) =&gt; {
+  let result = []
+  for (let i = 0; i &lt; areaOptions.length; i++) {
+    if (areaOptions[i].code === location[0] + '') {
+      result.push(areaOptions[i].label)
+    }
+    for (let j = 0; j &lt; areaOptions[i].children.length; j++) {
+      if (areaOptions[i].children[j].code === location[1] + '') {
+        result.push(areaOptions[i].children[j].label)
+      }
+      if (Array.isArray(areaOptions[i].children[j].children)) {
+        for (let z = 0; z &lt; areaOptions[i].children[j].children.length; z++) {
+          if (
+            areaOptions[i].children[j].children[z].code ===
+            location[2] + ''
+          ) {
+            result.push(areaOptions[i].children[j].children[z].label)
+          }
+        }
+      }
+    }
+  }
+  return result
+}
+</code></pre> 
+<p></p> 
+<p></p> 
+<p>数据来源：<a href="https://github.com/heerey525/antdCascaderDate/blob/master/src/cities.js">https://github.com/heerey525/antdCascaderDate/blob/master/src/cities.js</a></p> 
+<p><a href="https://github.com/heerey525/antdCascaderDate">https://github.com/heerey525/antdCascaderDate</a></p>
+                ]]></description></item><item><title>axios封装</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264340.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 07:41:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264340.html</guid><description><![CDATA[
+                    <p>&nbsp;common.js:</p> 
+<pre><code class="language-javascript">import axios from 'axios'
+import { message } from 'antd'
+import { baseURL } from '../utils/config'
+import qs from 'qs'
+import { showLoading, hideLoading } from '../utils/tools'
+let isCanShow = true
+const service = axios.create()
+
+service.defaults.baseURL = baseURL
+
+service.interceptors.request.use(
+  (config) =&gt; {
+    //获取token并放置在请求头中
+    const accessToken = localStorage.getItem('accessToken')
+    if (accessToken)
+      config.headers.Authorization =
+        'Bearer ' + localStorage.getItem('accessToken')
+
+    if (config.method === 'get') config.params = { ...config.data }
+    // 请求接口时显示loading，接口响应后隐藏loading，如果有特殊情况不能满足需求的，例如同时请求了多个接口
+    // 且接口响应时间有比较大的差异，loading的显示隐藏状态不能友好的展示，可以直接在业务代码或api层，把
+    // isLoading设置为false，则不再使用拦截器控制loading的状态，自己在业务代码里手动控制loading的状态
+    if (config.isLoading !== false) showLoading()
+    return config
+  },
+  (err) =&gt; {
+    return Promise.reject(err)
+  }
+)
+
+service.interceptors.response.use(
+  (res) =&gt; {
+    if (res.config.isLoading !== false) {
+      hideLoading()
+    }
+    //code是node接口的状态码，state是java接口的状态码
+    if (res.data.code === 200 || res.data.state === 1) {
+      return res.data
+    } else if (res.data.code === 400 || res.data.state === 0) {
+      let msg = ''
+      msg = res.data.message
+      if (res.data &amp;&amp; res.data.data) {
+        msg += res.data.data.error_msg ? `:${res.data.data.error_msg} ` : ''
+        msg += res.data.data.error_code ? res.data.data.error_code : ''
+      }
+      if (res.config.isShowMessage !== false) {
+        message.warning(msg)
+      }
+      return res.data
+    } else {
+      return Promise.reject(res)
+    }
+  },
+  (err) =&gt; {
+    hideLoading()
+    let { response } = err
+    let { status } = response
+    if (status === 401) {
+      if (isCanShow) {
+        message.warning('token失效,请重新登录!')
+        isCanShow = false
+      }
+      setTimeout(() =&gt; {
+        isCanShow = true
+      }, 1000)
+      
+      if (document.location.href.includes('#/sale')) {
+        window.reactRouter.replace({ pathname: '/sale/login' })
+      } else {
+        window.reactRouter.replace({ pathname: '/light/login' })
+      }
+      
+    } else {
+      message.warning(err &amp;&amp; err.message)
+    }
+    return Promise.reject(err)
+  }
+)
+
+export const common = async (config) =&gt; {
+  if (config.contentType === 'application/x-www-form-urlencoded') {
+    config.headers = { 'content-type': 'application/x-www-form-urlencoded' }
+    config.data = qs.stringify(config.data)
+  }
+  let res = await service(config)
+  return res
+}
+</code></pre> 
+<p>index.js:</p> 
+<pre><code class="language-javascript">import light from './lightApi'
+import sale from './saleApi'
+import dark from "./darkApi"
+
+const Api = {
+  light,
+  sale,
+  dark
+}
+
+export default Api
+</code></pre> 
+<p></p> 
+<p>lightApi.js:</p> 
+<pre><code class="language-javascript">import urls from './urls'
+import { common } from './common'
+
+//common函数传递的参数添加 contentType: 'application/x-www-form-urlencoded' 即可改变post请求参数传递的格式
+const Api = {
+
+  //#region 公共接口）
+  commonQueryAllOperation: (data) =&gt; common({ url: urls.light.commonQueryAllOperation, data, method: 'post' }),
+  //#endregion
+
+}
+
+export default Api</code></pre> 
+<p>lightUrls.js:</p> 
+<pre><code class="language-javascript">import { baseURL, nodeBaseURL } from '../utils/config'
+
+const urls = {
+
+  //#region 公共接口
+  commonQueryAllOperation: "/abc",
+  //#endregion  
+
+
+}
+
+export default urls
+</code></pre> 
+<p></p> 
+<p>config.js:</p> 
+<pre><code class="language-javascript">const baseURL = {
+  dev: '', // 使用反向代理解决跨域时，dev应为空字符串
+  test: 'http://abc.cn',
+  // 使用yarn build打包，所有接口使用这个url，需要服务器解决跨域
+  prod: 'http://abc.cn'
+}[process.env.REACT_APP_MODE]
+
+const imageBaseUrl = {
+  dev: 'http://abc/',
+  test: 'http://abc/',
+  prod: 'http://abc/',
+}[process.env.REACT_APP_MODE]
+
+const nodeBaseURL = {
+  dev: '',
+  test: 'https://efficacious-tiny-infinity.glitch.me',
+  prod: 'https://efficacious-tiny-infinity.glitch.me',
+}[process.env.REACT_APP_MODE]
+
+export { baseURL, imageBaseUrl, nodeBaseURL }
+</code></pre> 
+<p><img alt="" height="585" src="https://img-blog.csdnimg.cn/2021070815410018.png" width="261"></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>react 封装antd menu组件，路由懒加载，可折叠，可配置显示和隐藏，刷新后选择正确的菜单，打开正确的submenu</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264341.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 07:33:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264341.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">import React, { useEffect, useState, useMemo } from 'react'
+import { Menu } from 'antd'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import Icon from '../../../components/light/Icon'
+import Logo from './Logo'
+
+const { SubMenu } = Menu
+
+function Sidebar(props) {
+  const {
+    router,
+    location: { pathname },
+    theme,
+    selectedKeys,
+    collapsed,
+  } = props
+
+  const [openKeys, setOpenKeys] = useState([])
+
+  const defaultOpenKeysFn = () =&gt; {
+    const arr = []
+    let myPathname = pathname.replace(/(\/+$)/g, '')
+    let arrTemp = myPathname.split('/')
+    if (arrTemp.length &gt; 4) {
+      for (let i = 4; i &lt; arrTemp.length; i++) {
+        arr.push(arrTemp.slice(0, i).join('/'))
+      }
+    }
+    return arr
+  }
+
+  const handleNav = (path) =&gt; {
+    //props.onSetState(['selectedKeys'], path)
+    props.history.push(path)
+  }
+
+  const isFirstLevel = (item) =&gt; {
+    const pathLength = item.key.split('/').length
+    return pathLength === 4
+  }
+
+  // 只有router、collapsed变化时才会重新渲染sidebarDom，useMemo函数可以起到性能优化的作用
+  const sidebarDom = useMemo(() =&gt; {
+    const sidebarRender = (arr) =&gt; {
+      return arr.map((item) =&gt; {
+        if (item.children) {
+          if (item.isVisible) {
+            // 一级子菜单折叠时使用大图标
+            return (
+              &lt;SubMenu
+                key={item.key}
+                title={item.title}
+                className={item.className ? item.className : ''}
+                icon={
+                  item.icon ? (
+                    &lt;span className="anticon anticon-appstore m-sidebar-icon-wrap"&gt;
+                      &lt;Icon
+                        name={item.icon}
+                        className={`m-sidebar-icon ${
+                          collapsed &amp;&amp; isFirstLevel(item)
+                            ? 'big'
+                            : ''
+                        }`}
+                      &gt;&lt;/Icon&gt;
+                    &lt;/span&gt;
+                  ) : null
+                }
+              &gt;
+                {sidebarRender(item.children)}
+              &lt;/SubMenu&gt;
+            )
+          } else {
+            return null
+          }
+        } else {
+          // 使用span包裹Icon组件，并添加antd的className才能正确使用Menu的icon属性
+          // 折叠时使用大图标
+          if (item.isVisible) {
+            // 有些菜单只在开发环境展示
+            if (!item.isDevMenu || process.env.REACT_APP_MODE === 'dev'){
+              if(item.hiddenMenu!==false){
+                return (
+                  &lt;Menu.Item
+                    key={item.path}
+                    className={item.className ? item.className : ''}
+                    onClick={() =&gt; handleNav(item.path)}
+                    icon={
+                      item.icon ? (
+                        &lt;span className="anticon anticon-appstore m-sidebar-icon-wrap"&gt;
+                        &lt;Icon
+                          name={item.icon}
+                          className={`m-sidebar-icon ${collapsed ? 'big' : ''}`}
+                        &gt;&lt;/Icon&gt;
+                      &lt;/span&gt;
+                      ) : null
+                    }
+                  &gt;
+                    &lt;span&gt;{item.title}&lt;/span&gt;
+                  &lt;/Menu.Item&gt;
+                )
+              }else{
+                return null;
+              }
+            } else {
+              return null
+            }
+          } else {
+            return null
+          }
+        }
+      })
+    }
+
+    return sidebarRender(router.toJS())
+    // eslint-disable-next-line
+  }, [router, collapsed])
+
+  const handleOpenChange = (openKeys) =&gt; {
+    setOpenKeys(openKeys)
+  }
+
+  useEffect(() =&gt; {
+    props.onSetState(['selectedKeys'], pathname)
+    // eslint-disable-next-line
+  }, [pathname])
+
+  useEffect(() =&gt; {
+    if (!collapsed) {
+      setOpenKeys(defaultOpenKeysFn())
+    }
+    // eslint-disable-next-line
+  }, [collapsed])
+
+  return (
+    &lt;Menu
+      selectedKeys={[selectedKeys]}
+      openKeys={openKeys}
+      style={<!-- -->{ width: collapsed ? 80 : 256, height: '100%', overflowY: 'auto' }}
+      mode="inline"
+      theme={theme}
+      inlineCollapsed={collapsed}
+      onOpenChange={handleOpenChange}
+    &gt;
+      &lt;Logo collapsed={collapsed}&gt;&lt;/Logo&gt;
+      {sidebarDom}
+    &lt;/Menu&gt;
+  )
+}
+
+const mapStateToProps = (state) =&gt; {
+  return {
+    router: state.getIn(['light', 'router']),
+    theme: state.getIn(['light', 'theme']),
+    selectedKeys: state.getIn(['light', 'selectedKeys']),
+    collapsed: state.getIn(['light', 'collapsed']),
+    userInfo: state.getIn(['light', 'userInfo']).toJS(),
+  }
+}
+
+const mapDispatchToProps = (dispatch) =&gt; {
+  return {
+    onSetState(key, value) {
+      dispatch({ type: 'SET_LIGHT_STATE', key, value })
+    },
+    onDispatch(action) {
+      dispatch(action)
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Sidebar))
+</code></pre> 
+<p>router.js:</p> 
+<pre><code class="language-javascript">import { lazy } from 'react'
+
+// isDevMenu=true只在开发环境显示
+const router = [
+  {
+    title: '首页',
+    icon: 'home',
+    className: 'm-sidebar-home',
+    isVisible: true,
+    path: '/sale/index/home',
+    component: lazy(() =&gt; import('../../views/light/index/home/Home'))
+  },
+  {
+    title: 'xx管理',
+    icon: 'base',
+    isVisible: true,
+    key: '/sale/index/offline',
+    children: [
+      {
+        title: 'xx管理',
+        icon: '',
+        isVisible: true,
+        path: '/sale/index/offline/companyList',
+        component: lazy(() =&gt; import('../../views/sale/index/offline/companyList/Index'))
+      },   
+      {
+        title: 'xx管理',
+        icon: '',
+        isVisible: true,
+        path: '/sale/index/offline/shopList',
+        component: lazy(() =&gt; import('../../views/sale/index/offline/shopList/Index'))
+      },                                            
+    ]
+  }, 
+]
+
+
+export default router</code></pre> 
+<p></p> 
+<p><img alt="" height="822" src="https://img-blog.csdnimg.cn/20210708153157794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="372"></p> 
+<p><img alt="" height="893" src="https://img-blog.csdnimg.cn/20210708153249766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="614"></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>useHistory做页面跳转导航</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264342.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 07:25:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264342.html</guid><description><![CDATA[
+                    <h2 id="Hooks-usehistory"><a id="usehistory"></a><a href="https://reactrouter.com/web/api/Hooks/usehistory"><code>useHistory</code></a></h2> 
+<p>The <code>useHistory</code> hook gives you access to the <a href="https://reactrouter.com/web/api/history"><code>history</code></a> instance that you may use to navigate.</p> 
+<p></p> 
+<pre><code class="language-javascript">
+
+import { useHistory } from "react-router-dom";
+
+function HomeButton() {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/home");
+  }
+
+  return (
+    &lt;button type="button" onClick={handleClick}&gt;
+      Go home
+    &lt;/button&gt;
+  );
+}
+</code></pre> 
+<p></p>
+                ]]></description></item><item><title>react-draft-wysiwyg富文本组件</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264343.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 07:05:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264343.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">import React, { useState, useEffect } from 'react'
+import { EditorState, convertToRaw, ContentState, Modifier } from 'draft-js'
+import { Input, message } from 'antd'
+// https://jpuri.github.io/react-draft-wysiwyg/#/docs
+import { Editor } from 'react-draft-wysiwyg'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
+import urls from '../../api/urls'
+import axios from 'axios'
+import { htmlFormat, addUploadToken } from '../../utils/tools'
+const { TextArea } = Input
+
+//image position is lost when converting from html to EditorState
+//参考链接：https://github.com/jpuri/html-to-draftjs/issues/101
+// https://github.com/jpuri/html-to-draftjs/blob/master/src/library/index.js
+export default function MyEditor(props) {
+  const { value = {}, onChange } = props
+
+  //把html字符传转换成富文本要求的格式
+  const formatEditorState = (text) =&gt; {
+    //解决image位置无法保存的bug
+    const html = text ? htmlFormat(text) : ''
+    const contentBlock = htmlToDraft(html, (nodeName, node) =&gt; {
+      if (nodeName === 'img' &amp;&amp; node instanceof HTMLImageElement) {
+        const entityConfig = {}
+        entityConfig.src = node.getAttribute
+          ? node.getAttribute('src') || node.src
+          : node.src
+        entityConfig.alt = node.alt
+        entityConfig.height = node.style.height
+        entityConfig.width = node.style.width
+        if (node.style.float) {
+          entityConfig.alignment = node.style.float
+        } else {
+          if (node.style.textAlign) {
+            entityConfig.alignment = node.style.textAlign
+          }
+        }
+
+        return {
+          type: 'IMAGE',
+          mutability: 'MUTABLE',
+          data: entityConfig,
+        }
+      }
+    })
+    const contentState = ContentState.createFromBlockArray(
+      contentBlock.contentBlocks
+    )
+    const result = EditorState.createWithContent(contentState)
+    return result
+  }
+  const [editorState, setEditorState] = useState(formatEditorState(value.text))
+
+  const handleChange = (value) =&gt; {
+    setEditorState(value)
+    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    //提交给后端的是html字符串
+    onChange({
+      isChange: false,
+      text: html,
+    })
+  }
+
+  //图片上传
+  const uploadImageCallBack = (file) =&gt; {
+    return new Promise((resolve, reject) =&gt; {
+      let formData = new FormData()
+      formData.append('file', file)
+      formData.append('ctype', 'course')
+      axios(urls.light.uploadFile, {
+        method: 'POST',
+        data: formData,
+        headers: {
+          ...addUploadToken()
+        },
+      })
+        .then((res) =&gt; {
+          if (res.data.state === 1) {
+            resolve({ data: { link: res.data.data.fileImg } })
+          } else {
+            message.error('图片上传失败', 2)
+            reject(res)
+          }
+        })
+        .catch((err) =&gt; {
+          reject(err)
+        })
+    })
+  }
+
+
+  useEffect(() =&gt; {
+    //课程图片列表上传的图片尾部有一个加号，点击加号会自动把图片插入到富文本框光标所在的位置
+    if (value.isChange) {
+      const contentState = Modifier.replaceText(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        value.text,
+      );
+      const temp = EditorState.push(editorState, contentState, 'insert-characters')
+      let html = draftToHtml(convertToRaw(temp.getCurrentContent()))
+      html = html.replace(/&amp;lt;/g, '&lt;').replace(/&amp;gt;/g, '&gt;')
+      setEditorState(formatEditorState(html))
+      //提交给后端的是html字符串
+      onChange({
+        isChange: false,
+        text: html,
+      })
+    }
+  }, [value])
+
+  return (
+    &lt;div&gt;
+      &lt;Editor
+        editorState={editorState}
+        wrapperClassName="m-my-editor-wrapper"
+        editorClassName="demo-editor"
+        localization={<!-- -->{
+          locale: 'zh',
+        }}
+        onEditorStateChange={handleChange}
+        toolbar={<!-- -->{
+          image: {
+            urlEnabled: true,
+            uploadEnabled: true,
+            alignmentEnabled: true, // 是否显示排列按钮 相当于text-align
+            uploadCallback: uploadImageCallBack,
+            previewImage: true,
+            inputAccept: 'image/*',
+            alt: { present: false, mandatory: false, previewImage: true },
+          },
+        }}
+      /&gt;
+      &lt;TextArea
+        disabled
+        value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+        autoSize={<!-- -->{ minRows: 5, maxRows: 10 }}
+      &gt;&lt;/TextArea&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre> 
+<p>htmlFormat:</p> 
+<pre><code class="language-javascript">import { html2json, json2html } from 'html2json'
+
+
+//富文本html格式转换
+const htmlFormat = (data) =&gt; {
+  const json = html2json(data)
+  Array.isArray(json.child) &amp;&amp;
+    json.child.forEach((item) =&gt; {
+      if (item.tag === 'div') {
+        item.tag = 'img'
+        if (
+          item.attr &amp;&amp;
+          Array.isArray(item.child) &amp;&amp;
+          item.child.length === 1 &amp;&amp;
+          item.child[0].attr &amp;&amp;
+          Array.isArray(item.child[0].attr.style)
+        ) {
+          const style = item.attr.style + item.child[0].attr.style.join('')
+          item.attr = {
+            ...item.child[0].attr,
+          }
+          item.attr.style = style
+        }
+      }
+    })
+
+  const html = json2html(json)
+  return html
+}</code></pre> 
+<p></p> 
+<p><img alt="" height="560" src="https://img-blog.csdnimg.cn/2021070815050062.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p>
+                ]]></description></item><item><title>html转json json转html</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264344.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 08 Jul 2021 06:42:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/08/15264344.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">import React from 'react'
+import { html2json, json2html } from 'html2json'
+
+export default function Index() {
+  const data = `&lt;p&gt;&lt;/p&gt;
+  &lt;div style="text-align:right;"&gt;&lt;img src="http://test-images.qi.work/course/2021-07-01/bbbe7816252340aa8049bcab3b0370ac.jpg" alt="image" style="height: auto;width: auto"/&gt;&lt;/div&gt;
+  &lt;p&gt;&lt;/p&gt;`
+
+  const htmlFormat = (data) =&gt; {
+    const json = html2json(data)
+    console.log(json)
+    const html = json2html(json)
+    return html
+  }
+
+  const result = htmlFormat(data)
+  console.log(result)
+
+  return &lt;div&gt;1&lt;/div&gt;
+}
+</code></pre> 
+<p><img alt="" height="569" src="https://img-blog.csdnimg.cn/202107081440526.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p> 
+<p>参考链接：<a href="https://github.com/Jxck/html2json">https://github.com/Jxck/html2json</a></p> 
+<p></p>
+                ]]></description></item><item><title>create-react-app 生成 report.html 可视化打包分析</title><link>http://www.cnblogs.com/xutongbao/archive/2021/07/07/15264345.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 07 Jul 2021 01:28:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/07/07/15264345.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">yarn add webpack-bundle-analyzer</code></pre> 
+<p>修改webpack.config.js:</p> 
+<pre><code class="language-javascript">const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const isBundleAnalyzer = process.env.GENERATE_BUNDLE_ANALYZER_REPORT === 'true'
+plugins: [
+  // ...
+  isEnvProduction &amp;&amp; isBundleAnalyzer &amp;&amp; new BundleAnalyzerPlugin()
+]</code></pre> 
+<p>通过设置环境变量GENERATE_BUNDLE_ANALYZER_REPORT=true来生成report</p> 
+<p></p> 
+<p><img alt="" height="1080" src="https://img-blog.csdnimg.cn/20210707092750423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p>
+                ]]></description></item><item><title>axios设置请求头实现post请求发送数据的格式（Form Data）</title><link>http://www.cnblogs.com/xutongbao/archive/2021/06/30/15264346.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 30 Jun 2021 01:30:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/06/30/15264346.html</guid><description><![CDATA[
+                    <p>common.js:</p> 
+<p>common函数传递的参数添加&nbsp;contentType:&nbsp;'application/x-www-form-urlencoded'&nbsp;即可改变post请求参数传递的格式</p> 
+<pre><code class="language-javascript">import axios from 'axios'
+import qs from 'qs'
+
+const service = axios.create()
+
+
+export const common = async (config) =&gt; {
+  if (config.contentType === 'application/x-www-form-urlencoded') {
+    config.headers = { 'content-type': 'application/x-www-form-urlencoded' }
+    config.data = qs.stringify(config.data)
+  }
+  let res = await service(config)
+  return res
+}
+</code></pre> 
+<p></p>
+                ]]></description></item><item><title>url查询参数中的汉字如何解码</title><link>http://www.cnblogs.com/xutongbao/archive/2021/06/25/15264347.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Fri, 25 Jun 2021 09:15:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/06/25/15264347.html</guid><description><![CDATA[
+                    <p>decodeURIComponent</p> 
+<p>encodeURIComponent</p> 
+<p>参考链接：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent</a></p>
+                ]]></description></item><item><title>React在body下追加全局组件并实现渲染更新</title><link>http://www.cnblogs.com/xutongbao/archive/2021/06/22/15264348.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Tue, 22 Jun 2021 03:39:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/06/22/15264348.html</guid><description><![CDATA[
+                    <p>&nbsp;使用&nbsp;ReactDOM.createPortal，类似于vue的Teleport</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<pre><code class="language-javascript">import React from 'react'
+import ReactDOM from 'react-dom'
+import { Spin } from 'antd'
+import { connect } from 'react-redux'
+
+function Loading(props) {
+  const { isLoading, isLazyLoading } = props
+  return ReactDOM.createPortal(
+    &lt;div
+      className={'m-loading ' + (isLoading || isLazyLoading ? 'active' : '')}
+    &gt;
+      &lt;Spin className="m-spin" /&gt;
+    &lt;/div&gt;,
+    document.body
+  )
+}
+
+const mapStateToProps = (state) =&gt; {
+  return {
+    isLoading: state.getIn(['light', 'isLoading']),
+  }
+}
+
+const mapDispatchToProps = (dispatch) =&gt; {
+  return {
+    onSetState(key, value) {
+      dispatch({ type: 'SET_LIGHT_STATE', key, value })
+    },
+    onDispatch(action) {
+      dispatch(action)
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Loading)
+</code></pre> 
+<p><img alt="" height="682" src="https://img-blog.csdnimg.cn/20210622113842877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1072"></p> 
+<p>&nbsp;参考链接：<a href="https://zh-hans.reactjs.org/docs/portals.html#gatsby-focus-wrapper">https://zh-hans.reactjs.org/docs/portals.html#gatsby-focus-wrapper</a></p> 
+<p><a href="https://v3.cn.vuejs.org/guide/teleport.html#teleport">https://v3.cn.vuejs.org/guide/teleport.html#teleport</a></p>
+]]>
+</description></item>
+<item><title>js算法题,树状数据倒推</title><link>http://www.cnblogs.com/xutongbao/archive/2021/06/17/15264349.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 17 Jun 2021 10:31:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/06/17/15264349.html</guid>
+<description>
+<![CDATA[
+<pre>
+<code class="language-javascript">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script&gt;
+      // 基础数据
+      const categoryData = [
+        {
+          value: '1',
+          label: '职业教育',
+          children: [
+            {
+              value: '11',
+              label: 'IT/互联网',
+              children: [
+                {
+                  value: '111',
+                  label: '电商运营',
+                },
+                {
+                  value: '112',
+                  label: '产品经理',
+                },
+              ],
+            },
+          ],
+        },
+      ]
+
+      // 目标数据
+      const res = [
+          {
+            id: 0,
+            value: ['1', '11', '112'],
+            label: ['职业教育', 'IT/互联网', '产品经理'],
+          },
+          {
+            id: 1,
+            value: ['1', '11', '111'],
+            label: ['职业教育', 'IT/互联网', '电商运营'],
+          },
+        ]
+
+      // 已知数据
+      const myData = '111,112,111'
+
+      //倒推
+      const categoryAnalse = ({ categoryOptions, cateid3 }) =&gt; {
+        console.log(categoryOptions, cateid3)
+
+        const findWrap = (value, index) =&gt; {
+          const temp = {
+            id: index,
+            value: [],
+            label: [],
+          }
+          let tempClone
+          const find = (arr) =&gt; {
+            for (let i = 0; i &lt; arr.length; i++) {
+              if (arr[i].children) {
+                temp.value.push(arr[i].value)
+                temp.label.push(arr[i].label)
+                find(arr[i].children)
+              } else {
+                if (arr[i].value === value) {
+                  temp.value.push(value)
+                  temp.label.push(arr[i].label)
+                  tempClone = JSON.parse(JSON.stringify(temp))
+                }
+              }
+            }
+            temp.value.pop()
+            temp.label.pop()
+          }
+          find(categoryOptions)
+          return tempClone
+        }
+
+        const cateid3Arr = cateid3.split(',')
+        const result = cateid3Arr.map((item, index) =&gt; {
+          return findWrap(item, index)
+        })
+        console.log(result)
+        return result
+      }
+
+      categoryAnalse({categoryOptions: categoryData, cateid3: myData})
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre> 
+<p>&nbsp;</p> 
+<p><img alt="" height="485" src="https://img-blog.csdnimg.cn/20210617183020641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="695"></p> 
+<p>&nbsp;</p>
+                ]]></description></item><item><title>添加注释 使扁平的代码可以折叠</title><link>http://www.cnblogs.com/xutongbao/archive/2021/06/16/15264350.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Wed, 16 Jun 2021 02:45:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/06/16/15264350.html</guid><description><![CDATA[
+                    <pre><code class="language-javascript">  // #region 商户列表
+  companySearch: (data) =&gt; common({ url: urls.light.companySearch, data, method: 'post' }),
+  companyAdd: (data) =&gt; common({ url: urls.light.companyAdd, data, method: 'post' }),
+  companyDelete: (data) =&gt; common({ url: urls.light.companyDelete, data, method: 'post' }),
+  companyEdit: (data) =&gt; common({ url: urls.light.companyEdit, data, method: 'post' }),
+  companyFastAdd: (data) =&gt; common({ url: urls.light.companyQuickAdd, data, method: 'post' }),
+  companySetOperate: (data) =&gt; common({ url: urls.light.companySetOperate, data, method: 'post' }),
+  relatedBrand: (data) =&gt; common({ url: urls.light.relatedBrand, data, method: 'post' }),
+  companyBaiduCheck: (id) =&gt; common({ url: urls.light.companyBaiduCheck + id, data: {}, method: 'post' }),
+  companyBaiduView: (id) =&gt; common({ url: urls.light.companyBaiduView + id, data: {}, method: 'post' }),
+  companyBaiduResetCheck: (id) =&gt; common({ url: urls.light.companyBaiduResetCheck + id, data: {}, method: 'post' }),
+  companyBaiduPhone: (id) =&gt; common({ url: urls.light.companyBaiduPhone + id, data: {}, method: 'post' }),
+  // #endregion</code></pre> 
+<p>&nbsp;</p> 
+<p><img alt="" height="422" src="https://img-blog.csdnimg.cn/20210616104347556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1dG9uZ2Jhbw==,size_16,color_FFFFFF,t_70" width="1200"></p> 
+<p>&nbsp;</p> 
+<p><img alt="" height="74" src="https://img-blog.csdnimg.cn/20210616104415667.png" width="1170"></p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p>
+                ]]></description></item></channel></rss>
