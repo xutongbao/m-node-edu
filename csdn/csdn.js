@@ -17,24 +17,17 @@ const removeFileDir = (path) => {
 }
 //搜索
 const dataSearch = (req, res) => {
-  //let htmlStr = fs.readFileSync(__dirname + '/data.xml', 'utf8')
-  let htmlStr = fs.readFileSync(__dirname + '/dataMiddle.xml', 'utf8')
+  let htmlStr = fs.readFileSync(__dirname + '/data.xml', 'utf8')
+  //let htmlStr = fs.readFileSync(__dirname + '/dataMiddle.xml', 'utf8')
   //let htmlStr = fs.readFileSync(__dirname + '/dataAll.xml', 'utf8')
 
-  htmlStr = htmlStr
-    // .replace(/&lt;/g, '<')
-    // .replace(/&gt;/g, '>')
-    // .replace(/&quot;/g, '"')
-    //.replace(/\n/g, '')
   let itemArr = []
   htmlStr.replace(/<item(([\s\S])*?)<\/item>/g, (word) => {
     itemArr.push(word)
     return word
   })
 
-  const outputDir = `D:/source/m-apps/demo/vuepress/m-app2/test/blogs/md`
-  console.log(outputDir)
-  //removeFileDir(`${__dirname}/md`)
+  const outputDir = `D:/source/blog/src/md`
   removeFileDir(outputDir)
   itemArr.forEach((item, index) => {
     let title = ''
@@ -47,8 +40,11 @@ const dataSearch = (req, res) => {
       content = word.slice(9, word.length - 3)
       return word
     })
-    //content = `# ${title}\n${html2md(content)}`
-    content = `# ${title}\n${NodeHtmlMarkdown.translate(content)}`
+    content = 
+`---
+title: '${title}'
+---   
+${html2md(content)}`
     fs.writeFile(
       `${outputDir}/${index}.md`,
       content,

@@ -207,7 +207,7 @@ import "~slick-carousel/slick/slick-theme.css";
 <p></p>
                 ]]></description></item><item><title>antd tabe表头出现遮挡</title><link>http://www.cnblogs.com/xutongbao/archive/2021/08/28/15264307.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Sat, 28 Aug 2021 02:59:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2021/08/28/15264307.html</guid><description><![CDATA[
                     <p>antd table 表头文本禁止换行（white-space:&nbsp;nowrap;）</p> 
-<p>设置表格高度，出现纵向滚动条（&nbsp;scroll={<!-- -->{&nbsp; y: 200 }}）</p> 
+<p>设置表格高度，出现纵向滚动条</p> 
 <p>这时是表头和表格主体部分被渲染成两个table，表头文本出现遮挡</p> 
 <p></p> 
 <p>&nbsp;<img alt="" height="318" src="https://img-blog.csdnimg.cn/20210828105401104.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="886"></p> 
@@ -5693,7 +5693,7 @@ new Vue({
   myOption: 'hello!'
 })
 // =&gt; "hello!"</code></pre> 
-<h3>三、&lt;router-link&gt;标签的exact属性</h3> 
+<h3>三、router-link标签的exact属性</h3> 
 <p>“是否激活”默认类名的依据是<strong>包含匹配</strong>。默认为false，设置为true后，包含匹配，只有包含配置的地址，就会添加高亮样式类名。</p> 
 <h3>四、Vue.use(plugin)</h3> 
 <p>如果插件是一个对象，必须提供 <code>install</code> 方法。</p> 
@@ -46697,79 +46697,7 @@ $('#btn').on('click', function() {
 &lt;/html&gt;</code></pre><br><img src="https://img-blog.csdn.net/20171225115704050" alt=""><br><p><br></p>
 <p><br></p>
 <p><br></p>
-            ]]></description></item><item><title>director.js 路由</title><link>http://www.cnblogs.com/xutongbao/archive/2017/12/25/9924925.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Mon, 25 Dec 2017 01:17:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2017/12/25/9924925.html</guid><description><![CDATA[
-                <p>&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&nbsp; &lt;head&gt;<br>&nbsp;&nbsp;&nbsp; &lt;meta charset="utf-8"&gt;<br>&nbsp;&nbsp;&nbsp; &lt;title&gt;director.js&lt;/title&gt;<br>&nbsp;&nbsp;&nbsp; &lt;style type="text/css"&gt;<br>&nbsp;&nbsp;&nbsp; .test {width: 100px;height: 100px;}<br>&nbsp;&nbsp;&nbsp; span {cursor: pointer;}<br>&nbsp;&nbsp;&nbsp; &lt;/style&gt;<br>&nbsp; &lt;/head&gt;<br><br>&nbsp; &lt;body&gt;<br>&nbsp;&nbsp;&nbsp; &lt;ul&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="#/author"&gt;#/author&lt;/a&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="#/books"&gt;#/books&lt;/a&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;span href="#/books/view/1_1"&gt;#/books/view/1&lt;/span&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;span href="#/books/view/2_2"&gt;#/books/view/2&lt;/span&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;span href="#/books/view/3_3"&gt;#/books/view/3&lt;/span&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="https://www.baidu.com/?tn=47018152_dg"&gt;百度&lt;/a&gt;&lt;/li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="test"&gt;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp; &lt;/ul&gt;<br><br>&nbsp;&nbsp;&nbsp; &lt;script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp; &nbsp;&lt;script src="https://cdn.bootcss.com/Director/1.2.8/director.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&nbsp; &lt;script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var author = function () { <br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//console.log("author"); <br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$('.test').css({background:'green'});<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;};<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var books = function () { <br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//console.log("books"); <br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$('.test').css({background:'pink'});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var viewBook = function (bookId) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //console.log("viewBook: bookId is populated: " + bookId);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var id = bookId.split('_')[0];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var tid = bookId.split('_')[1];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (id == 1) {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$('.test').css({background:'gold'});<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;console.log(tid);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if&nbsp; (id == 2) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$('.test').css({background:'#dddddd'});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;console.log(tid);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if (id == 3) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$('.test').css({background:'blue'});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;console.log(tid);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $('span').on('click', function() {<br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var temp = location.href.split('#')[0];<br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;location.href = temp + $(this).attr('href'); <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var routes = {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '/author': author,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '/books': [books, function() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.log("An inline route handler.");<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '/books/view/:bookId': viewBook<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var router = Router(routes);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; router.init();<br>&nbsp;&nbsp;&nbsp; &lt;/script&gt;<br>&nbsp; &lt;/body&gt;<br>&lt;/html&gt;<br></p><p><br></p><p>通过js控制跳转：<br></p><pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;title&gt;A Gentle Introduction&lt;/title&gt;
- 
-    &lt;script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"&gt;&lt;/script&gt;
-    &lt;script src="https://cdn.bootcss.com/Director/1.2.8/director.min.js"&gt;&lt;/script&gt; 
- 
-    &lt;script&gt;
-    $('document').ready(function() {
-      //
-      // create some functions to be executed when
-      // the correct route is issued by the user.
-      //
-      var showAuthorInfo = function () { console.log("showAuthorInfo"); };
-      var listBooks = function () { console.log("listBooks"); };
- 
-      var allroutes = function() {
-        var route = window.location.hash.slice(2);
-        var sections = $('section');
-        var section;
- 
-        section = sections.filter('[data-route=' + route + ']');
- 
-        if (section.length) {
-          sections.hide(250);
-          section.show(250);
-        }
-      };
- 
-      //
-      // define the routing table.
-      //
-      var routes = {
-        '/author': showAuthorInfo,
-        '/books': listBooks
-      };
- 
-      //
-      // instantiate the router.
-      //
-      var router = Router(routes);
- 
-      //
-      // a global configuration setting.
-      //
-      router.configure({
-        on: allroutes
-      });
- 
-      router.init();
-
-      $('#m-author').on('click', function () {
-        window.location = '#/author';  
-      });
-      $('#m-books').on('click', function () {
-        window.location = '#/books';  
-      });
-    });
-    &lt;/script&gt; 
-  &lt;/head&gt;
- 
-  &lt;body&gt;
-    &lt;section data-route="author"&gt;Author Name&lt;/section&gt;
-    &lt;section data-route="books"&gt;Book1, Book2, Book3&lt;/section&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href="javascript:;" id="m-author"&gt;author&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="javascript:;" id="m-books"&gt;books&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre><br>            ]]></description></item><item><title>移动端网页滑动到底部触发事件</title><link>http://www.cnblogs.com/xutongbao/archive/2017/12/07/9924926.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 07 Dec 2017 08:40:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2017/12/07/9924926.html</guid><description><![CDATA[
+            ]]></description></item><item><title>移动端网页滑动到底部触发事件</title><link>http://www.cnblogs.com/xutongbao/archive/2017/12/07/9924926.html</link><dc:creator>徐同保</dc:creator><author>徐同保</author><pubDate>Thu, 07 Dec 2017 08:40:00 GMT</pubDate><guid>http://www.cnblogs.com/xutongbao/archive/2017/12/07/9924926.html</guid><description><![CDATA[
                 
 <p></p><pre><code class="language-html">&lt;!DOCTYPE html&gt;    
 &lt;html lang="en"&gt;    
