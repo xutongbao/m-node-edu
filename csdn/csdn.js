@@ -1,16 +1,17 @@
 const fs = require('fs')
 
-const removeFileDir = (path)=>{
-  var files = fs.readdirSync(path);
-      for (let item of files) {
-          var stats = fs.statSync(`${path}/${item}`);
-          if (stats.isDirectory()) {
-              removeFileDir(`${path}/${item}`)
-          } else {
-              fs.unlinkSync(`${path}/${item}`)
-          }
-      }
-      fs.rmdirSync(path)
+//删除文件夹下的所有文件和子文件夹，不删除该文件夹
+const removeFileDir = (path) => {
+  let files = fs.readdirSync(path)
+  for (let item of files) {
+    let stats = fs.statSync(`${path}/${item}`)
+    if (stats.isDirectory()) {
+      removeFileDir(`${path}/${item}`)
+    } else {
+      fs.unlinkSync(`${path}/${item}`)
+    }
+  }
+  //fs.rmdirSync(path)
 }
 //搜索
 const dataSearch = (req, res) => {
@@ -25,19 +26,24 @@ const dataSearch = (req, res) => {
     itemArr.push(word)
     return word
   })
-  itemArr.forEach((item, index) => {
+  removeFileDir(`${__dirname}/md`)
+  itemArr.forEach((item) => {
     let title = ''
     item.replace(/<title(([\s\S])*?)<\/title>/g, (word) => {
       title = word.slice(7, word.length - 8)
       console.log(title)
-      itemArr.push(word)
       return word
     })
-    //fs.rmdirSync(`${__dirname}/md`);
-    removeFileDir(`${__dirname}/md`)
+    let content = ''
+    item.replace(/<!\[CDATA\[(([\s\S])*?)]]>/g, (word) => {
+      content = word.slice(9, word.length - 3)
+      console.log(content)
+      return word
+    })
     fs.writeFile(
-      __dirname + `/md/${index}${title}.md`,
-      `# ${title}`,
+      __dirname + `/md/${title}.md`,
+      `# ${title}
+      ${content}`,
       function (err) {
         if (err) {
           return console.log(err)
