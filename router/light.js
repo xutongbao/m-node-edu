@@ -92,6 +92,10 @@ const {
   getItem,
 } = require('../light/columns/columns')
 
+const {
+  csdnSearch
+} = require('../csdn/csdn')
+
 const light = (app) => {
   //登录
   app.post('/api/login', login)
@@ -194,6 +198,9 @@ const light = (app) => {
   //表格列显示隐藏，调整顺序的接口
   app.post('/api/columns/setItem', setItem)
   app.post('/api/columns/getItem', getItem)
+
+  //csdn
+  app.post('/api/csdn/search', csdnSearch)
 }
 
 module.exports = {

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+<channel>
+<title>博客园-徐同保</title>
+<link>https://www.cnblogs.com/xutongbao/</link>
+<description>web前端行业的小学生</description><language>zh-cn</language>
+<lastBuildDate>Mon, 13 Sep 2021 10:50:44 GMT</lastBuildDate>
+<pubDate>Mon, 13 Sep 2021 10:50:44 GMT</pubDate><ttl>60</ttl>
+
+<item><title>pagic Deno + React 驱动的静态网站生成器 入门</title>
+  <link>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264299.html</link>
+  <dc:creator>徐同保</dc:creator><author>徐同保</author>
+  <pubDate>Fri, 10 Sep 2021 03:03:00 GMT</pubDate>
+  <guid>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264299.html</guid>
+  <description>
+  <![CDATA[
+                      <p>安装：</p> 
+  <pre><code class="language-bash"># 安装 pagic
+  deno install --unstable --allow-read --allow-write --allow-net --allow-run --name=pagic https://deno.land/x/pagic/mod.ts</code></pre> 
+  <p><img alt="" height="664" src="https://img-blog.csdnimg.cn/20210910105934798.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="677"></p> 
+  <p><img alt="" height="113" src="https://img-blog.csdnimg.cn/20210910110003759.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_13,color_FFFFFF,t_70,g_se,x_16" width="344"></p> 
+  <p>pagic.config.ts:</p> 
+  <pre><code class="language-javascript">export default {}</code></pre> 
+  <p>README.md:</p> 
+  <pre><code class="language-bash"># Hello world
+  </code></pre> 
+  <p>启动：</p> 
+  <pre><code class="language-bash"># 运行 pagic
+  pagic build --watch --serve</code></pre> 
+  <p>效果：</p> 
+  <p><img alt="" height="447" src="https://img-blog.csdnimg.cn/20210910110203443.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_20,color_FFFFFF,t_70,g_se,x_16" width="1200"></p> 
+  <p></p> 
+  <p></p> 
+  <p></p> 
+  <p></p>
+  ]]>
+  </description>
+</item>
+
+
+<item>
+<title>antd Form.Item label添加解释信息</title>
+<link>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264300.html</link>
+<dc:creator>徐同保</dc:creator>
+<author>徐同保</author>
+<pubDate>Fri, 10 Sep 2021 02:29:00 GMT</pubDate>
+<guid>http://www.cnblogs.com/xutongbao/archive/2021/09/10/15264300.html</guid>
+<description>
+<![CDATA[
+                    <p><img alt="" height="164" src="https://img-blog.csdnimg.cn/20210910102855685.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5b6Q5ZCM5L-d,size_17,color_FFFFFF,t_70,g_se,x_16" width="435"></p> 
+<p></p> 
+<pre><code class="language-javascript">      &lt;Col span={span} className={expandClassname}&gt;
+        &lt;Form.Item
+          label={
+            &lt;span&gt;
+              &lt;span&gt;是否添加&lt;/span&gt;
+              &lt;Tooltip
+                title='添加'
+                overlayClassName="m-tooltip"
+              &gt;
+                &lt;span className="m-help-wrap"&gt;
+                  &lt;Icon name="help"&gt;&lt;/Icon&gt;
+                &lt;/span&gt;
+              &lt;/Tooltip&gt;
+            &lt;/span&gt;
+          }
+        &gt;
+          &lt;Form.Item name="isAdd" noStyle&gt;
+            &lt;Select
+              placeholder="请选择"
+              allowClear
+              getPopupContainer={() =&gt;
+                document.getElementById('m-content-wrap')
+              }
+            &gt;
+              &lt;Option value={1}&gt;是&lt;/Option&gt;
+              &lt;Option value={0}&gt;否&lt;/Option&gt;
+            &lt;/Select&gt;
+          &lt;/Form.Item&gt;
+        &lt;/Form.Item&gt;
+      &lt;/Col&gt;</code></pre> 
+<p></p>
+                ]]></description>
+                </item>
+                </channel>
+</rss>
