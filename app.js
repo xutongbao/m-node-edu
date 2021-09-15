@@ -20,10 +20,10 @@ app.use(
 
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
-//app.use(express.static('D:/zlhx-ui'))
+app.use(express.static('D:/zlhx-ui'))
 //app.use(express.static('D:/tan-ui'))
 //app.use(express.static('../zlhx-ui'))
-app.use(express.static('../blog/docs'))
+//app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
 app.use(express.static('upload'))

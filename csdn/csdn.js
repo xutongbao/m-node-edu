@@ -1,6 +1,7 @@
 const fs = require('fs')
 const html2md = require('html-to-md')
 const { NodeHtmlMarkdown } = require('node-html-markdown')
+const mommet = require('moment')
 //搜索
 const dataSearch = (req, res) => {
   const { dataType = 0 } = req.body
@@ -23,6 +24,7 @@ const dataSearch = (req, res) => {
   const outputDir = `D:/source/blog/src/md`
   removeFileDir(outputDir)
 
+  let mdFileNameArr = []
   itemArr.forEach((item, index) => {
     //提取标题
     let title = ''
@@ -30,6 +32,17 @@ const dataSearch = (req, res) => {
       title = word.slice(7, word.length - 8)
       return word
     })
+
+    //提取标题
+    let pubDate = ''
+    item.replace(/<pubDate(([\s\S])*?)<\/pubDate>/g, (word) => {
+      pubDate = word.slice(9, word.length - 10)
+      return word
+    })
+    
+    const pageDate = mommet(pubDate).format('YYYY-MM-DD HH:mm:ss')
+    const mdFileName = mommet(pubDate).format('YYYY-MM-DD_HH_mm_ss')
+    
     //提取博客内容
     let content = ''
     item.replace(/<!\[CDATA\[(([\s\S])*?)]]>/g, (word) => {
@@ -39,11 +52,13 @@ const dataSearch = (req, res) => {
     //把标题和内容组织在一起，形成md文件
     const mdFile = `---
 title: '${title}'
+date: ${pageDate}
 ---   
 ${html2md(content)}`
 
     //创建md文件
-    fs.writeFile(`${outputDir}/${index}.md`, mdFile, function (err) {
+    mdFileNameArr.push(mdFileName)
+    fs.writeFile(`${outputDir}/${mdFileName}.md`, mdFile, function (err) {
       if (err) {
         return console.log('错误', err)
       }
@@ -54,6 +69,7 @@ ${html2md(content)}`
     state: 1,
     data: {
       count: itemArr.length,
+      mdFileNameArr,
     },
     message: 'md文件创建成功',
   })
