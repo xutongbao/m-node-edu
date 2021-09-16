@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "build": "node app",
-    "serve": "set PORT=81 && nodemon --inspect app"
+    "server": "set PORT=81 && nodemon --inspect app"
   },
   "author": "",
   "license": "ISC",
@@ -29,4 +29,3 @@
     "uuid": "^8.3.2"
   }
 }
-
