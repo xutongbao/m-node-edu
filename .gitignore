@@ -21,4 +21,4 @@ yarn-error.log*
 *.sln
 *.sw?
 /my.db
-/my1.db
+/my.db
