@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "serve": "node app",
-    "build": "node app"
+    "build": "node app",
+    "serve": "set PORT=81 && nodemon --inspect app"
   },
   "author": "",
   "license": "ISC",
