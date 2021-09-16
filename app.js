@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-console.log(3);
+console.log(4);
 
 app.use(compression({ filter: shouldCompress }));
 //app.use(history())
