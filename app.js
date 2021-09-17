@@ -9,16 +9,7 @@ const { sale } = require('./router/sale');
 const compression = require('compression');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-//通过代理解决跨域
-app.use(
-  '/zlhx',
-  createProxyMiddleware({
-    target: 'http://test-zhiliao.gongzuoshouji.cn',
-    changeOrigin: true
-  })
-);
-
-console.log(5);
+console.log(666);
 
 app.use(compression({ filter: shouldCompress }));
 //app.use(history())
