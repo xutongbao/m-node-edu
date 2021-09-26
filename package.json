@@ -8,7 +8,7 @@
     "start": "node app.js",
     "build": "node app",
     "server": "set PORT=81 && nodemon --inspect app",
-    "dockerStart": "PORT=81 node app"
+    "dockerStart": "PORT=81 nodemon --inspect app"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "multer": "^1.4.2",
     "node-html-markdown": "^1.1.1",
     "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.13",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
   }
