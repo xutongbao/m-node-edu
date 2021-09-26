@@ -13,7 +13,7 @@ console.log(666);
 
 app.use(compression({ filter: shouldCompress }));
 //app.use(history())
-//app.use(express.static('D:/zlhx-ui'))
+app.use(express.static('D:/zlhx-ui'))
 //app.use(express.static('D:/tan-ui'))
 //app.use(express.static('../zlhx-ui'))
 //app.use(express.static('../blog/docs'))
