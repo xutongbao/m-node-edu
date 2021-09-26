@@ -14,10 +14,5 @@ pipeline {
                 sh 'yarn'
             }
         }
-        stage('server') {
-            steps {
-                sh 'yarn dockerStart'
-            }
-        }
     }
 }
