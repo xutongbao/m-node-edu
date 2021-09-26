@@ -8,7 +8,7 @@
     "start": "node app.js",
     "build": "node app",
     "server": "set PORT=81 && nodemon --inspect app",
-    "dockerStart": "PORT=81 nodemon --inspect app"
+    "dockerStart": "PORT=81 node app"
   },
   "author": "",
   "license": "ISC",
