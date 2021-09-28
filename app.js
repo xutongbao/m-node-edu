@@ -13,14 +13,15 @@ console.log(666);
 
 app.use(compression({ filter: shouldCompress }));
 //app.use(history())
-app.use(express.static('D:/zlhx-ui'))
+//app.use(express.static('D:/zlhx-ui'))
 //app.use(express.static('D:/tan-ui'))
 //app.use(express.static('../zlhx-ui'))
 //app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
-//app.use(express.static("public"));
-app.use(express.static('upload'));
+//app.use(express.static("public"))
+//app.use(express.static('upload'))
+app.use(express.static('D:/temp'))
 app.use(cors());
 
 // parse application/x-www-form-urlencoded
