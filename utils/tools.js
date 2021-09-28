@@ -198,6 +198,35 @@ const sendEmail = async (dataObj) => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
+//jenkins构建完成邮件通知
+const jenkinsSendEmail = async (dataObj) => {
+  const { title, path } = dataObj
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '<13642061747@sina.cn>', // sender address
+    to: '1183391880@qq.com', //'1183391880@qq.com', // list of receivers
+    subject: title, // Subject line
+    html: `
+    <div>
+      <div>
+        <span>路径：</span>
+        <a href="${path}">${path}</a>
+      </div> 
+      <div>
+        <span>发生时间：</span>
+        <span>${Date()}</span>
+      </div>
+    </div>`// html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -206,4 +235,6 @@ module.exports = {
   companyInitValue,
   //发送邮件
   sendEmail,
+  //jenkins构建完成邮件通知
+  jenkinsSendEmail,
 }
