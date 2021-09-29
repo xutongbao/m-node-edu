@@ -88,6 +88,14 @@ const {
 } = require('../light/insight/insight')
 
 const {
+  jenkinsSearch,
+  jenkinsAdd,
+  jenkinsDelete,
+  jenkinsEdit,
+  jenkinsUp,
+} = require('../light/jenkins/jenkins')
+
+const {
   setItem,
   getItem,
 } = require('../light/columns/columns')
@@ -201,6 +209,13 @@ const light = (app) => {
 
   //csdn
   app.post('/api/csdn/search', csdnSearch)
+
+  //部署页面的接口
+  app.post('/api/jenkins/search', jenkinsSearch)
+  app.post('/api/jenkins/add', jenkinsAdd)
+  app.post('/api/jenkins/delete', jenkinsDelete)
+  app.post('/api/jenkins/edit', jenkinsEdit)
+  app.post('/api/jenkins/up', jenkinsUp)  
 }
 
 module.exports = {

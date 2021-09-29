@@ -1,42 +1,42 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const history = require('connect-history-api-fallback');
-const app = express();
-const { light } = require('./router/light');
-const { air } = require('./router/air');
-const { sale } = require('./router/sale');
-const compression = require('compression');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const history = require('connect-history-api-fallback')
+const app = express()
+const { light } = require('./router/light')
+const { air } = require('./router/air')
+const { sale } = require('./router/sale')
+const compression = require('compression')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
-console.log(666);
+console.log(666)
 
-app.use(compression({ filter: shouldCompress }));
+app.use(compression({ filter: shouldCompress }))
 //app.use(history())
 //app.use(express.static('D:/zlhx-ui'))
 //app.use(express.static('D:/tan-ui'))
-app.use(express.static('../zlhx-ui'));
+app.use(express.static('../zlhx-ui'))
 //app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
-app.use(express.static('public', { index: 'jenkins.html' }));
+app.use(express.static('public'))
 //app.use(express.static('upload'))
-app.use(express.static('D:/temp'));
-app.use(cors());
+app.use(express.static('/temp')) //, { index: '/air/origin/master/index.html'}
+app.use(cors())
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 function shouldCompress(req, res) {
   if (req.headers['x-no-compression']) {
     // don't compress responses with this request header
-    return false;
+    return false
   }
 
   // fallback to standard filter function
-  return compression.filter(req, res);
+  return compression.filter(req, res)
 }
 
 // app.use((res, req, next) => {
@@ -45,16 +45,20 @@ function shouldCompress(req, res) {
 //   }, 4000)
 // })
 
+app.get('/', function(req, res) {
+  res.redirect('/air/origin/master/#/light/index/content?id=0')
+})
+
 //知了好学的接口
-light(app);
+light(app)
 
 //销售系统
-sale(app);
+sale(app)
 
 //无代码平台的接口
-air(app);
+air(app)
 
 //启动命令：set PORT=3000 && node app
 app.listen(process.env.PORT, () => {
-  console.log(process.env.PORT);
-});
+  console.log(process.env.PORT)
+})
