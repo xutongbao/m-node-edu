@@ -68,7 +68,7 @@ let dataArr = [
     gitRepositorieName: 'm-node-edu',
     branch: 'origin/master',
     url: 'http://39.97.238.175:81',
-    remarks: '自动',
+    remarks: '自动，接口',
     addtime: 1632981815591
   }
 ]
