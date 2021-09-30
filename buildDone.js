@@ -4,7 +4,7 @@ const baseURL = `http://${process.env.IP}:${process.env.PORT}`
 console.log(baseURL)
 
 //项目名称
-const name = '无代码平台'
+const name = 'node接口'
 
 // 发邮件
 const email = () => {
