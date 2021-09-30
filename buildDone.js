@@ -50,6 +50,8 @@ const handleAddRecord = () => {
       console.error(error)
     })
 }
+setTimeout(() => {
+  email()
+  handleAddRecord()
+}, 3000)
 
-email()
-handleAddRecord()
