@@ -61,6 +61,15 @@ let dataArr = [
     url: 'http://39.97.238.175:81/air/origin/master',
     remarks: '自动',
     addtime: 1632981815592
+  },
+  {
+    id: 1632981815591,
+    name: 'node接口',
+    gitRepositorieName: 'm-node-edu',
+    branch: 'origin/master',
+    url: 'http://39.97.238.175:81',
+    remarks: '自动',
+    addtime: 1632981815591
   }
 ]
 
