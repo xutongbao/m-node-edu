@@ -1,48 +1,75 @@
-const Mock = require('mockjs')
-
-//模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
-const mockOtherValue = () => {
-  return Mock.mock({
-    releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5), 
-    isUp: () => Mock.Random.integer(0, 1),
-  })
-}
-
-//这些初始值在mock的批量数据中是重复的
-const addInitValues = {
-  addtime: Date.now(),
-  sale_name: '张三',
-}
-
-const initValue = () => {
-  let arr = []
-  for (let i = 0; i < 100; i++) {
-    //这些值在mock的批量数据中是随机的
-    const temp = Mock.mock({
-      name: '@cname',
-    })
-    arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
-  }
-
-  return arr
-}
-
 let dataArr = [
   {
-    id: 1,
+    id: 1632983530971,
+    name: '知了好客',
+    gitRepositorieName: 'edu',
+    branch: 'origin/feature/newName',
+    url: 'http://39.97.238.175:81/edu/origin/feature/newName',
+    remarks: '自动',
+    addtime: 1632983530971
+  },
+  {
+    id: 1632983182375,
+    name: '知了好客',
+    gitRepositorieName: 'edu',
+    branch: 'origin/release/ui20210720',
+    url: 'http://39.97.238.175:81/edu/origin/release/ui20210720',
+    remarks: '自动',
+    addtime: 1632983182376
+  },
+  {
+    id: 1632982857927,
+    name: '知了好客',
+    gitRepositorieName: 'edu',
+    branch: 'origin/feature/login',
+    url: 'http://39.97.238.175:81/edu/origin/feature/login',
+    remarks: '自动',
+    addtime: 1632982857927
+  },
+  {
+    id: 1632982651006,
+    name: '探马',
+    gitRepositorieName: 'tan',
+    branch: 'origin/feature/login',
+    url: 'http://39.97.238.175:81/tan/origin/feature/login',
+    remarks: '自动',
+    addtime: 1632982651006
+  },
+  {
+    id: 1632982424994,
+    name: '探马',
+    gitRepositorieName: 'tan',
+    branch: 'origin/master',
+    url: 'http://39.97.238.175:81/tan/origin/master',
+    remarks: '自动',
+    addtime: 1632982424994
+  },
+  {
+    id: 1632981932852,
+    name: '无代码平台',
+    gitRepositorieName: 'air',
+    branch: 'origin/feature/home',
+    url: 'http://39.97.238.175:81/air/origin/feature/home',
+    remarks: '自动',
+    addtime: 1632981932852
+  },
+  {
+    id: 1632981815592,
     name: '无代码平台',
     gitRepositorieName: 'air',
     branch: 'origin/master',
-    url: '/air/origin/master/#/light/index/content?id=0',
-    remarks: '默认'
+    url: 'http://39.97.238.175:81/air/origin/master',
+    remarks: '自动',
+    addtime: 1632981815592
   }
 ]
 
 //搜索
 const dataSearch = (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
-  let list = [...dataArr]
+  let list = dataArr.sort((a, b) => {
+    return b.addtime - a.addtime
+  })
 
   const searchParams = req.body || {}
   delete searchParams.pageNum
@@ -74,9 +101,9 @@ const dataSearch = (req, res) => {
       list: list.slice(start, end),
       totalCount: list.length,
       pageNum: pageNum - 0,
-      pageSize: pageSize - 0,
+      pageSize: pageSize - 0
     },
-    message: '搜索成功',
+    message: '搜索成功'
   })
 }
 
@@ -84,12 +111,18 @@ const dataSearch = (req, res) => {
 const dataAdd = (req, res) => {
   const { dataItem } = req.body
   dataItem.id = Date.now()
-  let temp = {...addInitValues, ...mockOtherValue(), ...dataItem, addtime: Date.now() }
-  dataArr.unshift(temp)
+  let temp = { ...dataItem, addtime: Date.now() }
+  const index = dataArr.findIndex((item) => item.url === temp.url)
+  if (index >= 0) {
+    dataArr.splice(index, 1, temp)
+  } else {
+    dataArr.unshift(temp)
+  }
+
   res.send({
     state: 1,
     data: temp,
-    message: '添加成功',
+    message: '添加成功'
   })
 }
 
@@ -101,7 +134,7 @@ const dataDelete = (req, res) => {
   res.send({
     state: 1,
     data: ids,
-    message: '删除成功',
+    message: '删除成功'
   })
 }
 
@@ -114,13 +147,13 @@ const dataEdit = (req, res) => {
     res.send({
       state: 1,
       data: dataArr[index],
-      message: '编辑成功',
+      message: '编辑成功'
     })
   } else {
     res.send({
       state: 0,
       data: dataItem,
-      message: '编辑失败，id不存在',
+      message: '编辑失败，id不存在'
     })
   }
 }
@@ -131,18 +164,18 @@ const dataUp = (req, res) => {
 
   let index = dataArr.findIndex((item) => item.id == id)
   if (index >= 0) {
-    dataArr[index] = { ...dataArr[index], isUp: isUp , edittime: Date.now() }
+    dataArr[index] = { ...dataArr[index], isUp: isUp, edittime: Date.now() }
     res.send({
       state: 1,
       data: {},
-      message: '操作成功',
+      message: '操作成功'
     })
   } else {
     res.send({
       state: 0,
       data: {},
-      message: 'id不存在',
-    })    
+      message: 'id不存在'
+    })
   }
 }
 
@@ -151,5 +184,5 @@ module.exports = {
   jenkinsAdd: dataAdd,
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
-  jenkinsUp: dataUp,
+  jenkinsUp: dataUp
 }

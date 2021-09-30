@@ -15,11 +15,11 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(history())
 //app.use(express.static('D:/zlhx-ui'))
 //app.use(express.static('D:/tan-ui'))
-app.use(express.static('../zlhx-ui'))
+//app.use(express.static('../zlhx-ui'))
 //app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
-app.use(express.static('public'))
+//app.use(express.static('public'))
 //app.use(express.static('upload'))
 app.use(express.static('/temp')) //, { index: '/air/origin/master/index.html'}
 app.use(cors())
@@ -46,7 +46,7 @@ function shouldCompress(req, res) {
 // })
 
 app.get('/', function(req, res) {
-  res.redirect('/air/origin/master/#/light/index/content?id=0')
+  res.redirect('/air/origin/master/#/air/light/extra/home')
 })
 
 //知了好学的接口
