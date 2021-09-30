@@ -15,7 +15,7 @@ const email = () => {
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
     url: `${baseURL}`,
-    remarks: '自动'
+    remarks: '自动，接口地址'
   }
   axios
     .post(`${baseURL}/api/log/email`, {
@@ -37,7 +37,7 @@ const handleAddRecord = () => {
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
     url: `${baseURL}`,
-    remarks: '自动'
+    remarks: '自动，接口地址'
   }
   axios
     .post(`${baseURL}/api/jenkins/add`, {
