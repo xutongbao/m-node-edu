@@ -5,7 +5,7 @@ let dataArr = [
     gitRepositorieName: 'edu',
     branch: 'origin/feature/newName',
     url: 'http://39.97.238.175:81/edu/origin/feature/newName',
-    remarks: '自动',
+    remarks: '知了好客改为知了好学',
     addtime: 1632983530971
   },
   {
@@ -14,7 +14,7 @@ let dataArr = [
     gitRepositorieName: 'edu',
     branch: 'origin/release/ui20210720',
     url: 'http://39.97.238.175:81/edu/origin/release/ui20210720',
-    remarks: '自动',
+    remarks: '和线上代码同步',
     addtime: 1632983182376
   },
   {
@@ -23,7 +23,7 @@ let dataArr = [
     gitRepositorieName: 'edu',
     branch: 'origin/feature/login',
     url: 'http://39.97.238.175:81/edu/origin/feature/login',
-    remarks: '自动',
+    remarks: '开发中',
     addtime: 1632982857927
   },
   {
