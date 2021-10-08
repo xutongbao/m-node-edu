@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 
 //调试用，返回全部数据
 const dataSearchAll = (req, res) => {
+  console.log('air dataSearchAll')
   res.send({
     code: 200,
     data: dataArr,
@@ -20,6 +21,7 @@ const dataSearch = (req, res) => {
       title: item.title,
     }
   })
+  console.log('air dataSearch')
   res.send({
     code: 200,
     data,
