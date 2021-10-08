@@ -22,4 +22,4 @@ yarn-error.log*
 *.sw?
 /my.db
 /my_81.db
-/log/*.log
+/log
