@@ -59,6 +59,7 @@ sale(app)
 air(app)
 
 //启动命令：set PORT=3000 && node app
-app.listen(process.env.PORT, () => {
-  console.log(process.env.PORT)
+const PORT = process.env.PORT || 81
+app.listen(PORT, () => {
+  console.log(PORT)
 })
