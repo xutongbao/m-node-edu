@@ -16,7 +16,7 @@ const dataSearch = (req, res) => {
   const fields = application.table.fields.sort(
     (a, b) => a.orderIndex - b.orderIndex
   )
-
+  console.log('air')
   res.send({
     code: 200,
     data: {
