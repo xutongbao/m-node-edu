@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "server": "set PORT=81 && nodemon --inspect app",
-    "dockerStart": "PORT=81 node app"
+    "dockerStart": "PORT=81 node app",
+    "dev": "pm2 start ecosystem.config.js --env development && pm2 logs",
+    "serve": "pm2 start ecosystem.config.js --env production  && pm2 logs"
   },
   "author": "",
   "license": "ISC",

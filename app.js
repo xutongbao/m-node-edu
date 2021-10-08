@@ -9,8 +9,6 @@ const { sale } = require('./router/sale')
 const compression = require('compression')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
-console.log(666)
-
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
 //app.use(express.static('D:/zlhx-ui'))

@@ -6,8 +6,13 @@ module.exports = {
       watch: true,
       ignore_watch: ['node_modules'],
       node_args: ['--inspect'],
-      env: {
-        PORT: 81
+      env_production: {
+        PORT: 81,
+        NODE_ENV: 'production'
+      },
+      env_development: {
+        PORT: 81,
+        NODE_ENV: 'development'
       }
     }
   ]

@@ -1,8 +1,9 @@
 const sqlite3 = require('sqlite3').verbose()
 const PORT = process.env.PORT || 81
-console.log('db', PORT)
+console.log('PORT:', PORT)
+console.log('NODE_ENV:', process.env.NODE_ENV)
 let db = {}
-if (PORT === 81) {
+if (process.env.NODE_ENV === 'development') {
   db = new sqlite3.Database('./my_81.db')
 } else {
   db = new sqlite3.Database('./my_online.db')
