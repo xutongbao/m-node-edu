@@ -28,6 +28,8 @@ const dataSearch = (req, res) => {
     const start = (page - 1) * pageSize
     const end = start + pageSize * 1
 
+    console.log('hello')
+
     res.send({
       code: 200,
       data: {
@@ -37,7 +39,7 @@ const dataSearch = (req, res) => {
         pageSize: pageSize - 0,
         fields: table.fields,
       },
-      message: '搜索成功',
+      message: '搜索成功1',
     })
   }
 }

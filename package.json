@@ -9,7 +9,7 @@
     "server": "set PORT=81 && nodemon --inspect app",
     "dockerStart": "PORT=81 node app",
     "dev": "pm2 start ecosystem.config.js --env development && pm2 logs",
-    "serve": "pm2 start ecosystem.config.js --env production  && pm2 logs"
+    "serve": "pm2 start ecosystem.config.js --env production && pm2 logs"
   },
   "author": "",
   "license": "ISC",
@@ -20,14 +20,19 @@
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "file-stream-rotator": "^0.5.7",
     "html-to-md": "^0.5.0",
     "http-proxy-middleware": "^2.0.0",
+    "log4js": "^6.3.0",
     "mockjs": "^1.1.0",
     "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "morgan-body": "^2.6.6",
     "multer": "^1.4.2",
     "node-html-markdown": "^1.1.1",
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.13",
+    "rotating-file-stream": "^2.1.6",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
   }

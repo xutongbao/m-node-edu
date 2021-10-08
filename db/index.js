@@ -1,12 +1,13 @@
 const sqlite3 = require('sqlite3').verbose()
 const PORT = process.env.PORT || 81
+const NODE_ENV = process.env.NODE_ENV || 'development'
 console.log('PORT:', PORT)
-console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('NODE_ENV:', NODE_ENV)
 let db = {}
-if (process.env.NODE_ENV === 'development') {
-  db = new sqlite3.Database('./my_81.db')
-} else {
+if (NODE_ENV === 'production') {
   db = new sqlite3.Database('./my_online.db')
+} else {
+  db = new sqlite3.Database('./my_81.db')
 }
 //执行sql语句
 const runSql = async (sql) => {

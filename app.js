@@ -7,8 +7,9 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const log4js = require('log4js')
 
+//开启gzip
 app.use(compression({ filter: shouldCompress }))
 //app.use(history())
 //app.use(express.static('D:/zlhx-ui'))
@@ -43,7 +44,27 @@ function shouldCompress(req, res) {
 //   }, 4000)
 // })
 
-app.get('/', function(req, res) {
+log4js.configure({
+  appenders: {
+    out: { type: 'console' },
+    cheese: { type: 'file', filename: 'log/myLog.log', maxLogSize: 10240 }
+  },
+  categories: {
+    default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
+  }
+})
+const logger = log4js.getLogger('log')
+logger.debug('重启，时间', new Date())
+
+app.use(
+  log4js.connectLogger(logger, {
+    level: log4js.levels.DEBUG,
+    format: (req, res, format) =>
+      format(`:remote-addr :method :url ${JSON.stringify(req.body)}`)
+  })
+)
+
+app.get('/', function (req, res) {
   res.redirect('/air/origin/master/#/air/light/extra/home')
 })
 
