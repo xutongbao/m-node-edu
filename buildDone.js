@@ -53,5 +53,5 @@ const handleAddRecord = () => {
 setTimeout(() => {
   email()
   handleAddRecord()
-}, 3000)
+}, 10000)
 
