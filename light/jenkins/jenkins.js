@@ -177,6 +177,7 @@ const dataAdd = async (req, res) => {
       })
     }
   } else {
+    const uid = Date.now()
     const err = await runSql(
       `INSERT INTO projectTest (
         uid,
