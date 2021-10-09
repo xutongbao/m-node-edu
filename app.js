@@ -54,7 +54,7 @@ log4js.configure({
     }
   },
   categories: {
-    default: { appenders: ['cheese'], level: log4js.levels.DEBUG }
+    default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
   }
 })
 const logger = log4js.getLogger('log')
@@ -63,8 +63,11 @@ logger.debug('重启')
 app.use(
   log4js.connectLogger(logger, {
     level: log4js.levels.DEBUG,
-    format: (req, res, format) =>
-      format(`:remote-addr :method :url ${JSON.stringify(req.body)}`)
+    format: (req, res, format) => {
+      const body = JSON.stringify(req.body)
+      console.log(body)
+      format(`:remote-addr :method :url ${body}`)
+    }
   })
 )
 
