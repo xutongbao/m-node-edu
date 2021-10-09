@@ -22,7 +22,6 @@ const runSql = async (sql) => {
 const queryPromise = async (sql) => {
   return new Promise(async (resolve, reject) => {
     db.all(sql, function (err, rows) {
-      console.log(rows)
       if (err) {
         reject(err)
       } else {

@@ -54,7 +54,7 @@ log4js.configure({
   }
 })
 const logger = log4js.getLogger('log')
-logger.debug('重启，时间', new Date())
+logger.debug('重启')
 
 app.use(
   log4js.connectLogger(logger, {

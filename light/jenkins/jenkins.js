@@ -88,30 +88,33 @@ const dataSearch = async (req, res) => {
   delete searchParams.pageNum
   delete searchParams.pageSize
 
-  list = list.filter((item) => {
-    let flag = true
-    for (let key in searchParams) {
-      if (
-        typeof item[key] === 'string' &&
-        !item[key].includes(searchParams[key])
-      ) {
-        flag = false
-      } else if (
-        typeof item[key] === 'number' &&
-        !(item[key] === searchParams[key])
-      ) {
-        flag = false
+  list = list
+    .filter((item) => {
+      let flag = true
+      for (let key in searchParams) {
+        if (
+          typeof item[key] === 'string' &&
+          !item[key].includes(searchParams[key])
+        ) {
+          flag = false
+        } else if (
+          typeof item[key] === 'number' &&
+          !(item[key] === searchParams[key])
+        ) {
+          flag = false
+        }
       }
-    }
-    return flag
-  }).map(item => {
-    return {
-      ...item,
-      id: item.uid,
-      uid: undefined,
-      addtime: item.addtime - 0
-    }
-  })
+      return flag
+    })
+    .map((item) => {
+      return {
+        ...item,
+        id: item.uid,
+        uid: undefined,
+        addtime: item.addtime - 0,
+        edittime: item.edittime - 0
+      }
+    })
 
   const start = (pageNum - 1) * pageSize
   const end = start + pageSize * 1
@@ -128,52 +131,127 @@ const dataSearch = async (req, res) => {
 }
 
 //添加
-const dataAdd = (req, res) => {
+const dataAdd = async (req, res) => {
   const { dataItem } = req.body
-  dataItem.id = Date.now()
-  let temp = { ...dataItem, addtime: Date.now() }
-  const index = dataArr.findIndex((item) => item.url === temp.url)
+  const result = await queryPromise(
+    `SELECT * FROM projectTest ORDER BY addtime DESC`
+  )
+  let list = [...result]
+  const index = list.findIndex((item) => item.url === dataItem.url)
   if (index >= 0) {
-    dataArr.splice(index, 1, temp)
+    const ids = [list[index].uid]
+    let err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
+    err = await runSql(
+      `INSERT INTO projectTest (
+        uid,
+        name,
+        gitRepositorieName,
+        branch,
+        url,
+        remarks,
+        addtime,
+        edittime
+    )
+    VALUES (
+        '${uid}',
+        '${dataItem.name}',
+        '${dataItem.gitRepositorieName}',
+        '${dataItem.branch}',
+        '${dataItem.url}',
+        '${dataItem.remarks}',
+        '${uid}',
+        ''
+    )`
+    )
+    if (err) {
+      res.send({
+        state: 0,
+        data: err,
+        message: '添加失败'
+      })
+    } else {
+      res.send({
+        state: 1,
+        data: dataItem,
+        message: 'url重复，添加成功'
+      })
+    }
   } else {
-    dataArr.unshift(temp)
+    const err = await runSql(
+      `INSERT INTO projectTest (
+        uid,
+        name,
+        gitRepositorieName,
+        branch,
+        url,
+        remarks,
+        addtime,
+        edittime
+    )
+    VALUES (
+        '${uid}',
+        '${dataItem.name}',
+        '${dataItem.gitRepositorieName}',
+        '${dataItem.branch}',
+        '${dataItem.url}',
+        '${dataItem.remarks}',
+        '${uid}',
+        ''
+    )`
+    )
+    if (err) {
+      res.send({
+        state: 0,
+        data: err,
+        message: '添加失败'
+      })
+    } else {
+      res.send({
+        state: 1,
+        data: dataItem,
+        message: '添加成功'
+      })
+    }
   }
-
-  res.send({
-    state: 1,
-    data: temp,
-    message: '添加成功'
-  })
 }
 
 //删除
 const dataDelete = async (req, res) => {
   let { ids } = req.body
-  console.log(ids)
-  err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
-  res.send({
-    state: 1,
-    data: ids,
-    message: '删除成功'
-  })
-}
-
-//编辑
-const dataEdit = (req, res) => {
-  let { id, dataItem } = req.body
-  let index = dataArr.findIndex((item) => item.id === id)
-  if (index >= 0) {
-    dataArr[index] = { id, ...dataItem, edittime: Date.now() }
+  const err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
+  if (err) {
     res.send({
-      state: 1,
-      data: dataArr[index],
-      message: '编辑成功'
+      state: 0,
+      data: err,
+      message: '添加失败'
     })
   } else {
     res.send({
+      state: 1,
+      data: ids,
+      message: '删除成功'
+    })
+  }
+}
+
+//编辑
+const dataEdit = async (req, res) => {
+  let { id, dataItem } = req.body
+  const err = await runSql(`UPDATE projectTest SET 'name' = '${dataItem.name}', 'remarks' = '${dataItem.remarks}', 'edittime' = '${Date.now()}' WHERE uid = '${id}'`)
+  if (err) {
+    res.send({
       state: 0,
-      data: dataItem,
-      message: '编辑失败，id不存在'
+      data: err,
+      message: '编辑失败'
+    })
+  } else {
+    res.send({
+      state: 1,
+      data: {
+        id,
+        dataItem
+      },
+      message: '编辑成功'
     })
   }
 }
