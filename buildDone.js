@@ -23,12 +23,10 @@ const email = async () => {
     })
     .then((res) => {
       console.log('E-Mail sent successfully!')
-      console.log(0)
     })
     .catch((error) => {
       console.error(error)
     })
-  console.log(1)
 }
 
 // 添加构建记录
@@ -53,7 +51,6 @@ const handleAddRecord = async () => {
 }
 setTimeout(async () => {
   await email()
-  console.log(2)
   await handleAddRecord()
 }, 3000)
 
