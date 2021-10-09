@@ -128,3 +128,66 @@ INSERT INTO projectTest (
                             '1632982424994',
                             ''
                         );
+
+INSERT INTO projectTest (
+                            uid,
+                            name,
+                            gitRepositorieName,
+                            branch,
+                            url,
+                            remarks,
+                            addtime,
+                            edittime
+                        )
+                        VALUES (
+                            '1632981932852',
+                            '无代码平台',
+                            'air',
+                            'origin/feature/home',
+                            'http://39.97.238.175:81/air/origin/feature/home',
+                            '自动',
+                            '1632981932852',
+                            ''
+                        );
+
+INSERT INTO projectTest (
+                            uid,
+                            name,
+                            gitRepositorieName,
+                            branch,
+                            url,
+                            remarks,
+                            addtime,
+                            edittime
+                        )
+                        VALUES (
+                            '1632981815592',
+                            '无代码平台',
+                            'air',
+                            'origin/master',
+                            'http://39.97.238.175:81/air/origin/master',
+                            '自动',
+                            '1632981815592',
+                            ''
+                        );
+
+INSERT INTO projectTest (
+                            uid,
+                            name,
+                            gitRepositorieName,
+                            branch,
+                            url,
+                            remarks,
+                            addtime,
+                            edittime
+                        )
+                        VALUES (
+                            '1632981815591',
+                            'node接口',
+                            'm-node-edu',
+                            'origin/master',
+                            'http://39.97.238.175:81',
+                            '自动，接口地址',
+                            '1632981815591',
+                            ''
+                        );

@@ -1,3 +1,5 @@
+const { runSql, queryPromise } = require('../../db/index')
+
 let dataArr = [
   {
     id: 1632983530971,
@@ -74,11 +76,13 @@ let dataArr = [
 ]
 
 //搜索
-const dataSearch = (req, res) => {
+const dataSearch = async (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
-  let list = dataArr.sort((a, b) => {
-    return b.addtime - a.addtime
-  })
+
+  const result = await queryPromise(
+    `SELECT * FROM projectTest ORDER BY addtime DESC`
+  )
+  let list = [...result]
 
   const searchParams = req.body || {}
   delete searchParams.pageNum
@@ -100,6 +104,13 @@ const dataSearch = (req, res) => {
       }
     }
     return flag
+  }).map(item => {
+    return {
+      ...item,
+      id: item.uid,
+      uid: undefined,
+      addtime: item.addtime - 0
+    }
   })
 
   const start = (pageNum - 1) * pageSize
@@ -136,10 +147,10 @@ const dataAdd = (req, res) => {
 }
 
 //删除
-const dataDelete = (req, res) => {
+const dataDelete = async (req, res) => {
   let { ids } = req.body
   console.log(ids)
-  dataArr = dataArr.filter((item) => !ids.includes(item.id))
+  err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
   res.send({
     state: 1,
     data: ids,
