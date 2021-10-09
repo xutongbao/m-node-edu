@@ -23,6 +23,7 @@ const email = () => {
     })
     .then((res) => {
       console.log('E-Mail sent successfully!')
+      handleAddRecord()
     })
     .catch((error) => {
       console.error(error)
@@ -51,6 +52,5 @@ const handleAddRecord = () => {
 }
 setTimeout(() => {
   email()
-  handleAddRecord()
 }, 3000)
 

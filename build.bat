@@ -10,3 +10,4 @@ set IP=39.97.238.175
 set PORT=81
 call node buildDone
 echo http://%IP%:%PORT%
+
