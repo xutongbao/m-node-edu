@@ -47,7 +47,11 @@ function shouldCompress(req, res) {
 log4js.configure({
   appenders: {
     out: { type: 'console' },
-    cheese: { type: 'file', filename: 'log/myLog.log', maxLogSize: 10240 }
+    cheese: {
+      type: 'file',
+      filename: 'log/myLog.log',
+      maxLogSize: 1024 * 1000 * 10 //10M
+    }
   },
   categories: {
     default: { appenders: ['cheese'], level: log4js.levels.DEBUG }
