@@ -32,7 +32,6 @@ const email = () => {
 // 添加构建记录
 const handleAddRecord = () => {
   const dataItem = {
-    id: Date.now(),
     name,
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
@@ -53,5 +52,5 @@ const handleAddRecord = () => {
 setTimeout(() => {
   email()
   handleAddRecord()
-}, 10000)
+}, 3000)
 
