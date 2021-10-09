@@ -20,6 +20,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-/my.db
 /my_81.db
 /log

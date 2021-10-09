@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "server": "set PORT=81 && nodemon --inspect app",
-    "dockerStart": "PORT=81 node app",
+    "dev1": "cross-env PORT=81 NODE_ENV=development nodemon --inspect app",
+    "serve1": "cross-env PORT=81 NODE_ENV=production nodemon --inspect app",
     "dev": "pm2 start ecosystem.config.js --env development && pm2 logs",
-    "serve": "pm2 start ecosystem.config.js --env production && pm2 logs"
+    "serve": "pm2 start ecosystem.config.js --env production && pm2 logs",
+    "dockerStart": "PORT=81 node app"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "file-stream-rotator": "^0.5.7",
     "html-to-md": "^0.5.0",

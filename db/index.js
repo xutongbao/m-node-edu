@@ -5,9 +5,9 @@ console.log('PORT:', PORT)
 console.log('NODE_ENV:', NODE_ENV)
 let db = {}
 if (NODE_ENV === 'production') {
-  db = new sqlite3.Database('./my_online.db')
+  db = new sqlite3.Database('./dbFile/my_prod.db')
 } else {
-  db = new sqlite3.Database('./my_81.db')
+  db = new sqlite3.Database('./dbFile/my_dev.db')
 }
 //执行sql语句
 const runSql = async (sql) => {
