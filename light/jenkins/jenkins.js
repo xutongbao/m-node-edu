@@ -138,6 +138,7 @@ const dataAdd = async (req, res) => {
   )
   let list = [...result]
   const index = list.findIndex((item) => item.url === dataItem.url)
+  const uid = Date.now()
   if (index >= 0) {
     const ids = [list[index].uid]
     let err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
@@ -177,7 +178,6 @@ const dataAdd = async (req, res) => {
       })
     }
   } else {
-    const uid = Date.now()
     const err = await runSql(
       `INSERT INTO projectTest (
         uid,

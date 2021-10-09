@@ -50,7 +50,7 @@ log4js.configure({
     cheese: { type: 'file', filename: 'log/myLog.log', maxLogSize: 10240 }
   },
   categories: {
-    default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
+    default: { appenders: ['cheese'], level: log4js.levels.DEBUG }
   }
 })
 const logger = log4js.getLogger('log')
