@@ -21,6 +21,7 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(express.static('public'))
 //app.use(express.static('upload'))
 app.use(express.static('/temp')) //, { index: '/air/origin/master/index.html'}
+app.use(express.static('log'))
 app.use(cors())
 
 // parse application/x-www-form-urlencoded
