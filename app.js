@@ -43,6 +43,23 @@ function shouldCompress(req, res) {
 //     next()
 //   }, 4000)
 // })
+// const logResponseBody = (req, res, next) => {
+//   const oldSend = res.send
+//   res.send = function () {
+//     const logger = log4js.getLogger('test')
+//     logger.info(`req:${JSON.stringify(req.body)} res:${JSON.stringify(arguments)}`)
+//     console.log(666)
+//     oldSend.apply(res, arguments)
+//   }
+//   next()
+// }
+
+// app.use(logResponseBody)
+// const oldSend = app.response.send
+// app.response.send = function() {
+//   console.log(6)
+//   oldSend.apply(this, arguments)
+// }
 
 log4js.configure({
   appenders: {
@@ -62,11 +79,13 @@ logger.debug('重启')
 
 app.use(
   log4js.connectLogger(logger, {
-    level: log4js.levels.DEBUG,
+    level: 'info',
     format: (req, res, format) => {
-      const body = JSON.stringify(req.body)
-      console.log(body)
-      format(`:remote-addr :method :url ${body}`)
+      return format(
+        `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
+          req.body
+        )} HTTP/:http-version" :status :content-length ":referrer" ":user-agent"`
+      )
     }
   })
 )
