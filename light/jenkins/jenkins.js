@@ -1,4 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
+const { logger } = require('../../utils/tools')
 
 let dataArr = [
   {
@@ -118,6 +119,7 @@ const dataSearch = async (req, res) => {
 
   const start = (pageNum - 1) * pageSize
   const end = start + pageSize * 1
+  logger('jenkins').info('列表页搜索')
   res.send({
     state: 1,
     data: {

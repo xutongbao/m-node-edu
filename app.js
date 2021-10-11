@@ -7,7 +7,7 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const log4js = require('log4js')
+const { initLog } = require('./utils/tools')
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
@@ -43,52 +43,9 @@ function shouldCompress(req, res) {
 //     next()
 //   }, 4000)
 // })
-// const logResponseBody = (req, res, next) => {
-//   const oldSend = res.send
-//   res.send = function () {
-//     const logger = log4js.getLogger('test')
-//     logger.info(`req:${JSON.stringify(req.body)} res:${JSON.stringify(arguments)}`)
-//     console.log(666)
-//     oldSend.apply(res, arguments)
-//   }
-//   next()
-// }
 
-// app.use(logResponseBody)
-// const oldSend = app.response.send
-// app.response.send = function() {
-//   console.log(6)
-//   oldSend.apply(this, arguments)
-// }
-
-log4js.configure({
-  appenders: {
-    out: { type: 'console' },
-    cheese: {
-      type: 'file',
-      filename: 'log/myLog.log',
-      maxLogSize: 1024 * 1000 * 10 //10M
-    }
-  },
-  categories: {
-    default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
-  }
-})
-const logger = log4js.getLogger('log')
-logger.debug('重启')
-
-app.use(
-  log4js.connectLogger(logger, {
-    level: 'info',
-    format: (req, res, format) => {
-      return format(
-        `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
-          req.body
-        )} HTTP/:http-version" :status :content-length ":referrer" ":user-agent"`
-      )
-    }
-  })
-)
+//初始化日志
+initLog(app)
 
 app.get('/', function (req, res) {
   res.redirect('/air/origin/master/#/air/light/extra/home')

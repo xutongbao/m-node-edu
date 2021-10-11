@@ -1,5 +1,6 @@
 const Mock = require('mockjs')
 const nodemailer = require('nodemailer')
+const log4js = require('log4js')
 
 const mockShop = () => {
   return Mock.mock({
@@ -242,6 +243,61 @@ const jenkinsSendEmail = async (dataObj) => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
+//日志初始化
+const initLog = (app) => {
+  log4js.configure({
+    appenders: {
+      out: { type: 'console' },
+      cheese: {
+        type: 'file',
+        filename: 'log/myLog.log',
+        maxLogSize: 1024 * 1000 * 10 //10M
+      }
+    },
+    categories: {
+      default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
+    }
+  })
+  const logger = log4js.getLogger('log')
+  logger.debug('重启')
+
+  app.use(
+    log4js.connectLogger(logger, {
+      level: 'info',
+      format: (req, res, format) => {
+        return format(
+          `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
+            req.body
+          )} HTTP/:http-version" :status :content-length ":referrer" ":user-agent"`
+        )
+      }
+    })
+  )
+
+  // const logResponseBody = (req, res, next) => {
+  //   const oldSend = res.send
+  //   res.send = function () {
+  //     const logger = log4js.getLogger('test')
+  //     logger.info(`req:${JSON.stringify(req.body)} res:${JSON.stringify(arguments)}`)
+  //     console.log(666)
+  //     oldSend.apply(res, arguments)
+  //   }
+  //   next()
+  // }
+
+  // app.use(logResponseBody)
+  // const oldSend = app.response.send
+  // app.response.send = function() {
+  //   console.log(6)
+  //   oldSend.apply(this, arguments)
+  // }
+}
+
+//日志对象
+const logger = (name) => {
+ return log4js.getLogger(name)
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -251,5 +307,9 @@ module.exports = {
   //发送邮件
   sendEmail,
   //jenkins构建完成邮件通知
-  jenkinsSendEmail
+  jenkinsSendEmail,
+  //日志初始化
+  initLog,
+  //日志对象
+  logger
 }
