@@ -66,6 +66,11 @@ const init = async () => {
   let port = process.env.PORT || 81
   //console.log(process.env.branch)
   //port = await choosePort({ port })
+  // Git.Repository.open('/source/edu-node-github').then(function(repository) {
+  //   // Use repository
+  //   console.log(111)
+  // });
+  
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world123')
