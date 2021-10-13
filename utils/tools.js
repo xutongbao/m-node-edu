@@ -1,6 +1,7 @@
 const Mock = require('mockjs')
 const nodemailer = require('nodemailer')
 const log4js = require('log4js')
+const net = require('net')
 
 const mockShop = () => {
   return Mock.mock({
@@ -296,7 +297,48 @@ const initLog = (app) => {
 
 //日志对象
 const logger = (name) => {
- return log4js.getLogger(name)
+  return log4js.getLogger(name)
+}
+
+//测试端口是否可用
+const portUsed = (port) => {
+  return new Promise((resolve, reject) => {
+    let server = net.createServer().listen(port)
+    server.on('listening', function () {
+      server.close()
+      resolve(port)
+    })
+    server.on('error', function (err) {
+      if (err.code == 'EADDRINUSE') {
+        resolve(err)
+      }
+    })
+  })
+}
+
+//尝试新端口
+const tryUsePort = async function (port, portAvailableCallback) {
+  let res = await portUsed(port)
+  if (res instanceof Error) {
+    console.log(`端口：${port}被占用`)
+    port++
+    tryUsePort(port, portAvailableCallback)
+  } else {
+    portAvailableCallback(port)
+    return port
+  }
+}
+
+//选择可用端口
+const choosePort = ({ port }) => {
+  return new Promise((resolve, reject) => {
+    tryUsePort(port, function (port) {
+      // do something ...
+      console.log(`端口：${port}可用`)
+      // net.createServer().listen(port);
+      resolve(port)
+    })
+  })
 }
 
 module.exports = {
@@ -312,5 +354,7 @@ module.exports = {
   //日志初始化
   initLog,
   //日志对象
-  logger
+  logger,
+  //选择可用端口
+  choosePort
 }

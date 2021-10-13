@@ -7,8 +7,7 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog } = require('./utils/tools')
-const { choosePort } = require('./choosePort')
+const { initLog, choosePort } = require('./utils/tools')
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
@@ -66,7 +65,6 @@ const init = async () => {
   //启动命令：set PORT=3000 && node app
   let port = process.env.PORT || 81
   port = await choosePort({ port })
-  console.log('666', port)
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world1')
