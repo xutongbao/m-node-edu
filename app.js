@@ -8,6 +8,7 @@ const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
 const { initLog, choosePort } = require('./utils/tools')
+const git = require('simple-git/promise')
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
