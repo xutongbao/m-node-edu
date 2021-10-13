@@ -8,6 +8,6 @@ simpleGit = git(GIT_REPOSITORY_ROOT );
 const init = async () => {
   const status = await simpleGit.status();
   console.log(status)
-  console.log(status.current)
+  console.log(status.tracking)
 }
 init()
