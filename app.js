@@ -64,17 +64,11 @@ air(app)
 const init = async () => {
   //启动命令：set PORT=3000 && node app
   let port = process.env.PORT || 81
-  port = await choosePort({ port })
+  //console.log(process.env.branch)
+  //port = await choosePort({ port })
   app.listen(port, () => {
     console.log(port)
-    console.log('hello,world1')
+    console.log('hello,world123')
   })
 }
 init()
-
-//启动命令：set PORT=3000 && node app
-// const PORT = process.env.PORT || 81
-// app.listen(PORT, () => {
-//   console.log(PORT)
-//   console.log('hello,world1')
-// })
