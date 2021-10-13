@@ -265,6 +265,7 @@ const initLog = (app) => {
     log4js.connectLogger(logger, {
       level: 'info',
       format: (req, res, format) => {
+        console.log('log')
         return format(
           `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
             req.body

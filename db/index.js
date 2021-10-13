@@ -1,7 +1,5 @@
 const sqlite3 = require('sqlite3').verbose()
-const PORT = process.env.PORT || 81
 const NODE_ENV = process.env.NODE_ENV || 'development'
-console.log('PORT:', PORT)
 console.log('NODE_ENV:', NODE_ENV)
 let db = {}
 if (NODE_ENV === 'production') {
