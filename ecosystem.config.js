@@ -3,7 +3,7 @@ module.exports = {
     {
       name: `source_${process.env.name}`,
       script: './app.js',
-      watch: true,
+      //watch: true,
       ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
       node_args: ['--inspect'],
       force: true,
