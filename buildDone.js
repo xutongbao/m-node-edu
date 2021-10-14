@@ -1,4 +1,7 @@
 const axios = require('axios')
+const spawn = require('cross-spawn')
+const { getBranch } = require('./utils/tools')
+
 
 const baseURL = `http://${process.env.IP}:${process.env.PORT}`
 console.log(baseURL)
@@ -49,7 +52,17 @@ const handleAddRecord = async () => {
       console.error(error)
     })
 }
+
+//运行项目
+const run = async () => {
+  const branch = await getBranch()
+  console.log(branch)
+  spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+}
+
 setTimeout(async () => {
+  //await run()
   await email()
   await handleAddRecord()
 }, 3000)

@@ -343,13 +343,12 @@ const choosePort = ({ port }) => {
 }
 
 //获取git项目分支名称
-const getBranch = async () => {
+const getBranch = async ({ path = '' } = {}) => {
   const git = simpleGit()
   const status = await git.status()
   //console.log(status)
   return status.tracking
 }
-
 
 module.exports = {
   mockShop,
@@ -368,5 +367,5 @@ module.exports = {
   //选择可用端口
   choosePort,
   //获取git项目分支名称
-  getBranch,
+  getBranch
 }

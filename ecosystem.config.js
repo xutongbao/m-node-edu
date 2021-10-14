@@ -1,10 +1,10 @@
 module.exports = {
   apps: [
     {
-      name: 'app',
+      name: `source_${process.env.name}`,
       script: './app.js',
-      watch: true,
-      ignore_watch: ['node_modules', 'log', 'dbFile'],
+      watch: process.env.watch === 'false' ? false : true,
+      ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
       node_args: ['--inspect'],
       env_development: {
         PORT: 81,
