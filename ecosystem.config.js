@@ -1,5 +1,3 @@
-
-console.log('watch')
 module.exports = {
   apps: [
     {
