@@ -1,12 +1,13 @@
+
+console.log('watch')
 module.exports = {
   apps: [
     {
       name: `source_${process.env.name}`,
       script: './app.js',
-      //watch: true,
+      watch: process.env.watch === 'false' ? false : true,
       ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
       node_args: ['--inspect'],
-      force: true,
       env_development: {
         PORT: 81,
         NODE_ENV: 'development'
