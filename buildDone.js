@@ -62,7 +62,7 @@ const run = async () => {
 }
 
 setTimeout(async () => {
-  await run()
+  //await run()
   await email()
   await handleAddRecord()
 }, 3000)
