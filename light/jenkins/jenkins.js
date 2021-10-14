@@ -198,13 +198,11 @@ const getPort = async ({ port }) => {
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
-  console.log(list)
   const branch = await getBranch()
   console.log(branch)
   const branchTestInfo = list.find(item => {
     return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
   })
-  console.log(branchTestInfo)
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
      const tempArr = branchTestInfo.url.split(':')

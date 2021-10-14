@@ -4,7 +4,7 @@ module.exports = {
       name: 'app',
       script: './app.js',
       watch: true,
-      ignore_watch: ['node_modules', 'log', 'dbFile'],
+      ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
       node_args: ['--inspect'],
       env_development: {
         PORT: 81,
