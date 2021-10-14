@@ -7,9 +7,8 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog, choosePort, getBranch } = require('./utils/tools')
-const simpleGit = require('simple-git')
-
+const { initLog } = require('./utils/tools')
+const { getPort } = require('./light/jenkins/jenkins')
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
@@ -67,14 +66,9 @@ const init = async () => {
   //启动命令：set PORT=3000 && node app
   let port = process.env.PORT || 81
   //console.log(process.env.branch)
-  //port = await choosePort({ port })
-  // Git.Repository.open('/source/edu-node-github').then(function(repository) {
-  //   // Use repository
-  //   console.log(111)
-  // });
-  const branch = await getBranch()
-  console.log(branch)
-  
+  port = await getPort({ port })
+  console.log(port)
+
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world123')
