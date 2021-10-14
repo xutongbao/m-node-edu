@@ -1,5 +1,6 @@
 const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort, getBranch } = require('../../utils/tools')
+const spawn = require('cross-spawn')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -218,10 +219,22 @@ const getPort = async ({ port }) => {
   return tempPort
 }
 
+const run = async (req, res) => {
+  const branch = await getBranch()
+  console.log(branch)
+  spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  res.send({
+    state: 1,
+    message: '成功'
+  })
+}
+
 module.exports = {
   jenkinsSearch: dataSearch,
   jenkinsAdd: dataAdd,
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
-  getPort
+  getPort,
+  jenkinsRun: run
 }

@@ -92,6 +92,7 @@ const {
   jenkinsAdd,
   jenkinsDelete,
   jenkinsEdit,
+  jenkinsRun,
 } = require('../light/jenkins/jenkins')
 
 const {
@@ -214,6 +215,7 @@ const light = (app) => {
   app.post('/api/jenkins/add', jenkinsAdd)
   app.post('/api/jenkins/delete', jenkinsDelete)
   app.post('/api/jenkins/edit', jenkinsEdit)
+  app.post('/api/jenkins/run', jenkinsRun)
 }
 
 module.exports = {
