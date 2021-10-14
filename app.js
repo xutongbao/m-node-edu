@@ -67,8 +67,7 @@ const init = async () => {
   let port = process.env.PORT || 81
   //console.log(process.env.branch)
   port = await getPort({ port })
-  console.log(port)
-
+  console.log('port:', port)
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world123')

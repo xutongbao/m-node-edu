@@ -321,7 +321,7 @@ const portUsed = (port) => {
 const tryUsePort = async function (port, portAvailableCallback) {
   let res = await portUsed(port)
   if (res instanceof Error) {
-    console.log(`端口：${port}被占用`)
+    console.log(`port ${port} already used`)
     port++
     tryUsePort(port, portAvailableCallback)
   } else {
@@ -335,7 +335,7 @@ const choosePort = ({ port }) => {
   return new Promise((resolve, reject) => {
     tryUsePort(port, function (port) {
       // do something ...
-      console.log(`端口：${port}可用`)
+      console.log(`port ${port} can use`)
       // net.createServer().listen(port);
       resolve(port)
     })

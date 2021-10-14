@@ -194,9 +194,27 @@ const dataEdit = async (req, res) => {
 
 //查找适合的端口
 const getPort = async ({ port }) => {
+  const result = await queryPromise(
+    `SELECT * FROM projectTest ORDER BY addtime DESC`
+  )
+  let list = [...result]
+  console.log(list)
   const branch = await getBranch()
   console.log(branch)
-  const tempPort = await choosePort({ port })
+  const branchTestInfo = list.find(item => {
+    return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
+  })
+  console.log(branchTestInfo)
+  let usedPort = port
+  if (branchTestInfo && branchTestInfo.url) {
+     const tempArr = branchTestInfo.url.split(':')
+     if (tempArr.length >= 3) {
+       usedPort = tempArr[2]
+     }
+  }
+  console.log('usedPort:', usedPort)
+
+  const tempPort = await choosePort({ port: usedPort })
   return tempPort
 }
 
