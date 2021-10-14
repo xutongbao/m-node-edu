@@ -2,6 +2,7 @@ const Mock = require('mockjs')
 const nodemailer = require('nodemailer')
 const log4js = require('log4js')
 const net = require('net')
+const simpleGit = require('simple-git')
 
 const mockShop = () => {
   return Mock.mock({
@@ -320,7 +321,7 @@ const portUsed = (port) => {
 const tryUsePort = async function (port, portAvailableCallback) {
   let res = await portUsed(port)
   if (res instanceof Error) {
-    console.log(`端口：${port}被占用`)
+    console.log(`port ${port} already used`)
     port++
     tryUsePort(port, portAvailableCallback)
   } else {
@@ -334,12 +335,21 @@ const choosePort = ({ port }) => {
   return new Promise((resolve, reject) => {
     tryUsePort(port, function (port) {
       // do something ...
-      console.log(`端口：${port}可用`)
+      console.log(`port ${port} can use`)
       // net.createServer().listen(port);
       resolve(port)
     })
   })
 }
+
+//获取git项目分支名称
+const getBranch = async () => {
+  const git = simpleGit()
+  const status = await git.status()
+  //console.log(status)
+  return status.tracking
+}
+
 
 module.exports = {
   mockShop,
@@ -356,5 +366,7 @@ module.exports = {
   //日志对象
   logger,
   //选择可用端口
-  choosePort
+  choosePort,
+  //获取git项目分支名称
+  getBranch,
 }

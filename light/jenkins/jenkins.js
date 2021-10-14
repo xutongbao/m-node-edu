@@ -1,80 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger } = require('../../utils/tools')
-
-let dataArr = [
-  {
-    id: 1632983530971,
-    name: '知了好客',
-    gitRepositorieName: 'edu',
-    branch: 'origin/feature/newName',
-    url: 'http://39.97.238.175:81/edu/origin/feature/newName',
-    remarks: '知了好客改为知了好学',
-    addtime: 1632983530971
-  },
-  {
-    id: 1632983182375,
-    name: '知了好客',
-    gitRepositorieName: 'edu',
-    branch: 'origin/release/ui20210720',
-    url: 'http://39.97.238.175:81/edu/origin/release/ui20210720',
-    remarks: '和线上代码同步',
-    addtime: 1632983182376
-  },
-  {
-    id: 1632982857927,
-    name: '知了好客',
-    gitRepositorieName: 'edu',
-    branch: 'origin/feature/login',
-    url: 'http://39.97.238.175:81/edu/origin/feature/login',
-    remarks: '开发中',
-    addtime: 1632982857927
-  },
-  {
-    id: 1632982651006,
-    name: '探马',
-    gitRepositorieName: 'tan',
-    branch: 'origin/feature/login',
-    url: 'http://39.97.238.175:81/tan/origin/feature/login',
-    remarks: '自动',
-    addtime: 1632982651006
-  },
-  {
-    id: 1632982424994,
-    name: '探马',
-    gitRepositorieName: 'tan',
-    branch: 'origin/master',
-    url: 'http://39.97.238.175:81/tan/origin/master',
-    remarks: '自动',
-    addtime: 1632982424994
-  },
-  {
-    id: 1632981932852,
-    name: '无代码平台',
-    gitRepositorieName: 'air',
-    branch: 'origin/feature/home',
-    url: 'http://39.97.238.175:81/air/origin/feature/home',
-    remarks: '自动',
-    addtime: 1632981932852
-  },
-  {
-    id: 1632981815592,
-    name: '无代码平台',
-    gitRepositorieName: 'air',
-    branch: 'origin/master',
-    url: 'http://39.97.238.175:81/air/origin/master',
-    remarks: '自动',
-    addtime: 1632981815592
-  },
-  {
-    id: 1632981815591,
-    name: 'node接口',
-    gitRepositorieName: 'm-node-edu',
-    branch: 'origin/master',
-    url: 'http://39.97.238.175:81',
-    remarks: '自动，接口地址',
-    addtime: 1632981815591
-  }
-]
+const { logger, choosePort, getBranch } = require('../../utils/tools')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -143,7 +68,9 @@ const dataAdd = async (req, res) => {
   const uid = Date.now()
   if (index >= 0) {
     const ids = [list[index].uid]
-    let err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
+    let err = await runSql(
+      `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
+    )
     err = await runSql(
       `INSERT INTO projectTest (
         uid,
@@ -221,7 +148,9 @@ const dataAdd = async (req, res) => {
 //删除
 const dataDelete = async (req, res) => {
   let { ids } = req.body
-  const err = await runSql(`DELETE FROM projectTest WHERE uid in (${ids.join(',')})`)
+  const err = await runSql(
+    `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
+  )
   if (err) {
     res.send({
       state: 0,
@@ -240,7 +169,11 @@ const dataDelete = async (req, res) => {
 //编辑
 const dataEdit = async (req, res) => {
   let { id, dataItem } = req.body
-  const err = await runSql(`UPDATE projectTest SET 'name' = '${dataItem.name}', 'remarks' = '${dataItem.remarks}', 'edittime' = '${Date.now()}' WHERE uid = '${id}'`)
+  const err = await runSql(
+    `UPDATE projectTest SET 'name' = '${dataItem.name}', 'remarks' = '${
+      dataItem.remarks
+    }', 'edittime' = '${Date.now()}' WHERE uid = '${id}'`
+  )
   if (err) {
     res.send({
       state: 0,
@@ -259,25 +192,32 @@ const dataEdit = async (req, res) => {
   }
 }
 
-// 状态操作
-const dataUp = (req, res) => {
-  const { id, isUp } = req.body
-
-  let index = dataArr.findIndex((item) => item.id == id)
-  if (index >= 0) {
-    dataArr[index] = { ...dataArr[index], isUp: isUp, edittime: Date.now() }
-    res.send({
-      state: 1,
-      data: {},
-      message: '操作成功'
-    })
+//查找适合的端口
+const getPort = async ({ port }) => {
+  const result = await queryPromise(
+    `SELECT * FROM projectTest ORDER BY addtime DESC`
+  )
+  let list = [...result]
+  console.log(list)
+  const branch = await getBranch()
+  console.log(branch)
+  const branchTestInfo = list.find(item => {
+    return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
+  })
+  console.log(branchTestInfo)
+  let usedPort = port
+  if (branchTestInfo && branchTestInfo.url) {
+     const tempArr = branchTestInfo.url.split(':')
+     if (tempArr.length >= 3) {
+       usedPort = tempArr[2]
+     }
   } else {
-    res.send({
-      state: 0,
-      data: {},
-      message: 'id不存在'
-    })
+    console.log('add')
   }
+  console.log('usedPort:', usedPort)
+
+  const tempPort = await choosePort({ port: usedPort })
+  return tempPort
 }
 
 module.exports = {
@@ -285,5 +225,5 @@ module.exports = {
   jenkinsAdd: dataAdd,
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
-  jenkinsUp: dataUp
+  getPort
 }
