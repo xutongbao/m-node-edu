@@ -211,6 +211,8 @@ const getPort = async ({ port }) => {
      if (tempArr.length >= 3) {
        usedPort = tempArr[2]
      }
+  } else {
+    console.log('add')
   }
   console.log('usedPort:', usedPort)
 
