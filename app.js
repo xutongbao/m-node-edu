@@ -7,8 +7,9 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog, choosePort } = require('./utils/tools')
-const git = require('simple-git/promise')
+const { initLog, choosePort, getBranch } = require('./utils/tools')
+const simpleGit = require('simple-git')
+
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
@@ -71,6 +72,8 @@ const init = async () => {
   //   // Use repository
   //   console.log(111)
   // });
+  const branch = await getBranch()
+  console.log(branch)
   
   app.listen(port, () => {
     console.log(port)
