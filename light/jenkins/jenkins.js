@@ -229,7 +229,7 @@ const run = async (req, res) => {
   // let prettylist = fs.readFileSync('./prettylist.txt').toString()
   // prettylist = prettylist.replace(/\n/g, '')
   // prettylist = JSON.parse(prettylist)
-  console.log(prettylist)
+  //console.log(prettylist)
   res.send({
     state: 1,
     data: {

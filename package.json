@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev1": "cross-env branch=origin/master PORT=81 NODE_ENV=development nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log app",
-    "serve1": "cross-env branch=origin/master PORT=81 NODE_ENV=production nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log app",
+    "dev1": "cross-env branch=origin/master PORT=81 NODE_ENV=development nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log --ignore prettylist.js app",
+    "serve1": "cross-env branch=origin/master PORT=81 NODE_ENV=production nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log --ignore prettylist.js app",
     "dev": "cross-env name=source_scripts branch=origin/master pm2 start ecosystem.config.js --env development && pm2 logs",
     "serve": "cross-env name=source_scripts branch=origin/master pm2 start ecosystem.config.js --env production && pm2 logs",
     "dockerStart": "PORT=81 node app"
