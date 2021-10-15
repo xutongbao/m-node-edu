@@ -1,8 +1,9 @@
 const axios = require('axios')
+const spawn = require('cross-spawn')
 
 const baseURL = {
   'LAPTOP-4KDIA4A3': 'http://localhost:81',
-  'iZ6ilh61jzkvrhZ': 'http://39.97.238.175:81'
+  iZ6ilh61jzkvrhZ: 'http://39.97.238.175:81'
 }[process.env.computername]
 console.log(baseURL)
 
@@ -22,7 +23,7 @@ const email = async () => {
   }
   await axios
     .post(`${baseURL}/api/log/email`, {
-      ...emailData,
+      ...emailData
     })
     .then((res) => {
       console.log('E-Mail sent successfully!')
@@ -43,7 +44,7 @@ const handleAddRecord = async () => {
   }
   await axios
     .post(`${baseURL}/api/jenkins/add`, {
-      dataItem,
+      dataItem
     })
     .then((res) => {
       console.log('Record added successfully!')
@@ -55,12 +56,33 @@ const handleAddRecord = async () => {
 
 //运行项目
 const run = async () => {
-  await axios
+  return await axios
     .post(`${baseURL}/api/jenkins/run`, {
-      branch: process.env.branch,
+      branch: process.env.branch
     })
     .then((res) => {
-      console.log('Start successful!')
+      if (res.data.state === 1) {
+        console.log('Start successful!')
+        spawn.sync('echo const prettylist = > prettylist.js', [], {
+          stdio: 'inherit',
+          shell: true
+        })
+        spawn.sync('pm2 prettylist >> prettylist.js', [], { stdio: 'inherit' })
+        spawn.sync('echo ; >> prettylist.js', [], {
+          stdio: 'inherit',
+          shell: true
+        })
+        spawn.sync(
+          'echo module.exports = { prettylist } >> prettylist.js',
+          [],
+          {
+            stdio: 'inherit',
+            shell: true
+          }
+        )
+        console.log(res.data.data)
+        return res.data.data
+      }
     })
     .catch((error) => {
       console.error(error)
@@ -69,7 +91,7 @@ const run = async () => {
 
 setTimeout(async () => {
   await run()
-  await email()
-  await handleAddRecord()
+  const data = {}
+  await email({ data })
+  await handleAddRecord({ data })
 }, 3000)
-
