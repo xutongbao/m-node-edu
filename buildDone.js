@@ -67,7 +67,10 @@ const run = async () => {
           stdio: 'inherit',
           shell: true
         })
-        spawn.sync('pm2 prettylist >> prettylist.js', [], { stdio: 'inherit' })
+        spawn.sync('pm2 prettylist >> prettylist.js', [], {
+          stdio: 'inherit',
+          shell: true
+        })
         spawn.sync('echo ; >> prettylist.js', [], {
           stdio: 'inherit',
           shell: true
