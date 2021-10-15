@@ -1,5 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort, getBranch } = require('../../utils/tools')
+const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 
 //搜索
@@ -194,13 +194,13 @@ const dataEdit = async (req, res) => {
 }
 
 //查找适合的端口
-const getPort = async ({ port }) => {
+const getPort = async ({ branch, port }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
-  const branch = await getBranch()
-  console.log(branch)
+  //const branch = await getBranch()
+  console.log('getPort:', branch)
   const branchTestInfo = list.find((item) => {
     return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
   })
@@ -220,12 +220,10 @@ const getPort = async ({ port }) => {
 }
 
 const run = async (req, res) => {
-  const branch = await getBranch({
-    path: '/temp/m-node-edu/origin/feature/login/'
-  })
+  const { branch } = req.body
   console.log(branch)
-  // spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  // spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
     message: '成功'
