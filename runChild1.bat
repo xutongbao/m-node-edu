@@ -1,0 +1,1 @@
+pm2 prettylist > prettylist.txt

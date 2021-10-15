@@ -226,6 +226,8 @@ const run = async (req, res) => {
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`runChild1.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   // let prettylist = fs.readFileSync('./prettylist.txt').toString()
   // prettylist = prettylist.replace(/\n/g, '')
   // prettylist = JSON.parse(prettylist)
