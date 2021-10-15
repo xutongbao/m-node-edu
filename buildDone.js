@@ -60,7 +60,7 @@ const run = async () => {
       branch: process.env.branch,
     })
     .then((res) => {
-      console.log('Processing. Please wait!')
+      console.log('Start successful!')
     })
     .catch((error) => {
       console.error(error)
