@@ -1,6 +1,5 @@
 const axios = require('axios')
 const spawn = require('cross-spawn')
-const { getBranch } = require('./utils/tools')
 
 const baseURL = {
   'LAPTOP-4KDIA4A3': 'http://localhost:81',
@@ -57,8 +56,6 @@ const handleAddRecord = async () => {
 
 //运行项目
 const run = async () => {
-  const branch = await getBranch()
-  console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
 }
