@@ -2,8 +2,10 @@ const axios = require('axios')
 const spawn = require('cross-spawn')
 const { getBranch } = require('./utils/tools')
 
-
-const baseURL = `http://${process.env.IP}:${process.env.PORT}`
+const baseURL = {
+  'LAPTOP-4KDIA4A3': 'http://localhost:81',
+  'iZ6ilh61jzkvrhZ': 'http://39.97.238.175:81'
+}[process.env.computername]
 console.log(baseURL)
 
 //项目名称

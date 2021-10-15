@@ -201,15 +201,15 @@ const getPort = async ({ port }) => {
   let list = [...result]
   const branch = await getBranch()
   console.log(branch)
-  const branchTestInfo = list.find(item => {
+  const branchTestInfo = list.find((item) => {
     return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
   })
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
-     const tempArr = branchTestInfo.url.split(':')
-     if (tempArr.length >= 3) {
-       usedPort = tempArr[2]
-     }
+    const tempArr = branchTestInfo.url.split(':')
+    if (tempArr.length >= 3) {
+      usedPort = tempArr[2]
+    }
   } else {
     console.log('add')
   }
@@ -220,10 +220,12 @@ const getPort = async ({ port }) => {
 }
 
 const run = async (req, res) => {
-  const branch = await getBranch()
+  const branch = await getBranch({
+    path: '/temp/m-node-edu/origin/feature/login/'
+  })
   console.log(branch)
-  spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  // spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  // spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
     message: '成功'

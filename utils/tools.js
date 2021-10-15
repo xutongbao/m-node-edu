@@ -344,9 +344,9 @@ const choosePort = ({ port }) => {
 
 //获取git项目分支名称
 const getBranch = async ({ path = '' } = {}) => {
-  const git = simpleGit()
+  const git = simpleGit('/temp/m-node-edu/origin/feature/login/')
   const status = await git.status()
-  //console.log(status)
+  console.log(status)
   return status.tracking
 }
 
