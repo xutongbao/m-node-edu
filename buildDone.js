@@ -63,26 +63,6 @@ const run = async () => {
     .then((res) => {
       if (res.data.state === 1) {
         console.log('Start successful!')
-        spawn.sync('echo const prettylist = > prettylist.js', [], {
-          stdio: 'inherit',
-          shell: true
-        })
-        spawn.sync('pm2 prettylist >> prettylist.js', [], {
-          stdio: 'inherit',
-          shell: true
-        })
-        spawn.sync('echo ; >> prettylist.js', [], {
-          stdio: 'inherit',
-          shell: true
-        })
-        spawn.sync(
-          'echo module.exports = { prettylist } >> prettylist.js',
-          [],
-          {
-            stdio: 'inherit',
-            shell: true
-          }
-        )
         console.log(res.data.data)
         return res.data.data
       }
