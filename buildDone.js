@@ -1,5 +1,4 @@
 const axios = require('axios')
-const spawn = require('cross-spawn')
 
 const baseURL = {
   'LAPTOP-4KDIA4A3': 'http://localhost:81',
@@ -56,12 +55,20 @@ const handleAddRecord = async () => {
 
 //运行项目
 const run = async () => {
-  spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  await axios
+    .post(`${baseURL}/api/jenkins/run`, {
+      branch: process.env.branch,
+    })
+    .then((res) => {
+      console.log('Processing. Please wait!')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }
 
 setTimeout(async () => {
-  //await run()
+  await run()
   await email()
   await handleAddRecord()
 }, 3000)

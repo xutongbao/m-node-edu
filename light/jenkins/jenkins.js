@@ -221,12 +221,13 @@ const getPort = async ({ branch, port }) => {
 const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
-  spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
-    message: '成功'
+    message: '正在处理中'
   })
+  spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+
 }
 
 module.exports = {
