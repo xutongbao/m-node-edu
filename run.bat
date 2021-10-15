@@ -1,3 +1,4 @@
+@REM 接口/api/jenkins/run执行这个批处理
 echo %0 %1
 set historyPath=%cd%
 echo %historyPath%
@@ -11,4 +12,3 @@ set watch=false
 call pm2 start ecosystem.config.js --env production
 @REM 跳转到原路径
 cd %historyPath%
-echo 666

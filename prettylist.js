@@ -1,7 +1,7 @@
 const prettylist = 
 [
   {
-    pid: 89500,
+    pid: 85436,
     name: 'origin_master',
     pm2_env: {
       namespace: 'default',
@@ -14,7 +14,14 @@ const prettylist =
       automation: true,
       pmx: true,
       instance_var: 'NODE_APP_INSTANCE',
-      ignore_watch: [ 'node_modules', 'log', 'dbFile', '.git', 'prettylist.js' ],
+      ignore_watch: [
+        'node_modules',
+        'log',
+        'dbFile',
+        '.git',
+        'prettylist.js',
+        'prettylist.txt'
+      ],
       watch: 'false',
       autorestart: true,
       vizion: true,
@@ -136,7 +143,7 @@ const prettylist =
         ALLUSERSPROFILE: 'C:\\ProgramData',
         PM2_HOME: 'C:\\Users\\xu\\.pm2',
         origin_master: '{}',
-        unique_id: '8891a6a6-7a1d-470c-8ed5-5135f4278839'
+        unique_id: '2f43c950-fbd7-4dcf-a769-789cb79129f9'
       },
       node_args: [ '--inspect' ],
       name: 'origin_master',
@@ -265,9 +272,9 @@ const prettylist =
       ALLUSERSPROFILE: 'C:\\ProgramData',
       PM2_HOME: 'C:\\Users\\xu\\.pm2',
       origin_master: '{}',
-      unique_id: '8891a6a6-7a1d-470c-8ed5-5135f4278839',
+      unique_id: '2f43c950-fbd7-4dcf-a769-789cb79129f9',
       status: 'online',
-      pm_uptime: 1634295657715,
+      pm_uptime: 1634295844442,
       axm_actions: [
         {
           action_name: 'km:heapdump',
@@ -297,19 +304,19 @@ const prettylist =
       ],
       axm_monitor: {
         'Heap Size': {
-          value: '53.91',
+          value: '53.41',
           type: 'internal/v8/heap/total',
           unit: 'MiB',
           historic: true
         },
         'Heap Usage': {
-          value: 51.49,
+          value: 51.85,
           type: 'internal/v8/heap/usage',
           unit: '%',
           historic: true
         },
         'Used Heap Size': {
-          value: '27.76',
+          value: '27.69',
           type: 'internal/v8/heap/used',
           unit: 'MiB',
           historic: true
@@ -339,7 +346,7 @@ const prettylist =
         module_version: '5.1.2'
       },
       axm_dynamic: {},
-      created_at: 1634295657715,
+      created_at: 1634295844442,
       pm_id: 0,
       restart_time: 0,
       unstable_restarts: 0,
@@ -350,7 +357,7 @@ const prettylist =
         url: 'git@github.com:xutongbao/m-node-edu.git',
         revision: '4226cc9349cb30eb29c7cabaee585f2c8b9ccdc9',
         comment: '优化\n',
-        unstaged: false,
+        unstaged: true,
         branch: 'HEAD',
         remotes: [ 'origin' ],
         remote: 'origin',
@@ -358,12 +365,12 @@ const prettylist =
         ahead: false,
         next_rev: null,
         prev_rev: '2c585a4942ca29fe7b6a9fe107bd530c112ff2bf',
-        update_time: '2021-10-15T11:00:58.324Z',
+        update_time: '2021-10-15T11:04:04.925Z',
         repo_path: 'D:\\temp\\m-node-edu\\origin\\master'
       }
     },
     pm_id: 0,
-    monit: { memory: 77209600, cpu: 37.4 }
+    monit: { memory: 77234176, cpu: 39 }
   }
 ]; 
 module.exports = { prettylist } 
