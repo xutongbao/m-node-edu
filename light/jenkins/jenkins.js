@@ -2,6 +2,7 @@ const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const fs = require('fs')
+const { prettylist } = require('../../prettylist')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -225,9 +226,9 @@ const run = async (req, res) => {
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
-  let prettylist = fs.readFileSync('./prettylist.txt').toString()
-  prettylist = prettylist.replace(/\n/g, '')
-  prettylist = JSON.parse(prettylist)
+  // let prettylist = fs.readFileSync('./prettylist.txt').toString()
+  // prettylist = prettylist.replace(/\n/g, '')
+  // prettylist = JSON.parse(prettylist)
   console.log(prettylist)
   res.send({
     state: 1,
