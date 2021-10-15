@@ -7,3 +7,4 @@ set tempName=%1
 set name=%tempName:\=_%
 set watch=false
 call pm2 start ecosystem.config.js --env production
+call pm2 prettylist > prettylist.txt

@@ -10,7 +10,7 @@ const compression = require('compression')
 const { initLog } = require('./utils/tools')
 const { getPort } = require('./light/jenkins/jenkins')
 
-console.log(1)
+console.log(12)
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))

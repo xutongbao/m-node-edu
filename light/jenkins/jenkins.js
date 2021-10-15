@@ -1,6 +1,7 @@
 const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
+const fs = require('fs')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -218,16 +219,23 @@ const getPort = async ({ branch, port }) => {
   return tempPort
 }
 
+//jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
-  res.send({
-    state: 1,
-    message: '正在处理中'
-  })
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
-
+  let prettylist = fs.readFileSync('./prettylist.txt').toString()
+  prettylist = prettylist.replace(/\n/g, '')
+  prettylist = JSON.parse(prettylist)
+  console.log(prettylist)
+  res.send({
+    state: 1,
+    data: {
+      prettylist
+    }, 
+    message: '成功'
+  })
 }
 
 module.exports = {
