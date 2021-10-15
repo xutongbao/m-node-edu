@@ -2,7 +2,6 @@ const Mock = require('mockjs')
 const nodemailer = require('nodemailer')
 const log4js = require('log4js')
 const net = require('net')
-const simpleGit = require('simple-git')
 
 const mockShop = () => {
   return Mock.mock({
@@ -267,7 +266,6 @@ const initLog = (app) => {
     log4js.connectLogger(logger, {
       level: 'info',
       format: (req, res, format) => {
-        console.log('log')
         return format(
           `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
             req.body
@@ -342,14 +340,6 @@ const choosePort = ({ port }) => {
   })
 }
 
-//获取git项目分支名称
-const getBranch = async ({ path = '' } = {}) => {
-  const git = simpleGit()
-  const status = await git.status()
-  //console.log(status)
-  return status.tracking
-}
-
 module.exports = {
   mockShop,
   shopInitValue,
@@ -365,7 +355,5 @@ module.exports = {
   //日志对象
   logger,
   //选择可用端口
-  choosePort,
-  //获取git项目分支名称
-  getBranch
+  choosePort
 }

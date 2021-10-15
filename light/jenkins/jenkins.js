@@ -1,5 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort, getBranch } = require('../../utils/tools')
+const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 
 //搜索
@@ -54,7 +54,7 @@ const dataSearch = async (req, res) => {
       pageNum: pageNum - 0,
       pageSize: pageSize - 0
     },
-    message: '搜索成功'
+    message: '搜索成功1'
   })
 }
 
@@ -194,22 +194,21 @@ const dataEdit = async (req, res) => {
 }
 
 //查找适合的端口
-const getPort = async ({ port }) => {
+const getPort = async ({ branch, port }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
-  const branch = await getBranch()
-  console.log(branch)
-  const branchTestInfo = list.find(item => {
+  console.log('getPort:', branch)
+  const branchTestInfo = list.find((item) => {
     return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
   })
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
-     const tempArr = branchTestInfo.url.split(':')
-     if (tempArr.length >= 3) {
-       usedPort = tempArr[2]
-     }
+    const tempArr = branchTestInfo.url.split(':')
+    if (tempArr.length >= 3) {
+      usedPort = tempArr[2]
+    }
   } else {
     console.log('add')
   }
@@ -220,14 +219,15 @@ const getPort = async ({ port }) => {
 }
 
 const run = async (req, res) => {
-  const branch = await getBranch()
+  const { branch } = req.body
   console.log(branch)
-  spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
-    message: '成功'
+    message: '正在处理中'
   })
+  spawn.sync('yarn -v', [], { stdio: 'inherit' })
+  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+
 }
 
 module.exports = {

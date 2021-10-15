@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: `source_${process.env.name}`,
+      name: `${process.env.name}`,
       script: './app.js',
       watch: process.env.watch === 'false' ? false : true,
       ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
