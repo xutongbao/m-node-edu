@@ -22,3 +22,5 @@ yarn-error.log*
 *.sw?
 /my_81.db
 /log
+/prettylist.js
+/prettylist.txt
