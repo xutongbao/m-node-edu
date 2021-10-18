@@ -30,3 +30,6 @@ yarn-error.log*
 /prettylist.js
 /port.js
 /prettylist.txt
+/exclude.txt
+/portUsed.txt
+/postUsed.txt
