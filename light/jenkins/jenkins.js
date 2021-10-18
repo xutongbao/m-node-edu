@@ -237,12 +237,14 @@ const run = async (req, res) => {
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`runChild1.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`runChild2.bat ${branch}`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../prettylist')]
   const { prettylist } = require('../../prettylist')
   spawn.sync(`runChild3.bat`, [], { stdio: 'inherit' })
   prettylist.forEach(item => {
     spawn.sync(`runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
   })
   spawn.sync(`runChild5.bat`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../port')]
   const { port } = require('../../port')
   
   res.send({
