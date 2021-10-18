@@ -2,6 +2,7 @@ const Mock = require('mockjs')
 const nodemailer = require('nodemailer')
 const log4js = require('log4js')
 const net = require('net')
+const spawn = require('cross-spawn')
 
 const mockShop = () => {
   return Mock.mock({
@@ -305,6 +306,9 @@ const portUsed = (port) => {
     let server = net.createServer().listen(port)
     server.on('listening', function () {
       server.close()
+      spawn.sync(`netstat -ano | findstr 0.0.0.0:${port} > postUsed.txt`, [], { stdio: 'inherit' })
+      let portUsedStr = fs.readFileSync('./postUsed.txt').toString()
+      console.log(portUsedStr)
       resolve(port)
     })
     server.on('error', function (err) {
