@@ -2,7 +2,6 @@ const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const fs = require('fs')
-const { prettylist } = require('../../prettylist')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -220,6 +219,16 @@ const getPort = async ({ branch, port }) => {
   return tempPort
 }
 
+function readText(pathname) {
+  var bin = fs.readFileSync(pathname)
+
+  if (bin[0] === 0xef && bin[1] === 0xbb && bin[2] === 0xbf) {
+    bin = bin.slice(3)
+  }
+
+  return bin.toString('utf-8')
+}
+
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
   const { branch } = req.body
@@ -228,15 +237,13 @@ const run = async (req, res) => {
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`runChild1.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`runChild2.bat ${branch}`, [], { stdio: 'inherit' })
-  // let prettylist = fs.readFileSync('./prettylist.txt').toString()
-  // prettylist = prettylist.replace(/\n/g, '')
-  // prettylist = JSON.parse(prettylist)
-  //console.log(prettylist)
+  //let prettylist = fs.readText('./prettylist.txt').toString()
+  const { prettylist } = require('../../prettylist')
   res.send({
     state: 1,
     data: {
       prettylist
-    }, 
+    },
     message: '成功'
   })
 }
