@@ -238,19 +238,22 @@ const run = async (req, res) => {
   const { port } = require('../../port')
 
   const currentServer = prettylist.find(item => {
-    const name = item.name.replace('_', '/')
+    const name = item.name.replace(/_/g, '/')
     return name === branch
   })
   let currentPort
   
-  port.forEach(item => {
-    if (item.pid === currentServer.pid) {
-      const startIndex = item.info.indexOf(':')
-      const endIndex = item.info.indexOf(' ', startIndex)
-      currentPort = item.info.slice(startIndex + 1, endIndex)
-      //currentPort = item.info
-    }
-  })
+  if (currentServer) {
+    port.forEach(item => {
+      if (item.pid === currentServer.pid) {
+        const startIndex = item.info.indexOf(':')
+        const endIndex = item.info.indexOf(' ', startIndex)
+        currentPort = item.info.slice(startIndex + 1, endIndex)
+        //currentPort = item.info
+      }
+    })
+  }
+
 
 
   
