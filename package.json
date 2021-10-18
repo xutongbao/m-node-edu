@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev1": "cross-env PORT=81 NODE_ENV=development nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log --ignore prettylist.js --ignore prettylist.txt --ignore port.js app",
+    "dev1": "cross-env PORT=81 NODE_ENV=development nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log --ignore jenkins --ignore prettylist.js --ignore prettylist.txt --ignore port.js app",
     "serve1": "cross-env PORT=81 NODE_ENV=production nodemon --inspect --ignore node_modules/ --ignore dbFile/ --ignore log --ignore prettylist.js --ignore prettylist.txt --ignore port.js app",
     "dev": "cross-env name=source_scripts pm2 start ecosystem.config.js --env development && pm2 logs",
     "serve": "cross-env name=source_scripts pm2 start ecosystem.config.js --env production && pm2 logs",
