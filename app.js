@@ -10,7 +10,7 @@ const compression = require('compression')
 const { initLog } = require('./utils/tools')
 const { getPort } = require('./light/jenkins/jenkins')
 
-console.log(1)
+console.log(12)
 
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
@@ -67,8 +67,9 @@ air(app)
 const init = async () => {
   //启动命令：set PORT=3000 && node app
   let port = process.env.PORT || 81
-  console.log(process.env.branch)
-  port = await getPort({ branch: process.env.branch, port })
+  if (process.env.branch) {
+    port = await getPort({ branch: process.env.branch, port })
+  }
   console.log('port:', port)
   app.listen(port, () => {
     console.log(port)

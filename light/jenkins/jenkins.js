@@ -1,6 +1,7 @@
 const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort } = require('../../utils/tools')
 const spawn = require('cross-spawn')
+const fs = require('fs')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -218,16 +219,51 @@ const getPort = async ({ branch, port }) => {
   return tempPort
 }
 
+//jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
-  res.send({
-    state: 1,
-    message: '正在处理中'
-  })
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`runChild1.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`runChild2.bat ${branch}`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../prettylist')]
+  const { prettylist } = require('../../prettylist')
+  spawn.sync(`runChild3.bat`, [], { stdio: 'inherit' })
+  prettylist.forEach(item => {
+    spawn.sync(`runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
+  })
+  spawn.sync(`runChild5.bat`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../port')]
+  const { port } = require('../../port')
 
+  const currentServer = prettylist.find(item => {
+    const name = item.name.replace('_', '/')
+    return name === branch
+  })
+  let currentPort
+  
+  port.forEach(item => {
+    if (item.pid === currentServer.pid) {
+      const startIndex = item.info.indexOf(':')
+      const endIndex = item.info.indexOf(' ', startIndex)
+      currentPort = item.info.slice(startIndex + 1, endIndex)
+      //currentPort = item.info
+    }
+  })
+
+
+  
+  res.send({
+    state: 1,
+    data: {
+      prettylist,
+      port,
+      currentServer,
+      currentPort
+    },
+    message: '成功'
+  })
 }
 
 module.exports = {

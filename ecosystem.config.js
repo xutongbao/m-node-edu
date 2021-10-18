@@ -4,7 +4,7 @@ module.exports = {
       name: `${process.env.name}`,
       script: './app.js',
       watch: process.env.watch === 'false' ? false : true,
-      ignore_watch: ['node_modules', 'log', 'dbFile', '.git'],
+      ignore_watch: ['node_modules', 'log', 'dbFile', '.git', 'prettylist.js', 'prettylist.txt', 'port.js'],
       node_args: ['--inspect'],
       env_development: {
         PORT: 81,
