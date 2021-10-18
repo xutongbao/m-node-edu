@@ -303,7 +303,7 @@ const logger = (name) => {
 
 //测试端口是否可用
 const portUsed = (port) => {
-  console.log('postUsed1')
+  console.log('portUsed,6666')
   return new Promise((resolve, reject) => {
     let server = net.createServer().listen(port)
     server.on('listening', function () {
