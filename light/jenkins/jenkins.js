@@ -219,16 +219,6 @@ const getPort = async ({ branch, port }) => {
   return tempPort
 }
 
-function readText(pathname) {
-  var bin = fs.readFileSync(pathname)
-
-  if (bin[0] === 0xef && bin[1] === 0xbb && bin[2] === 0xbf) {
-    bin = bin.slice(3)
-  }
-
-  return bin.toString('utf-8')
-}
-
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
   const { branch } = req.body
