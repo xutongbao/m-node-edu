@@ -1,23 +1,25 @@
 const axios = require('axios')
-
-const baseURL = {
-  'LAPTOP-4KDIA4A3': 'http://localhost:81',
-  iZ6ilh61jzkvrhZ: 'http://39.97.238.175:81'
+const port = 81
+const host = {
+  'LAPTOP-4KDIA4A3': 'http://localhost',
+  iZ6ilh61jzkvrhZ: 'http://39.97.238.175'
 }[process.env.computername]
+const baseURL = `${host}:${port}`
 console.log(baseURL)
 
 //项目名称
 const name = 'node接口'
 
 // 发邮件
-const email = async () => {
+const email = async ({ data }) => {
+  const { currentPort } = data
   const emailData = {
     type: 'jenkins',
     title: '构建成功',
     name,
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
-    url: `${baseURL}`,
+    url: `${host}:${currentPort}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -33,12 +35,13 @@ const email = async () => {
 }
 
 // 添加构建记录
-const handleAddRecord = async () => {
+const handleAddRecord = async ({ data }) => {
+  const { currentPort } = data
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
-    url: `${baseURL}`,
+    url: `${host}:${currentPort}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -72,8 +75,7 @@ const run = async () => {
 }
 
 setTimeout(async () => {
-  await run()
-  const data = {}
+  const data = await run()
   await email({ data })
   await handleAddRecord({ data })
 }, 3000)

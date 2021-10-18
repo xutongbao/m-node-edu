@@ -246,12 +246,31 @@ const run = async (req, res) => {
   spawn.sync(`runChild5.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../port')]
   const { port } = require('../../port')
+
+  const currentServer = prettylist.find(item => {
+    const name = item.name.replace('_', '/')
+    return name === branch
+  })
+  let currentPort
+  
+  port.forEach(item => {
+    if (item.pid === currentServer.pid) {
+      const startIndex = item.info.indexOf(':')
+      const endIndex = item.info.indexOf(' ', startIndex)
+      currentPort = item.info.slice(startIndex + 1, endIndex)
+      //currentPort = item.info
+    }
+  })
+
+
   
   res.send({
     state: 1,
     data: {
       prettylist,
       port,
+      currentServer,
+      currentPort
     },
     message: '成功'
   })
