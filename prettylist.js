@@ -1,7 +1,7 @@
 const prettylist = 
 [
   {
-    pid: 22460,
+    pid: 22308,
     name: 'origin_master',
     pm2_env: {
       pmx_module: true,
@@ -156,7 +156,7 @@ const prettylist =
       network_refresh_rate: '5',
       unique_id: '0e45bc1a-a5f0-4023-8ab0-c4208480fd99',
       status: 'online',
-      pm_uptime: 1634525146062,
+      pm_uptime: 1634525779074,
       axm_actions: [
         {
           action_name: 'km:heapdump',
@@ -193,35 +193,21 @@ const prettylist =
           historic: true
         },
         'Heap Usage': {
-          value: 51.55,
+          value: 51,
           type: 'internal/v8/heap/usage',
           unit: '%',
           historic: true
         },
         'Used Heap Size': {
-          value: '8.26',
+          value: '8.17',
           type: 'internal/v8/heap/used',
           unit: 'MiB',
           historic: true
         },
-        'CPU usage': { value: 58.27, unit: '%', historic: true },
-        'Free memory': { value: '41.69', unit: '%', historic: true },
-        'Used memory': { value: '9.94', unit: 'GB', historic: true },
-        'Total memory': { value: '17.05', unit: 'GB', historic: true },
-        'Active requests': { value: 0, type: 'internal/libuv/requests', historic: true },
-        'Active handles': { value: 3, type: 'internal/libuv/handles', historic: true },
-        'Event Loop Latency': {
-          value: '10.09',
-          type: 'internal/libuv/latency/p50',
-          unit: 'ms',
-          historic: true
-        },
-        'Event Loop Latency p95': {
-          value: '10.09',
-          type: 'internal/libuv/latency/p95',
-          unit: 'ms',
-          historic: true
-        }
+        'CPU usage': { value: 61.6, unit: '%', historic: true },
+        'Free memory': { value: '39.83', unit: '%', historic: true },
+        'Used memory': { value: '10.26', unit: 'GB', historic: true },
+        'Total memory': { value: '17.05', unit: 'GB', historic: true }
       },
       axm_options: {
         error: true,
@@ -271,9 +257,9 @@ const prettylist =
         description: 'Production process manager for Node.JS applications with a built-in load balancer.'
       },
       axm_dynamic: {},
-      created_at: 1634525145622,
+      created_at: 1634525778660,
       pm_id: 0,
-      restart_time: 14,
+      restart_time: 16,
       unstable_restarts: 0,
       version: '3.0.0',
       versioning: null,
@@ -293,7 +279,7 @@ const prettylist =
       exit_code: 1
     },
     pm_id: 0,
-    monit: { memory: 40243200, cpu: 0 }
+    monit: { memory: 40493056, cpu: 0 }
   }
 ]; 
 module.exports = { prettylist } 
