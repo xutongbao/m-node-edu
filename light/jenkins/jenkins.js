@@ -224,27 +224,28 @@ const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  spawn.sync(`run.bat ${branch}`, [], { stdio: 'inherit' })
-  spawn.sync(`runChild1.bat ${branch}`, [], { stdio: 'inherit' })
-  spawn.sync(`runChild2.bat ${branch}`, [], { stdio: 'inherit' })
+  const path = './'
+  spawn.sync(`${path}run.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
   const { prettylist } = require('../../prettylist')
-  spawn.sync(`runChild3.bat`, [], { stdio: 'inherit' })
-  prettylist.forEach(item => {
-    spawn.sync(`runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
+  prettylist.forEach((item) => {
+    spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
   })
-  spawn.sync(`runChild5.bat`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../port')]
   const { port } = require('../../port')
 
-  const currentServer = prettylist.find(item => {
+  const currentServer = prettylist.find((item) => {
     const name = item.name.replace(/_/g, '/')
     return name === branch
   })
   let currentPort
-  
+
   if (currentServer) {
-    port.forEach(item => {
+    port.forEach((item) => {
       if (item.pid === currentServer.pid) {
         const startIndex = item.info.indexOf(':')
         const endIndex = item.info.indexOf(' ', startIndex)
@@ -254,9 +255,6 @@ const run = async (req, res) => {
     })
   }
 
-
-
-  
   res.send({
     state: 1,
     data: {
