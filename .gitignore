@@ -24,3 +24,6 @@ yarn-error.log*
 /log
 /prettylist.js
 /prettylist.txt
+/port.js
+/port copy.js
+/prettylist copy.js
