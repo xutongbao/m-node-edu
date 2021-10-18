@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer')
 const log4js = require('log4js')
 const net = require('net')
 const spawn = require('cross-spawn')
+const fs = require('fs')
 
 const mockShop = () => {
   return Mock.mock({
@@ -302,14 +303,20 @@ const logger = (name) => {
 
 //测试端口是否可用
 const portUsed = (port) => {
+  console.log('postUsed1')
   return new Promise((resolve, reject) => {
     let server = net.createServer().listen(port)
     server.on('listening', function () {
       server.close()
-      spawn.sync(`netstat -ano | findstr 0.0.0.0:${port} > postUsed.txt`, [], { stdio: 'inherit' })
-      let portUsedStr = fs.readFileSync('./postUsed.txt').toString()
-      console.log(portUsedStr)
-      resolve(port)
+      spawn.sync(`./checkPort.bat ${port}`, [], { stdio: 'inherit' })
+      let portUsedStr = fs.readFileSync('./portUsed.txt').toString()
+      console.log(portUsedStr.length)
+      if (portUsedStr.length === 0) {
+        resolve(port)
+      } else {
+        resolve(new Error())
+      }
+      
     })
     server.on('error', function (err) {
       if (err.code == 'EADDRINUSE') {
