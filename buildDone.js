@@ -65,7 +65,6 @@ const run = async () => {
     .then((res) => {
       if (res.data.state === 1) {
         console.log('Start successful!')
-        console.log(res.data.data)
         return res.data.data
       }
     })
