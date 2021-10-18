@@ -224,7 +224,7 @@ const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  const path = './jenkins/hot/'
+  const path = './'
   spawn.sync(`${path}run.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
