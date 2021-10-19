@@ -208,10 +208,10 @@ const getPort = async ({ branch, port }) => {
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
     if (tempArr.length >= 3) {
-      usedPort = tempArr[2]
+      if (tempArr[2]) {
+        usedPort = tempArr[2]
+      }
     }
-  } else {
-    console.log('add')
   }
   console.log('usedPort:', usedPort)
 
