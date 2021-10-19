@@ -71,6 +71,7 @@ air(app)
 
 const init = async () => {
   //启动命令：set PORT=3000 && node app
+  //yarn start命令用于https://codesandbox.io网站的node托管，本地使用yarn start直接启动会报错
   let port = process.env.PORT
   if (process.env.NODE_ENV !== 'codesandbox') {
     port = process.env.PORT || 81
