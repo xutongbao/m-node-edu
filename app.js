@@ -22,8 +22,13 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
 //app.use(express.static('public'))
-//app.use(express.static('upload'))
-app.use(express.static('/temp')) //, { index: '/air/origin/master/index.html'}
+app.use(express.static('upload'))
+if (process.env.NODE_ENV === 'codesandbox') {
+  app.use(express.static('codesandbox'))
+} else {
+  app.use(express.static('/temp'))
+}
+
 app.use(express.static('log'))
 app.use(cors())
 

@@ -4,8 +4,10 @@ console.log('NODE_ENV:', NODE_ENV)
 let db = {}
 if (NODE_ENV === 'production') {
   db = new sqlite3.Database('/temp/dbFile/my_prod.db')
-} else {
+} else if (NODE_ENV === 'development') {
   db = new sqlite3.Database('/temp/dbFile/my_dev.db')
+} else if (NODE_ENV === 'codesandbox') {
+  db = new sqlite3.Database('./codesandbox.db')
 }
 //执行sql语句
 const runSql = async (sql) => {
