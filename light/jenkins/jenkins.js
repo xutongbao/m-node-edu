@@ -1,7 +1,6 @@
 const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort, sleep } = require('../../utils/tools')
 const spawn = require('cross-spawn')
-const fs = require('fs')
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -251,7 +250,6 @@ const run = async (req, res) => {
         const startIndex = item.info.indexOf(':')
         const endIndex = item.info.indexOf(' ', startIndex)
         currentPort = item.info.slice(startIndex + 1, endIndex)
-        //currentPort = item.info
       }
     })
   }
