@@ -303,7 +303,7 @@ const logger = (name) => {
 
 //测试端口是否可用
 const portUsed = (port) => {
-  console.log('postUsed1')
+  console.log('portUsed,6666')
   return new Promise((resolve, reject) => {
     let server = net.createServer().listen(port)
     server.on('listening', function () {
@@ -314,9 +314,15 @@ const portUsed = (port) => {
       if (portUsedStr.length === 0) {
         resolve(port)
       } else {
-        resolve(new Error())
+        portUsedStr = portUsedStr.trim()
+        portUsedStr = portUsedStr.replace(/\s+/g, ' ')
+        portUsedStr = portUsedStr.split(' ')
+        if (portUsedStr[1] === `0.0.0.0:${port}`) {
+          resolve(new Error())
+        } else {
+          resolve(port)
+        }
       }
-      
     })
     server.on('error', function (err) {
       if (err.code == 'EADDRINUSE') {
@@ -351,6 +357,15 @@ const choosePort = ({ port }) => {
   })
 }
 
+//睡眠函数
+const sleep = async (count) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, count)
+  })
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -366,5 +381,7 @@ module.exports = {
   //日志对象
   logger,
   //选择可用端口
-  choosePort
+  choosePort,
+  //睡眠函数
+  sleep,
 }
