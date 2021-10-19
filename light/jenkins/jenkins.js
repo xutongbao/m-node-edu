@@ -1,5 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort } = require('../../utils/tools')
+const { logger, choosePort, sleep } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const fs = require('fs')
 
@@ -230,6 +230,7 @@ const run = async (req, res) => {
   spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
   const { prettylist } = require('../../prettylist')
+  sleep(2000)
   spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
   prettylist.forEach((item) => {
     spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
@@ -237,7 +238,7 @@ const run = async (req, res) => {
   spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../port')]
   const { port } = require('../../port')
-
+  
   const currentServer = prettylist.find((item) => {
     const name = item.name.replace(/_/g, '/')
     return name === branch

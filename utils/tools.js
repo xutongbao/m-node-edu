@@ -357,6 +357,15 @@ const choosePort = ({ port }) => {
   })
 }
 
+//睡眠函数
+const sleep = async (count) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, count)
+  })
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -372,5 +381,7 @@ module.exports = {
   //日志对象
   logger,
   //选择可用端口
-  choosePort
+  choosePort,
+  //睡眠函数
+  sleep,
 }
