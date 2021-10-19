@@ -71,7 +71,10 @@ air(app)
 
 const init = async () => {
   //启动命令：set PORT=3000 && node app
-  let port = process.env.PORT || 81
+  let port = process.env.PORT
+  if (process.env.NODE_ENV !== 'codesandbox') {
+    port = process.env.PORT || 81
+  }
   console.log(process.env.branch)
   if (process.env.branch) {
     port = await getPort({ branch: process.env.branch, port })
