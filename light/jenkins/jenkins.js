@@ -225,9 +225,7 @@ const run = async (req, res) => {
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
   spawn.sync(
-    `${path}run.bat ${branch} ${
-      branch === 'origin/master' ? 'production' : 'development'
-    } `,
+    `${path}run.bat ${branch}`,
     [],
     { stdio: 'inherit' }
   )
