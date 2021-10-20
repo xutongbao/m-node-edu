@@ -31,7 +31,7 @@ if (NODE_ENV === 'development') {
   tempPath = 'uploadForCodesandbox'
 }
 console.log(tempPath)
-app.use(express.static(`${tempPath}`))
+app.use(express.static(tempPath))
 if (process.env.NODE_ENV === 'codesandbox') {
   app.use(express.static('codesandbox'))
 } else {
