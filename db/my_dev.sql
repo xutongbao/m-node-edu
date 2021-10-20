@@ -195,7 +195,8 @@ INSERT INTO projectTest (
 
 UPDATE projectTest SET 'name' = 'node接口1', 'remarks' = '自动，接口地址1', 'edittime' = '1632981815591' WHERE uid = '1632981815591';
 
-
+Select name from projectTest;
+SELECT * FROM projectTest;
 
 
 

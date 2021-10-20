@@ -21,9 +21,23 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
-//app.use(express.static('public'))
-//app.use(express.static('upload'))
-app.use(express.static('/temp')) //, { index: '/air/origin/master/index.html'}
+const NODE_ENV = process.env.NODE_ENV || 'development'
+let tempPath = ''
+if (NODE_ENV === 'development') {
+  tempPath = '/temp/uploadForDev'
+} else if (NODE_ENV === 'production') {
+  tempPath = '/temp/uploadForProd'
+} else if (NODE_ENV === 'codesandbox') {
+  tempPath = 'uploadForCodesandbox'
+}
+console.log(tempPath)
+app.use(express.static(tempPath))
+if (process.env.NODE_ENV === 'codesandbox') {
+  app.use(express.static('codesandbox'))
+} else {
+  app.use(express.static('/temp'))
+}
+
 app.use(express.static('log'))
 app.use(cors())
 
@@ -66,7 +80,11 @@ air(app)
 
 const init = async () => {
   //启动命令：set PORT=3000 && node app
-  let port = process.env.PORT || 81
+  //yarn start命令用于 https://codesandbox.io 的node托管，本地使用yarn start直接启动会报错
+  let port = process.env.PORT
+  if (process.env.NODE_ENV !== 'codesandbox') {
+    port = process.env.PORT || 81
+  }
   console.log(process.env.branch)
   if (process.env.branch) {
     port = await getPort({ branch: process.env.branch, port })
