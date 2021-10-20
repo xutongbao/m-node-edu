@@ -14,7 +14,7 @@ const name = 'node接口'
 const email = async () => {
   const emailData = {
     type: 'jenkins',
-    title: '构建成功',
+    title: '构建成功-基础api',
     name,
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
