@@ -224,7 +224,13 @@ const run = async (req, res) => {
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
-  spawn.sync(`${path}run.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(
+    `${path}run.bat ${branch} ${
+      branch === 'origin/master' ? 'production' : 'development'
+    } `,
+    [],
+    { stdio: 'inherit' }
+  )
   spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
@@ -237,7 +243,7 @@ const run = async (req, res) => {
   spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../port')]
   const { port } = require('../../port')
-  
+
   const currentServer = prettylist.find((item) => {
     const name = item.name.replace(/_/g, '/')
     return name === branch
