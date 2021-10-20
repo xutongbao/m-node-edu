@@ -21,8 +21,17 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(express.static('../blog/docs'))
 //app.use(express.static('../tan-ui'))
 //app.use(express.static('../air-github/docs'))
-//app.use(express.static('public'))
-app.use(express.static('upload'))
+const NODE_ENV = process.env.NODE_ENV || 'development'
+let tempPath = ''
+if (NODE_ENV === 'development') {
+  tempPath = '/temp/uploadForDev'
+} else if (NODE_ENV === 'production') {
+  tempPath = '/temp/uploadForProd'
+} else if (NODE_ENV === 'codesandbox') {
+  tempPath = 'uploadForCodesandbox'
+}
+console.log(tempPath)
+app.use(express.static(`${tempPath}`))
 if (process.env.NODE_ENV === 'codesandbox') {
   app.use(express.static('codesandbox'))
 } else {

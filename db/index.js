@@ -2,10 +2,10 @@ const sqlite3 = require('sqlite3').verbose()
 const NODE_ENV = process.env.NODE_ENV || 'development'
 console.log('NODE_ENV:', NODE_ENV)
 let db = {}
-if (NODE_ENV === 'production') {
-  db = new sqlite3.Database('/temp/dbFile/my_prod.db')
-} else if (NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
   db = new sqlite3.Database('/temp/dbFile/my_dev.db')
+} else if (NODE_ENV === 'production') {
+  db = new sqlite3.Database('/temp/dbFile/my_prod.db')
 } else if (NODE_ENV === 'codesandbox') {
   db = new sqlite3.Database('./codesandbox.db')
 }
