@@ -233,7 +233,9 @@ const run = async (req, res) => {
   spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
   const { prettylist } = require('../../prettylist')
+  console.log(`sleep start`, new Date())
   await sleep(5000)
+  console.log(`sleep end`, new Date())
   spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
   prettylist.forEach((item) => {
     spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
