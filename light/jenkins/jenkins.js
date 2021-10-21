@@ -3,7 +3,6 @@ const { logger, choosePort, sleep } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
-
 //搜索
 const dataSearch = async (req, res) => {
   const { pageNum = 1, pageSize = 10 } = req.body
@@ -225,18 +224,72 @@ const getPort = async ({ branch, port }) => {
 }
 
 //端口转发
-const portTransfer = ({ app }) => {
-  //接口转发
-  app.use(
-    '/source_scripts_serve1',
-    createProxyMiddleware({
-      target: 'http://localhost:84',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/source_scripts_serve1': '/'
+const portTransfer = async ({ app }) => {
+  const result = await queryPromise(
+    `SELECT * FROM projectTest ORDER BY addtime DESC`
+  )
+  let list = [...result]
+  console.log(list)
+  list = list
+    .filter((item) => item.gitRepositorieName === 'm-node-edu')
+    .filter((item) => {
+      if (item.url.includes('81')) {
+        return false
+      } else if (item.url.includes('84')) {
+        return false
+      } else {
+        return true
       }
     })
-  )
+    .map((item) => {
+      const url = item.url.split(':')
+      const port = url[url.length - 1]
+      return {
+        sign: item.branch,
+        port,
+        remarks: '测试环境'
+      }
+    })
+  console.log(list)
+
+  const transferArr = [
+    {
+      sign: 'source_scripts_dev2',
+      port: '81',
+      remarks: '对应prod-m-node-edu-ice构建的node服务,基础服务'
+    },
+    {
+      sign: 'source_scripts_serve2',
+      port: '84',
+      remarks: '对应prod-m-node-edu构建的node服务，线上服务'
+    },
+    ...list
+  ]
+  console.log(transferArr)
+  transferArr.forEach((item) => {
+    //接口转发
+    app.use(
+      `/${item.sign}`,
+      createProxyMiddleware({
+        target: `http://localhost:${item.port}`,
+        changeOrigin: true,
+        pathRewrite: {
+          [`^/${item.sign}`]: '/'
+        }
+      })
+    )
+  })
+  // //接口转发
+  // app.use(
+  //   '/source_scripts_serve1',
+  //   createProxyMiddleware({
+  //     target: 'http://localhost:84',
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/source_scripts_serve1': '/'
+  //     }
+  //   })
+  // )
 }
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
