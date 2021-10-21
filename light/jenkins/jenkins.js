@@ -243,7 +243,10 @@ const portTransfer = async ({ app }) => {
     .filter((item) => item.gitRepositorieName === 'm-node-edu')
     .map((item) => {
       const url = item.url.split(':')
-      const port = url[url.length - 1]
+      let port = url[url.length - 1]
+      if (!Number.isInteger(port - 1)) {
+        port = 80
+      }
       return {
         ...item,
         port,
