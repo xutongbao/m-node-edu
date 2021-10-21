@@ -7,6 +7,8 @@ const host = {
 const baseURL = `${host}:${port}`
 console.log('ice', baseURL)
 
+console.log('cd:', process.env.cd)
+
 //项目名称
 const name = 'node接口'
 
@@ -38,6 +40,7 @@ const handleAddRecord = async () => {
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: process.env.cd,
     branch: process.env.branch,
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
