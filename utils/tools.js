@@ -404,7 +404,8 @@ const getValuesByNodeEnv = () => {
     staticUploadPath = '/temp/uploadForProd'
     staticWebPath = '/temp'
     redirectPath = '/air/#/air/light/extra/home'
-    dbFilePath = '/temp/dbFile/my_prod.db'
+    //dbFilePath = '/temp/dbFile/my_prod.db'
+    dbFilePath = '/temp/dbFile/my_dev.db'
   } else if (NODE_ENV === 'codesandbox') {
     staticUploadPath = 'uploadForCodesandbox'
     staticWebPath = 'codesandbox'
