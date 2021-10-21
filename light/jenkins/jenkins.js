@@ -1,6 +1,8 @@
 const { runSql, queryPromise } = require('../../db/index')
 const { logger, choosePort, sleep } = require('../../utils/tools')
 const spawn = require('cross-spawn')
+const { createProxyMiddleware } = require('http-proxy-middleware')
+
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -222,17 +224,28 @@ const getPort = async ({ branch, port }) => {
   return tempPort
 }
 
+//端口转发
+const portTransfer = ({ app }) => {
+  //接口转发
+  app.use(
+    '/source_scripts_serve1',
+    createProxyMiddleware({
+      target: 'http://localhost:84',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/source_scripts_serve1': '/'
+      }
+    })
+  )
+}
+
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
   const { branch } = req.body
   console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
-  spawn.sync(
-    `${path}run.bat ${branch}`,
-    [],
-    { stdio: 'inherit' }
-  )
+  spawn.sync(`${path}run.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
@@ -282,5 +295,6 @@ module.exports = {
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
   getPort,
+  portTransfer,
   jenkinsRun: run
 }

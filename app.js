@@ -8,8 +8,7 @@ const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
 const { initLog, getValuesByNodeEnv } = require('./utils/tools')
-const { getPort } = require('./light/jenkins/jenkins')
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const { getPort, portTransfer } = require('./light/jenkins/jenkins')
 
 console.log(12)
 
@@ -25,17 +24,8 @@ function shouldCompress(req, res) {
 //开启gzip
 app.use(compression({ filter: shouldCompress }))
 
-//接口转发
-app.use(
-  '/source_scripts_serve1',
-  createProxyMiddleware({
-    target: 'http://localhost:84',
-    changeOrigin: true,
-    pathRewrite: {
-      '^/source_scripts_serve1': '/',
-    },
-  })
-)
+portTransfer({ app })
+
 //前端路由history模式
 //app.use(history())
 //app.use(express.static('D:/zlhx-ui'))
