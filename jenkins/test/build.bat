@@ -11,6 +11,7 @@ xcopy \Jenkins\workspace\%pipeline%%gitRepositorieName% \temp\%gitRepositorieNam
 
 @REM 设置环境变量并执行js脚本发送邮件通知、添加构建记录
 set computername=%computername%
+set cd=%cd%
 call node .\jenkins\test\buildDone
 echo test success
 

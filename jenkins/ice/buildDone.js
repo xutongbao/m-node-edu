@@ -1,4 +1,5 @@
 const axios = require('axios')
+const { getJenkinsProjectName } = require('../../utils/tools')
 const port = 81
 const host = {
   'LAPTOP-4KDIA4A3': 'http://localhost',
@@ -11,14 +12,6 @@ console.log('cd:', process.env.cd)
 
 //项目名称
 const name = 'node接口'
-
-const getJenkinsProjectName = ({ cd }) => {
-  cd = cd.split('\\')
-  cd = cd[cd.length - 1]
-
-  console.log(cd)
-  return cd
-}
 
 // 发邮件
 const email = async () => {
