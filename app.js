@@ -7,7 +7,7 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog } = require('./utils/tools')
+const { initLog, getValuesByNodeEnv } = require('./utils/tools')
 const { getPort } = require('./light/jenkins/jenkins')
 
 console.log(12)
@@ -33,23 +33,7 @@ app.use(compression({ filter: shouldCompress }))
 //app.use(express.static('../air-github/docs'))
 
 //环境变量
-const NODE_ENV = process.env.NODE_ENV || 'development'
-let staticUploadPath = '/temp/uploadForDev'
-let staticWebPath = '/temp'
-let redirectPath = '/'
-if (NODE_ENV === 'development') {
-  staticUploadPath = '/temp/uploadForDev'
-  staticWebPath = '/temp'
-  redirectPath = '/test/air/origin/master/#/air/light/extra/home'
-} else if (NODE_ENV === 'production') {
-  staticUploadPath = '/temp/uploadForProd'
-  staticWebPath = '/temp'
-  redirectPath = '/air/#/air/light/extra/home'
-} else if (NODE_ENV === 'codesandbox') {
-  staticUploadPath = 'uploadForCodesandbox'
-  staticWebPath = 'codesandbox'
-  redirectPath = '/'
-}
+const { staticUploadPath, staticWebPath, redirectPath } = getValuesByNodeEnv()
 
 //上传文件
 app.use(express.static(staticUploadPath))
@@ -92,9 +76,6 @@ const init = async () => {
   //启动命令：set PORT=3000 && node app
   //yarn start命令用于 https://codesandbox.io 的node托管，本地使用yarn start直接启动会报错
   let port = process.env.PORT
-  if (process.env.NODE_ENV !== 'codesandbox') {
-    port = process.env.PORT || 81
-  }
   console.log(process.env.branch)
   if (process.env.branch) {
     port = await getPort({ branch: process.env.branch, port })

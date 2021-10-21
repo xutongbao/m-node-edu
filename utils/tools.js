@@ -203,7 +203,15 @@ const sendEmail = async (dataObj) => {
 
 //jenkins构建完成邮件通知
 const jenkinsSendEmail = async (dataObj) => {
-  const { title, name, gitRepositorieName, jenkinsProjectName, branch, url, remarks } = dataObj
+  const {
+    title,
+    name,
+    gitRepositorieName,
+    jenkinsProjectName,
+    branch,
+    url,
+    remarks
+  } = dataObj
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '<13642061747@sina.cn>', // sender address
@@ -379,6 +387,39 @@ const getJenkinsProjectName = ({ cd }) => {
   return cd
 }
 
+//根据环境变量获取一些值
+const getValuesByNodeEnv = () => {
+  //环境变量
+  const NODE_ENV = process.env.NODE_ENV || 'development'
+  let staticUploadPath = '/temp/uploadForDev'
+  let staticWebPath = '/temp'
+  let redirectPath = '/'
+  let dbFilePath = '/temp/dbFile/my_dev.db'
+  if (NODE_ENV === 'development') {
+    staticUploadPath = '/temp/uploadForDev'
+    staticWebPath = '/temp'
+    redirectPath = '/test/air/origin/master/#/air/light/extra/home'
+    dbFilePath = '/temp/dbFile/my_dev.db'
+  } else if (NODE_ENV === 'production') {
+    staticUploadPath = '/temp/uploadForProd'
+    staticWebPath = '/temp'
+    redirectPath = '/air/#/air/light/extra/home'
+    dbFilePath = '/temp/dbFile/my_prod.db'
+  } else if (NODE_ENV === 'codesandbox') {
+    staticUploadPath = 'uploadForCodesandbox'
+    staticWebPath = 'codesandbox'
+    redirectPath = '/'
+    dbFilePath = './codesandbox.db'
+  }
+
+  return {
+    staticUploadPath,
+    staticWebPath,
+    redirectPath,
+    dbFilePath,
+  }
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -399,4 +440,6 @@ module.exports = {
   sleep,
   //获取Jenkins项目名称
   getJenkinsProjectName,
+  //根据环境变量获取一些值
+  getValuesByNodeEnv
 }
