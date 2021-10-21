@@ -20,7 +20,7 @@ const email = async () => {
     gitRepositorieName: process.env.gitRepositorieName,
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
-    url: `${host}:${84}`,
+    url: `${host}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -42,7 +42,7 @@ const handleAddRecord = async () => {
     gitRepositorieName: process.env.gitRepositorieName,
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
-    url: `${host}:${84}`,
+    url: `${host}`,
     remarks: '自动，接口地址'
   }
   await axios
