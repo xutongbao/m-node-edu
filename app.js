@@ -12,39 +12,6 @@ const { getPort } = require('./light/jenkins/jenkins')
 
 console.log(12)
 
-//开启gzip
-app.use(compression({ filter: shouldCompress }))
-//app.use(history())
-//app.use(express.static('D:/zlhx-ui'))
-//app.use(express.static('D:/tan-ui'))
-//app.use(express.static('../zlhx-ui'))
-//app.use(express.static('../blog/docs'))
-//app.use(express.static('../tan-ui'))
-//app.use(express.static('../air-github/docs'))
-const NODE_ENV = process.env.NODE_ENV || 'development'
-let tempPath = ''
-if (NODE_ENV === 'development') {
-  tempPath = '/temp/uploadForDev'
-} else if (NODE_ENV === 'production') {
-  tempPath = '/temp/uploadForProd'
-} else if (NODE_ENV === 'codesandbox') {
-  tempPath = 'uploadForCodesandbox'
-}
-app.use(express.static(tempPath))
-if (process.env.NODE_ENV === 'codesandbox') {
-  app.use(express.static('codesandbox'))
-} else {
-  app.use(express.static('/temp'))
-}
-
-app.use(express.static('log'))
-app.use(cors())
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
-
 function shouldCompress(req, res) {
   if (req.headers['x-no-compression']) {
     // don't compress responses with this request header
@@ -54,6 +21,48 @@ function shouldCompress(req, res) {
   // fallback to standard filter function
   return compression.filter(req, res)
 }
+//开启gzip
+app.use(compression({ filter: shouldCompress }))
+//前端路由history模式
+//app.use(history())
+//app.use(express.static('D:/zlhx-ui'))
+//app.use(express.static('D:/tan-ui'))
+//app.use(express.static('../zlhx-ui'))
+//app.use(express.static('../blog/docs'))
+//app.use(express.static('../tan-ui'))
+//app.use(express.static('../air-github/docs'))
+
+//环境变量
+const NODE_ENV = process.env.NODE_ENV || 'development'
+let staticUploadPath = '/temp/uploadForDev'
+let staticWebPath = '/temp'
+let redirectPath = '/'
+if (NODE_ENV === 'development') {
+  staticUploadPath = '/temp/uploadForDev'
+  staticWebPath = '/temp'
+  redirectPath = '/test/air/origin/master/#/air/light/extra/home'
+} else if (NODE_ENV === 'production') {
+  staticUploadPath = '/temp/uploadForProd'
+  staticWebPath = '/temp'
+  redirectPath = '/air/#/air/light/extra/home'
+} else if (NODE_ENV === 'codesandbox') {
+  staticUploadPath = 'uploadForCodesandbox'
+  staticWebPath = 'codesandbox'
+  redirectPath = '/'
+}
+
+//上传文件
+app.use(express.static(staticUploadPath))
+//网页
+app.use(express.static(staticWebPath))
+//日志
+app.use(express.static('log'))
+//解决跨域问题
+app.use(cors())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
 // app.use((res, req, next) => {
 //   setTimeout(() => {
@@ -64,8 +73,9 @@ function shouldCompress(req, res) {
 //初始化日志
 initLog(app)
 
+//重定向
 app.get('/', function (req, res) {
-  res.redirect('/air/origin/master/#/air/light/extra/home')
+  res.redirect(redirectPath)
 })
 
 //知了好学的接口
@@ -77,6 +87,7 @@ sale(app)
 //无代码平台的接口
 air(app)
 
+//初始化
 const init = async () => {
   //启动命令：set PORT=3000 && node app
   //yarn start命令用于 https://codesandbox.io 的node托管，本地使用yarn start直接启动会报错
