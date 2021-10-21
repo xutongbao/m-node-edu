@@ -260,21 +260,23 @@ const portTransfer = async ({ app }) => {
     },
     {
       sign: 'source_scripts_serve2',
-      port: '84',
+      port: '80',
       remarks: '对应prod-m-node-edu构建的node服务，线上服务'
     },
     ...list
   ]
   console.log(transferArr)
+  
   transferArr.forEach((item) => {
+    const sign = `m-node-edu/${item.sign}`
     //接口转发
     app.use(
-      `/${item.sign}`,
+      `/${sign}`,
       createProxyMiddleware({
         target: `http://localhost:${item.port}`,
         changeOrigin: true,
         pathRewrite: {
-          [`^/${item.sign}`]: '/'
+          [`^/${sign}`]: '/'
         }
       })
     )
