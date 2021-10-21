@@ -241,43 +241,18 @@ const portTransfer = async ({ app }) => {
   console.log(list)
   list = list
     .filter((item) => item.gitRepositorieName === 'm-node-edu')
-    .filter((item) => {
-      if (item.url.includes('81')) {
-        return false
-      } else if (item.url.includes('84')) {
-        return false
-      } else {
-        return true
-      }
-    })
     .map((item) => {
       const url = item.url.split(':')
       const port = url[url.length - 1]
       return {
-        sign: item.branch,
+        ...item,
         port,
-        remarks: '测试环境'
       }
     })
   console.log(list)
 
-  const transferArr = [
-    {
-      sign: 'source_scripts_dev2',
-      port: '81',
-      remarks: '对应prod-m-node-edu-ice构建的node服务,基础服务'
-    },
-    {
-      sign: 'source_scripts_serve2',
-      port: '80',
-      remarks: '对应prod-m-node-edu构建的node服务，线上服务'
-    },
-    ...list
-  ]
-  console.log(transferArr)
-
-  transferArr.forEach((item) => {
-    const sign = `m-node-edu/${item.sign}`
+  list.forEach((item) => {
+    const sign = `${item.hash}`
     //接口转发
     app.use(
       `/${sign}`,
