@@ -203,7 +203,7 @@ const sendEmail = async (dataObj) => {
 
 //jenkins构建完成邮件通知
 const jenkinsSendEmail = async (dataObj) => {
-  const { title, name, gitRepositorieName, branch, url, remarks } = dataObj
+  const { title, name, gitRepositorieName, jenkinsProjectName, branch, url, remarks } = dataObj
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '<13642061747@sina.cn>', // sender address
@@ -218,6 +218,10 @@ const jenkinsSendEmail = async (dataObj) => {
       <div>
         <span>Git仓库名称：</span>
         <span>${gitRepositorieName}</span>
+      </div> 
+      <div>
+        <span>Jenkins项目名称：</span>
+        <span>${jenkinsProjectName}</span>
       </div> 
       <div>
         <span>分支名称：</span>

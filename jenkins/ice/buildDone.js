@@ -12,6 +12,14 @@ console.log('cd:', process.env.cd)
 //项目名称
 const name = 'node接口'
 
+const getJenkinsProjectName = ({ cd }) => {
+  cd = cd.split('\\')
+  cd = cd[cd.length - 1]
+
+  console.log(cd)
+  return cd
+}
+
 // 发邮件
 const email = async () => {
   const emailData = {
@@ -19,6 +27,7 @@ const email = async () => {
     title: '构建成功-基础环境',
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
@@ -40,7 +49,7 @@ const handleAddRecord = async () => {
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
-    jenkinsProjectName: process.env.cd,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
