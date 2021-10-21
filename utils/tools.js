@@ -421,6 +421,15 @@ const getValuesByNodeEnv = () => {
   }
 }
 
+//获取hash短码
+const getHash = ({ list }) => {
+  let tempStr = Math.random().toString(36).substr(2, 5)
+  while (list.find(item => item.hash === tempStr)) {
+    tempStr = Math.random().toString(36).substr(2, 5)
+  }
+  return tempStr
+}
+
 module.exports = {
   mockShop,
   shopInitValue,
@@ -442,5 +451,7 @@ module.exports = {
   //获取Jenkins项目名称
   getJenkinsProjectName,
   //根据环境变量获取一些值
-  getValuesByNodeEnv
+  getValuesByNodeEnv,
+  //获取hash短码
+  getHash,
 }

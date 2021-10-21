@@ -1,5 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort, sleep } = require('../../utils/tools')
+const { logger, choosePort, sleep, getHash } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
@@ -73,6 +73,10 @@ const dataAdd = async (req, res) => {
     let err = await runSql(
       `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
     )
+    let hash = list[index].hash
+    if (!hash) {
+      hash = getHash({ list })
+    }
     err = await runSql(
       `INSERT INTO projectTest (
         uid,
@@ -81,6 +85,7 @@ const dataAdd = async (req, res) => {
         jenkinsProjectName,
         branch,
         url,
+        hash,
         remarks,
         addtime,
         edittime
@@ -92,6 +97,7 @@ const dataAdd = async (req, res) => {
         '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
+        '${hash}',
         '${dataItem.remarks}',
         '${uid}',
         ''
@@ -111,6 +117,7 @@ const dataAdd = async (req, res) => {
       })
     }
   } else {
+    const hash = getHash({ list })
     const err = await runSql(
       `INSERT INTO projectTest (
         uid,
@@ -119,6 +126,7 @@ const dataAdd = async (req, res) => {
         jenkinsProjectName,
         branch,
         url,
+        hash,
         remarks,
         addtime,
         edittime
@@ -130,6 +138,7 @@ const dataAdd = async (req, res) => {
         '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
+        '${hash}',
         '${dataItem.remarks}',
         '${uid}',
         ''
@@ -266,7 +275,7 @@ const portTransfer = async ({ app }) => {
     ...list
   ]
   console.log(transferArr)
-  
+
   transferArr.forEach((item) => {
     const sign = `m-node-edu/${item.sign}`
     //接口转发
