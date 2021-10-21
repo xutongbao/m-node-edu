@@ -39,7 +39,7 @@ const handleAddRecord = async () => {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
     branch: process.env.branch,
-    url: `${host}:${port}`,
+    url: `${host}:${84}`,
     remarks: '自动，接口地址'
   }
   await axios
