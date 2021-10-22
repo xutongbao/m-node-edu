@@ -215,7 +215,7 @@ const jenkinsSendEmail = async (dataObj) => {
     remarks
   } = dataObj
   // send mail with defined transport object
-  let info = await transporter.sendMail({
+  let result = await transporter.sendMail({
     from: '<13642061747@sina.cn>', // sender address
     to: '1183391880@qq.com', //'1183391880@qq.com', // list of receivers
     subject: title, // Subject line
@@ -253,11 +253,11 @@ const jenkinsSendEmail = async (dataObj) => {
     </div>` // html body
   })
 
-  console.log('Message sent: %s', info.messageId)
+  console.log('Message sent: %s', result.messageId)
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(result))
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
