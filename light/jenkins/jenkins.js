@@ -316,7 +316,7 @@ const run = async (req, res) => {
 
   const currentServer = prettylist.find((item) => {
     const name = item.name.replace(/_/g, '/')
-    return name === branch
+    return name === `${gitRepositorieName}_${branch}`
   })
   let currentPort
 
