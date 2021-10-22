@@ -7,7 +7,7 @@ call yarn -v
 call yarn
 @REM name会自动应用到pm2配置文件ecosystem.config.js的name字段
 set branch=%2
-set name=%1%-%branch:\=_%
+set name=%1_%branch:\=_%
 set watch=false
 call pm2 start ecosystem.config.js --env development
 @REM 跳转到原路径
