@@ -1,5 +1,5 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort, sleep, getHash } = require('../../utils/tools')
+const { logger, choosePort, sleep, getHash, deepClone } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
@@ -69,6 +69,7 @@ const dataAdd = async (req, res) => {
   let list = [...result]
   const index = list.findIndex((item) => item.url === dataItem.url)
   const uid = Date.now()
+  let objInfo = {}
   if (index >= 0) {
     const ids = [list[index].uid]
     let err = await runSql(
@@ -80,6 +81,7 @@ const dataAdd = async (req, res) => {
       info.hash = getHash({ list })
     }
     info.projectType = dataItem.projectType ? dataItem.projectType : ''
+    objInfo = deepClone(info)
     console.log('dataItem:', dataItem, info)
 
     info = JSON.stringify(info)
@@ -128,6 +130,7 @@ const dataAdd = async (req, res) => {
       hash,
       projectType: dataItem.projectType ? dataItem.projectType : ''
     }
+    objInfo = deepClone(info)
     info = JSON.stringify(info)
     const err = await runSql(
       `INSERT INTO projectTest (
@@ -164,7 +167,10 @@ const dataAdd = async (req, res) => {
     } else {
       res.send({
         state: 1,
-        data: dataItem,
+        data: {
+          dataItem,
+          info: objInfo
+        },
         message: '添加成功'
       })
     }

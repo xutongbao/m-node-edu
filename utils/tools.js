@@ -4,6 +4,7 @@ const log4js = require('log4js')
 const net = require('net')
 const spawn = require('cross-spawn')
 const fs = require('fs')
+const { fromJS } = require('immutable')
 
 const mockShop = () => {
   return Mock.mock({
@@ -210,6 +211,7 @@ const jenkinsSendEmail = async (dataObj) => {
     jenkinsProjectName,
     branch,
     url,
+    info,
     remarks
   } = dataObj
   // send mail with defined transport object
@@ -238,6 +240,7 @@ const jenkinsSendEmail = async (dataObj) => {
       <div>
         <span>测试链接：</span>
         <a href="${url}">${url}</a>
+        <a href="${url}/${info.hash}">${url}/${info.hash}</a>
       </div> 
       <div>
         <span>备注：</span>
@@ -416,17 +419,22 @@ const getValuesByNodeEnv = () => {
     staticUploadPath,
     staticWebPath,
     redirectPath,
-    dbFilePath,
+    dbFilePath
   }
 }
 
 //获取hash短码
 const getHash = ({ list }) => {
   let tempStr = Math.random().toString(36).substr(2, 5)
-  while (list.find(item => item.hash === tempStr)) {
+  while (list.find((item) => item.hash === tempStr)) {
     tempStr = Math.random().toString(36).substr(2, 5)
   }
   return tempStr
+}
+
+//深拷贝
+const deepClone = (obj) => {
+  return fromJS(obj).toJS()
 }
 
 module.exports = {
@@ -453,4 +461,6 @@ module.exports = {
   getValuesByNodeEnv,
   //获取hash短码
   getHash,
+  //深拷贝
+  deepClone
 }

@@ -14,7 +14,16 @@
     "dockerStart": "PORT=81 node app"
   },
   "nodemonConfig": {
-    "ignore": ["node_modules", "dbFile", "log", "jenkins", "prettylist.js", "prettylist.txt", "port.js", "portUsed.txt" ]
+    "ignore": [
+      "node_modules",
+      "dbFile",
+      "log",
+      "jenkins",
+      "prettylist.js",
+      "prettylist.txt",
+      "port.js",
+      "portUsed.txt"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +39,7 @@
     "file-stream-rotator": "^0.5.7",
     "html-to-md": "^0.5.0",
     "http-proxy-middleware": "^2.0.0",
+    "immutable": "^4.0.0",
     "log4js": "^6.3.0",
     "mockjs": "^1.1.0",
     "moment": "^2.29.1",

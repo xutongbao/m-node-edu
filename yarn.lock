@@ -1027,6 +1027,11 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
+immutable@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/immutable/download/immutable-4.0.0.tgz#b86f78de6adef3608395efb269a91462797e2c23"
+  integrity sha1-uG943mre82CDle+yaakUYnl+LCM=
+
 import-lazy@^2.1.0:
   version "2.1.0"
   resolved "https://registry.nlark.com/import-lazy/download/import-lazy-2.1.0.tgz"

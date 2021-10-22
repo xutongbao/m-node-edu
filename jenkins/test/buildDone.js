@@ -12,8 +12,8 @@ console.log('test', baseURL)
 const name = 'node接口'
 
 // 发邮件
-const email = async ({ data }) => {
-  const { currentPort } = data
+const email = async ({ runData, recordData }) => {
+  const { currentPort } = runData
   const emailData = {
     type: 'jenkins',
     title: '构建成功-测试环境',
@@ -22,6 +22,7 @@ const email = async ({ data }) => {
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${currentPort}`,
+    info: recordData.info,
     remarks: '自动，接口地址'
   }
   await axios
@@ -37,8 +38,8 @@ const email = async ({ data }) => {
 }
 
 // 添加构建记录
-const handleAddRecord = async ({ data }) => {
-  const { currentPort } = data
+const handleAddRecord = async ({ runData }) => {
+  const { currentPort } = runData
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
@@ -48,12 +49,13 @@ const handleAddRecord = async ({ data }) => {
     url: `${host}:${currentPort}`,
     remarks: '自动，接口地址'
   }
-  await axios
+  return await axios
     .post(`${baseURL}/api/jenkins/add`, {
       dataItem
     })
     .then((res) => {
       console.log('Record added successfully!')
+      return res.data.data
     })
     .catch((error) => {
       console.error(error)
@@ -94,8 +96,8 @@ const restart = async () => {
 }
 
 setTimeout(async () => {
-  const data = await run()
-  await email({ data })
-  await handleAddRecord({ data })
+  const runData = await run()
+  const recordData = await handleAddRecord({ runData })
+  await email({ runData, recordData })
   await restart()
 }, 3000)
