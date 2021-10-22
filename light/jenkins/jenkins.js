@@ -120,7 +120,10 @@ const dataAdd = async (req, res) => {
     } else {
       res.send({
         state: 1,
-        data: dataItem,
+        data: {
+          dataItem,
+          info: objInfo
+        },
         message: 'url重复，添加成功'
       })
     }
