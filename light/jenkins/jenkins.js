@@ -79,9 +79,8 @@ const dataAdd = async (req, res) => {
     if (!info.hash) {
       info.hash = getHash({ list })
     }
-    if (dataItem.projectType) {
-      info.projectType = dataItem.projectType
-    }
+    info.projectType = dataItem.projectType ? dataItem.projectType : '6'
+
     console.log('dataItem:', dataItem, info)
 
     info = JSON.stringify(info)
