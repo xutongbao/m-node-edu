@@ -77,6 +77,10 @@ const dataAdd = async (req, res) => {
     if (!hash) {
       hash = getHash({ list })
     }
+    let info = {
+      hash
+    }
+    info = JSON.stringify(info)
     err = await runSql(
       `INSERT INTO projectTest (
         uid,
@@ -85,7 +89,7 @@ const dataAdd = async (req, res) => {
         jenkinsProjectName,
         branch,
         url,
-        hash,
+        info,
         remarks,
         addtime,
         edittime
@@ -97,7 +101,7 @@ const dataAdd = async (req, res) => {
         '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
-        '${hash}',
+        '${info}',
         '${dataItem.remarks}',
         '${uid}',
         ''
@@ -118,6 +122,10 @@ const dataAdd = async (req, res) => {
     }
   } else {
     const hash = getHash({ list })
+    let info = {
+      hash
+    }
+    info = JSON.stringify(info)
     const err = await runSql(
       `INSERT INTO projectTest (
         uid,
@@ -126,7 +134,7 @@ const dataAdd = async (req, res) => {
         jenkinsProjectName,
         branch,
         url,
-        hash,
+        info,
         remarks,
         addtime,
         edittime
@@ -138,7 +146,7 @@ const dataAdd = async (req, res) => {
         '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
-        '${hash}',
+        '${info}',
         '${dataItem.remarks}',
         '${uid}',
         ''

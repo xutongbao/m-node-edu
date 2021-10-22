@@ -17,7 +17,7 @@ CREATE TABLE projectTest (
     jenkinsProjectName VARCHAR (100) NOT NULL,
     branch             VARCHAR (100) NOT NULL,
     url                VARCHAR (300) NOT NULL,
-    hash               VARCHAR (300) NOT NULL,
+    info               VARCHAR (1000) NOT NULL,
     remarks            VARCHAR (100) NOT NULL,
     addtime            VARCHAR (100) NOT NULL,
     edittime           VARCHAR (100) NOT NULL,
