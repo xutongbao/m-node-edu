@@ -294,13 +294,13 @@ const portTransfer = async ({ app }) => {
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
-  const { branch } = req.body
-  console.log(branch)
+  const { gitRepositorieName, branch } = req.body
+  console.log(gitRepositorieName, branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
-  spawn.sync(`${path}run.bat ${branch}`, [], { stdio: 'inherit' })
-  spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
-  spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}run.bat ${gitRepositorieName} ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild1.bat`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild2.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
   const { prettylist } = require('../../prettylist')
   console.log(`sleep start`, new Date())

@@ -64,6 +64,7 @@ const handleAddRecord = async ({ data }) => {
 const run = async () => {
   return await axios
     .post(`${baseURL}/api/jenkins/run`, {
+      gitRepositorieName: process.env.gitRepositorieName,
       branch: process.env.branch
     })
     .then((res) => {
