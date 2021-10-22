@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
-const app = express()
 const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
@@ -12,6 +11,7 @@ const { getPort, portTransfer } = require('./light/jenkins/jenkins')
 
 //初始化
 const init = async () => {
+  const app = express()
   console.log(12)
 
   function shouldCompress(req, res) {
