@@ -79,6 +79,9 @@ const dataAdd = async (req, res) => {
     if (!info.hash) {
       info.hash = getHash({ list })
     }
+    if (dataItem.projectType) {
+      info.projectType = dataItem.projectType
+    }
 
     info = JSON.stringify(info)
     err = await runSql(
