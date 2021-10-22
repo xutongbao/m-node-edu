@@ -82,6 +82,7 @@ const dataAdd = async (req, res) => {
     if (dataItem.projectType) {
       info.projectType = dataItem.projectType
     }
+    console.log('dataItem:', dataItem)
 
     info = JSON.stringify(info)
     err = await runSql(
@@ -262,17 +263,23 @@ const portTransfer = async ({ app }) => {
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
+
   list = list
-    .filter((item) => item.gitRepositorieName === 'm-node-edu')
+    .filter((item) =>  {
+      let info = typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
+      return info.projectType === 'node'
+    })
     .map((item) => {
       const url = item.url.split(':')
       let port = url[url.length - 1]
       if (!Number.isInteger(port - 1)) {
         port = 80
       }
+      let info = typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
       return {
         ...item,
         port,
+        hash: info.hash
       }
     })
   //console.log(list)
