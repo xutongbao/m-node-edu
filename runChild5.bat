@@ -3,4 +3,4 @@ echo ]; >> port.js
 echo module.exports = { port } >> port.js
 echo port.js done!
 call pm2 restart source_scripts_m_node_edu_serve2
-call pm2 restart source_scripts_m_node_edu_dev2
+@REM call pm2 restart source_scripts_m_node_edu_dev2

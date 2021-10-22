@@ -361,6 +361,18 @@ const run = async (req, res) => {
   })
 }
 
+//重启有端口转发功能的项目
+const restart = async (req, res) => {
+  const path = './'
+  spawn.sync(`${path}runChild6.bat`, [], { stdio: 'inherit' })
+  res.send({
+    state: 1,
+    data: {
+    },
+    message: '成功'
+  })
+}
+
 module.exports = {
   jenkinsSearch: dataSearch,
   jenkinsAdd: dataAdd,
@@ -369,5 +381,6 @@ module.exports = {
   jenkinsGetPort: dataGetPort,
   getPort,
   portTransfer,
-  jenkinsRun: run
+  jenkinsRun: run,
+  jenkinsRestart: restart,
 }

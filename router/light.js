@@ -94,6 +94,7 @@ const {
   jenkinsEdit,
   jenkinsRun,
   jenkinsGetPort,
+  jenkinsRestart,
 } = require('../light/jenkins/jenkins')
 
 const {
@@ -218,6 +219,7 @@ const light = (app) => {
   app.post('/api/jenkins/edit', jenkinsEdit)
   app.post('/api/jenkins/run', jenkinsRun)
   app.post('/api/jenkins/getPort', jenkinsGetPort)
+  app.post('/api/jenkins/restart', jenkinsRestart)
 }
 
 module.exports = {

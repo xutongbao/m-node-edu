@@ -78,8 +78,24 @@ const run = async () => {
     })
 }
 
+//重启有端口转发功能的项目
+const restart = async () => {
+  return await axios
+    .post(`${baseURL}/api/jenkins/restart`, {})
+    .then((res) => {
+      if (res.data.state === 1) {
+        console.log('Restart successful!')
+        return res.data.data
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
 setTimeout(async () => {
   const data = await run()
   await email({ data })
   await handleAddRecord({ data })
+  await restart()
 }, 3000)
