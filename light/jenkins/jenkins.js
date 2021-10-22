@@ -40,7 +40,8 @@ const dataSearch = async (req, res) => {
         id: item.uid,
         uid: undefined,
         addtime: item.addtime - 0,
-        edittime: item.edittime - 0
+        edittime: item.edittime - 0,
+        info: typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
       }
     })
 
@@ -73,13 +74,12 @@ const dataAdd = async (req, res) => {
     let err = await runSql(
       `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
     )
-    let hash = list[index].hash
-    if (!hash) {
-      hash = getHash({ list })
+    let info = list[index].info
+    let info = typeof info === 'string' && info !== '' ? JSON.parse(info) : {}
+    if (!info.hash) {
+      info.hash = getHash({ list })
     }
-    let info = {
-      hash
-    }
+
     info = JSON.stringify(info)
     err = await runSql(
       `INSERT INTO projectTest (
@@ -246,7 +246,6 @@ const portTransfer = async ({ app }) => {
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
-  console.log(list)
   list = list
     .filter((item) => item.gitRepositorieName === 'm-node-edu')
     .map((item) => {
@@ -260,7 +259,7 @@ const portTransfer = async ({ app }) => {
         port,
       }
     })
-  console.log(list)
+  //console.log(list)
 
   list.forEach((item) => {
     const sign = `${item.hash}`
