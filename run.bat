@@ -1,5 +1,5 @@
 @REM 接口/api/jenkins/run执行这个批处理
-echo %0 %1 %2
+echo %0 %1 %2 %3
 set historyPath=%cd%
 echo %historyPath%
 cd /temp/%1/%2
@@ -9,6 +9,6 @@ call yarn
 set branch=%2
 set name=%1_%branch:\=_%
 set watch=false
-call pm2 start ecosystem.config.js --env development
+call pm2 start %3 --env development
 @REM 跳转到原路径
 cd %historyPath%

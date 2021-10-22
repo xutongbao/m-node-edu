@@ -219,7 +219,7 @@ const dataEdit = async (req, res) => {
 }
 
 //查找适合的端口
-const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port }) => {
+const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
@@ -306,11 +306,11 @@ const portTransfer = async ({ app }) => {
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
-  const { gitRepositorieName, branch } = req.body
-  console.log(gitRepositorieName, branch)
+  const { gitRepositorieName, branch, pm2ConfigFileName = 'ecosystem.config.js' } = req.body
+  console.log(gitRepositorieName, branch, pm2ConfigFileName)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
-  spawn.sync(`${path}run.bat ${gitRepositorieName} ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild1.bat`, [], { stdio: 'inherit' })
   spawn.sync(`${path}runChild2.bat`, [], { stdio: 'inherit' })
   delete require.cache[require.resolve('../../prettylist')]
