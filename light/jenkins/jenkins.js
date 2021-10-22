@@ -125,10 +125,9 @@ const dataAdd = async (req, res) => {
   } else {
     const hash = getHash({ list })
     let info = {
-      hash
+      hash,
+      projectType: dataItem.projectType ? dataItem.projectType : ''
     }
-    info = JSON.stringify(info)
-    info.projectType = dataItem.projectType ? dataItem.projectType : ''
     info = JSON.stringify(info)
     const err = await runSql(
       `INSERT INTO projectTest (
