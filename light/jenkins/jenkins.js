@@ -315,8 +315,8 @@ const run = async (req, res) => {
   const { port } = require('../../port')
 
   const currentServer = prettylist.find((item) => {
-    const name = item.name.replace(/_/g, '/')
-    return name === `${gitRepositorieName}_${branch}`
+    let branch = branch.replace(/\//g, '_')
+    return item.name === `${gitRepositorieName}_${branch}`
   })
   let currentPort
 
