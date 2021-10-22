@@ -211,7 +211,7 @@ const jenkinsSendEmail = async (dataObj) => {
     jenkinsProjectName,
     branch,
     url,
-    info,
+    hashUrl,
     remarks
   } = dataObj
   // send mail with defined transport object
@@ -240,7 +240,10 @@ const jenkinsSendEmail = async (dataObj) => {
       <div>
         <span>测试链接：</span>
         <a href="${url}">${url}</a>
-        <a href="${url}/${info.hash}">${url}/${info.hash}</a>
+      </div> 
+      <div>
+        <span>哈希测试链接：</span>
+        <a href="${hashUrl}">${hashUrl}</a>
       </div> 
       <div>
         <span>备注：</span>

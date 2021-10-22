@@ -22,7 +22,7 @@ const email = async ({ runData, recordData }) => {
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${currentPort}`,
-    info: recordData.info,
+    hashUrl: `${host}/${recordData.info.hash}`,
     remarks: '自动，接口地址'
   }
   await axios
