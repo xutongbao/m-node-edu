@@ -219,14 +219,14 @@ const dataEdit = async (req, res) => {
 }
 
 //查找适合的端口
-const getPort = async ({ branch, port }) => {
+const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
   console.log('getPort:', branch)
   const branchTestInfo = list.find((item) => {
-    return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
+    return item.gitRepositorieName === gitRepositorieName && item.branch === branch
   })
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
@@ -241,6 +241,18 @@ const getPort = async ({ branch, port }) => {
 
   const tempPort = await choosePort({ port: usedPort })
   return tempPort
+}
+
+const dataGetPort = async (req, res) => {
+  const { gitRepositorieName, branch, port } = req.body
+  const resultPort = await getPort({ gitRepositorieName, branch, port })
+  res.send({
+    state: 1,
+    data: {
+      port: resultPort
+    },
+    message: '成功'
+  })
 }
 
 
@@ -347,6 +359,7 @@ module.exports = {
   jenkinsAdd: dataAdd,
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
+  jenkinsGetPort: dataGetPort,
   getPort,
   portTransfer,
   jenkinsRun: run

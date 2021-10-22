@@ -80,7 +80,7 @@ const init = async () => {
   let port = process.env.PORT
   console.log(process.env.branch)
   if (process.env.branch) {
-    port = await getPort({ branch: process.env.branch, port })
+    port = await getPort({ gitRepositorieName: 'm-node-edu', branch: process.env.branch, port })
   }
   console.log('port:', port)
   app.listen(port, () => {
