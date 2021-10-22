@@ -82,7 +82,7 @@ const dataAdd = async (req, res) => {
     if (dataItem.projectType) {
       info.projectType = dataItem.projectType
     }
-    console.log('dataItem:', dataItem)
+    console.log('dataItem:', dataItem, info)
 
     info = JSON.stringify(info)
     err = await runSql(
