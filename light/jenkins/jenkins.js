@@ -75,7 +75,7 @@ const dataAdd = async (req, res) => {
       `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
     )
     let info = list[index].info
-    let info = typeof info === 'string' && info !== '' ? JSON.parse(info) : {}
+    info = typeof info === 'string' && info !== '' ? JSON.parse(info) : {}
     if (!info.hash) {
       info.hash = getHash({ list })
     }
