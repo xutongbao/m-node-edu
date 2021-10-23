@@ -6,6 +6,7 @@ const spawn = require('cross-spawn')
 const fs = require('fs')
 const { fromJS } = require('immutable')
 const os = require('os')
+const axios = require('axios')
 
 const mockShop = () => {
   return Mock.mock({
