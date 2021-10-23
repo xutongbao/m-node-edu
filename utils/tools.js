@@ -136,7 +136,7 @@ const companyInitValue = () => {
   return arr
 }
 
-let transporter
+let transporter = {}
 const emailInit = async () => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
@@ -157,6 +157,11 @@ const emailInit = async () => {
 }
 
 emailInit()
+
+//获取发邮件的对象
+const getTransporter = () => {
+  return transporter
+}
 
 //发送邮件
 // async..await is not allowed in global scope, must use a wrapper
@@ -491,5 +496,7 @@ module.exports = {
   //深拷贝
   deepClone,
   //获取可用端口号
-  getPort
+  getPort,
+  //获取发邮件的对象
+  getTransporter
 }
