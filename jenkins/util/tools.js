@@ -1,4 +1,5 @@
 const os = require('os')
+const { hostList } = require('../../utils/config')
 
 //获取Jenkins项目名称
 const getJenkinsProjectName = ({ cd }) => {
@@ -13,10 +14,7 @@ const getJenkinsProjectName = ({ cd }) => {
 const getBaseURL = () => {
   const port = 81
   const hostname = os.hostname()
-  const host = {
-    'LAPTOP-4KDIA4A3': 'http://localhost',
-    iZ6ilh61jzkvrhZ: 'http://39.97.238.175'
-  }[hostname]
+  const host = hostList[hostname]
   const baseURL = `${host}:${port}`
   return {
     host,
