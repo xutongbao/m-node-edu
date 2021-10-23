@@ -14,7 +14,7 @@ console.log('cd:', process.env.cd)
 const name = 'node接口'
 
 // 发邮件
-const email = async () => {
+const email = async ({ recordData }) => {
   const emailData = {
     type: 'jenkins',
     title: '构建成功-基础环境',
@@ -23,6 +23,7 @@ const email = async () => {
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${port}`,
+    hashUrl: `${host}/${recordData.info.hash}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -61,6 +62,6 @@ const handleAddRecord = async () => {
 }
 
 setTimeout(async () => {
-  await email()
-  await handleAddRecord()
+  const recordData = await handleAddRecord()
+  await email({ recordData })
 }, 3000)
