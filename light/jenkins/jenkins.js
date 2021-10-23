@@ -261,7 +261,7 @@ const getPort = async ({
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
     if (tempArr.length >= 3) {
-      if (tempArr[2]) {
+      if (tempArr[2] && Number.isInteger(tempArr[0] - 0)) {
         usedPort = tempArr[2]
       }
     }
@@ -276,6 +276,7 @@ const getPort = async ({
 //查看可用端口的接口
 const dataGetPort = async (req, res) => {
   const { gitRepositorieName, branch, port } = req.body
+  console.log(req.body)
   const resultPort = await getPort({ gitRepositorieName, branch, port })
   res.send({
     state: 1,
