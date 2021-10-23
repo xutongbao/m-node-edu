@@ -409,13 +409,12 @@ const run = async (req, res) => {
 
 //重启有端口转发功能的项目
 const restart = async (req, res) => {
-  const path = './'
-  spawn.sync(`${path}runChild6.bat`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
     data: {},
     message: '成功'
   })
+  spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })
 }
 
 module.exports = {

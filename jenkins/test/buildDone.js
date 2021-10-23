@@ -1,7 +1,7 @@
 const axios = require('axios')
 const { getBaseURL, getJenkinsProjectName } = require('../util/tools')
 
-const { host, port, baseURL } = getBaseURL()
+const { host, baseURL } = getBaseURL()
 
 //项目名称
 const name = 'node接口'
