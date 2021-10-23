@@ -404,9 +404,6 @@ const run = async (req, res) => {
   res.send({
     state: 1,
     data: {
-      prettylist,
-      port,
-      currentServer,
       currentPort: tempPort
     },
     message: '成功'
