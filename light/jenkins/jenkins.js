@@ -270,6 +270,7 @@ const getPort = async ({
   console.log('usedPort:', usedPort)
 
   tempPort = await choosePort({ port: usedPort })
+  console.log('tempPort:', tempPort)
   return tempPort
 }
 
@@ -400,6 +401,12 @@ const run = async (req, res) => {
   }
 
   //#endregion
+
+  console.log(`sleep start`, new Date())
+  //等待一会再继续执行，后续的批处理需要根据进程号查询端口号，这个对应关系需要系统准备好才能查到
+  await sleep(10000)
+  console.log(`sleep end`, new Date())
+  console.log('run:', tempPort)
 
   res.send({
     state: 1,
