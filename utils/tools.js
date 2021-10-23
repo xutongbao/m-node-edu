@@ -242,11 +242,16 @@ const jenkinsSendEmail = async (dataObj) => {
       <div>
         <span>测试链接：</span>
         <a href="${url}">${url}</a>
-      </div> 
+      </div>
+      ${
+        hashUrl
+          ? `
       <div>
         <span>哈希测试链接：</span>
         <a href="${hashUrl}">${hashUrl}</a>
-      </div> 
+      </div>`
+          : ``
+      } 
       <div>
         <span>备注：</span>
         <span>${remarks}</span>
@@ -442,7 +447,7 @@ const getPort = async () => {
       .post(`${getBaseURL().baseURL}/api/jenkins/getPort`, {
         gitRepositorieName: process.env.gitRepositorieName,
         branch: process.env.branch,
-        port,
+        port
       })
       .then((res) => {
         if (res.data.state === 1) {
@@ -486,5 +491,5 @@ module.exports = {
   //深拷贝
   deepClone,
   //获取可用端口号
-  getPort,
+  getPort
 }
