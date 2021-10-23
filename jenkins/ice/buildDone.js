@@ -49,12 +49,13 @@ const handleAddRecord = async () => {
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
   }
-  await axios
+  return await axios
     .post(`${baseURL}/api/jenkins/add`, {
       dataItem
     })
     .then((res) => {
       console.log('Record added successfully!')
+      return res.data.data
     })
     .catch((error) => {
       console.error(error)
