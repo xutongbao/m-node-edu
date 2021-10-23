@@ -1,7 +1,15 @@
 const { runSql, queryPromise } = require('../../db/index')
-const { logger, choosePort, sleep, getHash, deepClone } = require('../../utils/tools')
+const {
+  logger,
+  choosePort,
+  sleep,
+  getHash,
+  deepClone
+} = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const { createProxyMiddleware } = require('http-proxy-middleware')
+
+let tempPort
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -41,7 +49,10 @@ const dataSearch = async (req, res) => {
         uid: undefined,
         addtime: item.addtime - 0,
         edittime: item.edittime - 0,
-        info: typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
+        info:
+          typeof item.info === 'string' && item.info !== ''
+            ? JSON.parse(item.info)
+            : {}
       }
     })
 
@@ -228,14 +239,20 @@ const dataEdit = async (req, res) => {
 }
 
 //查找可用端口的函数
-const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 }) => {
+const getPort = async ({
+  gitRepositorieName = 'm-node-edu',
+  branch,
+  port = 81
+}) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
   console.log('getPort:', branch)
   const branchTestInfo = list.find((item) => {
-    return item.gitRepositorieName === gitRepositorieName && item.branch === branch
+    return (
+      item.gitRepositorieName === gitRepositorieName && item.branch === branch
+    )
   })
   //查找可用端口时可以传递一个起始端口号，默认是81
   //根据gitRepositorieName和branch去数据库中查找是否该项目的该分支已经存在端口号，如果存在，使用存在的
@@ -252,7 +269,7 @@ const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 })
   }
   console.log('usedPort:', usedPort)
 
-  const tempPort = await choosePort({ port: usedPort })
+  tempPort = await choosePort({ port: usedPort })
   return tempPort
 }
 
@@ -269,7 +286,6 @@ const dataGetPort = async (req, res) => {
   })
 }
 
-
 //端口转发
 const portTransfer = async ({ app }) => {
   const result = await queryPromise(
@@ -278,8 +294,11 @@ const portTransfer = async ({ app }) => {
   let list = [...result]
 
   list = list
-    .filter((item) =>  {
-      let info = typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
+    .filter((item) => {
+      let info =
+        typeof item.info === 'string' && item.info !== ''
+          ? JSON.parse(item.info)
+          : {}
       return info.projectType === 'node'
     })
     .map((item) => {
@@ -288,7 +307,10 @@ const portTransfer = async ({ app }) => {
       if (!Number.isInteger(port - 1)) {
         port = 80
       }
-      let info = typeof item.info === 'string' && item.info !== '' ? JSON.parse(item.info) : {}
+      let info =
+        typeof item.info === 'string' && item.info !== ''
+          ? JSON.parse(item.info)
+          : {}
       return {
         ...item,
         port,
@@ -326,42 +348,58 @@ const portTransfer = async ({ app }) => {
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
-  const { gitRepositorieName, branch, pm2ConfigFileName = 'ecosystem.config.js' } = req.body
+  const {
+    gitRepositorieName,
+    branch,
+    pm2ConfigFileName = 'ecosystem.config.js'
+  } = req.body
   console.log(gitRepositorieName, branch, pm2ConfigFileName)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
-  spawn.sync(`${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`, [], { stdio: 'inherit' })
-  spawn.sync(`${path}runChild1.bat`, [], { stdio: 'inherit' })
-  spawn.sync(`${path}runChild2.bat`, [], { stdio: 'inherit' })
-  delete require.cache[require.resolve('../../prettylist')]
-  const { prettylist } = require('../../prettylist')
-  console.log(`sleep start`, new Date())
-  //等待一会再继续执行，后续的批处理需要根据进程号查询端口号，这个对应关系需要系统准备好才能查到
-  await sleep(10000)
-  console.log(`sleep end`, new Date())
-  spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
-  prettylist.forEach((item) => {
-    spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
-  })
-  spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
-  delete require.cache[require.resolve('../../port')]
-  const { port } = require('../../port')
+  spawn.sync(
+    `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`,
+    [],
+    { stdio: 'inherit' }
+  )
+  //启动完成后如何获取端口号
 
-  const currentServer = prettylist.find((item) => {
-    let tempBranch = branch.replace(/\//g, '_')
-    return item.name === `${gitRepositorieName}_${tempBranch}`
-  })
+  //#region 通过批处理获取端口号，根据进程号查询端口号，性能差，逻辑复杂
+  let isUseBatGetCurrentPort = false
   let currentPort
-
-  if (currentServer) {
-    port.forEach((item) => {
-      if (item.pid === currentServer.pid) {
-        const startIndex = item.info.indexOf(':')
-        const endIndex = item.info.indexOf(' ', startIndex)
-        currentPort = item.info.slice(startIndex + 1, endIndex)
-      }
+  if (isUseBatGetCurrentPort) {
+    spawn.sync(`${path}runChild1.bat`, [], { stdio: 'inherit' })
+    spawn.sync(`${path}runChild2.bat`, [], { stdio: 'inherit' })
+    delete require.cache[require.resolve('../../prettylist')]
+    const { prettylist } = require('../../prettylist')
+    console.log(`sleep start`, new Date())
+    //等待一会再继续执行，后续的批处理需要根据进程号查询端口号，这个对应关系需要系统准备好才能查到
+    await sleep(10000)
+    console.log(`sleep end`, new Date())
+    spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
+    prettylist.forEach((item) => {
+      spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
     })
+    spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
+    delete require.cache[require.resolve('../../port')]
+    const { port } = require('../../port')
+
+    const currentServer = prettylist.find((item) => {
+      let tempBranch = branch.replace(/\//g, '_')
+      return item.name === `${gitRepositorieName}_${tempBranch}`
+    })
+
+    if (currentServer) {
+      port.forEach((item) => {
+        if (item.pid === currentServer.pid) {
+          const startIndex = item.info.indexOf(':')
+          const endIndex = item.info.indexOf(' ', startIndex)
+          currentPort = item.info.slice(startIndex + 1, endIndex)
+        }
+      })
+    }
   }
+
+  //#endregion
 
   res.send({
     state: 1,
@@ -369,7 +407,7 @@ const run = async (req, res) => {
       prettylist,
       port,
       currentServer,
-      currentPort
+      currentPort: tempPort
     },
     message: '成功'
   })
@@ -381,8 +419,7 @@ const restart = async (req, res) => {
   spawn.sync(`${path}runChild6.bat`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
-    data: {
-    },
+    data: {},
     message: '成功'
   })
 }
@@ -396,5 +433,5 @@ module.exports = {
   getPort,
   portTransfer,
   jenkinsRun: run,
-  jenkinsRestart: restart,
+  jenkinsRestart: restart
 }
