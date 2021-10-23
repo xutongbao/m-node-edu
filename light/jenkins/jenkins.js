@@ -318,7 +318,6 @@ const portTransfer = async ({ app }) => {
         hash: info.hash
       }
     })
-  //console.log(list)
 
   list.forEach((item) => {
     const sign = `${item.hash}`
@@ -334,17 +333,6 @@ const portTransfer = async ({ app }) => {
       })
     )
   })
-  // //接口转发
-  // app.use(
-  //   '/source_scripts_serve1',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:84',
-  //     changeOrigin: true,
-  //     pathRewrite: {
-  //       '^/source_scripts_serve1': '/'
-  //     }
-  //   })
-  // )
 }
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
@@ -402,9 +390,11 @@ const run = async (req, res) => {
 
   //#endregion
 
-  console.log(`sleep start`, new Date())
-  await sleep(2000)
-  console.log(`sleep end`, new Date())
+  while (typeof tempPort === 'undefined') {
+    console.log(`sleep start`, new Date())
+    await sleep(2000)
+    console.log(`sleep end`, new Date())
+  }
   console.log('run:', tempPort)
 
   res.send({
