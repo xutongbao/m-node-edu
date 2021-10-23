@@ -97,6 +97,7 @@ const restart = async () => {
 
 setTimeout(async () => {
   const runData = await run()
+  console.log('runData:', runData)
   const recordData = await handleAddRecord({ runData })
   await email({ runData, recordData })
   await restart()
