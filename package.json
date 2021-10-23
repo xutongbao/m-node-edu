@@ -7,14 +7,23 @@
     "test": "echo \"Error: no test specified1\" && exit 1",
     "start": "cross-env NODE_ENV=codesandbox node app.js",
     "dev1": "cross-env PORT=81 NODE_ENV=development nodemon --inspect app",
-    "serve1": "cross-env PORT=81 NODE_ENV=production nodemon --inspect app",
-    "dev2": "cross-env name=source_scripts_dev2 pm2 start ecosystem.config.js --env development && pm2 logs",
-    "serve2": "cross-env name=source_scripts_serve2 pm2 start ecosystem.config.js --env production && pm2 logs",
+    "serve1": "cross-env PORT=80 NODE_ENV=production nodemon --inspect app",
+    "dev2": "cross-env name=source_scripts_m_node_edu_dev2 pm2 start ecosystem.config.js --env development && pm2 logs",
+    "serve2": "cross-env name=source_scripts_m_node_edu_serve2 pm2 start ecosystem.config.js --env production && pm2 logs",
     "dev3": "cross-env branch=origin/master PORT=81 NODE_ENV=development nodemon --inspect app",
     "dockerStart": "PORT=81 node app"
   },
   "nodemonConfig": {
-    "ignore": ["node_modules", "dbFile", "log", "jenkins", "prettylist.js", "prettylist.txt", "port.js", "portUsed.txt" ]
+    "ignore": [
+      "node_modules",
+      "dbFile",
+      "log",
+      "jenkins",
+      "prettylist.js",
+      "prettylist.txt",
+      "port.js",
+      "portUsed.txt"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +39,7 @@
     "file-stream-rotator": "^0.5.7",
     "html-to-md": "^0.5.0",
     "http-proxy-middleware": "^2.0.0",
+    "immutable": "^4.0.0",
     "log4js": "^6.3.0",
     "mockjs": "^1.1.0",
     "moment": "^2.29.1",

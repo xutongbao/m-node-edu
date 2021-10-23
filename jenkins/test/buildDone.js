@@ -1,4 +1,5 @@
 const axios = require('axios')
+const { getJenkinsProjectName } = require('../../utils/tools')
 const port = 81
 const host = {
   'LAPTOP-4KDIA4A3': 'http://localhost',
@@ -11,15 +12,17 @@ console.log('test', baseURL)
 const name = 'node接口'
 
 // 发邮件
-const email = async ({ data }) => {
-  const { currentPort } = data
+const email = async ({ runData, recordData }) => {
+  const { currentPort } = runData
   const emailData = {
     type: 'jenkins',
     title: '构建成功-测试环境',
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${currentPort}`,
+    hashUrl: `${host}/${recordData.info.hash}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -35,21 +38,24 @@ const email = async ({ data }) => {
 }
 
 // 添加构建记录
-const handleAddRecord = async ({ data }) => {
-  const { currentPort } = data
+const handleAddRecord = async ({ runData }) => {
+  const { currentPort } = runData
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
+    projectType: 'node',
     url: `${host}:${currentPort}`,
     remarks: '自动，接口地址'
   }
-  await axios
+  return await axios
     .post(`${baseURL}/api/jenkins/add`, {
       dataItem
     })
     .then((res) => {
       console.log('Record added successfully!')
+      return res.data.data
     })
     .catch((error) => {
       console.error(error)
@@ -60,6 +66,7 @@ const handleAddRecord = async ({ data }) => {
 const run = async () => {
   return await axios
     .post(`${baseURL}/api/jenkins/run`, {
+      gitRepositorieName: process.env.gitRepositorieName,
       branch: process.env.branch
     })
     .then((res) => {
@@ -73,8 +80,24 @@ const run = async () => {
     })
 }
 
+//重启有端口转发功能的项目
+const restart = async () => {
+  return await axios
+    .post(`${baseURL}/api/jenkins/restart`, {})
+    .then((res) => {
+      if (res.data.state === 1) {
+        console.log('Restart successful!')
+        return res.data.data
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
 setTimeout(async () => {
-  const data = await run()
-  await email({ data })
-  await handleAddRecord({ data })
+  const runData = await run()
+  const recordData = await handleAddRecord({ runData })
+  await email({ runData, recordData })
+  await restart()
 }, 3000)

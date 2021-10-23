@@ -1,4 +1,5 @@
 const axios = require('axios')
+const { getJenkinsProjectName } = require('../../utils/tools')
 const port = 81
 const host = {
   'LAPTOP-4KDIA4A3': 'http://localhost',
@@ -7,6 +8,8 @@ const host = {
 const baseURL = `${host}:${port}`
 console.log('ice', baseURL)
 
+console.log('cd:', process.env.cd)
+
 //项目名称
 const name = 'node接口'
 
@@ -14,9 +17,10 @@ const name = 'node接口'
 const email = async () => {
   const emailData = {
     type: 'jenkins',
-    title: '构建成功-基础api',
+    title: '构建成功-基础环境',
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
@@ -38,7 +42,9 @@ const handleAddRecord = async () => {
   const dataItem = {
     name,
     gitRepositorieName: process.env.gitRepositorieName,
+    jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
+    projectType: 'node',
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
   }
