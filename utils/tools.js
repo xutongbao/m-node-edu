@@ -5,8 +5,8 @@ const net = require('net')
 const spawn = require('cross-spawn')
 const fs = require('fs')
 const { fromJS } = require('immutable')
-const os = require('os')
 const axios = require('axios')
+const { getBaseURL } = require('../jenkins/util/tools')
 
 const mockShop = () => {
   return Mock.mock({
@@ -136,7 +136,7 @@ const companyInitValue = () => {
   return arr
 }
 
-let transporter
+let transporter = {}
 const emailInit = async () => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
@@ -157,6 +157,11 @@ const emailInit = async () => {
 }
 
 emailInit()
+
+//获取发邮件的对象
+const getTransporter = () => {
+  return transporter
+}
 
 //发送邮件
 // async..await is not allowed in global scope, must use a wrapper
@@ -242,11 +247,16 @@ const jenkinsSendEmail = async (dataObj) => {
       <div>
         <span>测试链接：</span>
         <a href="${url}">${url}</a>
-      </div> 
+      </div>
+      ${
+        hashUrl
+          ? `
       <div>
         <span>哈希测试链接：</span>
         <a href="${hashUrl}">${hashUrl}</a>
-      </div> 
+      </div>`
+          : ``
+      } 
       <div>
         <span>备注：</span>
         <span>${remarks}</span>
@@ -385,15 +395,6 @@ const sleep = async (count) => {
   })
 }
 
-//获取Jenkins项目名称
-const getJenkinsProjectName = ({ cd }) => {
-  cd = cd.split('\\')
-  cd = cd[cd.length - 1]
-
-  console.log(cd)
-  return cd
-}
-
 //根据环境变量获取一些值
 const getValuesByNodeEnv = () => {
   //环境变量
@@ -442,28 +443,16 @@ const deepClone = (obj) => {
   return fromJS(obj).toJS()
 }
 
-//根据主机名获取baseURL
-const getBaseURL = () => {
-  const port = 81
-  const hostname = os.hostname()
-  const host = {
-    'LAPTOP-4KDIA4A3': 'http://localhost',
-    iZ6ilh61jzkvrhZ: 'http://39.97.238.175',
-  }[hostname]
-  const baseURL = `${host}:${port}`
-  return baseURL
-}
-
 //获取可用端口号
 const getPort = async () => {
   let port = process.env.PORT
   console.log(process.env.branch)
   if (process.env.branch) {
     const data = await axios
-      .post(`${getBaseURL()}/api/jenkins/getPort`, {
+      .post(`${getBaseURL().baseURL}/api/jenkins/getPort`, {
         gitRepositorieName: process.env.gitRepositorieName,
         branch: process.env.branch,
-        port,
+        port
       })
       .then((res) => {
         if (res.data.state === 1) {
@@ -500,16 +489,14 @@ module.exports = {
   choosePort,
   //睡眠函数
   sleep,
-  //获取Jenkins项目名称
-  getJenkinsProjectName,
   //根据环境变量获取一些值
   getValuesByNodeEnv,
   //获取hash短码
   getHash,
   //深拷贝
   deepClone,
-  //根据主机名获取baseURL
-  getBaseURL,
   //获取可用端口号
   getPort,
+  //获取发邮件的对象
+  getTransporter
 }

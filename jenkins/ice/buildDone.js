@@ -1,20 +1,13 @@
 const axios = require('axios')
-const { getJenkinsProjectName } = require('../../utils/tools')
-const port = 81
-const host = {
-  'LAPTOP-4KDIA4A3': 'http://localhost',
-  iZ6ilh61jzkvrhZ: 'http://39.97.238.175'
-}[process.env.computername]
-const baseURL = `${host}:${port}`
-console.log('ice', baseURL)
+const { getBaseURL, getJenkinsProjectName } = require('../util/tools')
 
-console.log('cd:', process.env.cd)
+const { host, port, baseURL } = getBaseURL()
 
 //项目名称
 const name = 'node接口'
 
 // 发邮件
-const email = async () => {
+const email = async ({ recordData }) => {
   const emailData = {
     type: 'jenkins',
     title: '构建成功-基础环境',
@@ -23,6 +16,7 @@ const email = async () => {
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     url: `${host}:${port}`,
+    hashUrl: `${host}/${recordData.info.hash}`,
     remarks: '自动，接口地址'
   }
   await axios
@@ -48,12 +42,13 @@ const handleAddRecord = async () => {
     url: `${host}:${port}`,
     remarks: '自动，接口地址'
   }
-  await axios
+  return await axios
     .post(`${baseURL}/api/jenkins/add`, {
       dataItem
     })
     .then((res) => {
       console.log('Record added successfully!')
+      return res.data.data
     })
     .catch((error) => {
       console.error(error)
@@ -61,6 +56,6 @@ const handleAddRecord = async () => {
 }
 
 setTimeout(async () => {
-  await email()
-  await handleAddRecord()
+  const recordData = await handleAddRecord()
+  await email({ recordData })
 }, 3000)
