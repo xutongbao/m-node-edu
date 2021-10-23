@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer')
     "html": "6"
 }
 */
-const customSend = async  (req, res) => {
+const customSend = async (req, res) => {
   const transporter = getTransporter()
   let result = await transporter.sendMail({
     ...req.body
@@ -25,11 +25,10 @@ const customSend = async  (req, res) => {
     data: {
       ...req.body
     },
-    message: '发送成功',
+    message: '发送成功'
   })
 }
 
-
 module.exports = {
-  emailCustomSend: customSend,
+  emailCustomSend: customSend
 }
