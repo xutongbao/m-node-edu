@@ -227,7 +227,7 @@ const dataEdit = async (req, res) => {
   }
 }
 
-//查找适合的端口
+//查找可用端口的函数
 const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
@@ -237,6 +237,10 @@ const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 })
   const branchTestInfo = list.find((item) => {
     return item.gitRepositorieName === gitRepositorieName && item.branch === branch
   })
+  //查找可用端口时可以传递一个起始端口号，默认是81
+  //根据gitRepositorieName和branch去数据库中查找是否该项目的该分支已经存在端口号，如果存在，使用存在的
+  //经过上述操作后获得的端口号，再使用choosePort函数检查可用性，若不可以会递增端口号继续查找可用端口
+  //最终获得一个可用的端口
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
@@ -252,6 +256,7 @@ const getPort = async ({ gitRepositorieName = 'm-node-edu', branch, port = 81 })
   return tempPort
 }
 
+//查看可用端口的接口
 const dataGetPort = async (req, res) => {
   const { gitRepositorieName, branch, port } = req.body
   const resultPort = await getPort({ gitRepositorieName, branch, port })

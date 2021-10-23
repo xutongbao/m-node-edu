@@ -461,8 +461,8 @@ const getPort = async () => {
   if (process.env.branch) {
     const data = await axios
       .post(`${getBaseURL()}/api/jenkins/getPort`, {
-        gitRepositorieName: 'm-node-light',
-        branch: 'origin/master',
+        gitRepositorieName: process.env.gitRepositorieName,
+        branch: process.env.branch,
         port,
       })
       .then((res) => {
