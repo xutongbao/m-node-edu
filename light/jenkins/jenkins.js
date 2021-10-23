@@ -395,7 +395,7 @@ const run = async (req, res) => {
     await sleep(2000)
     console.log(`sleep end`, new Date())
   }
-  console.log('run:', tempPort)
+  console.log('run,tempPort:', tempPort)
 
   res.send({
     state: 1,
@@ -404,6 +404,7 @@ const run = async (req, res) => {
     },
     message: '成功'
   })
+  tempPort = undefined
 }
 
 //重启有端口转发功能的项目
