@@ -1,6 +1,13 @@
 const { getTransporter } = require('../../utils/tools')
 const nodemailer = require('nodemailer')
-
+/* 
+{
+    "from": "<13642061747@sina.cn>",
+    "to": "1183391880@qq.com",
+    "subject": "测试",
+    "html": "6"
+}
+*/
 const customSend = async  (req, res) => {
   const transporter = getTransporter()
   let result = await transporter.sendMail({
