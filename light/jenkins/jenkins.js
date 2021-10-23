@@ -8,6 +8,7 @@ const {
 } = require('../../utils/tools')
 const spawn = require('cross-spawn')
 const { createProxyMiddleware } = require('http-proxy-middleware')
+const fs = require('fs')
 
 let tempPort
 
@@ -409,12 +410,19 @@ const run = async (req, res) => {
 
 //重启有端口转发功能的项目
 const restart = async (req, res) => {
+  //spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
-    data: {},
+    data: {
+      
+    },
     message: '成功'
   })
-  spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })
+
+  const restart = fs.readFileSync('restart.js','utf-8')
+  console.log('restart:', restart)
+  const newCount = restart - 0 + 1
+  fs.writeFile('restart.js', `${newCount}`, { encoding: 'utf8' }, err => {})
 }
 
 module.exports = {
