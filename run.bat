@@ -1,5 +1,5 @@
 @REM 接口/api/jenkins/run执行这个批处理
-@REM %0:run.bat %1:gitRepositorieName %2:branch %3:pm2配置文件名，ecosystem.config.js
+@REM echo %0:run.bat %1:gitRepositorieName %2:branch %3:pm2配置文件名，ecosystem.config.js
 echo %0 %1 %2 %3
 set historyPath=%cd%
 echo %historyPath%
