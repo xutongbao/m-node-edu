@@ -401,9 +401,9 @@ const run = async (req, res) => {
 
   //#endregion
 
-  // console.log(`sleep start`, new Date())
-  // await sleep(10000)
-  // console.log(`sleep end`, new Date())
+  console.log(`sleep start`, new Date())
+  await sleep(2000)
+  console.log(`sleep end`, new Date())
   console.log('run:', tempPort)
 
   res.send({
