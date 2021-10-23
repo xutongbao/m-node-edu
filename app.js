@@ -6,8 +6,8 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog, getValuesByNodeEnv } = require('./utils/tools')
-const { getPort, portTransfer } = require('./light/jenkins/jenkins')
+const { initLog, getValuesByNodeEnv, getPort } = require('./utils/tools')
+const { portTransfer } = require('./light/jenkins/jenkins')
 
 //初始化
 const init = async () => {
@@ -77,12 +77,13 @@ const init = async () => {
   air(app)
   //启动命令：set PORT=3000 && node app
   //yarn start命令用于 https://codesandbox.io 的node托管，本地使用yarn start直接启动会报错
-  let port = process.env.PORT
-  console.log(process.env.branch)
-  if (process.env.branch) {
-    port = await getPort({ gitRepositorieName: 'm-node-edu', branch: process.env.branch, port })
-  }
-  console.log('port:', port)
+  // let port = process.env.PORT
+  // console.log(process.env.branch)
+  // if (process.env.branch) {
+  //   port = await getPort({ gitRepositorieName: 'm-node-edu', branch: process.env.branch, port })
+  // }
+  // console.log('port:', port)
+  const port = await getPort()
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world123')
