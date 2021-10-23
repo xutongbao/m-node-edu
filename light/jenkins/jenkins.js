@@ -93,7 +93,6 @@ const dataAdd = async (req, res) => {
     }
     info.projectType = dataItem.projectType ? dataItem.projectType : ''
     objInfo = deepClone(info)
-    console.log('dataItem:', dataItem, info)
 
     info = JSON.stringify(info)
     err = await runSql(
