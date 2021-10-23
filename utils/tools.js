@@ -385,15 +385,6 @@ const sleep = async (count) => {
   })
 }
 
-//获取Jenkins项目名称
-const getJenkinsProjectName = ({ cd }) => {
-  cd = cd.split('\\')
-  cd = cd[cd.length - 1]
-
-  console.log(cd)
-  return cd
-}
-
 //根据环境变量获取一些值
 const getValuesByNodeEnv = () => {
   //环境变量
@@ -500,8 +491,6 @@ module.exports = {
   choosePort,
   //睡眠函数
   sleep,
-  //获取Jenkins项目名称
-  getJenkinsProjectName,
   //根据环境变量获取一些值
   getValuesByNodeEnv,
   //获取hash短码

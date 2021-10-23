@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { getJenkinsProjectName } = require('../../utils/tools')
+const { getJenkinsProjectName } = require('../util/tools')
 const port = 81
 const host = {
   'LAPTOP-4KDIA4A3': 'http://localhost',
