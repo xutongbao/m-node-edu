@@ -348,6 +348,8 @@ const portUsed = (port) => {
         portUsedStr = portUsedStr.split(' ')
         if (portUsedStr[1] === `0.0.0.0:${port}`) {
           resolve(new Error())
+        } else if ((port - 0) === 87) {
+          resolve(new Error())
         } else {
           resolve(port)
         }
