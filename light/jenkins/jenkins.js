@@ -410,20 +410,28 @@ const run = async (req, res) => {
 
 //重启有端口转发功能的项目
 const restart = async (req, res) => {
-  //spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })
+  //spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })\
+  const restartCountFilePath = './light/jenkins/restartCount.js'
+  const restartCountStr = fs.readFileSync(restartCountFilePath, 'utf-8')
+  console.log('restart:', restartCountStr)
+  let restartCountArr = restartCountStr.split('=')
+  const newCount = restartCountArr[1] - 0 + 1
   res.send({
     state: 1,
     data: {
-      
+      restartCountStr,
+      newCount
     },
     message: '成功'
   })
 
-  const restartCountFilePath = './light/jenkins/restartCount.js'
-  const restart = fs.readFileSync(restartCountFilePath,'utf-8')
-  console.log('restart:', restart)
-  const newCount = restart - 0 + 1
-  fs.writeFile(restartCountFilePath, `${newCount}`, { encoding: 'utf8' }, err => {})
+  //修改js文件，会导致node服务自动重启
+  fs.writeFile(
+    restartCountFilePath,
+    `${restartCountArr[0]}=${newCount}`,
+    { encoding: 'utf8' },
+    (err) => {}
+  )
 }
 
 module.exports = {

@@ -1,1 +1,1 @@
-23
+const restartCount =5
