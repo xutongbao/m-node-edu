@@ -93,8 +93,6 @@ const {
   jenkinsDelete,
   jenkinsEdit,
   jenkinsRun,
-  jenkinsGetPort,
-  jenkinsRestart,
 } = require('../light/jenkins/jenkins')
 
 const {
@@ -105,10 +103,6 @@ const {
 const {
   csdnSearch
 } = require('../csdn/csdn')
-
-const {
-  emailCustomSend
-} = require('../light/email/email')
 
 const light = (app) => {
   //登录
@@ -222,11 +216,6 @@ const light = (app) => {
   app.post('/api/jenkins/delete', jenkinsDelete)
   app.post('/api/jenkins/edit', jenkinsEdit)
   app.post('/api/jenkins/run', jenkinsRun)
-  app.post('/api/jenkins/getPort', jenkinsGetPort)
-  app.post('/api/jenkins/restart', jenkinsRestart)
-
-  //发送邮件
-  app.post('/api/email/customSend', emailCustomSend)
 }
 
 module.exports = {

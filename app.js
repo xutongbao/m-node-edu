@@ -2,88 +2,93 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
+const app = express()
 const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog, getValuesByNodeEnv, getPort } = require('./utils/tools')
-const { portTransfer } = require('./light/jenkins/jenkins')
+const { initLog } = require('./utils/tools')
+const { getPort } = require('./light/jenkins/jenkins')
 
-//初始化
-const init = async () => {
-  const app = express()
-  console.log(12)
+console.log(12)
 
-  function shouldCompress(req, res) {
-    if (req.headers['x-no-compression']) {
-      // don't compress responses with this request header
-      return false
-    }
+//开启gzip
+app.use(compression({ filter: shouldCompress }))
+//app.use(history())
+//app.use(express.static('D:/zlhx-ui'))
+//app.use(express.static('D:/tan-ui'))
+//app.use(express.static('../zlhx-ui'))
+//app.use(express.static('../blog/docs'))
+//app.use(express.static('../tan-ui'))
+//app.use(express.static('../air-github/docs'))
+const NODE_ENV = process.env.NODE_ENV || 'development'
+let tempPath = ''
+if (NODE_ENV === 'development') {
+  tempPath = '/temp/uploadForDev'
+} else if (NODE_ENV === 'production') {
+  tempPath = '/temp/uploadForProd'
+} else if (NODE_ENV === 'codesandbox') {
+  tempPath = 'uploadForCodesandbox'
+}
+app.use(express.static(tempPath))
+if (process.env.NODE_ENV === 'codesandbox') {
+  app.use(express.static('codesandbox'))
+} else {
+  app.use(express.static('/temp'))
+}
 
-    // fallback to standard filter function
-    return compression.filter(req, res)
+app.use(express.static('log'))
+app.use(cors())
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+function shouldCompress(req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
   }
-  //开启gzip
-  app.use(compression({ filter: shouldCompress }))
 
-  await portTransfer({ app })
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
 
-  //前端路由history模式
-  //app.use(history())
-  //app.use(express.static('D:/zlhx-ui'))
-  //app.use(express.static('D:/tan-ui'))
-  //app.use(express.static('../zlhx-ui'))
-  //app.use(express.static('../blog/docs'))
-  //app.use(express.static('../tan-ui'))
-  //app.use(express.static('../air-github/docs'))
+// app.use((res, req, next) => {
+//   setTimeout(() => {
+//     next()
+//   }, 4000)
+// })
 
-  //环境变量
-  const { staticUploadPath, staticWebPath, redirectPath } = getValuesByNodeEnv()
+//初始化日志
+initLog(app)
 
-  //上传文件
-  app.use(express.static(staticUploadPath))
-  //网页
-  app.use(express.static(staticWebPath))
-  //日志
-  app.use(express.static('log'))
-  //解决跨域问题
-  app.use(cors())
-  // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: false }))
-  // parse application/json
-  app.use(bodyParser.json())
+app.get('/', function (req, res) {
+  res.redirect('/air/origin/master/#/air/light/extra/home')
+})
 
-  // app.use((res, req, next) => {
-  //   setTimeout(() => {
-  //     next()
-  //   }, 4000)
-  // })
+//知了好学的接口
+light(app)
 
-  //初始化日志
-  initLog(app)
+//销售系统
+sale(app)
 
-  //重定向
-  app.get('/', function (req, res) {
-    res.redirect(redirectPath)
-  })
+//无代码平台的接口
+air(app)
 
-  //知了好学的接口
-  light(app)
-
-  //销售系统
-  sale(app)
-
-  //无代码平台的接口
-  air(app)
+const init = async () => {
   //启动命令：set PORT=3000 && node app
   //yarn start命令用于 https://codesandbox.io 的node托管，本地使用yarn start直接启动会报错
-  // let port = process.env.PORT
-  // console.log(process.env.branch)
-  // if (process.env.branch) {
-  //   port = await getPort({ gitRepositorieName: 'm-node-edu', branch: process.env.branch, port })
-  // }
-  // console.log('port:', port)
-  const port = await getPort()
+  let port = process.env.PORT
+  if (process.env.NODE_ENV !== 'codesandbox') {
+    port = process.env.PORT || 81
+  }
+  console.log(process.env.branch)
+  if (process.env.branch) {
+    port = await getPort({ branch: process.env.branch, port })
+  }
+  console.log('port:', port)
   app.listen(port, () => {
     console.log(port)
     console.log('hello,world123')

@@ -4,9 +4,6 @@ const log4js = require('log4js')
 const net = require('net')
 const spawn = require('cross-spawn')
 const fs = require('fs')
-const { fromJS } = require('immutable')
-const axios = require('axios')
-const { getBaseURL } = require('../jenkins/util/tools')
 
 const mockShop = () => {
   return Mock.mock({
@@ -136,7 +133,7 @@ const companyInitValue = () => {
   return arr
 }
 
-let transporter = {}
+let transporter
 const emailInit = async () => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
@@ -157,11 +154,6 @@ const emailInit = async () => {
 }
 
 emailInit()
-
-//获取发邮件的对象
-const getTransporter = () => {
-  return transporter
-}
 
 //发送邮件
 // async..await is not allowed in global scope, must use a wrapper
@@ -211,18 +203,9 @@ const sendEmail = async (dataObj) => {
 
 //jenkins构建完成邮件通知
 const jenkinsSendEmail = async (dataObj) => {
-  const {
-    title,
-    name,
-    gitRepositorieName,
-    jenkinsProjectName,
-    branch,
-    url,
-    hashUrl,
-    remarks
-  } = dataObj
+  const { title, name, gitRepositorieName, branch, url, remarks } = dataObj
   // send mail with defined transport object
-  let result = await transporter.sendMail({
+  let info = await transporter.sendMail({
     from: '<13642061747@sina.cn>', // sender address
     to: '1183391880@qq.com', //'1183391880@qq.com', // list of receivers
     subject: title, // Subject line
@@ -237,26 +220,13 @@ const jenkinsSendEmail = async (dataObj) => {
         <span>${gitRepositorieName}</span>
       </div> 
       <div>
-        <span>Jenkins项目名称：</span>
-        <span>${jenkinsProjectName}</span>
-      </div> 
-      <div>
         <span>分支名称：</span>
         <span>${branch}</span>
       </div>                  
       <div>
         <span>测试链接：</span>
         <a href="${url}">${url}</a>
-      </div>
-      ${
-        hashUrl
-          ? `
-      <div>
-        <span>哈希测试链接：</span>
-        <a href="${hashUrl}">${hashUrl}</a>
-      </div>`
-          : ``
-      } 
+      </div> 
       <div>
         <span>备注：</span>
         <span>${remarks}</span>
@@ -268,11 +238,11 @@ const jenkinsSendEmail = async (dataObj) => {
     </div>` // html body
   })
 
-  console.log('Message sent: %s', result.messageId)
+  console.log('Message sent: %s', info.messageId)
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(result))
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
@@ -333,6 +303,7 @@ const logger = (name) => {
 
 //测试端口是否可用
 const portUsed = (port) => {
+  console.log('portUsed,6666')
   return new Promise((resolve, reject) => {
     let server = net.createServer().listen(port)
     server.on('listening', function () {
@@ -341,11 +312,7 @@ const portUsed = (port) => {
       let portUsedStr = fs.readFileSync('./portUsed.txt').toString()
       console.log(portUsedStr.length)
       if (portUsedStr.length === 0) {
-        if ((port - 0) === 87) {
-          resolve(new Error())
-        } else {
-          resolve(port)
-        }
+        resolve(port)
       } else {
         portUsedStr = portUsedStr.trim()
         portUsedStr = portUsedStr.replace(/\s+/g, ' ')
@@ -399,84 +366,6 @@ const sleep = async (count) => {
   })
 }
 
-//根据环境变量获取一些值
-const getValuesByNodeEnv = () => {
-  //环境变量
-  const NODE_ENV = process.env.NODE_ENV || 'development'
-  let staticUploadPath = '/temp/uploadForDev'
-  let staticWebPath = '/temp'
-  let redirectPath = '/'
-  let dbFilePath = '/temp/dbFile/my_dev.db'
-  if (NODE_ENV === 'development') {
-    staticUploadPath = '/temp/uploadForDev'
-    staticWebPath = '/temp'
-    redirectPath = '/test/air/origin/master/#/air/light/extra/home'
-    dbFilePath = '/temp/dbFile/my_dev.db'
-  } else if (NODE_ENV === 'production') {
-    staticUploadPath = '/temp/uploadForProd'
-    staticWebPath = '/temp'
-    redirectPath = '/air/#/air/light/extra/home'
-    //dbFilePath = '/temp/dbFile/my_prod.db'
-    dbFilePath = '/temp/dbFile/my_dev.db'
-  } else if (NODE_ENV === 'codesandbox') {
-    staticUploadPath = 'uploadForCodesandbox'
-    staticWebPath = 'codesandbox'
-    redirectPath = '/'
-    dbFilePath = './codesandbox.db'
-  }
-
-  return {
-    staticUploadPath,
-    staticWebPath,
-    redirectPath,
-    dbFilePath
-  }
-}
-
-//获取hash短码
-const getHash = ({ list }) => {
-  let tempStr = Math.random().toString(36).substr(2, 5)
-  while (list.find((item) => item.hash === tempStr)) {
-    tempStr = Math.random().toString(36).substr(2, 5)
-  }
-  return tempStr
-}
-
-//深拷贝
-const deepClone = (obj) => {
-  return fromJS(obj).toJS()
-}
-
-//获取可用端口号
-const getPort = async () => {
-  let port = process.env.PORT
-  console.log(process.env.branch)
-  if (process.env.branch) {
-    const data = await axios
-      .post(`${getBaseURL().baseURL}/api/jenkins/getPort`, {
-        gitRepositorieName: process.env.gitRepositorieName,
-        branch: process.env.branch,
-        port
-      })
-      .then((res) => {
-        if (res.data.state === 1) {
-          console.log('Start successful!')
-          return res.data.data
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-
-    console.log(data)
-    port = data.port
-  } else {
-    port = await choosePort({ port })
-  }
-  console.log('port:', port)
-  return port
-}
-
 module.exports = {
   mockShop,
   shopInitValue,
@@ -495,14 +384,4 @@ module.exports = {
   choosePort,
   //睡眠函数
   sleep,
-  //根据环境变量获取一些值
-  getValuesByNodeEnv,
-  //获取hash短码
-  getHash,
-  //深拷贝
-  deepClone,
-  //获取可用端口号
-  getPort,
-  //获取发邮件的对象
-  getTransporter
 }

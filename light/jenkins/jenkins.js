@@ -1,16 +1,6 @@
 const { runSql, queryPromise } = require('../../db/index')
-const {
-  logger,
-  choosePort,
-  sleep,
-  getHash,
-  deepClone
-} = require('../../utils/tools')
+const { logger, choosePort, sleep } = require('../../utils/tools')
 const spawn = require('cross-spawn')
-const { createProxyMiddleware } = require('http-proxy-middleware')
-const fs = require('fs')
-
-let tempPort
 
 //搜索
 const dataSearch = async (req, res) => {
@@ -49,11 +39,7 @@ const dataSearch = async (req, res) => {
         id: item.uid,
         uid: undefined,
         addtime: item.addtime - 0,
-        edittime: item.edittime - 0,
-        info:
-          typeof item.info === 'string' && item.info !== ''
-            ? JSON.parse(item.info)
-            : {}
+        edittime: item.edittime - 0
       }
     })
 
@@ -81,30 +67,18 @@ const dataAdd = async (req, res) => {
   let list = [...result]
   const index = list.findIndex((item) => item.url === dataItem.url)
   const uid = Date.now()
-  let objInfo = {}
   if (index >= 0) {
     const ids = [list[index].uid]
     let err = await runSql(
       `DELETE FROM projectTest WHERE uid in (${ids.join(',')})`
     )
-    let info = list[index].info
-    info = typeof info === 'string' && info !== '' ? JSON.parse(info) : {}
-    if (!info.hash) {
-      info.hash = getHash({ list })
-    }
-    info.projectType = dataItem.projectType ? dataItem.projectType : ''
-    objInfo = deepClone(info)
-
-    info = JSON.stringify(info)
     err = await runSql(
       `INSERT INTO projectTest (
         uid,
         name,
         gitRepositorieName,
-        jenkinsProjectName,
         branch,
         url,
-        info,
         remarks,
         addtime,
         edittime
@@ -113,10 +87,8 @@ const dataAdd = async (req, res) => {
         '${uid}',
         '${dataItem.name}',
         '${dataItem.gitRepositorieName}',
-        '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
-        '${info}',
         '${dataItem.remarks}',
         '${uid}',
         ''
@@ -131,30 +103,18 @@ const dataAdd = async (req, res) => {
     } else {
       res.send({
         state: 1,
-        data: {
-          dataItem,
-          info: objInfo
-        },
+        data: dataItem,
         message: 'url重复，添加成功'
       })
     }
   } else {
-    const hash = getHash({ list })
-    let info = {
-      hash,
-      projectType: dataItem.projectType ? dataItem.projectType : ''
-    }
-    objInfo = deepClone(info)
-    info = JSON.stringify(info)
     const err = await runSql(
       `INSERT INTO projectTest (
         uid,
         name,
         gitRepositorieName,
-        jenkinsProjectName,
         branch,
         url,
-        info,
         remarks,
         addtime,
         edittime
@@ -163,10 +123,8 @@ const dataAdd = async (req, res) => {
         '${uid}',
         '${dataItem.name}',
         '${dataItem.gitRepositorieName}',
-        '${dataItem.jenkinsProjectName}',
         '${dataItem.branch}',
         '${dataItem.url}',
-        '${info}',
         '${dataItem.remarks}',
         '${uid}',
         ''
@@ -181,10 +139,7 @@ const dataAdd = async (req, res) => {
     } else {
       res.send({
         state: 1,
-        data: {
-          dataItem,
-          info: objInfo
-        },
+        data: dataItem,
         message: '添加成功'
       })
     }
@@ -238,199 +193,83 @@ const dataEdit = async (req, res) => {
   }
 }
 
-//查找可用端口的函数
-const getPort = async ({
-  gitRepositorieName = 'm-node-edu',
-  branch,
-  port = 81
-}) => {
+//查找适合的端口
+const getPort = async ({ branch, port }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
   )
   let list = [...result]
   console.log('getPort:', branch)
   const branchTestInfo = list.find((item) => {
-    return (
-      item.gitRepositorieName === gitRepositorieName && item.branch === branch
-    )
+    return item.gitRepositorieName === 'm-node-edu' && item.branch === branch
   })
-  //查找可用端口时可以传递一个起始端口号，默认是81
-  //根据gitRepositorieName和branch去数据库中查找是否该项目的该分支已经存在端口号，如果存在，使用存在的
-  //经过上述操作后获得的端口号，再使用choosePort函数检查可用性，若不可以会递增端口号继续查找可用端口
-  //最终获得一个可用的端口
   let usedPort = port
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
     if (tempArr.length >= 3) {
-      if (tempArr[2] && Number.isInteger(tempArr[0] - 0)) {
+      if (tempArr[2]) {
         usedPort = tempArr[2]
       }
     }
   }
   console.log('usedPort:', usedPort)
 
-  tempPort = await choosePort({ port: usedPort })
-  console.log('tempPort:', tempPort)
+  const tempPort = await choosePort({ port: usedPort })
   return tempPort
-}
-
-//查看可用端口的接口
-const dataGetPort = async (req, res) => {
-  const { gitRepositorieName, branch, port } = req.body
-  console.log(req.body)
-  const resultPort = await getPort({ gitRepositorieName, branch, port })
-  res.send({
-    state: 1,
-    data: {
-      port: resultPort
-    },
-    message: '成功'
-  })
-}
-
-//端口转发
-const portTransfer = async ({ app }) => {
-  const result = await queryPromise(
-    `SELECT * FROM projectTest ORDER BY addtime DESC`
-  )
-  let list = [...result]
-
-  list = list
-    .filter((item) => {
-      let info =
-        typeof item.info === 'string' && item.info !== ''
-          ? JSON.parse(item.info)
-          : {}
-      return info.projectType === 'node'
-    })
-    .map((item) => {
-      const url = item.url.split(':')
-      let port = url[url.length - 1]
-      if (!Number.isInteger(port - 1)) {
-        port = 80
-      }
-      let info =
-        typeof item.info === 'string' && item.info !== ''
-          ? JSON.parse(item.info)
-          : {}
-      return {
-        ...item,
-        port,
-        hash: info.hash
-      }
-    })
-
-  list.forEach((item) => {
-    const sign = `${item.hash}`
-    //接口转发
-    app.use(
-      `/${sign}`,
-      createProxyMiddleware({
-        target: `http://localhost:${item.port}`,
-        changeOrigin: true,
-        pathRewrite: {
-          [`^/${sign}`]: '/'
-        }
-      })
-    )
-  })
 }
 
 //jenkins部署时自动调run接口执行批处理，pm2起项目
 const run = async (req, res) => {
-  const {
-    gitRepositorieName,
-    branch,
-    pm2ConfigFileName = 'ecosystem.config.js'
-  } = req.body
-  console.log(gitRepositorieName, branch, pm2ConfigFileName)
+  const { branch } = req.body
+  console.log(branch)
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
   spawn.sync(
-    `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`,
+    `${path}run.bat ${branch}`,
     [],
     { stdio: 'inherit' }
   )
-  //启动完成后如何获取端口号
+  spawn.sync(`${path}runChild1.bat ${branch}`, [], { stdio: 'inherit' })
+  spawn.sync(`${path}runChild2.bat ${branch}`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../prettylist')]
+  const { prettylist } = require('../../prettylist')
+  console.log(`sleep start`, new Date())
+  await sleep(5000)
+  console.log(`sleep end`, new Date())
+  spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
+  prettylist.forEach((item) => {
+    spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
+  })
+  spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
+  delete require.cache[require.resolve('../../port')]
+  const { port } = require('../../port')
 
-  //#region 通过批处理获取端口号，根据进程号查询端口号，性能差，逻辑复杂
-  let isUseBatGetCurrentPort = false
+  const currentServer = prettylist.find((item) => {
+    const name = item.name.replace(/_/g, '/')
+    return name === branch
+  })
   let currentPort
-  if (isUseBatGetCurrentPort) {
-    spawn.sync(`${path}runChild1.bat`, [], { stdio: 'inherit' })
-    spawn.sync(`${path}runChild2.bat`, [], { stdio: 'inherit' })
-    delete require.cache[require.resolve('../../prettylist')]
-    const { prettylist } = require('../../prettylist')
-    console.log(`sleep start`, new Date())
-    //等待一会再继续执行，后续的批处理需要根据进程号查询端口号，这个对应关系需要系统准备好才能查到
-    await sleep(10000)
-    console.log(`sleep end`, new Date())
-    spawn.sync(`${path}runChild3.bat`, [], { stdio: 'inherit' })
-    prettylist.forEach((item) => {
-      spawn.sync(`${path}runChild4.bat ${item.pid}`, [], { stdio: 'inherit' })
+
+  if (currentServer) {
+    port.forEach((item) => {
+      if (item.pid === currentServer.pid) {
+        const startIndex = item.info.indexOf(':')
+        const endIndex = item.info.indexOf(' ', startIndex)
+        currentPort = item.info.slice(startIndex + 1, endIndex)
+      }
     })
-    spawn.sync(`${path}runChild5.bat`, [], { stdio: 'inherit' })
-    delete require.cache[require.resolve('../../port')]
-    const { port } = require('../../port')
-
-    const currentServer = prettylist.find((item) => {
-      let tempBranch = branch.replace(/\//g, '_')
-      return item.name === `${gitRepositorieName}_${tempBranch}`
-    })
-
-    if (currentServer) {
-      port.forEach((item) => {
-        if (item.pid === currentServer.pid) {
-          const startIndex = item.info.indexOf(':')
-          const endIndex = item.info.indexOf(' ', startIndex)
-          currentPort = item.info.slice(startIndex + 1, endIndex)
-        }
-      })
-    }
   }
-
-  //#endregion
-
-  while (typeof tempPort === 'undefined') {
-    console.log(`sleep start`, new Date())
-    await sleep(2000)
-    console.log(`sleep end`, new Date())
-  }
-  console.log('run,tempPort:', tempPort)
 
   res.send({
     state: 1,
     data: {
-      currentPort: tempPort
+      prettylist,
+      port,
+      currentServer,
+      currentPort
     },
     message: '成功'
   })
-  tempPort = undefined
-}
-
-//重启有端口转发功能的项目
-const restart = async (req, res) => {
-  //spawn.sync(`runChild6.bat`, [], { stdio: 'inherit' })\
-  const restartCountFilePath = './light/jenkins/restartCount.json'
-  const restartCountStr = fs.readFileSync(restartCountFilePath, 'utf-8')
-  let restartObj = eval('(' + restartCountStr + ')')
-  restartObj.restartCount = restartObj.restartCount + 1
-  res.send({
-    state: 1,
-    data: {
-      restartCountStr,
-      restartObj
-    },
-    message: '成功'
-  })
-
-  //修改json文件，会导致node服务自动重启
-  fs.writeFile(
-    restartCountFilePath,
-    JSON.stringify(restartObj, null, 2),
-    { encoding: 'utf8' },
-    (err) => {}
-  )
 }
 
 module.exports = {
@@ -438,9 +277,6 @@ module.exports = {
   jenkinsAdd: dataAdd,
   jenkinsDelete: dataDelete,
   jenkinsEdit: dataEdit,
-  jenkinsGetPort: dataGetPort,
   getPort,
-  portTransfer,
-  jenkinsRun: run,
-  jenkinsRestart: restart
+  jenkinsRun: run
 }
