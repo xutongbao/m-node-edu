@@ -419,10 +419,11 @@ const restart = async (req, res) => {
     message: '成功'
   })
 
-  const restart = fs.readFileSync('restart.js','utf-8')
+  const restartCountFilePath = './light/jenkins/restartCount.js'
+  const restart = fs.readFileSync(restartCountFilePath,'utf-8')
   console.log('restart:', restart)
   const newCount = restart - 0 + 1
-  fs.writeFile('restart.js', `${newCount}`, { encoding: 'utf8' }, err => {})
+  fs.writeFile(restartCountFilePath, `${newCount}`, { encoding: 'utf8' }, err => {})
 }
 
 module.exports = {
