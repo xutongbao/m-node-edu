@@ -341,7 +341,11 @@ const portUsed = (port) => {
       let portUsedStr = fs.readFileSync('./portUsed.txt').toString()
       console.log(portUsedStr.length)
       if (portUsedStr.length === 0) {
-        resolve(port)
+        if ((port - 0) === 87) {
+          resolve(new Error())
+        } else {
+          resolve(port)
+        }
       } else {
         portUsedStr = portUsedStr.trim()
         portUsedStr = portUsedStr.replace(/\s+/g, ' ')
@@ -466,6 +470,8 @@ const getPort = async () => {
 
     console.log(data)
     port = data.port
+  } else {
+    port = await choosePort({ port })
   }
   console.log('port:', port)
   return port
