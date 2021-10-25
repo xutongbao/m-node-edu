@@ -466,6 +466,8 @@ const getPort = async () => {
 
     console.log(data)
     port = data.port
+  } else {
+    port = await choosePort({ port })
   }
   console.log('port:', port)
   return port
