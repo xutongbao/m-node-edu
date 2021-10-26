@@ -13,7 +13,12 @@ let userList = [
     id: 2,
     username: 'xu',
     password: '123'
-  }
+  },
+  {
+    id: 3,
+    username: '13642061747',
+    password: '123456'
+  },
 ]
 
 //登录
@@ -92,6 +97,34 @@ const getCode = (req, res) => {
   })
 }
 
+//注册
+const register = (req, res) => {
+  const { phone, code, password } = req.body
+  const user = userList.find(item => item.username === phone)
+  if (user) {
+    res.send({
+      state: 0,
+      data: {
+        phone
+      },
+      message: '手机号已经注册了'
+    })
+  } else {
+    userList.push({
+      id: Date.now(),
+      username: phone,
+      password
+    })
+    res.send({
+      state: 1,
+      data: {
+        phone
+      },
+      message: '成功'
+    })
+  }
+}
+
 //根据token获取用户信息
 const getUserInfo = (req, res) => {
   let token = req.headers['token']
@@ -118,4 +151,4 @@ const getUserList = (req, res) => {
   })
 }
 
-module.exports = { login, loginEdu, logout, getCode, getUserInfo, getUserList }
+module.exports = { login, loginEdu, logout, getCode, getUserInfo, getUserList, register }
