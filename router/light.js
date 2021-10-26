@@ -3,6 +3,7 @@ const {
   login,
   loginEdu,
   logout,
+  getCode,
   getUserInfo,
   getUserList,
 } = require('../light/user/user')
@@ -117,6 +118,7 @@ const light = (app) => {
   app.post('/edu/auth/login', loginEdu)
   //退出
   app.post('/api/logout', logout)
+  app.post('/api/getCode', getCode)
   //获取用户信息
   app.get('/api/getUserInfo', getUserInfo)
   //获取用户列表

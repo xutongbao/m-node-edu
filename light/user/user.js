@@ -8,7 +8,8 @@ let userList = [
     id: 1,
     username: 'xutongbao',
     password: '123456'
-  }, {
+  },
+  {
     id: 2,
     username: 'xu',
     password: '123'
@@ -18,7 +19,7 @@ let userList = [
 //登录
 const login = (req, res) => {
   let { username, password } = req.body
-  let user = userList.find(item => item.username === username)
+  let user = userList.find((item) => item.username === username)
   if (user) {
     if (user.password === password) {
       res.send({
@@ -46,7 +47,7 @@ const login = (req, res) => {
 //登录
 const loginEdu = (req, res) => {
   let { userName, passWord } = req.body
-  let user = userList.find(item => item.username === userName)
+  let user = userList.find((item) => item.username === userName)
   if (user) {
     if (user.password === passWord) {
       res.send({
@@ -79,10 +80,22 @@ const logout = (req, res) => {
   })
 }
 
+//获取验证吗
+const getCode = (req, res) => {
+  const { phone } = req.body
+  res.send({
+    state: 1,
+    data: {
+      phone
+    },
+    message: '成功'
+  })
+}
+
 //根据token获取用户信息
 const getUserInfo = (req, res) => {
   let token = req.headers['token']
-  const user = userList.find(item => item.id == token)
+  const user = userList.find((item) => item.id == token)
   res.send({
     state: 1,
     data: user,
@@ -92,7 +105,7 @@ const getUserInfo = (req, res) => {
 
 //获取用户列表
 const getUserList = (req, res) => {
-  const data = userList.map(item => {
+  const data = userList.map((item) => {
     return {
       id: item.id,
       name: item.username
@@ -105,8 +118,4 @@ const getUserList = (req, res) => {
   })
 }
 
-module.exports = { login, loginEdu, logout, getUserInfo, getUserList }
-
-
-
-
+module.exports = { login, loginEdu, logout, getCode, getUserInfo, getUserList }
