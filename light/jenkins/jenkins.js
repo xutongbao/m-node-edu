@@ -329,7 +329,7 @@ const portTransfer = async ({ app }) => {
         target: `http://localhost:${item.port}`,
         changeOrigin: true,
         pathRewrite: {
-          [`^/${sign}`]: '/'
+          [`^/${sign}`]: ''
         }
       })
     )

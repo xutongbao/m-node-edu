@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified1\" && exit 1",
     "start": "cross-env NODE_ENV=codesandbox node app.js",
     "dev1": "cross-env PORT=81 NODE_ENV=development nodemon --inspect app",
-    "serve1": "cross-env PORT=80 NODE_ENV=production nodemon --inspect app",
+    "serve1": "cross-env PORT=82 NODE_ENV=production nodemon --inspect app",
     "dev2": "cross-env name=source_scripts_m_node_edu_dev2 pm2 start ecosystem.config.js --env development && pm2 logs",
     "serve2": "cross-env name=source_scripts_m_node_edu_serve2 pm2 start ecosystem.config.js --env production && pm2 logs",
     "dev3": "cross-env branch=origin/master PORT=87 NODE_ENV=development nodemon --inspect app",
