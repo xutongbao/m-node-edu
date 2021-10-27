@@ -91,7 +91,7 @@ const restart = async () => {
     })
 
   await axios
-    .post(`${host}/api/jenkins/restart`, {})
+    .post(`${host}:82/api/jenkins/restart`, {})
     .then((res) => {
       if (res.data.state === 1) {
         console.log('Restart successful!')

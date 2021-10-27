@@ -1,10 +1,12 @@
 const axios = require('axios')
 const { getBaseURL, getJenkinsProjectName } = require('../util/tools')
 
-const { host, port, baseURL } = getBaseURL()
+const { host, baseURL } = getBaseURL()
 
 //项目名称
 const name = 'node接口'
+
+const port = 82
 
 // 发邮件
 const email = async ({ recordData }) => {
@@ -15,7 +17,7 @@ const email = async ({ recordData }) => {
     gitRepositorieName: process.env.gitRepositorieName,
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
-    url: `${host}`,
+    url: `${host}:${port}`,
     hashUrl: `${host}/${recordData.info.hash}`,
     remarks: '自动，接口地址'
   }
@@ -39,7 +41,7 @@ const handleAddRecord = async () => {
     jenkinsProjectName: getJenkinsProjectName({ cd: process.env.cd }),
     branch: process.env.branch,
     projectType: 'node',
-    url: `${host}`,
+    url: `${host}:${port}`,
     remarks: '自动，接口地址'
   }
   return await axios
