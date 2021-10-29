@@ -453,6 +453,7 @@ const deepClone = (obj) => {
 
 //获取可用端口号
 const getPort = async () => {
+  const NODE_ENV = process.env.NODE_ENV || 'development'
   let port = process.env.PORT
   console.log(process.env.branch)
   if (process.env.branch) {
