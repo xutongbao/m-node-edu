@@ -477,8 +477,15 @@ const getPort = async () => {
   } else {
     port = await choosePort({ port })
   }
-  console.log('port:', port)
-  return port
+  
+  if (NODE_ENV === 'codesandbox') {
+    console.log('post:codesandbox')
+    return undefined
+  } else {
+    console.log('port:', port)
+    return port
+  }
+  
 }
 
 module.exports = {
