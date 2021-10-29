@@ -425,7 +425,7 @@ const getValuesByNodeEnv = () => {
     staticWebPath = 'codesandbox'
     redirectPath = '/'
     dbFilePath = './codesandbox.db'
-    logFilePath = './myLog.log'
+    logFilePath = 'log/myLog.log'
   }
 
   return {
