@@ -481,7 +481,7 @@ const getPort = async () => {
   
   if (NODE_ENV === 'codesandbox') {
     console.log('post:codesandbox')
-    return undefined
+    return port
   } else {
     console.log('port:', port)
     return port
