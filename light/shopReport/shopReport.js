@@ -4,17 +4,7 @@ const Mock = require('mockjs')
 const mockOtherValue = () => {
   return Mock.mock({
     courseCount: () => Mock.Random.integer(0, 10),
-    days: () => Mock.Random.integer(0, 5),
-    field1: () => Mock.Random.integer(90, 100),
-    field2: () => Mock.Random.integer(90, 100),
-    field3: () => Mock.Random.integer(90, 100),
-    field4: () => Mock.Random.integer(90, 100),
-    field5: () => Mock.Random.integer(90, 100),
-    field6: () => Mock.Random.integer(90, 100),
-    field7: () => Mock.Random.integer(90, 100),
-    field8: () => Mock.Random.integer(90, 100),
-    field9: () => Mock.Random.integer(90, 100),
-    field10: () => Mock.Random.integer(90, 100),
+    days: () => Mock.Random.integer(0, 5)
   })
 }
 
@@ -50,7 +40,12 @@ const initValue = () => {
     const temp = Mock.mock({
       name: '@cname'
     })
-    arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), id: i + 1 })
+    let obj = {}
+    for (let i = 1; i < 100; i++) {
+      obj['field' + i] = (() => Mock.Random.integer(90, 100))();
+    }
+    console.log(obj)
+    arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), ...obj, id: i + 1 })
   }
 
   return arr
