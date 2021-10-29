@@ -24,8 +24,8 @@ const addInitValues = {
   companyId: 582,
   shopName: '文都考研（宝鸡分校）',
   companyName: '文都教育',
-  authStartTime: '0000-00-00',
-  authEndTime: '0000-00-00',
+  authEndTime: "2022-10-22",
+  authStartTime: "2021-10-23",
   cateid3Name:
     '考研其他,在职研修,在职研究生,艺术考研,医学考研,新闻学考研,心理学考研,考研政治,考研英语,考研数学,MBA考试,经济学考研,金融硕士考研,教育学考研,计算机考研,会计考研,管理学考研,法学考研,博士,MPA考试',
   address:
