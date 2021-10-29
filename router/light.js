@@ -6,7 +6,7 @@ const {
   getCode,
   getUserInfo,
   getUserList,
-  register,
+  register
 } = require('../light/user/user')
 const {
   shopSearch,
@@ -15,34 +15,34 @@ const {
   shopEdit,
   shopOpenClueSms,
   shopCopy,
-  shopIMAdd,
+  shopIMAdd
 } = require('../light/shop/shop')
 const {
   companySearch,
   companyAdd,
   companyDelete,
   companyEdit,
-  companyFastAdd,
+  companyFastAdd
 } = require('../light/company/company')
 const {
   templateSearch,
   templateAdd,
   templateDelete,
   templateEdit,
-  templateUp,
+  templateUp
 } = require('../light/template/template')
 const {
   easyTemplateSearch,
   easyTemplateAdd,
   easyTemplateDelete,
-  easyTemplateEdit,
+  easyTemplateEdit
 } = require('../light/template/easyTemplate')
 const { category, relatedBrand } = require('../light/common/common')
 const {
   categorySearch,
   categoryAdd,
   categoryDelete,
-  categoryEdit,
+  categoryEdit
 } = require('../light/baseMgt/category/category')
 const {
   brandSearch,
@@ -50,14 +50,14 @@ const {
   brandDelete,
   brandEdit,
   brandUp,
-  brandHonorAdd,
+  brandHonorAdd
 } = require('../light/brand/brand')
 const {
   orgSearch,
   orgAdd,
   orgDelete,
   orgEdit,
-  orgUp,
+  orgUp
 } = require('../light/org/org')
 const {
   courseSearch,
@@ -66,7 +66,7 @@ const {
   courseEdit,
   courseUp,
   courseOpenClassAdd,
-  courseSeoAdd,
+  courseSeoAdd
 } = require('../light/course/course')
 const { authSearch, authEdit, authRoleSearch } = require('../light/auth/auth')
 const {
@@ -76,7 +76,7 @@ const {
   logDelete,
   logEdit,
   logStatus,
-  logAction,
+  logAction
 } = require('../light/log/log')
 
 const {
@@ -86,7 +86,7 @@ const {
   insightEdit,
   insightUp,
   insightDetail,
-  insightFriends,
+  insightFriends
 } = require('../light/insight/insight')
 
 const {
@@ -96,21 +96,16 @@ const {
   jenkinsEdit,
   jenkinsRun,
   jenkinsGetPort,
-  jenkinsRestart,
+  jenkinsRestart
 } = require('../light/jenkins/jenkins')
 
-const {
-  setItem,
-  getItem,
-} = require('../light/columns/columns')
+const { setItem, getItem } = require('../light/columns/columns')
 
-const {
-  csdnSearch
-} = require('../csdn/csdn')
+const { csdnSearch } = require('../csdn/csdn')
 
-const {
-  emailCustomSend
-} = require('../light/email/email')
+const { emailCustomSend } = require('../light/email/email')
+
+const { shopReportSearch } = require('../light/shopReport/shopReport')
 
 const light = (app) => {
   //登录
@@ -210,8 +205,8 @@ const light = (app) => {
   app.post('/api/insight/add', insightAdd)
   app.post('/api/insight/delete', insightDelete)
   app.post('/api/insight/edit', insightEdit)
-  app.post('/api/insight/up', insightUp) 
-  app.post('/api/insight/detail', insightDetail)  
+  app.post('/api/insight/up', insightUp)
+  app.post('/api/insight/detail', insightDetail)
   app.post('/api/insight/friends', insightFriends)
 
   //表格列显示隐藏，调整顺序的接口
@@ -232,8 +227,11 @@ const light = (app) => {
 
   //发送邮件
   app.post('/api/email/customSend', emailCustomSend)
+
+  //发送邮件
+  app.post('/api/shopReport/search', shopReportSearch)
 }
 
 module.exports = {
-  light,
+  light
 }
