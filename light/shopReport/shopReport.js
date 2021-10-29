@@ -3,9 +3,18 @@ const Mock = require('mockjs')
 //模拟其他值，例如审核状态这种非输入的字段，每次添加新数据时要带上
 const mockOtherValue = () => {
   return Mock.mock({
-    releaseStatus: () => Mock.Random.integer(0, 1),
-    commentCount: () => Mock.Random.integer(0, 5),
-    isUp: () => Mock.Random.integer(0, 1)
+    courseCount: () => Mock.Random.integer(0, 10),
+    days: () => Mock.Random.integer(0, 5),
+    field1: () => Mock.Random.integer(90, 100),
+    field2: () => Mock.Random.integer(90, 100),
+    field3: () => Mock.Random.integer(90, 100),
+    field4: () => Mock.Random.integer(90, 100),
+    field5: () => Mock.Random.integer(90, 100),
+    field6: () => Mock.Random.integer(90, 100),
+    field7: () => Mock.Random.integer(90, 100),
+    field8: () => Mock.Random.integer(90, 100),
+    field9: () => Mock.Random.integer(90, 100),
+    field10: () => Mock.Random.integer(90, 100),
   })
 }
 
@@ -27,7 +36,11 @@ const addInitValues = {
   teacherNum: 0,
   courseNum: 0,
   commentNum: 0,
-  guideNum: 0
+  guideNum: 0,
+
+
+  //自己添加的
+  area: '北京市-海淀区'
 }
 
 const initValue = () => {
