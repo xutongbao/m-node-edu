@@ -44,7 +44,6 @@ const initValue = () => {
     for (let i = 1; i < 100; i++) {
       obj['field' + i] = (() => Mock.Random.integer(90, 100))();
     }
-    console.log(obj)
     arr.push({ ...addInitValues, ...temp, ...mockOtherValue(), ...obj, id: i + 1 })
   }
 
