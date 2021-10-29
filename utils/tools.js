@@ -278,12 +278,13 @@ const jenkinsSendEmail = async (dataObj) => {
 
 //日志初始化
 const initLog = (app) => {
+  const { logFilePath } = getValuesByNodeEnv()
   log4js.configure({
     appenders: {
       out: { type: 'console' },
       cheese: {
         type: 'file',
-        filename: 'log/myLog.log',
+        filename: logFilePath,
         maxLogSize: 1024 * 1000 * 10 //10M
       }
     },
@@ -407,6 +408,7 @@ const getValuesByNodeEnv = () => {
   let staticWebPath = '/temp'
   let redirectPath = '/'
   let dbFilePath = '/temp/dbFile/my_dev.db'
+  let logFilePath = 'log/myLog.log'
   if (NODE_ENV === 'development') {
     staticUploadPath = '/temp/uploadForDev'
     staticWebPath = '/temp'
@@ -423,13 +425,15 @@ const getValuesByNodeEnv = () => {
     staticWebPath = 'codesandbox'
     redirectPath = '/'
     dbFilePath = './codesandbox.db'
+    logFilePath = './myLog.log'
   }
 
   return {
     staticUploadPath,
     staticWebPath,
     redirectPath,
-    dbFilePath
+    dbFilePath,
+    logFilePath
   }
 }
 
