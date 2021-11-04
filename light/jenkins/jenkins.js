@@ -251,8 +251,11 @@ const getPort = async ({
   let list = [...result]
   console.log('getPort:', branch)
   const branchTestInfo = list.find((item) => {
+    console.log(branch)
+    const tempBranch = branch.replace('\\', '/')
+    console.log(tempBranch)
     return (
-      item.gitRepositorieName === gitRepositorieName && item.branch === branch
+      item.gitRepositorieName === gitRepositorieName && item.branch === tempBranch
     )
   })
   //查找可用端口时可以传递一个起始端口号，默认是81
@@ -264,7 +267,7 @@ const getPort = async ({
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
     if (tempArr.length >= 3) {
-      if (tempArr[2] && Number.isInteger(tempArr[0] - 0)) {
+      if (tempArr[2] && Number.isInteger(tempArr[2] - 0)) {
         usedPort = tempArr[2]
         isHasHistroyPort = true
       }
