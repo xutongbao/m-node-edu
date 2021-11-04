@@ -265,14 +265,22 @@ const getPort = async ({
   //最终获得一个可用的端口
   let usedPort = port
   let isHasHistroyPort = false
+  console.log('branchTestInfo:', branchTestInfo)
   if (branchTestInfo && branchTestInfo.url) {
-    const tempArr = branchTestInfo.url.split(':')
-    if (tempArr.length >= 3) {
-      if (tempArr[2] && Number.isInteger(tempArr[2] - 0)) {
-        usedPort = tempArr[2]
-        isHasHistroyPort = true
-      }
+    const tempNum = branchTestInfo.url.replace(/[^0-9]/ig,"")
+    if (tempNum) {
+      usedPort = tempNum
+      isHasHistroyPort = true
     }
+    // const tempArr = branchTestInfo.url.split(':')
+    // console.log(tempArr)
+    // console.log(Number.isInteger(tempArr[2] - 0))
+    // if (tempArr.length >= 3) {
+    //   if (tempArr[2] && Number.isInteger(tempArr[2] - 0)) {
+    //     usedPort = tempArr[2]
+    //     isHasHistroyPort = true
+    //   }
+    // }
   }
   console.log('usedPort:', usedPort)
   console.log('isSsr:', isSsr)
@@ -362,14 +370,22 @@ const run = async (req, res) => {
   let resultPort = ''
   if (isSsr) {
     resultPort = await getPort({ gitRepositorieName, branch, isSsr })
+    spawn.sync('yarn -v', [], { stdio: 'inherit' })
+    const path = './'
+    spawn.sync(
+      `${path}runSsr.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName} ${resultPort}`,
+      [],
+      { stdio: 'inherit' }
+    )
+  } else {
+    spawn.sync('yarn -v', [], { stdio: 'inherit' })
+    const path = './'
+    spawn.sync(
+      `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`,
+      [],
+      { stdio: 'inherit' }
+    )
   }
-  spawn.sync('yarn -v', [], { stdio: 'inherit' })
-  const path = './'
-  spawn.sync(
-    `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName} ${resultPort}`,
-    [],
-    { stdio: 'inherit' }
-  )
 
   //启动完成后如何获取端口号
 
