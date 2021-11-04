@@ -344,6 +344,7 @@ const run = async (req, res) => {
     pm2ConfigFileName = 'ecosystem.config.js'
   } = req.body
   console.log(gitRepositorieName, branch, pm2ConfigFileName)
+  const resultPort = await getPort({ gitRepositorieName, branch })
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
   spawn.sync(
@@ -401,7 +402,8 @@ const run = async (req, res) => {
   res.send({
     state: 1,
     data: {
-      currentPort: tempPort
+      currentPort: tempPort,
+      resultPort
     },
     message: '成功'
   })
