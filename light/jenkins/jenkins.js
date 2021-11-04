@@ -255,7 +255,8 @@ const getPort = async ({
     const tempBranch = branch.replace('\\', '/')
     console.log(tempBranch)
     return (
-      item.gitRepositorieName === gitRepositorieName && item.branch === tempBranch
+      item.gitRepositorieName === gitRepositorieName &&
+      item.branch === tempBranch
     )
   })
   //查找可用端口时可以传递一个起始端口号，默认是81
@@ -282,7 +283,7 @@ const getPort = async ({
   } else {
     tempPort = await choosePort({ port: usedPort })
   }
-  
+
   console.log('tempPort:', tempPort)
   return tempPort
 }
@@ -358,14 +359,18 @@ const run = async (req, res) => {
     isSsr = false
   } = req.body
   console.log('start:', gitRepositorieName, branch, pm2ConfigFileName, isSsr)
-  const resultPort = await getPort({ gitRepositorieName, branch, isSsr })
+  let resultPort = ''
+  if (isSsr) {
+    resultPort = await getPort({ gitRepositorieName, branch, isSsr })
+  }
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
   spawn.sync(
-    `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName}`,
+    `${path}run.bat ${gitRepositorieName} ${branch} ${pm2ConfigFileName} ${resultPort}`,
     [],
     { stdio: 'inherit' }
   )
+
   //启动完成后如何获取端口号
 
   //#region 通过批处理获取端口号，根据进程号查询端口号，性能差，逻辑复杂
