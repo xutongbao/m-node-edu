@@ -242,7 +242,8 @@ const dataEdit = async (req, res) => {
 const getPort = async ({
   gitRepositorieName = 'm-node-edu',
   branch,
-  port = 81
+  port = 81,
+  isSsr = false
 }) => {
   const result = await queryPromise(
     `SELECT * FROM projectTest ORDER BY addtime DESC`
@@ -259,17 +260,26 @@ const getPort = async ({
   //经过上述操作后获得的端口号，再使用choosePort函数检查可用性，若不可以会递增端口号继续查找可用端口
   //最终获得一个可用的端口
   let usedPort = port
+  let isHasHistroyPort = false
   if (branchTestInfo && branchTestInfo.url) {
     const tempArr = branchTestInfo.url.split(':')
     if (tempArr.length >= 3) {
       if (tempArr[2] && Number.isInteger(tempArr[0] - 0)) {
         usedPort = tempArr[2]
+        isHasHistroyPort = true
       }
     }
   }
   console.log('usedPort:', usedPort)
+  console.log('isSsr:', isSsr)
+  console.log('isHasHistoryPort:', isHasHistroyPort)
 
-  tempPort = await choosePort({ port: usedPort })
+  if (isSsr && isHasHistroyPort) {
+    tempPort = usedPort
+  } else {
+    tempPort = await choosePort({ port: usedPort })
+  }
+  
   console.log('tempPort:', tempPort)
   return tempPort
 }
@@ -341,10 +351,11 @@ const run = async (req, res) => {
   const {
     gitRepositorieName,
     branch,
-    pm2ConfigFileName = 'ecosystem.config.js'
+    pm2ConfigFileName = 'ecosystem.config.js',
+    isSsr = false
   } = req.body
-  console.log(gitRepositorieName, branch, pm2ConfigFileName)
-  const resultPort = await getPort({ gitRepositorieName, branch })
+  console.log('start:', gitRepositorieName, branch, pm2ConfigFileName, isSsr)
+  const resultPort = await getPort({ gitRepositorieName, branch, isSsr })
   spawn.sync('yarn -v', [], { stdio: 'inherit' })
   const path = './'
   spawn.sync(
