@@ -2,22 +2,26 @@ let userList = [
   {
     id: 0,
     username: 'admin',
-    password: '123456'
+    password: '123456',
+    sysAdmin: 1,
   },
   {
     id: 1,
     username: 'xutongbao',
-    password: '123456'
+    password: '123456',
+    sysAdmin: 0,
   },
   {
     id: 2,
     username: 'xu',
-    password: '123'
+    password: '123',
+    sysAdmin: 0,
   },
   {
     id: 3,
     username: '13642061747',
-    password: '123456'
+    password: '123456',
+    sysAdmin: 0,
   },
 ]
 
@@ -30,8 +34,10 @@ const login = (req, res) => {
       res.send({
         state: 1,
         data: {
+          id: user.id,
           username,
-          token: user.id
+          access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.e1rgnFKrbuyAfOY4H19sTzMScmSKH9YezUMUuZL8Nro',
+          sysAdmin: user.sysAdmin
         },
         message: '登录成功'
       })
