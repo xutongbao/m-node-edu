@@ -6,7 +6,8 @@ const {
   getCode,
   getUserInfo,
   getUserList,
-  register
+  register,
+  registerCompany,
 } = require('../light/user/user')
 const {
   shopSearch,
@@ -121,6 +122,7 @@ const light = (app) => {
   app.post('/api/getUserList', getUserList)
   //注册
   app.post('/api/register', register)
+  app.post('/api/registerCompany', registerCompany)
   //上传
   app.post('/api/upload', uploadImgMulter.single('file'), uploadImg)
   //店铺

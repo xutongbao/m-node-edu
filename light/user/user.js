@@ -8,32 +8,33 @@ let userList = [
       companys: [
         {
           id: 0,
+          companyName: '北京企友科技有限责任公司',
           role: 'admin'
         }
       ]
-    },
+    }
   },
   {
     id: 1,
     username: 'xutongbao',
     password: '123456',
     sysAdmin: 0,
-    info: {},
+    info: {}
   },
   {
     id: 2,
     username: 'xu',
-    password: '123',
+    password: '123456',
     sysAdmin: 0,
-    info: {},
+    info: {}
   },
   {
     id: 3,
     username: '13642061747',
     password: '123456',
     sysAdmin: 0,
-    info: {},
-  },
+    info: {}
+  }
 ]
 
 //登录
@@ -47,9 +48,10 @@ const login = (req, res) => {
         data: {
           id: user.id,
           username,
-          access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.e1rgnFKrbuyAfOY4H19sTzMScmSKH9YezUMUuZL8Nro',
+          access_token:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.e1rgnFKrbuyAfOY4H19sTzMScmSKH9YezUMUuZL8Nro',
           sysAdmin: user.sysAdmin,
-          info: user.info,
+          info: user.info
         },
         message: '登录成功'
       })
@@ -118,7 +120,7 @@ const getCode = (req, res) => {
 //注册
 const register = (req, res) => {
   const { phone, code, password } = req.body
-  const user = userList.find(item => item.username === phone)
+  const user = userList.find((item) => item.username === phone)
   if (user) {
     res.send({
       state: 0,
@@ -133,7 +135,7 @@ const register = (req, res) => {
       username: phone,
       password,
       sysAdmin: 0,
-      info: {},
+      info: {}
     })
     res.send({
       state: 1,
@@ -147,11 +149,9 @@ const register = (req, res) => {
 
 //根据token获取用户信息
 const getUserInfo = (req, res) => {
-  let token = req.headers['token']
-  const user = userList.find((item) => item.id == token)
   res.send({
     state: 1,
-    data: user,
+    data: userList,
     message: '获取用户信息成功'
   })
 }
@@ -171,4 +171,49 @@ const getUserList = (req, res) => {
   })
 }
 
-module.exports = { login, loginEdu, logout, getCode, getUserInfo, getUserList, register }
+//注册企业
+const registerCompany = (req, res) => {
+  const { loginUserId, companyName } = req.body
+  const resultIndex = userList.findIndex((item) => item.id == loginUserId)
+  const company = {
+    id: Date.now(),
+    companyName,
+    role: 'admin'
+  }
+  if (resultIndex >= 0) {
+    if (
+      userList[resultIndex].info &&
+      Array.isArray(userList[resultIndex].info.companys)
+    ) {
+      userList[resultIndex].info.companys.push(company)
+    } else if (userList[resultIndex].info) {
+      userList[resultIndex].info.companys = [company]
+    }
+    res.send({
+      state: 1,
+      data: {
+        company
+      },
+      message: '成功'
+    })
+  } else {
+    res.send({
+      state: 0,
+      data: {
+        loginUserId
+      },
+      message: '用户不存在'
+    })
+  }
+}
+
+module.exports = {
+  login,
+  loginEdu,
+  logout,
+  getCode,
+  getUserInfo,
+  getUserList,
+  register,
+  registerCompany
+}
