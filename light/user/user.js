@@ -161,7 +161,7 @@ const getUserList = (req, res) => {
   const data = userList.map((item) => {
     return {
       id: item.id,
-      name: item.username
+      name: item.username,
     }
   })
   res.send({
