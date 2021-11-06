@@ -4,24 +4,35 @@ let userList = [
     username: 'admin',
     password: '123456',
     sysAdmin: 1,
+    info: {
+      companys: [
+        {
+          id: 0,
+          role: 'admin'
+        }
+      ]
+    },
   },
   {
     id: 1,
     username: 'xutongbao',
     password: '123456',
     sysAdmin: 0,
+    info: {},
   },
   {
     id: 2,
     username: 'xu',
     password: '123',
     sysAdmin: 0,
+    info: {},
   },
   {
     id: 3,
     username: '13642061747',
     password: '123456',
     sysAdmin: 0,
+    info: {},
   },
 ]
 
@@ -37,7 +48,8 @@ const login = (req, res) => {
           id: user.id,
           username,
           access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.e1rgnFKrbuyAfOY4H19sTzMScmSKH9YezUMUuZL8Nro',
-          sysAdmin: user.sysAdmin
+          sysAdmin: user.sysAdmin,
+          info: user.info,
         },
         message: '登录成功'
       })
@@ -119,7 +131,9 @@ const register = (req, res) => {
     userList.push({
       id: Date.now(),
       username: phone,
-      password
+      password,
+      sysAdmin: 0,
+      info: {},
     })
     res.send({
       state: 1,
