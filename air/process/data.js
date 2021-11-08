@@ -5,7 +5,7 @@ let dataArr = [
     id: '0',
     key: '0',
     path: '/light/index/content?id=0',
-    title: '客户',
+    title: '请假',
     table: {
       fields: [
         {
@@ -74,7 +74,7 @@ let dataArr = [
     id: '1',
     key: '1',
     path: '/light/index/content?id=1',
-    title: '线索',
+    title: '报销',
     table: {
       fields: [
         {
@@ -142,7 +142,7 @@ let dataArr = [
     id: '2',
     key: '2',
     path: '/light/index/content?id=2',
-    title: '问卷调查',
+    title: '出差',
     table: {
       fields: [
         {
