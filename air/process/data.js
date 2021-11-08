@@ -21,19 +21,40 @@ let dataArr = [
 
         {
           id: 3,
-          title: '客户名称', //表单里对应label
-          dataIndex: 'name', //表单里对应name
-          type: 'formItem',
+          title: '审批人', //表单里对应label
+          dataIndex: 'approver', //表单里对应name
+          type: 'condition',
           rules: [
             {
               required: true,
               message: '请输入客户名称！',
             },
           ],
-          formComponentName: 'Input',
+          formComponentName: 'Card',
           renderFunName: 'renderSpan',
-          isHasRules: true,
-          isHasPlaceHolder: true,
+          isHasRules: false,
+          isHasPlaceHolder: false,
+          isColumn: true,
+          isSearch: true,
+          isModalField: true,
+          isSystem: false,
+          orderIndex: 1,
+        },
+        {
+          id: 4,
+          title: '抄送人', //表单里对应label
+          dataIndex: 'makeACopyFor', //表单里对应name
+          type: 'condition',
+          rules: [
+            {
+              required: true,
+              message: '请输入客户名称！',
+            },
+          ],
+          formComponentName: 'Card',
+          renderFunName: 'renderSpan',
+          isHasRules: false,
+          isHasPlaceHolder: false,
           isColumn: true,
           isSearch: true,
           isModalField: true,
