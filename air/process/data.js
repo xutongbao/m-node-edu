@@ -1,4 +1,4 @@
-const { customerInitValue, clueInitValue } = require('../utils/air')
+const { customerInitValue, clueInitValue } = require('../../utils/air')
 
 let dataArr = [
   {
