@@ -1,14 +1,14 @@
 let dataArr = [
   {
-    categoryName: '留学',
+    name: '留学',
     belongCategory: '0',
     status: true,
     id: 1622771045562,
     children: [
       {
-        categoryName: '雅思',
+        name: '雅思',
         belongCategory: 1622771045562,
-        status: true,
+        status: false,
         id: 1622771052842,
       },
     ],
@@ -105,7 +105,7 @@ const deleteFunWrap = (id) => {
 //搜索
 const dataSearch = (req, res) => {
   res.send({
-    code: 200,
+    state: 1,
     data: dataArr,
     message: '搜索成功',
   })
