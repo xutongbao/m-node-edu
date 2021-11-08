@@ -113,13 +113,14 @@ const dataSearch = (req, res) => {
 
 //添加
 const dataAdd = (req, res) => {
-  const { dataItem } = req.body
+  const dataItem = req.body
   dataItem.id = Date.now()
+  dataItem.status = true
 
   addFunWrap(dataItem)(dataArr, dataItem.belongCategory)
 
   res.send({
-    code: 200,
+    state: 1,
     data: dataArr,
     message: '添加成功',
   })
@@ -140,11 +141,11 @@ const dataDelete = (req, res) => {
 
 //编辑
 const dataEdit = (req, res) => {
-  let { id, dataItem } = req.body
+  let dataItem  = req.body
 
-  editFunWrap(dataItem)(dataArr, id)
+  editFunWrap(dataItem)(dataArr, dataItem.id)
   res.send({
-    code: 200,
+    state: 1,
     data: dataItem,
     message: '编辑成功',
   })
