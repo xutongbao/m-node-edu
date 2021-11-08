@@ -94,8 +94,8 @@ const dataEdit = (req, res) => {
 }
 
 module.exports = {
-  appTableSearch: dataSearch,
-  appTableAdd: dataAdd,
-  appTableDelete: dataDelete,
-  appTableEdit: dataEdit,
+  processTableSearch: dataSearch,
+  processTableAdd: dataAdd,
+  processTableDelete: dataDelete,
+  processTableEdit: dataEdit,
 }

@@ -114,9 +114,9 @@ const dataEdit = (req, res) => {
 }
 
 module.exports = {
-  appListSearchAll: dataSearchAll,
-  appListSearch: dataSearch,
-  appListAdd: dataAdd,
-  appListDelete: dataDelete,
-  appListEdit: dataEdit
+  processListSearchAll: dataSearchAll,
+  processListSearch: dataSearch,
+  processListAdd: dataAdd,
+  processListDelete: dataDelete,
+  processListEdit: dataEdit
 }

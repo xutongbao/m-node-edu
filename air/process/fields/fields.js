@@ -101,10 +101,10 @@ const dataEditAll = (req, res) => {
 }
 
 module.exports = {
-  appFieldsSearchAll: dataSearchAll,
-  appFieldsSearch: dataSearch,
-  appFieldsAdd: dataAdd,
-  appFieldsDelete: dataDelete,
-  appFieldsEdit: dataEdit,
-  appFieldsEditAll: dataEditAll,
+  processFieldsSearchAll: dataSearchAll,
+  processFieldsSearch: dataSearch,
+  processFieldsAdd: dataAdd,
+  processFieldsDelete: dataDelete,
+  processFieldsEdit: dataEdit,
+  processFieldsEditAll: dataEditAll,
 }
