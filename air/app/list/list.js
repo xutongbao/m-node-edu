@@ -7,25 +7,25 @@ const dataSearchAll = (req, res) => {
   res.send({
     code: 200,
     data: dataArr,
-    message: '搜索成功',
+    message: '搜索成功'
   })
 }
 
 //搜索
 const dataSearch = (req, res) => {
-  const data = dataArr.map(item => {
+  const data = dataArr.map((item) => {
     return {
       id: item.id,
       key: item.key,
       path: item.path,
-      title: item.title,
+      title: item.title
     }
   })
   console.log('air dataSearch')
   res.send({
     code: 200,
     data,
-    message: '搜索成功',
+    message: '搜索成功'
   })
 }
 
@@ -45,7 +45,7 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
-        orderIndex: 0,
+        orderIndex: 0
       },
       {
         id: 1,
@@ -56,7 +56,7 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
-        orderIndex: 101,
+        orderIndex: 101
       },
       {
         id: 2,
@@ -67,16 +67,16 @@ const dataAdd = (req, res) => {
         isSearch: false,
         isModalField: false,
         isSystem: true,
-        orderIndex: 102,
+        orderIndex: 102
       }
     ],
-    dataArr: [],
+    dataArr: []
   }
   dataArr.push({ ...dataItem })
   res.send({
     code: 200,
     data: dataItem,
-    message: '添加成功',
+    message: '添加成功'
   })
 }
 
@@ -88,7 +88,7 @@ const dataDelete = (req, res) => {
   res.send({
     code: 200,
     data: ids,
-    message: '删除成功',
+    message: '删除成功'
   })
 }
 
@@ -102,21 +102,21 @@ const dataEdit = (req, res) => {
     res.send({
       code: 200,
       data: dataItem,
-      message: '编辑成功',
+      message: '编辑成功'
     })
   } else {
     res.send({
       code: 400,
       data: dataItem,
-      message: '编辑失败，id不存在',
+      message: '编辑失败，id不存在'
     })
   }
 }
 
 module.exports = {
-  routerSearchAll: dataSearchAll,
-  routerSearch: dataSearch,
-  routerAdd: dataAdd,
-  routerDelete: dataDelete,
-  routerEdit: dataEdit,
+  appListSearchAll: dataSearchAll,
+  appListSearch: dataSearch,
+  appListAdd: dataAdd,
+  appListDelete: dataDelete,
+  appListEdit: dataEdit
 }
