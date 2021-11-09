@@ -1,0 +1,5 @@
+# robots.txt
+User-agent: *
+Disallow: 
+Disallow: /cgi-bin/
+Sitemap: http://blog.xutongbao.top/sitemap.xml

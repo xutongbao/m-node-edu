@@ -46,6 +46,8 @@ const init = async () => {
   app.use(express.static(staticWebPath))
   //日志
   app.use(express.static('log'))
+  //日志
+  app.use(express.static('/tools/nginx-1.21.3/logs'))
   //解决跨域问题
   app.use(cors())
   // parse application/x-www-form-urlencoded

@@ -93,6 +93,7 @@ const removeFileDir = (path) => {
   //fs.rmdirSync(path)
 }
 
+//遍历文件夹获取link列表
 const getLinks = async () => {
   return await new Promise((resolve, rejects) => {
     fs.readdir(outputDir, function (err, files) {
@@ -109,7 +110,7 @@ const getLinks = async () => {
   })
 }
 
-//sitemap
+//根据link列表生成sitemap.xml文件
 const getSitemap = async (req, res) => {
   const links = await getLinks()
   //const links = [{ url: '/page-1/', changefreq: 'daily', priority: 0.3 }]
