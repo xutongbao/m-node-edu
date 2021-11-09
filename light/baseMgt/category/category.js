@@ -131,13 +131,13 @@ const dataAdd = (req, res) => {
 
 //删除
 const dataDelete = (req, res) => {
-  let { ids } = req.body
-  console.log(ids)
+  let { id } = req.body
+  console.log(id)
   //dataArr = dataArr.filter((item) => !ids.includes(item.id))
-  deleteFunWrap(ids[0])
+  deleteFunWrap(id)
   res.send({
-    code: 200,
-    data: ids,
+    state: 1,
+    data: id,
     message: '删除成功',
   })
 }
