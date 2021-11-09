@@ -65,14 +65,17 @@ const editFunWrap = (dataItem) => {
         editFun(arr[i].children, id)
       }
       if (arr[i].id === id) {
-        //编辑的不是所属分类
+        //编辑时没有修改所属分类
         if (arr[i].belongCategory === dataItem.belongCategory) {
-          arr[i] = { id, ...dataItem, updateTime: Date.now() }
+          arr[i] = { id, ...dataItem, updateTime: Date.now(), children: arr[i].children }
         } else {
-          //删除当前的
-          arr.splice(i, 1)
+          //删除当前的，这块需要改一改，不能把children删了
+          const deleteItem = arr.splice(i, 1)
           if (arr.length === 0) {
             deleteEmptyChildrenFunWrap()
+          }
+          if (Array.isArray(deleteItem) && deleteItem.length > 0 && Array.isArray(deleteItem[0].children) && deleteItem[0].children.length > 0) {
+            dataItem.children = deleteItem[0].children
           }
           //重新添加一个新的
           addFunWrap(dataItem)(dataArr, dataItem.belongCategory)
