@@ -102,7 +102,7 @@ const {
 
 const { setItem, getItem } = require('../light/columns/columns')
 
-const { csdnSearch } = require('../csdn/csdn')
+const { csdnSearch, csdnSitemap } = require('../csdn/csdn')
 
 const { emailCustomSend } = require('../light/email/email')
 
@@ -217,6 +217,7 @@ const light = (app) => {
 
   //csdn
   app.post('/api/csdn/search', csdnSearch)
+  app.post('/api/csdn/sitemap', csdnSitemap)
 
   //部署页面的接口
   app.post('/api/jenkins/search', jenkinsSearch)

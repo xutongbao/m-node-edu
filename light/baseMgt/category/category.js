@@ -1,15 +1,23 @@
 let dataArr = [
   {
-    name: '留学',
+    name: '申请人',
     belongCategory: '0',
     status: true,
     id: 1622771045562,
     children: [
       {
-        name: '雅思',
+        name: '审批人',
         belongCategory: 1622771045562,
         status: false,
         id: 1622771052842,
+        children: [
+          {
+            name: '抄送人',
+            belongCategory: 1622771052842,
+            status: false,
+            id: 1636424256035,
+          },
+        ],
       },
     ],
   },

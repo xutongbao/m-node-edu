@@ -50,6 +50,7 @@
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.13",
     "rotating-file-stream": "^2.1.6",
+    "sitemap": "^7.0.0",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
   }

@@ -2,6 +2,12 @@ const fs = require('fs')
 const html2md = require('html-to-md')
 const { NodeHtmlMarkdown } = require('node-html-markdown')
 const mommet = require('moment')
+const { SitemapStream, streamToPromise } = require('sitemap')
+const { Readable } = require('stream')
+
+//md文件输出路径
+const outputDir = `D:/source/blog/src/md`
+
 //搜索
 const dataSearch = (req, res) => {
   const { dataType = 0 } = req.body
@@ -9,7 +15,7 @@ const dataSearch = (req, res) => {
   let dataUrl = {
     0: '/data.xml',
     1: '/dataMiddle.xml',
-    2: '/data_9142.xml',
+    2: '/data_9142.xml'
   }[dataType]
   const htmlStr = fs.readFileSync(__dirname + dataUrl, 'utf8')
 
@@ -20,8 +26,6 @@ const dataSearch = (req, res) => {
     return word
   })
 
-  //md文件输出路径
-  const outputDir = `D:/source/blog/src/md`
   removeFileDir(outputDir)
 
   let mdFileNameArr = []
@@ -39,10 +43,10 @@ const dataSearch = (req, res) => {
       pubDate = word.slice(9, word.length - 10)
       return word
     })
-    
+
     const pageDate = mommet(pubDate).format('YYYY-MM-DD HH:mm:ss')
     const mdFileName = mommet(pubDate).format('YYYY-MM-DD_HH_mm_ss')
-    
+
     //提取博客内容
     let content = ''
     item.replace(/<!\[CDATA\[(([\s\S])*?)]]>/g, (word) => {
@@ -69,9 +73,9 @@ ${html2md(content)}`
     state: 1,
     data: {
       count: itemArr.length,
-      mdFileNameArr,
+      mdFileNameArr
     },
-    message: 'md文件创建成功',
+    message: 'md文件创建成功'
   })
 }
 
@@ -89,6 +93,49 @@ const removeFileDir = (path) => {
   //fs.rmdirSync(path)
 }
 
+const getLinks = async () => {
+  return await new Promise((resolve, rejects) => {
+    fs.readdir(outputDir, function (err, files) {
+      if (err) {
+        console.warn(err)
+      } else {
+        let links = files.map(item => {
+          
+          return { url: `http://blog.xutongbao.top/blog/src/md/${item.replace('md', 'html')}`, changefreq: 'daily', priority: 0.3 }
+        })
+        resolve(links)
+      }
+    })
+  })
+}
+
+//sitemap
+const getSitemap = async (req, res) => {
+  const links = await getLinks()
+  //const links = [{ url: '/page-1/', changefreq: 'daily', priority: 0.3 }]
+
+  // Create a stream to write to
+  const stream = new SitemapStream({ hostname: 'http://blog.xutongbao.top' })
+
+  // Return a promise that resolves with your XML string
+  let mySitemap = '1'
+  await streamToPromise(Readable.from(links).pipe(stream)).then((data) => {
+    mySitemap = data.toString()
+  })
+  const sitemapFilePath = './csdn/sitemap.xml'
+  fs.writeFile(sitemapFilePath, mySitemap, { encoding: 'utf8' }, (err) => {})
+
+  res.send({
+    state: 1,
+    data: {
+      mySitemap,
+      links
+    },
+    message: 'sitemap'
+  })
+}
+
 module.exports = {
   csdnSearch: dataSearch,
+  csdnSitemap: getSitemap
 }
