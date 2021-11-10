@@ -3,3 +3,5 @@ User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
 Sitemap: http://blog.xutongbao.top/sitemap.xml
+Sitemap: http://blog.xutongbao.top/sitemap-www.xml
+Sitemap: http://blog.xutongbao.top/sitemap-blog.xml

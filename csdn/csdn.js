@@ -94,15 +94,14 @@ const removeFileDir = (path) => {
 }
 
 //遍历文件夹获取link列表
-const getLinks = async () => {
+const getLinks = async ({type}) => {
   return await new Promise((resolve, rejects) => {
     fs.readdir(outputDir, function (err, files) {
       if (err) {
         console.warn(err)
       } else {
         let links = files.map(item => {
-          
-          return { url: `http://blog.xutongbao.top/blog/src/md/${item.replace('md', 'html')}`, changefreq: 'daily', priority: 0.3 }
+          return { url: `http://${type}.xutongbao.top/blog/src/md/${item.replace('md', 'html')}`, changefreq: 'daily', priority: 0.3 }
         })
         resolve(links)
       }
@@ -112,7 +111,8 @@ const getLinks = async () => {
 
 //根据link列表生成sitemap.xml文件
 const getSitemap = async (req, res) => {
-  const links = await getLinks()
+  const { type = 'www' } = req.body
+  const links = await getLinks({type})
   //const links = [{ url: '/page-1/', changefreq: 'daily', priority: 0.3 }]
 
   // Create a stream to write to
@@ -123,7 +123,7 @@ const getSitemap = async (req, res) => {
   await streamToPromise(Readable.from(links).pipe(stream)).then((data) => {
     mySitemap = data.toString()
   })
-  const sitemapFilePath = './csdn/sitemap.xml'
+  const sitemapFilePath = `./csdn/sitemap-${type}.xml`
   fs.writeFile(sitemapFilePath, mySitemap, { encoding: 'utf8' }, (err) => {})
 
   res.send({
