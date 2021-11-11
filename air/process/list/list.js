@@ -35,43 +35,14 @@ const dataAdd = (req, res) => {
   dataItem.id = uuidv4()
   dataItem.path += `?id=${dataItem.id}`
   dataItem.key = dataItem.id
-  dataItem.table = {
-    fields: [
-      {
-        id: 0,
-        title: 'ID',
-        dataIndex: 'id',
-        isColumn: true,
-        isSearch: false,
-        isModalField: false,
-        isSystem: true,
-        orderIndex: 0
-      },
-      {
-        id: 1,
-        title: '创建时间',
-        dataIndex: 'createTime',
-        renderFunName: 'renderDatetime',
-        isColumn: true,
-        isSearch: false,
-        isModalField: false,
-        isSystem: true,
-        orderIndex: 101
-      },
-      {
-        id: 2,
-        title: '更新时间',
-        dataIndex: 'updateTime',
-        renderFunName: 'renderDatetime',
-        isColumn: true,
-        isSearch: false,
-        isModalField: false,
-        isSystem: true,
-        orderIndex: 102
-      }
-    ],
-    dataArr: []
-  }
+  dataItem.tree = [
+    {
+      name: '流程起点',
+      belongCategory: '0',
+      status: true,
+      id: 1622771045569
+    }
+  ]
   dataArr.push({ ...dataItem })
   res.send({
     code: 200,
