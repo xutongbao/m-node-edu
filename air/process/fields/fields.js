@@ -1,6 +1,33 @@
 let { dataArr } = require('../data')
 
 
+//添加函数，如果不是一级分类，就递归遍历所有children，找到他的所属分类并添加
+const addFunWrap = (dataItem) => {
+  //belongCategory==='0'代表一级分类
+  if (dataItem.belongCategory === '0') {
+    dataArr.push({ ...dataItem })
+    return () => {}
+  } else {
+    const addFun = (arr, belongCategory) => {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].children) {
+          addFun(arr[i].children, belongCategory)
+        }
+        if (arr[i].id === belongCategory) {
+          if (arr[i].children && arr[i].children.length > 0) {
+            arr[i].children.push(dataItem)
+          } else {
+            arr[i].children = [dataItem]
+          }
+        }
+      }
+    }
+
+    return addFun
+  }
+}
+
+
 //编辑或删除后，children可能为空，及时删除children
 const deleteEmptyChildrenFunWrap = (tree) => {
   const deleteEmptyChildrenFun = (arr) => {
@@ -94,7 +121,10 @@ const dataAdd = (req, res) => {
   console.log('add')
   const index = dataArr.findIndex((item) => item.id === tableId)
   dataItem.id = Date.now()
-  dataArr[index].table.fields.push({ ...dataItem })
+  const tree = dataArr[index].tree
+
+  addFunWrap(dataItem)(tree, dataItem.belongCategory)
+
   res.send({
     code: 200,
     data: dataItem,
