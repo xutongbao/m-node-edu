@@ -13,15 +13,10 @@ const dataSearchAll = (req, res) => {
 const dataSearch = (req, res) => {
   const { tableId } = req.body
   const application = dataArr.find((item) => item.id === tableId)
-  const fields = application.table.fields.sort(
-    (a, b) => a.orderIndex - b.orderIndex
-  )
   res.send({
     code: 200,
     data: {
-      title: application.title,
-      fields,
-      skin: application.table.skin,
+      ...application
     },
     message: '搜索成功',
   })
