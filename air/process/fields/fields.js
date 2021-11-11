@@ -45,7 +45,7 @@ const deleteEmptyChildrenFunWrap = (tree) => {
 }
 
 //编辑函数，递归遍历所有children，找到他的对应的id并编辑
-const editFunWrap = (dataItem) => {
+const editFunWrap = (dataItem, tree) => {
   const editFun = (arr, id) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].children) {
@@ -59,13 +59,13 @@ const editFunWrap = (dataItem) => {
           //删除当前的，这块需要改一改，不能把children删了
           const deleteItem = arr.splice(i, 1)
           if (arr.length === 0) {
-            deleteEmptyChildrenFunWrap()
+            deleteEmptyChildrenFunWrap(tree)
           }
           if (Array.isArray(deleteItem) && deleteItem.length > 0 && Array.isArray(deleteItem[0].children) && deleteItem[0].children.length > 0) {
             dataItem.children = deleteItem[0].children
           }
           //重新添加一个新的
-          addFunWrap(dataItem)(dataArr, dataItem.belongCategory)
+          addFunWrap(dataItem)(tree, dataItem.belongCategory)
         }
       }
     }
@@ -152,27 +152,13 @@ const dataDelete = (req, res) => {
 const dataEdit = (req, res) => {
   let { tableId, id, dataItem } = req.body
   const tableIndex = dataArr.findIndex((item) => item.id === tableId)
-  let index = dataArr[tableIndex].table.fields.findIndex(
-    (item) => item.id === id
-  )
-  if (index >= 0) {
-    dataArr[tableIndex].table.fields[index] = {
-      id,
-      ...dataItem,
-      updateTime: Date.now(),
-    }
-    res.send({
-      code: 200,
-      data: dataItem,
-      message: '编辑成功',
-    })
-  } else {
-    res.send({
-      code: 400,
-      data: dataItem,
-      message: '编辑失败，id不存在',
-    })
-  }
+  const tree = dataArr[tableIndex].tree
+  editFunWrap(dataItem, tree)(tree, id)
+  res.send({
+    code: 200,
+    data: dataItem,
+    message: '编辑成功',
+  })
 }
 
 //编辑全部
