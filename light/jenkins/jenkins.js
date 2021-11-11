@@ -470,6 +470,17 @@ const restart = async (req, res) => {
   )
 }
 
+//刷新日志报告
+const refreshLogReport = (req, res) => {
+  spawn.sync(`./light/jenkins/report.bat`, [], { stdio: 'inherit' })
+  res.send({
+    state: 1,
+    data: {
+    },
+    message: '成功'
+  })
+}
+
 module.exports = {
   jenkinsSearch: dataSearch,
   jenkinsAdd: dataAdd,
@@ -479,5 +490,6 @@ module.exports = {
   getPort,
   portTransfer,
   jenkinsRun: run,
-  jenkinsRestart: restart
+  jenkinsRestart: restart,
+  refreshLogReport,
 }

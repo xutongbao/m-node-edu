@@ -97,7 +97,8 @@ const {
   jenkinsEdit,
   jenkinsRun,
   jenkinsGetPort,
-  jenkinsRestart
+  jenkinsRestart,
+  refreshLogReport,
 } = require('../light/jenkins/jenkins')
 
 const { setItem, getItem } = require('../light/columns/columns')
@@ -227,6 +228,7 @@ const light = (app) => {
   app.post('/api/jenkins/run', jenkinsRun)
   app.post('/api/jenkins/getPort', jenkinsGetPort)
   app.post('/api/jenkins/restart', jenkinsRestart)
+  app.post('/api/jenkins/refreshLogReport', refreshLogReport)
 
   //发送邮件
   app.post('/api/email/customSend', emailCustomSend)
