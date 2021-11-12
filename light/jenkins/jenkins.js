@@ -487,8 +487,8 @@ const uploadCode = (req, res) => {
 `
 echo unzip start
 cd /temp/zip
-7z x /temp/zip/build.tar -o/temp/unzip
-xcopy /temp/unzip/build /temp/cache/ /Y /E
+7z x /temp/zip/build.tar -o/temp/unzip -y
+xcopy \\temp\\unzip\\build ${targetPath} /Y /E
 echo success
 `
 
