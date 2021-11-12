@@ -481,6 +481,20 @@ const refreshLogReport = (req, res) => {
   })
 }
 
+//上传代码到目标服务器
+const uploadCode = (req, res) => {
+  const { buildPath, targetPath } = req.body
+  spawn.sync(`./light/jenkins/upload.bat`, [], { stdio: 'inherit' })
+  res.send({
+    state: 1,
+    data: {
+      buildPath,
+      targetPath,
+    },
+    message: '成功'
+  })
+}
+
 module.exports = {
   jenkinsSearch: dataSearch,
   jenkinsAdd: dataAdd,
@@ -492,4 +506,5 @@ module.exports = {
   jenkinsRun: run,
   jenkinsRestart: restart,
   refreshLogReport,
+  jenkinsUploadCode: uploadCode,
 }
