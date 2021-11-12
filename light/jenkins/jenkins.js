@@ -484,7 +484,7 @@ const refreshLogReport = (req, res) => {
 //上传代码到目标服务器
 const uploadCode = (req, res) => {
   const { buildPath, targetPath } = req.body
-  spawn.sync(`./light/jenkins/upload.bat`, [], { stdio: 'inherit' })
+  spawn.sync(`./light/jenkins/upload.bat ${buildPath} ${targetPath}`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
     data: {
