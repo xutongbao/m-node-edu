@@ -267,7 +267,7 @@ const getPort = async ({
   let isHasHistroyPort = false
   console.log('branchTestInfo:', branchTestInfo)
   if (branchTestInfo && branchTestInfo.url) {
-    const tempNum = branchTestInfo.url.replace(/[^0-9]/ig,"")
+    const tempNum = branchTestInfo.url.replace(/[^0-9]/gi, '')
     if (tempNum) {
       usedPort = tempNum
       isHasHistroyPort = true
@@ -475,8 +475,7 @@ const refreshLogReport = (req, res) => {
   spawn.sync(`./light/jenkins/report.bat`, [], { stdio: 'inherit' })
   res.send({
     state: 1,
-    data: {
-    },
+    data: {},
     message: '成功'
   })
 }
@@ -484,12 +483,27 @@ const refreshLogReport = (req, res) => {
 //上传代码到目标服务器
 const uploadCode = (req, res) => {
   const { buildPath, targetPath } = req.body
-  spawn.sync(`./light/jenkins/upload.bat ${buildPath} ${targetPath}`, [], { stdio: 'inherit' })
+  const buildBat = 
+`
+echo unzip start
+cd /temp/zip
+7z x /temp/zip/build.tar -o/temp/unzip
+xcopy /temp/unzip/build /temp/cache/ /Y /E
+echo success
+`
+
+  //创建用于解压的批处理文件
+  fs.writeFileSync('/temp/zip/build.bat', buildBat, { encoding: 'utf8' }, (err) => {})
+  //上传build压缩包到服务器
+  spawn.sync(`./light/jenkins/upload.bat ${buildPath} ${targetPath}`, [], {
+    stdio: 'inherit'
+  })
+
   res.send({
     state: 1,
     data: {
       buildPath,
-      targetPath,
+      targetPath
     },
     message: '成功'
   })
@@ -506,5 +520,5 @@ module.exports = {
   jenkinsRun: run,
   jenkinsRestart: restart,
   refreshLogReport,
-  jenkinsUploadCode: uploadCode,
+  jenkinsUploadCode: uploadCode
 }
