@@ -14,9 +14,9 @@ let dataArr = [
         status: true,
         id: 1622771045562,
         color: 'blue',
-        positon: {
+        position: {
           rolIndex: 1,
-          colIndex: 2,
+          colIndex: 2
         },
         children: [
           {
@@ -26,9 +26,9 @@ let dataArr = [
             status: false,
             id: 1622771052842,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 2,
+              colIndex: 2
             },
             children: [
               {
@@ -38,15 +38,15 @@ let dataArr = [
                 status: false,
                 id: 1636424256035,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 2,
+                  colIndex: 2
                 },
-              },
-            ],
-          },
-        ],
-      },
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   {
@@ -62,9 +62,9 @@ let dataArr = [
         status: true,
         id: 1622771045562,
         color: 'blue',
-        positon: {
+        position: {
           rolIndex: 1,
-          colIndex: 2,
+          colIndex: 2
         },
         children: [
           {
@@ -74,9 +74,9 @@ let dataArr = [
             status: false,
             id: 1622771052842,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 1,
+              colIndex: 1
             },
             children: [
               {
@@ -86,12 +86,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256035,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 1,
+                  colIndex: 1
                 },
-              },
-            ],
+              }
+            ]
           },
           {
             name: '审批人',
@@ -100,9 +100,9 @@ let dataArr = [
             status: false,
             id: 1622771052843,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 3,
+              colIndex: 3
             },
             children: [
               {
@@ -112,15 +112,15 @@ let dataArr = [
                 status: false,
                 id: 1636424256034,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 3,
-                },
-              },
-            ],
-          },
-        ],
-      },
+                  colIndex: 3
+                }
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   {
@@ -136,9 +136,9 @@ let dataArr = [
         status: true,
         id: 1622771045562,
         color: 'blue',
-        positon: {
+        position: {
           rolIndex: 1,
-          colIndex: 4,
+          colIndex: 4
         },
         children: [
           {
@@ -148,9 +148,9 @@ let dataArr = [
             status: false,
             id: 1622771052842,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 2,
+              colIndex: 2
             },
             children: [
               {
@@ -160,12 +160,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256035,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 2,
-                },
-              },
-            ],
+                  colIndex: 2
+                }
+              }
+            ]
           },
           {
             name: '审批人',
@@ -174,9 +174,9 @@ let dataArr = [
             status: false,
             id: 1622771052843,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 4,
+              colIndex: 4
             },
             children: [
               {
@@ -186,12 +186,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256034,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 4,
-                },
-              },
-            ],
+                  colIndex: 4
+                }
+              }
+            ]
           },
           {
             name: '审批人',
@@ -200,9 +200,9 @@ let dataArr = [
             status: false,
             id: 1622771052844,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 6,
+              colIndex: 6
             },
             children: [
               {
@@ -212,15 +212,15 @@ let dataArr = [
                 status: false,
                 id: 1636424256036,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 6,
-                },
-              },
-            ],
-          },
-        ],
-      },
+                  colIndex: 6
+                }
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   {
@@ -236,9 +236,9 @@ let dataArr = [
         status: true,
         id: 1622771045562,
         color: 'blue',
-        positon: {
+        position: {
           rolIndex: 1,
-          colIndex: 6,
+          colIndex: 6
         },
         children: [
           {
@@ -248,9 +248,9 @@ let dataArr = [
             status: false,
             id: 1622771052842,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 3,
+              colIndex: 3
             },
             children: [
               {
@@ -260,12 +260,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256066,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 3,
-                },
-              },
-            ],
+                  colIndex: 3
+                }
+              }
+            ]
           },
           {
             name: '审批人',
@@ -274,9 +274,9 @@ let dataArr = [
             status: false,
             id: 1622771052843,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 5,
+              colIndex: 5
             },
             children: [
               {
@@ -286,12 +286,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256034,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 5,
-                },
-              },
-            ],
+                  colIndex: 5
+                }
+              }
+            ]
           },
           {
             name: '审批人',
@@ -300,9 +300,9 @@ let dataArr = [
             status: false,
             id: 1622771052844,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 7,
+              colIndex: 7
             },
             children: [
               {
@@ -312,12 +312,12 @@ let dataArr = [
                 status: false,
                 id: 1636424256036,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 7,
-                },
-              },
-            ],
+                  colIndex: 7
+                }
+              }
+            ]
           },
           {
             name: '审批人',
@@ -326,9 +326,9 @@ let dataArr = [
             status: false,
             id: 1622771052847,
             color: 'orange',
-            positon: {
+            position: {
               rolIndex: 3,
-              colIndex: 9,
+              colIndex: 9
             },
             children: [
               {
@@ -338,15 +338,15 @@ let dataArr = [
                 status: false,
                 id: 1636424256038,
                 color: 'green',
-                positon: {
+                position: {
                   rolIndex: 5,
-                  colIndex: 9,
-                },
-              },
-            ],
-          },
-        ],
-      },
+                  colIndex: 9
+                }
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 ]
