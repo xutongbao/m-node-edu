@@ -512,14 +512,17 @@ echo success
 //上传代码到目标服务器
 const uploadCodeForLinux = (req, res) => {
   const { buildPath, targetPath } = req.body
+  console.log(targetPath)
+  const targetPathArr = targetPath.split('\\')
+  const wholeTargetPath = targetPathArr.join('/')
+  const shortTargetPath = targetPathArr.slice(0, targetPathArr.length - 2).join('/') + '/'
   const buildBat = 
 `
 echo unzip start
 cd /server/demo/zip
 tar xvf buildForLinux.tar -C /server/demo/unzip/
-mkdir -p /server/demo/test/tan/origin/
-cp -r /server/demo/unzip/build /server/demo/test/tan/origin/master/
-xcopy \\server\\demo\\unzip\\build ${targetPath} /Y /E
+mkdir -p ${shortTargetPath}
+cp -r /server/demo/unzip/build ${wholeTargetPath}
 echo success
 `
 
@@ -534,7 +537,9 @@ echo success
     state: 1,
     data: {
       buildPath,
-      targetPath
+      targetPath,
+      shortTargetPath,
+      wholeTargetPath,
     },
     message: '成功'
   })
