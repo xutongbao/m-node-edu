@@ -518,6 +518,7 @@ const uploadCodeForLinux = (req, res) => {
   const shortTargetPath = targetPathArr.slice(0, targetPathArr.length - 2).join('/') + '/'
   const buildBat = 
 `
+#!/bin/bash
 echo unzip start
 cd /server/demo/zip
 tar xvf buildForLinux.tar -C /server/demo/unzip/
@@ -527,7 +528,7 @@ echo success
 `
 
   //创建用于解压的批处理文件
-  fs.writeFileSync('/temp/zip/buildForLinux.bat', buildBat, { encoding: 'utf8' }, (err) => {})
+  fs.writeFileSync('/temp/zip/buildForLinux.sh', buildBat, { encoding: 'utf8' }, (err) => {})
   //上传build压缩包到服务器
   spawn.sync(`./light/jenkins/uploadForLinux.bat ${buildPath} ${targetPath}`, [], {
     stdio: 'inherit'
