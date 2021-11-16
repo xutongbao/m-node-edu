@@ -509,6 +509,35 @@ echo success
   })
 }
 
+//上传代码到目标服务器
+const uploadCodeForLinux = (req, res) => {
+  const { buildPath, targetPath } = req.body
+  const buildBat = 
+`
+echo unzip start
+cd /server/demo/zip
+7z x /server/demo/zip/build.tar -o/server/demo/unzip -y
+xcopy \\server\\demo\\unzip\\build ${targetPath} /Y /E
+echo success
+`
+
+  //创建用于解压的批处理文件
+  fs.writeFileSync('/temp/zip/buildForLinux.bat', buildBat, { encoding: 'utf8' }, (err) => {})
+  //上传build压缩包到服务器
+  spawn.sync(`./light/jenkins/uploadForLinux.bat ${buildPath} ${targetPath}`, [], {
+    stdio: 'inherit'
+  })
+
+  res.send({
+    state: 1,
+    data: {
+      buildPath,
+      targetPath
+    },
+    message: '成功'
+  })
+}
+
 module.exports = {
   jenkinsSearch: dataSearch,
   jenkinsAdd: dataAdd,
@@ -520,5 +549,6 @@ module.exports = {
   jenkinsRun: run,
   jenkinsRestart: restart,
   refreshLogReport,
-  jenkinsUploadCode: uploadCode
+  jenkinsUploadCode: uploadCode,
+  jenkinsUploadCodeForLunux: uploadCodeForLinux,
 }

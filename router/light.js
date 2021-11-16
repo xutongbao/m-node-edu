@@ -100,6 +100,7 @@ const {
   jenkinsRestart,
   refreshLogReport,
   jenkinsUploadCode,
+  jenkinsUploadCodeForLunux,
 } = require('../light/jenkins/jenkins')
 
 const { setItem, getItem } = require('../light/columns/columns')
@@ -231,6 +232,7 @@ const light = (app) => {
   app.post('/api/jenkins/restart', jenkinsRestart)
   app.post('/api/jenkins/refreshLogReport', refreshLogReport)
   app.post('/api/jenkins/uploadCode', jenkinsUploadCode)
+  app.post('/api/jenkins/uploadCodeForLinux', jenkinsUploadCodeForLunux)
 
   //发送邮件
   app.post('/api/email/customSend', emailCustomSend)
