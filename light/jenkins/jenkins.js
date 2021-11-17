@@ -522,8 +522,8 @@ const uploadCodeForLinux = (req, res) => {
 echo unzip start
 cd /server/demo/zip
 tar xvf buildForLinux.tar -C /server/demo/unzip/
-mkdir -p ${shortTargetPath}
-cp -r /server/demo/unzip/build ${wholeTargetPath}
+mkdir -p ${wholeTargetPath}
+\\cp -rf /server/demo/unzip/build/* ${wholeTargetPath}
 echo success
 `
 
