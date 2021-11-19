@@ -29,6 +29,7 @@ const dataSearch = (req, res) => {
   removeFileDir(outputDir)
 
   let mdFileNameArr = []
+  let summary = []
   itemArr.forEach((item, index) => {
     //提取标题
     let title = ''
@@ -67,6 +68,12 @@ ${html2md(content)}`
         return console.log('错误', err)
       }
     })
+    summary.push(`* [${title}](md/${mdFileName}.md)`)
+  })
+  fs.writeFile(`${outputDir}/SUMMARY.md`, summary.join('\n'), function (err) {
+    if (err) {
+      return console.log('错误', err)
+    }
   })
 
   res.send({
