@@ -482,13 +482,13 @@ const refreshLogReport = (req, res) => {
 
 //上传代码到目标服务器
 const uploadCode = (req, res) => {
-  const { buildPath, targetPath } = req.body
+  const { buildPath, targetPath, buildFileName = 'build' } = req.body
   const buildBat = 
 `
 echo unzip start
 cd /temp/zip
 7z x /temp/zip/build.tar -o/temp/unzip -y
-xcopy \\temp\\unzip\\build ${targetPath} /Y /E
+xcopy \\temp\\unzip\\${buildFileName} ${targetPath} /Y /E
 echo success
 `
 
