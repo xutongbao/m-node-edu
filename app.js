@@ -23,6 +23,23 @@ const init = async () => {
     // fallback to standard filter function
     return compression.filter(req, res)
   }
+  //解决跨域问题
+  var whitelist = ['http://example1.com', 'http://localhost:1888']
+  var corsOptions = {
+    origin:  function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1 || origin.includes('localhost') || origin.includes('39.97.238.175') || origin.includes('xutongbao.top')) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    maxAge: 5, //指定本次预检请求的有效期，单位为秒。
+    credentials: true, //是否允许发送Cookie
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], //设置所允许的HTTP请求方法
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'], //设置服务器支持的所有头信息字段
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'] //设置获取其他自定义字段
+  }
+  app.use(cors(corsOptions))
   //开启gzip
   app.use(compression({ filter: shouldCompress }))
 
@@ -48,8 +65,6 @@ const init = async () => {
   app.use(express.static('log'))
   //日志
   app.use(express.static('/tools/nginx-1.21.3/logs'))
-  //解决跨域问题
-  app.use(cors())
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }))
   // parse application/json

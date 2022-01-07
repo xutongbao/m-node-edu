@@ -5,6 +5,8 @@ const mockOtherValue = () => {
   return Mock.mock({
     releaseStatus: () => Mock.Random.integer(0, 1),
     commentCount: () => Mock.Random.integer(0, 5), 
+    age: () => Mock.Random.integer(18, 36), 
+    gender: () => Mock.Random.integer(0, 1),
     isUp: () => Mock.Random.integer(0, 1),
   })
 }
@@ -17,7 +19,7 @@ const addInitValues = {
 
 const initValue = () => {
   let arr = []
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     //这些值在mock的批量数据中是随机的
     const temp = Mock.mock({
       name: '@cname',
