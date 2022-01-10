@@ -27,7 +27,10 @@ const init = async () => {
   var whitelist = ['http://example1.com', 'http://localhost:1888']
   var corsOptions = {
     origin:  function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || origin.includes('localhost') || origin.includes('39.97.238.175') || origin.includes('xutongbao.top')) {
+      console.log(origin)
+      if (typeof origin === 'undefined') {
+        callback(null, true)
+      } else if (whitelist.indexOf(origin) !== -1 || origin.includes('localhost') || origin.includes('39.97.238.175') || origin.includes('xutongbao.top')) {
         callback(null, true)
       } else {
         callback(new Error('Not allowed by CORS'))
