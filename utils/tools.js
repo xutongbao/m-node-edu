@@ -7,6 +7,7 @@ const fs = require('fs')
 const { fromJS } = require('immutable')
 const axios = require('axios')
 const { getBaseURL } = require('../jenkins/util/tools')
+const os = require('os')
 
 const mockShop = () => {
   return Mock.mock({
@@ -407,19 +408,29 @@ const getValuesByNodeEnv = () => {
   let staticUploadPath = '/temp/uploadForDev'
   let staticWebPath = '/temp'
   let redirectPath = '/'
+  const hostname = os.hostname()
   let dbFilePath = '/temp/dbFile/my_dev.db'
+  if (hostname === "macbookdeMacBook-Pro-2.local") {
+    dbFilePath = '/Users/macbook/temp/dbFile/my_dev.db'
+  }
   let logFilePath = 'log/myLog.log'
+
   if (NODE_ENV === 'development') {
     staticUploadPath = '/temp/uploadForDev'
     staticWebPath = '/temp'
     redirectPath = '/test/air/origin/master/#/air/light/extra/home'
     dbFilePath = '/temp/dbFile/my_dev.db'
-  } else if (NODE_ENV === 'production') {
+    if (hostname === "macbookdeMacBook-Pro-2.local") {
+      dbFilePath = '/Users/macbook/temp/dbFile/my_dev.db'
+    }  } else if (NODE_ENV === 'production') {
     staticUploadPath = '/temp/uploadForProd'
     staticWebPath = '/temp'
     redirectPath = '/air/#/air/light/extra/home'
     //dbFilePath = '/temp/dbFile/my_prod.db'
     dbFilePath = '/temp/dbFile/my_dev.db'
+    if (hostname === "macbookdeMacBook-Pro-2.local") {
+      dbFilePath = '/Users/macbook/temp/dbFile/my_dev.db'
+    }
   } else if (NODE_ENV === 'codesandbox') {
     staticUploadPath = 'uploadForCodesandbox'
     staticWebPath = 'codesandbox'
