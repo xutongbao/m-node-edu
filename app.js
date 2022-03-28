@@ -49,7 +49,7 @@ const init = async () => {
   await portTransfer({ app })
 
   //前端路由history模式
-  //app.use(history())
+  app.use(history())
   //app.use(express.static('D:/zlhx-ui'))
   //app.use(express.static('D:/tan-ui'))
   //app.use(express.static('../zlhx-ui'))
@@ -68,6 +68,9 @@ const init = async () => {
   app.use(express.static('log'))
   //日志
   app.use(express.static('/tools/nginx-1.21.3/logs'))
+  // app.use(express.static('/temp/banxue_h5'))
+  // app.use(express.static('/temp'))
+  app.use(express.static('/temp/h5'))
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }))
   // parse application/json
