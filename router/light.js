@@ -103,6 +103,10 @@ const {
   jenkinsUploadCodeForLunux,
 } = require('../light/jenkins/jenkins')
 
+const {
+  statisticsSearch
+} = require('../light/statistics/statistics')
+
 const { setItem, getItem } = require('../light/columns/columns')
 
 const { csdnSearch, csdnSitemap } = require('../csdn/csdn')
@@ -239,6 +243,9 @@ const light = (app) => {
 
   //发送邮件
   app.post('/api/shopReport/search', shopReportSearch)
+
+  //统计
+  app.post('/api/statistics/search', statisticsSearch)  
 }
 
 module.exports = {

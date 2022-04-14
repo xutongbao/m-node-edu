@@ -30,7 +30,7 @@ const init = async () => {
       console.log(origin)
       if (typeof origin === 'undefined') {
         callback(null, true)
-      } else if (whitelist.indexOf(origin) !== -1 || origin.includes('localhost') || origin.includes('39.97.238.175') || origin.includes('xutongbao.top')) {
+      } else if (whitelist.indexOf(origin) !== -1 || origin.includes('localhost') || origin.includes('39.97.238.175') || origin.includes('xutongbao.top') || origin.includes('http') ) {
         callback(null, true)
       } else {
         callback(new Error('Not allowed by CORS'))

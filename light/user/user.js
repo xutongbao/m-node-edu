@@ -40,6 +40,7 @@ let userList = [
 //登录
 const login = (req, res) => {
   let { username, password } = req.body
+  console.log(666, req.body)
   let user = userList.find((item) => item.username === username)
   if (user) {
     if (user.password === password) {
@@ -64,7 +65,7 @@ const login = (req, res) => {
   } else {
     res.send({
       state: 0,
-      message: '用户名不存在'
+      message: '用户名不存在-测试'
     })
   }
 }
