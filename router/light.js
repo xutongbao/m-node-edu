@@ -231,12 +231,12 @@ const light = (app) => {
   app.post('/api/jenkins/add', jenkinsAdd)
   app.post('/api/jenkins/delete', jenkinsDelete)
   app.post('/api/jenkins/edit', jenkinsEdit)
-  app.post('/api/jenkins/run', jenkinsRun)
-  app.post('/api/jenkins/getPort', jenkinsGetPort)
-  app.post('/api/jenkins/restart', jenkinsRestart)
-  app.post('/api/jenkins/refreshLogReport', refreshLogReport)
-  app.post('/api/jenkins/uploadCode', jenkinsUploadCode)
-  app.post('/api/jenkins/uploadCodeForLinux', jenkinsUploadCodeForLunux)
+  //app.post('/api/jenkins/run', jenkinsRun)
+  //app.post('/api/jenkins/getPort', jenkinsGetPort)
+  //app.post('/api/jenkins/restart', jenkinsRestart)
+  //app.post('/api/jenkins/refreshLogReport', refreshLogReport)
+  //app.post('/api/jenkins/uploadCode', jenkinsUploadCode)
+  //app.post('/api/jenkins/uploadCodeForLinux', jenkinsUploadCodeForLunux)
 
   //发送邮件
   app.post('/api/email/customSend', emailCustomSend)

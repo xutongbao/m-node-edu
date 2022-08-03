@@ -68,9 +68,9 @@ const init = async () => {
   app.use(express.static('log'))
   //日志
   app.use(express.static('/tools/nginx-1.21.3/logs'))
-  // app.use(express.static('/temp/banxue_h5'))
   app.use(express.static('/temp'))
-  app.use(express.static('/temp/h5'))
+  //app.use(express.static('/temp/h5'))
+  //app.use(express.static('/source/m-job/demo/m-app/build'))
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }))
   // parse application/json
