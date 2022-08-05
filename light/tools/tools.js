@@ -25,6 +25,7 @@ const toolsMonitor = async (req, res) => {
       } else {
         let dataObj = eval('(' + data + ')')
         dataObj.count = dataObj.count - 1
+        console.log('81', 'startValue:', startValue, 'currentValue:', dataObj.count)
         if (startValue - dataObj.count > 5 && isAlert === false) {
           console.log('报警')
           isAlert = true
@@ -50,7 +51,7 @@ const toolsMonitor = async (req, res) => {
         )
       }
     })
-  }, 60000)
+  }, 1000)
 
   res.send({
     code: 200,
