@@ -53,6 +53,8 @@ const toolsMonitor = async (req, res) => {
     })
   }, 60000)
 
+  console.log('开启监控')
+
   res.send({
     code: 200,
     data: {},
