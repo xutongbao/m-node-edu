@@ -115,6 +115,8 @@ const { emailCustomSend } = require('../light/email/email')
 
 const { shopReportSearch } = require('../light/shopReport/shopReport')
 
+const { toolsMonitor } = require('../light/tools/tools')
+
 const light = (app) => {
   //登录
   app.post('/api/login', login)
@@ -246,6 +248,10 @@ const light = (app) => {
 
   //统计
   app.post('/api/statistics/search', statisticsSearch)  
+
+  //#region 工具函数
+  app.post('/api/light/superAdmin/tools/monitor', toolsMonitor)
+  //#endregion  
 }
 
 module.exports = {
