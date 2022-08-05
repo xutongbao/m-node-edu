@@ -51,7 +51,7 @@ const toolsMonitor = async (req, res) => {
         )
       }
     })
-  }, 1000)
+  }, 60000)
 
   res.send({
     code: 200,
