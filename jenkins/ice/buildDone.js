@@ -55,7 +55,22 @@ const handleAddRecord = async () => {
     })
 }
 
+//启动监控
+const handleMonitor = async () => {
+  return await axios
+    .post(`${baseURL}/api/light/superAdmin/tools/monitor`)
+    .then((res) => {
+      console.log('Open monitor successfully!')
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
+
 setTimeout(async () => {
   const recordData = await handleAddRecord()
   await email({ recordData })
+  await handleMonitor()
 }, 3000)
