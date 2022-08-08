@@ -250,7 +250,7 @@ const light = (app) => {
   app.post('/api/statistics/search', statisticsSearch)  
 
   //#region 工具函数
-  app.post('/api/light/superAdmin/tools/monitor', toolsMonitor)
+  app.post('/api/light/tools/monitor', toolsMonitor)
   //#endregion  
 }
 
