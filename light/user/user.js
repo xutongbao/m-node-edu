@@ -45,7 +45,7 @@ const login = (req, res) => {
   if (user) {
     if (user.password === password) {
       res.send({
-        state: 1,
+        code: 200,
         data: {
           id: user.id,
           username,
@@ -58,13 +58,13 @@ const login = (req, res) => {
       })
     } else {
       res.send({
-        state: 0,
+        code: 400,
         message: '密码错误'
       })
     }
   } else {
     res.send({
-      state: 0,
+      code: 400,
       message: '用户名不存在-本地111'
     })
   }
@@ -101,7 +101,7 @@ const loginEdu = (req, res) => {
 //退出
 const logout = (req, res) => {
   res.send({
-    state: 1,
+    code: 200,
     message: '退出成功'
   })
 }
