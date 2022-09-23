@@ -6,7 +6,7 @@ let timer
 let startValue
 
 //监控
-const toolsMonitor = async (req, res) => {
+const toolsOpenMonitor = async (req, res) => {
   const monitorFilePath = '/temp/log/monitor.json'
   clearInterval(timer)
   fs.readFile(monitorFilePath, 'utf-8', function (err, data) {
@@ -53,15 +53,29 @@ const toolsMonitor = async (req, res) => {
     })
   }, 60000)
 
-  console.log('开启监控')
+  console.log('开启监控-81')
 
   res.send({
     code: 200,
     data: {},
-    message: '监控成功'
+    message: '开启监控-81'
   })
 }
 
+//监控关闭
+const toolsCloseMonitor = async (req, res) => {
+  clearInterval(timer)
+  console.log('关闭监控-81')
+
+  res.send({
+    code: 200,
+    data: {},
+    message: '关闭监控-81'
+  })
+}
+
+
 module.exports = {
-  toolsMonitor
+  toolsOpenMonitor,
+  toolsCloseMonitor
 }

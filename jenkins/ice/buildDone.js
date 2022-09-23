@@ -58,7 +58,7 @@ const handleAddRecord = async () => {
 //启动监控
 const handleMonitor = async () => {
   return await axios
-    .post(`${baseURL}/api/light/tools/monitor`)
+    .post(`${baseURL}/api/light/tools/openMonitor`)
     .then((res) => {
       console.log('Open monitor successfully!')
       console.log(res.data)

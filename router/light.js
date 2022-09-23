@@ -115,7 +115,7 @@ const { emailCustomSend } = require('../light/email/email')
 
 const { shopReportSearch } = require('../light/shopReport/shopReport')
 
-const { toolsMonitor } = require('../light/tools/tools')
+const { toolsOpenMonitor, toolsCloseMonitor } = require('../light/tools/tools')
 
 const light = (app) => {
   //登录
@@ -250,7 +250,8 @@ const light = (app) => {
   app.post('/api/statistics/search', statisticsSearch)  
 
   //#region 工具函数
-  app.post('/api/light/tools/monitor', toolsMonitor)
+  app.post('/api/light/tools/openMonitor', toolsOpenMonitor)
+  app.post('/api/light/tools/closeMonitor', toolsCloseMonitor)
   //#endregion  
 }
 
