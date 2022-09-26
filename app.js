@@ -6,7 +6,7 @@ const { light } = require('./router/light')
 const { air } = require('./router/air')
 const { sale } = require('./router/sale')
 const compression = require('compression')
-const { initLog, getValuesByNodeEnv, getPort } = require('./utils/tools')
+const { logMiddleWare, getValuesByNodeEnv, getPort } = require('./utils/tools')
 const { portTransfer } = require('./light/jenkins/jenkins')
 
 //初始化
@@ -82,8 +82,8 @@ const init = async () => {
   //   }, 4000)
   // })
 
-  //初始化日志
-  initLog(app)
+  //日志
+  app.use(logMiddleWare())
 
   //重定向
   app.get('/', function (req, res) {

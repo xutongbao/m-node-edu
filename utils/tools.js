@@ -8,6 +8,28 @@ const { fromJS } = require('immutable')
 const axios = require('axios')
 const { getBaseURL } = require('../jenkins/util/tools')
 const os = require('os')
+const jwt = require('jwt-simple')
+const uaParser = require('ua-parser-js')
+
+//token密码
+let secret = 'Qi.work@666'
+
+//解析token
+const decodeToken = ({ token }) => {
+  try {
+    let decoded = jwt.decode(token, secret)
+    if (decoded.loginInfo) {
+      try {
+        decoded.loginInfo = JSON.parse(decoded.loginInfo)
+      } catch (error) {
+        return decoded
+      }
+    }
+    return decoded
+  } catch (error) {
+    return {}
+  }
+}
 
 const mockShop = () => {
   return Mock.mock({
@@ -277,12 +299,12 @@ const jenkinsSendEmail = async (dataObj) => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-//日志初始化
-const initLog = (app) => {
+//日志对象
+const logger = (name) => {
   const { logFilePath } = getValuesByNodeEnv()
   log4js.configure({
     appenders: {
-      out: { type: 'console' },
+      out: { type: 'console' }, //在控制台输出日志
       cheese: {
         type: 'file',
         filename: logFilePath,
@@ -290,48 +312,96 @@ const initLog = (app) => {
       }
     },
     categories: {
-      default: { appenders: ['cheese', 'out'], level: log4js.levels.DEBUG }
+      //需要在控制台输出日志时：appenders: ['cheese', 'out']
+      default: { appenders: ['cheese'], level: log4js.levels.DEBUG }
     }
   })
-  const logger = log4js.getLogger('log')
-  logger.debug('重启')
-
-  app.use(
-    log4js.connectLogger(logger, {
-      level: 'info',
-      format: (req, res, format) => {
-        return format(
-          `:remote-addr - ${req.host} - ":method :url ${JSON.stringify(
-            req.body
-          )} HTTP/:http-version" :status :content-length ":referrer" ":user-agent"`
-        )
-      }
-    })
-  )
-
-  // const logResponseBody = (req, res, next) => {
-  //   const oldSend = res.send
-  //   res.send = function () {
-  //     const logger = log4js.getLogger('test')
-  //     logger.info(`req:${JSON.stringify(req.body)} res:${JSON.stringify(arguments)}`)
-  //     console.log(666)
-  //     oldSend.apply(res, arguments)
-  //   }
-  //   next()
-  // }
-
-  // app.use(logResponseBody)
-  // const oldSend = app.response.send
-  // app.response.send = function() {
-  //   console.log(6)
-  //   oldSend.apply(this, arguments)
-  // }
-}
-
-//日志对象
-const logger = (name) => {
   return log4js.getLogger(name)
 }
+
+//获取ip
+function getClientIp(req) {
+  return req.headers['x-forwarded-for'] || req.ip
+}
+
+//添加日志
+const addFormatLog = function (req, res, data) {
+  const now = new Date()
+  const resTime = now - req._startTime
+  let resTimeLevel = '01'
+  if (resTime > 5000) {
+    resTimeLevel = '50'
+  } else if (resTime > 2000) {
+    resTimeLevel = '20'
+  } else if (resTime > 1000) {
+    resTimeLevel = '10'
+  } else if (resTime > 500) {
+    resTimeLevel = '05'
+  } else if (resTime > 300) {
+    resTimeLevel = '03'
+  } else if (resTime > 200) {
+    resTimeLevel = '02'
+  } else if (resTime > 100) {
+    resTimeLevel = '01'
+  } else {
+    resTimeLevel = '00'
+  }
+  const user = decodeToken({ token: req.headers.authorization })
+  const { uid: userUid, username, userType, loginInfo } = user
+  const {
+    headers,
+    method,
+    url,
+    body,
+    httpVersion,
+    res: { statusCode, _headers }
+  } = req
+  delete data[0].data
+  const { browser, os } = uaParser(headers['user-agent'])
+
+  let logInfo = {
+    ip: getClientIp(req),
+    host: headers.host,
+    resTime,
+    resTimeLevel,
+    method,
+    url,
+    href: headers.href,
+    httpVersion,
+    statusCode,
+    contentLength: _headers['content-length'],
+    browserName: browser.name,
+    browserVersion: browser.version,
+    osName: os.name,
+    osVersion: os.version,
+    userUid,
+    username,
+    userType,
+    loginInfo,
+    body,
+    data: data[0],
+    userAgent: headers['user-agent'],
+  }
+  logger('log').info(`${JSON.stringify(logInfo)}`)
+}
+
+//日志中间件
+const logMiddleWare = () => {
+  return function (req, res, next) {
+    req._startTime = new Date()
+
+    const oldSend = res.send
+    res.send = function () {
+      oldSend.apply(res, arguments)
+      if (typeof [...arguments][0] === 'object') {
+        res.once('finish', () => addFormatLog(req, res, arguments))
+      }
+    }
+
+    return next()
+  }
+}
+
 
 //测试端口是否可用
 const portUsed = (port) => {
@@ -510,8 +580,8 @@ module.exports = {
   sendEmail,
   //jenkins构建完成邮件通知
   jenkinsSendEmail,
-  //日志初始化
-  initLog,
+  //日志中间件
+  logMiddleWare,
   //日志对象
   logger,
   //选择可用端口
