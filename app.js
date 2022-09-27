@@ -90,6 +90,10 @@ const init = async () => {
     res.redirect(redirectPath)
   })
 
+  app.get('/abc', function (req, res) {
+    res.redirect('https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0NDM0OTMxNQ==#wechat_redirect')
+  })
+
   //知了好学的接口
   light(app)
 
