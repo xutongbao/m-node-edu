@@ -483,7 +483,7 @@ const getValuesByNodeEnv = () => {
   if (hostname === "macbookdeMacBook-Pro-2.local") {
     dbFilePath = '/Users/macbook/temp/dbFile/my_dev.db'
   }
-  let logFilePath = 'log/myLog.log'
+  let logFilePath = '/temp/log/myLog_81.log'
 
   if (NODE_ENV === 'development') {
     staticUploadPath = '/temp/uploadForDev'
