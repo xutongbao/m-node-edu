@@ -72,5 +72,5 @@ const handleMonitor = async () => {
 setTimeout(async () => {
   const recordData = await handleAddRecord()
   await email({ recordData })
-  await handleMonitor()
+  //await handleMonitor()
 }, 3000)
