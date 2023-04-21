@@ -61,15 +61,16 @@ const init = async () => {
   const { staticUploadPath, staticWebPath, redirectPath } = getValuesByNodeEnv()
 
   //上传文件
-  app.use(express.static(staticUploadPath))
+  //app.use(express.static(staticUploadPath))
   //网页
-  app.use(express.static(staticWebPath))
+  //app.use(express.static(staticWebPath))
   //日志
-  app.use(express.static('log'))
+  //app.use(express.static('log'))
   //日志
-  app.use(express.static('/tools/nginx-1.21.3/logs'))
-  app.use(express.static('/temp'))
-  //app.use(express.static('/temp/h5'))
+  // app.use(express.static('/tools/nginx-1.21.3/logs'))
+  // app.use(express.static('/temp'))
+
+  app.use(express.static('/source/pinxuan_h5/dist'))
   //app.use(express.static('/source/m-job/demo/m-app/build'))
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -79,16 +80,16 @@ const init = async () => {
   // app.use((res, req, next) => {
   //   setTimeout(() => {
   //     next()
-  //   }, 4000)
+  //   }, 1000)
   // })
 
   //日志
   app.use(logMiddleWare())
 
   //重定向
-  app.get('/', function (req, res) {
-    res.redirect(redirectPath)
-  })
+  // app.get('/', function (req, res) {
+  //   res.redirect(redirectPath)
+  // })
 
   app.get('/abc', function (req, res) {
     res.redirect('https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0NDM0OTMxNQ==#wechat_redirect')

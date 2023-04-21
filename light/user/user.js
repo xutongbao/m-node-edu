@@ -120,11 +120,11 @@ const getCode = (req, res) => {
 
 //注册
 const register = (req, res) => {
-  const { phone, code, password } = req.body
+  const { phone, password = '123456' } = req.body
   const user = userList.find((item) => item.username === phone)
   if (user) {
     res.send({
-      state: 0,
+      code: 400,
       data: {
         phone
       },
@@ -139,7 +139,7 @@ const register = (req, res) => {
       info: {}
     })
     res.send({
-      state: 1,
+      code: 200,
       data: {
         phone
       },

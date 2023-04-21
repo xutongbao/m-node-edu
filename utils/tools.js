@@ -181,9 +181,39 @@ const emailInit = async () => {
 
 emailInit()
 
+
+let transporterQQ = {}
+const emailInitQQ = async () => {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  //let testAccount = await nodemailer.createTestAccount()
+
+  // create reusable transporter object using the default SMTP transport
+  transporterQQ = nodemailer.createTransport({
+    host: 'smtp.qcloudmail.com',
+    //service: 'qq',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    secureConnection: true, // 使用了 SSL
+    auth: {
+      // user: 'chat@chat.xutongbao.top',
+      // pass: 'XuTongBao2023',
+      user: 'chat@xutongbao.top',
+      pass: 'XuTongBao1989' 
+    }
+  })
+}
+
+emailInitQQ()
+
 //获取发邮件的对象
 const getTransporter = () => {
-  return transporter
+  return transporterQQ
+}
+
+//获取发邮件的对象
+const getTransporterQQ = () => {
+  return transporterQQ
 }
 
 //发送邮件

@@ -32,7 +32,9 @@ const toolsOpenMonitor = async (req, res) => {
             isAlert = true
             const transporter = getTransporter()
             let result = await transporter.sendMail({
-              from: '<13642061747@sina.cn>',
+              // from: '<13642061747@sina.cn>',
+              // to: '1183391880@qq.com',
+              from: '<chat@xutongbao.top>',
               to: '1183391880@qq.com',
               subject: 'node服务警报-【85】端口node服务停止服务',
               html: 'node服务警报-【85】端口node服务停止服务'
